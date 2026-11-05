@@ -1,0 +1,200 @@
+@page "/denials/reasons"
+
+<div class="denial-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">DENIAL MANAGEMENT</div>
+            <h1>Denial Reasons</h1>
+            <p>Manage denial reason codes, categories, descriptions, and resolution guidance.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/denials" class="secondary-button">← Denials</a>
+            <button class="primary-button">+ Add Reason</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">DR</div>
+            <div>
+                <span>Total Reasons</span>
+                <strong>42</strong>
+                <small>Configured reason codes</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">A</div>
+            <div>
+                <span>Active</span>
+                <strong>38</strong>
+                <small>Currently in use</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">CO</div>
+            <div>
+                <span>CO Codes</span>
+                <strong>24</strong>
+                <small>Claim adjustment reasons</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">PR</div>
+            <div>
+                <span>PR Codes</span>
+                <strong>11</strong>
+                <small>Patient responsibility</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search reason code or description..." />
+        </div>
+
+        <select>
+            <option>All Categories</option>
+            <option>Eligibility</option>
+            <option>Authorization</option>
+            <option>Medical Necessity</option>
+            <option>Billing</option>
+            <option>Coverage</option>
+        </select>
+
+        <select>
+            <option>All Status</option>
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Denial Reason Configuration</h2>
+                <p>Standardized reasons used for denial classification.</p>
+            </div>
+
+            <a href="/denials">View Denials</a>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Reason</th>
+                        <th>Category</th>
+                        <th>CARC</th>
+                        <th>RARC</th>
+                        <th>Occurrences</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>AUTH-001</strong></td>
+                        <td>
+                            <strong>Prior Authorization Required</strong>
+                            <small>Authorization was not obtained.</small>
+                        </td>
+                        <td>Authorization</td>
+                        <td>197</td>
+                        <td>N386</td>
+                        <td>124</td>
+                        <td><span class="status active">Active</span></td>
+                        <td class="actions">
+                            <button>Edit</button>
+                            <button>View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>ELG-002</strong></td>
+                        <td>
+                            <strong>Inactive Coverage</strong>
+                            <small>Coverage was inactive on date of service.</small>
+                        </td>
+                        <td>Eligibility</td>
+                        <td>27</td>
+                        <td>N130</td>
+                        <td>87</td>
+                        <td><span class="status active">Active</span></td>
+                        <td class="actions">
+                            <button>Edit</button>
+                            <button>View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>MED-004</strong></td>
+                        <td>
+                            <strong>Medical Necessity</strong>
+                            <small>Service not considered medically necessary.</small>
+                        </td>
+                        <td>Medical Necessity</td>
+                        <td>50</td>
+                        <td>N115</td>
+                        <td>64</td>
+                        <td><span class="status active">Active</span></td>
+                        <td class="actions">
+                            <button>Edit</button>
+                            <button>View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>COV-008</strong></td>
+                        <td>
+                            <strong>Non-Covered Service</strong>
+                            <small>Service is excluded from plan benefits.</small>
+                        </td>
+                        <td>Coverage</td>
+                        <td>96</td>
+                        <td>N130</td>
+                        <td>51</td>
+                        <td><span class="status active">Active</span></td>
+                        <td class="actions">
+                            <button>Edit</button>
+                            <button>View</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-footer">
+            <span>Showing 1–4 of 42 reasons</span>
+
+            <div class="pagination">
+                <button>‹</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>›</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

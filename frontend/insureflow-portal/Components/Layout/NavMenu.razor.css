@@ -1,0 +1,231 @@
+
+/* =========================================
+   INSUREFLOW NAVIGATION
+   ========================================= */
+
+.top-row {
+    min-height: 3.5rem;
+    background: #008080;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Brand */
+
+.navbar-brand {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+/* =========================================
+   NAVBAR TOGGLER
+   ========================================= */
+
+.navbar-toggler {
+    appearance: none;
+    cursor: pointer;
+    width: 3.5rem;
+    height: 2.5rem;
+    color: white;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+
+    background:
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+        no-repeat center / 1.75rem
+        rgba(0, 0, 0, 0.08);
+}
+
+.navbar-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-toggler:checked {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.nav-scrollable {
+    display: none;
+
+    background: #006f6f;
+
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.navbar-toggler:checked ~ .nav-scrollable {
+    display: block;
+}
+
+/* =========================================
+   NAV ITEMS
+   ========================================= */
+
+.nav-item {
+    font-size: 0.92rem;
+    padding-bottom: 0.35rem;
+}
+
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
+
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
+
+/* =========================================
+   NAV LINKS
+   ========================================= */
+
+.nav-item ::deep .nav-link {
+    color: #e8ffff;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 7px;
+
+    height: 3rem;
+
+    display: flex;
+    align-items: center;
+
+    line-height: 3rem;
+    width: 100%;
+
+    padding: 0 1rem;
+
+    font-weight: 500;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* =========================================
+   ICONS
+   ========================================= */
+
+.bi {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    margin-right: 0.8rem;
+
+    font-size: 1.05rem;
+
+    color: #bffafa;
+
+    flex-shrink: 0;
+}
+
+/* =========================================
+   ACTIVE MENU
+   ========================================= */
+
+.nav-item ::deep a.active {
+    background: rgba(255, 255, 255, 0.20);
+
+    color: #ffffff;
+
+    font-weight: 600;
+
+    box-shadow:
+        inset 3px 0 0 #ffffff;
+}
+
+/* Active icon */
+
+.nav-item ::deep a.active .bi {
+    color: #ffffff;
+}
+
+/* =========================================
+   HOVER
+   ========================================= */
+
+.nav-item ::deep .nav-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    color: #ffffff;
+
+    transform: translateX(2px);
+}
+
+.nav-item ::deep .nav-link:hover .bi {
+    color: #ffffff;
+}
+
+/* =========================================
+   SIDEBAR SCROLLBAR
+   ========================================= */
+
+.nav-scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.nav-scrollable::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.nav-scrollable::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.30);
+    border-radius: 10px;
+}
+
+.nav-scrollable::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.50);
+}
+
+/* =========================================
+   DESKTOP
+   ========================================= */
+
+@media (min-width: 641px) {
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .nav-scrollable {
+        display: block;
+
+        height: calc(100vh - 3.5rem);
+
+        overflow-y: auto;
+    }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 640px) {
+
+    .nav-scrollable {
+        max-height: calc(100vh - 3.5rem);
+
+        overflow-y: auto;
+    }
+
+    .nav-item ::deep .nav-link {
+        height: 2.8rem;
+        line-height: 2.8rem;
+    }
+}
+

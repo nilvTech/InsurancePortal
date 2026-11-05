@@ -1,0 +1,226 @@
+@page "/claims/list"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CLAIMS MANAGEMENT</div>
+            <h1>Claims</h1>
+            <p>Search, review and manage healthcare claims.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims" class="secondary-button">Dashboard</a>
+            <a href="/claims/create" class="primary-button">+ Create Claim</a>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Total Claims</span>
+            <strong>1,248</strong>
+            <small>All claims</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Ready</span>
+            <strong>118</strong>
+            <small>Ready for submission</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Submitted</span>
+            <strong>342</strong>
+            <small>Awaiting response</small>
+        </div>
+
+        <div class="summary-card warning">
+            <span>Rejected</span>
+            <strong>24</strong>
+            <small>Needs attention</small>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search claim, patient, member ID or payer..." />
+        </div>
+
+        <select>
+            <option>All Statuses</option>
+            <option>Draft</option>
+            <option>Validated</option>
+            <option>Submitted</option>
+            <option>Accepted</option>
+            <option>Rejected</option>
+            <option>Denied</option>
+        </select>
+
+        <select>
+            <option>All Payers</option>
+            <option>Blue Cross Blue Shield</option>
+            <option>Aetna</option>
+            <option>UnitedHealthcare</option>
+            <option>Cigna</option>
+        </select>
+
+        <select>
+            <option>All Providers</option>
+            <option>Dr. James Wilson</option>
+            <option>Dr. Emily Carter</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Claim Records</h2>
+                <p>1,248 claims found</p>
+            </div>
+
+            <a href="/claims/submission">Submission Queue →</a>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Claim</th>
+                        <th>Patient</th>
+                        <th>Insurance</th>
+                        <th>Provider</th>
+                        <th>DOS</th>
+                        <th>Charge</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <strong>CLM-2026-001248</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            <strong>Robert Johnson</strong>
+                            <small>MRN-10245</small>
+                        </td>
+
+                        <td>
+                            <strong>BCBS</strong>
+                            <small>Member: X123456</small>
+                        </td>
+
+                        <td>Dr. James Wilson</td>
+
+                        <td>09/03/2026</td>
+
+                        <td>$1,250.00</td>
+
+                        <td>
+                            <span class="status submitted">Submitted</span>
+                        </td>
+
+                        <td class="actions">
+                            <a href="/claims/details">View</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>CLM-2026-001247</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            <strong>Sarah Williams</strong>
+                            <small>MRN-10246</small>
+                        </td>
+
+                        <td>
+                            <strong>Aetna</strong>
+                            <small>Member: A998821</small>
+                        </td>
+
+                        <td>Dr. Emily Carter</td>
+
+                        <td>09/02/2026</td>
+
+                        <td>$860.00</td>
+
+                        <td>
+                            <span class="status pending">Pending</span>
+                        </td>
+
+                        <td class="actions">
+                            <a href="/claims/details">View</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>CLM-2026-001246</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            <strong>Michael Brown</strong>
+                            <small>MRN-10247</small>
+                        </td>
+
+                        <td>
+                            <strong>UHC</strong>
+                            <small>Member: U882192</small>
+                        </td>
+
+                        <td>Dr. James Wilson</td>
+
+                        <td>09/01/2026</td>
+
+                        <td>$2,450.00</td>
+
+                        <td>
+                            <span class="status rejected">Rejected</span>
+                        </td>
+
+                        <td class="actions">
+                            <a href="/claims/rejection">Review</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-footer">
+
+            <span>Showing 1–25 of 1,248 claims</span>
+
+            <div class="pagination">
+                <button>‹</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>›</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

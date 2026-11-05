@@ -1,0 +1,427 @@
+@page "/insurance/create"
+@page "/insurance/{InsuranceId:guid}/edit"
+
+
+<div class="insurance-form-page">
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <a href="/insurance" class="back-link">
+            ← Insurance
+        </a>
+
+        <div class="eyebrow">
+            INSURANCE MANAGEMENT
+        </div>
+
+        <h1>
+            @(InsuranceId.HasValue ? "Edit Insurance" : "Add Insurance")
+        </h1>
+
+        <p>
+            Create or update patient insurance coverage and benefit information.
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <!-- 01 -->
+
+        <div class="section-heading">
+
+            <span>01</span>
+
+            <div>
+                <h2>Coverage Information</h2>
+
+                <p>
+                    Define the patient's coverage priority and insurance type.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-field">
+                <label>Patient *</label>
+
+                <select>
+                    <option>Select patient</option>
+                    <option>John Smith — MRN-10001</option>
+                    <option>Mary Jones — MRN-10002</option>
+                    <option>Robert Brown — MRN-10003</option>
+                    <option>Linda Davis — MRN-10004</option>
+                </select>
+            </div>
+
+
+            <div class="form-field">
+                <label>Coverage Level *</label>
+
+                <select>
+                    <option>Primary</option>
+                    <option>Secondary</option>
+                    <option>Tertiary</option>
+                </select>
+            </div>
+
+
+            <div class="form-field">
+                <label>Insurance Type *</label>
+
+                <select>
+                    <option>Commercial</option>
+                    <option>Medicare</option>
+                    <option>Medicaid</option>
+                    <option>Workers Compensation</option>
+                    <option>Auto Insurance</option>
+                    <option>Self Pay</option>
+                </select>
+            </div>
+
+
+            <div class="form-field">
+                <label>Payer *</label>
+
+                <select>
+                    <option>ABC Health</option>
+                    <option>XYZ Health</option>
+                    <option>Demo Medicare</option>
+                    <option>State Medicaid</option>
+                    <option>Illinois Workers Compensation</option>
+                    <option>ABC Auto Insurance</option>
+                    <option>Self Pay</option>
+                </select>
+            </div>
+
+
+            <div class="form-field">
+                <label>Plan *</label>
+
+                <input
+                    placeholder="Commercial PPO" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Plan Type *</label>
+
+                <select>
+                    <option>PPO</option>
+                    <option>HMO</option>
+                    <option>EPO</option>
+                    <option>POS</option>
+                    <option>Medicare Advantage</option>
+                    <option>Medicaid</option>
+                    <option>Workers Compensation</option>
+                    <option>PIP</option>
+                    <option>Self Pay</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- 02 -->
+
+        <div class="section-heading">
+
+            <span>02</span>
+
+            <div>
+                <h2>Member Information</h2>
+
+                <p>
+                    Insurance membership and subscriber information.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-field">
+                <label>Member ID *</label>
+
+                <input
+                    placeholder="ABC123456" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Subscriber ID</label>
+
+                <input
+                    placeholder="SUB123456" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Group Number</label>
+
+                <input
+                    placeholder="GRP-001" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Relationship to Subscriber *</label>
+
+                <select>
+                    <option>Self</option>
+                    <option>Spouse</option>
+                    <option>Child</option>
+                    <option>Parent</option>
+                    <option>Domestic Partner</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- 03 -->
+
+        <div class="section-heading">
+
+            <span>03</span>
+
+            <div>
+                <h2>Policy Information</h2>
+
+                <p>
+                    Policy holder and coverage dates.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-field">
+                <label>Policy Holder *</label>
+
+                <input
+                    placeholder="John Michael Smith" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Effective Date *</label>
+
+                <input type="date" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Termination Date</label>
+
+                <input type="date" />
+            </div>
+
+
+            <div class="form-field">
+                <label>Coverage Status</label>
+
+                <select>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                    <option>Pending</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- 04 -->
+
+        <div class="section-heading">
+
+            <span>04</span>
+
+            <div>
+                <h2>Benefits & Cost Sharing</h2>
+
+                <p>
+                    Store patient responsibility and plan benefit information.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-box">
+
+            <div class="form-grid">
+
+                <div class="form-field">
+
+                    <label>Copay</label>
+
+                    <div class="currency-input">
+                        <span>$</span>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            placeholder="30.00" />
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>Coinsurance</label>
+
+                    <div class="percentage-input">
+                        <input
+                            type="number"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            placeholder="20" />
+
+                        <span>%</span>
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>Deductible</label>
+
+                    <div class="currency-input">
+                        <span>$</span>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            placeholder="1500.00" />
+                    </div>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>Out-of-Pocket Maximum</label>
+
+                    <div class="currency-input">
+                        <span>$</span>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            placeholder="6500.00" />
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 05 -->
+
+        <div class="section-heading">
+
+            <span>05</span>
+
+            <div>
+                <h2>Eligibility & Verification</h2>
+
+                <p>
+                    Track the current insurance verification state.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="verification-box">
+
+            <div class="form-grid">
+
+                <div class="form-field">
+
+                    <label>Eligibility Status</label>
+
+                    <select>
+                        <option>Not Verified</option>
+                        <option>Verified</option>
+                        <option>Inactive</option>
+                        <option>Pending</option>
+                        <option>Verification Required</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>Last Verified Date</label>
+
+                    <input type="date" />
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>Verification Source</label>
+
+                    <select>
+                        <option>Electronic Eligibility</option>
+                        <option>Manual Verification</option>
+                        <option>Payer Portal</option>
+                        <option>Phone</option>
+                        <option>Not Applicable</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+            <a href="/insurance" class="cancel-button">
+                Cancel
+            </a>
+
+            <button class="draft-button">
+                Save Draft
+            </button>
+
+            <button class="primary-button">
+                Save Insurance
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Guid? InsuranceId { get; set; }
+
+}

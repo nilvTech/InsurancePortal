@@ -1,0 +1,149 @@
+@page "/denials/attachments"
+
+<div class="denial-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">DENIAL DOCUMENTATION</div>
+            <h1>Denial Attachments</h1>
+            <p>Manage clinical records, payer correspondence, and supporting documents.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/denials" class="secondary-button">← Denials</a>
+            <button class="primary-button">+ Upload Document</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">DC</div>
+            <div>
+                <span>Total Documents</span>
+                <strong>184</strong>
+                <small>Linked denial documents</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">CD</div>
+            <div>
+                <span>Clinical</span>
+                <strong>92</strong>
+                <small>Clinical documentation</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">PC</div>
+            <div>
+                <span>Payer Correspondence</span>
+                <strong>51</strong>
+                <small>Payer documents</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">MI</div>
+            <div>
+                <span>Missing</span>
+                <strong>11</strong>
+                <small>Required documents</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search document or denial..." />
+        </div>
+
+        <select>
+            <option>All Document Types</option>
+            <option>Clinical Note</option>
+            <option>Medical Record</option>
+            <option>Payer Letter</option>
+            <option>Remittance</option>
+            <option>Appeal Letter</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Document Repository</h2>
+                <p>Files associated with denial cases.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Denial</th>
+                        <th>Patient</th>
+                        <th>Type</th>
+                        <th>Uploaded By</th>
+                        <th>Date</th>
+                        <th>Size</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>Clinical_Notes_09062026.pdf</strong></td>
+                        <td>DEN-10045</td>
+                        <td>Robert Wilson</td>
+                        <td>Clinical Note</td>
+                        <td>Dr. Michael Brown</td>
+                        <td>09/06/2026</td>
+                        <td>2.4 MB</td>
+                        <td><span class="status available">Available</span></td>
+                        <td class="actions"><button>View</button><button>Download</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>UHC_Denial_Letter.pdf</strong></td>
+                        <td>DEN-10045</td>
+                        <td>Robert Wilson</td>
+                        <td>Payer Letter</td>
+                        <td>System</td>
+                        <td>09/05/2026</td>
+                        <td>840 KB</td>
+                        <td><span class="status available">Available</span></td>
+                        <td class="actions"><button>View</button><button>Download</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Medical_Record.pdf</strong></td>
+                        <td>DEN-10047</td>
+                        <td>John Smith</td>
+                        <td>Medical Record</td>
+                        <td>Jane Adams</td>
+                        <td>09/04/2026</td>
+                        <td>4.1 MB</td>
+                        <td><span class="status missing">Missing Signature</span></td>
+                        <td class="actions"><button>Review</button></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

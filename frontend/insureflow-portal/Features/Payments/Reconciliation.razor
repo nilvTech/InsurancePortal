@@ -1,0 +1,113 @@
+@page "/payments/reconciliation"
+
+<div class="payment-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">FINANCIAL CONTROL</div>
+            <h1>Payment Reconciliation</h1>
+            <p>Compare ERA, posted payments, adjustments and claim balances.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Dashboard</a>
+            <button class="primary-button">Run Reconciliation</button>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>ERA Amount</span>
+            <strong>$518,420</strong>
+            <small>Current period</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Posted</span>
+            <strong>$482,110</strong>
+            <small>93%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Variance</span>
+            <strong>$15,010</strong>
+            <small>Requires review</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Unmatched</span>
+            <strong>18</strong>
+            <small>Transactions</small>
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <div>
+                <h2>Reconciliation Results</h2>
+                <p>Compare payer remittance with posted financial transactions</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ERA</th>
+                        <th>Payer</th>
+                        <th>ERA Amount</th>
+                        <th>Posted</th>
+                        <th>Adjustment</th>
+                        <th>Variance</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>ERA-202600245</td>
+                        <td>UnitedHealthcare</td>
+                        <td>$48,420</td>
+                        <td>$48,420</td>
+                        <td>$0</td>
+                        <td>$0</td>
+                        <td><span class="status reconciled">Reconciled</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>ERA-202600244</td>
+                        <td>Aetna</td>
+                        <td>$32,180</td>
+                        <td>$30,900</td>
+                        <td>$600</td>
+                        <td>$680</td>
+                        <td><span class="status review">Review</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>ERA-202600243</td>
+                        <td>Cigna</td>
+                        <td>$27,840</td>
+                        <td>$25,100</td>
+                        <td>$1,240</td>
+                        <td>$1,500</td>
+                        <td><span class="status review">Review</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

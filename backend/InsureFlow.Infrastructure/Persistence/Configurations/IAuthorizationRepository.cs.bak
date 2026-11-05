@@ -1,0 +1,282 @@
+using InsureFlow.Application.Persistence;
+using InsureFlow.Domain.Entities;
+using InsureFlow.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
+namespace InsureFlow.Infrastructure.Repositories;
+
+public sealed class AuthorizationRepository(
+    InsureFlowDbContext db) : IAuthorizationRepository
+{
+    public async Task<IReadOnlyList<Authorization>> GetPagedAsync(
+        string? search,
+        string? status,
+        string? priority,
+        int page,
+        int pageSize,
+        CancellationToken ct = default)
+    {
+        page = Math.Max(page, 1);
+        pageSize = Math.Clamp(pageSize, 1, 100);
+
+        var query = db.Authorizations
+            .AsNoTracking()
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var value = search.Trim();
+
+            query = query.Where(x =>
+                x.AuthorizationNumber.Contains(value) ||
+                (x.PayerReference != null &&
+                 x.PayerReference.Contains(value)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(status))
+        {
+            var value = status.Trim();
+            query = query.Where(x => x.Status == value);
+        }
+
+        if (!string.IsNullOrWhiteSpace(priority))
+        {
+            var value = priority.Trim();
+            query = query.Where(x => x.Priority == value);
+        }
+
+        return await query
+            .OrderByDescending(x => x.CreatedAtUtc)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(ct);
+    }
+
+    public Task<Authorization?> GetByExternalIdAsync(
+        Guid externalId,
+        CancellationToken ct = default)
+        => db.Authorizations
+            .FirstOrDefaultAsync(
+                x => x.ExternalId == externalId,
+                ct);
+
+    public Task<bool> ExistsByNumberAsync(
+        string authorizationNumber,
+        long? excludeId,
+        CancellationToken ct = default)
+        => db.Authorizations.AnyAsync(
+            x =>
+                x.AuthorizationNumber == authorizationNumber &&
+                (!excludeId.HasValue || x.Id != excludeId.Value),
+            ct);
+
+    public Task AddAsync(
+        Authorization authorization,
+        CancellationToken ct = default)
+        => db.Authorizations
+            .AddAsync(authorization, ct)
+            .AsTask();
+
+    public Task UpdateAsync(
+        Authorization authorization,
+        CancellationToken ct = default)
+    {
+        db.Authorizations.Update(authorization);
+        return Task.CompletedTask;
+    }
+
+    public Task SaveChangesAsync(
+        CancellationToken ct = default)
+        => db.SaveChangesAsync(ct);
+
+    // Authorization service lines
+
+    public async Task<IReadOnlyList<AuthorizationServiceLine>>
+        GetServicesAsync(
+            long authorizationId,
+            CancellationToken ct = default)
+        => await db.AuthorizationServiceLines
+            .AsNoTracking()
+            .Where(x => x.AuthorizationId == authorizationId)
+            .OrderBy(x => x.Id)
+            .ToListAsync(ct);
+
+    public Task<AuthorizationServiceLine?> GetServiceAsync(
+        long serviceId,
+        CancellationToken ct = default)
+        => db.AuthorizationServiceLines
+            .FirstOrDefaultAsync(
+                x => x.Id == serviceId,
+                ct);
+
+    public Task AddServiceAsync(
+        AuthorizationServiceLine service,
+        CancellationToken ct = default)
+        => db.AuthorizationServiceLines
+            .AddAsync(service, ct)
+            .AsTask();
+
+    public async Task<bool> DeleteServiceAsync(
+        long authorizationId,
+        long serviceId,
+        CancellationToken ct = default)
+    {
+        var entity = await db.AuthorizationServiceLines
+            .FirstOrDefaultAsync(
+                x =>
+                    x.Id == serviceId &&
+                    x.AuthorizationId == authorizationId,
+                ct);
+
+        if (entity is null)
+            return false;
+
+        db.AuthorizationServiceLines.Remove(entity);
+        return true;
+    }
+
+    // Authorization diagnoses
+
+    public async Task<IReadOnlyList<AuthorizationDiagnosis>>
+        GetDiagnosesAsync(
+            long authorizationId,
+            CancellationToken ct = default)
+        => await db.AuthorizationDiagnoses
+            .AsNoTracking()
+            .Where(x => x.AuthorizationId == authorizationId)
+            .OrderBy(x => x.Sequence)
+            .ToListAsync(ct);
+
+    public Task AddDiagnosisAsync(
+        AuthorizationDiagnosis diagnosis,
+        CancellationToken ct = default)
+        => db.AuthorizationDiagnoses
+            .AddAsync(diagnosis, ct)
+            .AsTask();
+
+    public async Task<bool> DeleteDiagnosisAsync(
+        long authorizationId,
+        long diagnosisId,
+        CancellationToken ct = default)
+    {
+        var entity = await db.AuthorizationDiagnoses
+            .FirstOrDefaultAsync(
+                x =>
+                    x.Id == diagnosisId &&
+                    x.AuthorizationId == authorizationId,
+                ct);
+
+        if (entity is null)
+            return false;
+
+        db.AuthorizationDiagnoses.Remove(entity);
+        return true;
+    }
+
+    // Authorization documents
+
+    public async Task<IReadOnlyList<AuthorizationDocument>>
+        GetDocumentsAsync(
+            long authorizationId,
+            CancellationToken ct = default)
+        => await db.AuthorizationDocuments
+            .AsNoTracking()
+            .Where(x => x.AuthorizationId == authorizationId)
+            .OrderByDescending(x => x.UploadedAt)
+            .ToListAsync(ct);
+
+    public Task<AuthorizationDocument?> GetDocumentAsync(
+        long authorizationId,
+        long documentId,
+        CancellationToken ct = default)
+        => db.AuthorizationDocuments
+            .AsNoTracking()
+            .FirstOrDefaultAsync(
+                x =>
+                    x.Id == documentId &&
+                    x.AuthorizationId == authorizationId,
+                ct);
+
+    public Task AddDocumentAsync(
+        AuthorizationDocument document,
+        CancellationToken ct = default)
+        => db.AuthorizationDocuments
+            .AddAsync(document, ct)
+            .AsTask();
+
+    public async Task<bool> DeleteDocumentAsync(
+        long authorizationId,
+        long documentId,
+        CancellationToken ct = default)
+    {
+        var entity = await db.AuthorizationDocuments
+            .FirstOrDefaultAsync(
+                x =>
+                    x.Id == documentId &&
+                    x.AuthorizationId == authorizationId,
+                ct);
+
+        if (entity is null)
+            return false;
+
+        db.AuthorizationDocuments.Remove(entity);
+        return true;
+    }
+
+    // Authorization history
+
+    public async Task<IReadOnlyList<AuthorizationHistory>>
+        GetHistoryAsync(
+            long authorizationId,
+            CancellationToken ct = default)
+        => await db.AuthorizationHistory
+            .AsNoTracking()
+            .Where(x => x.AuthorizationId == authorizationId)
+            .OrderByDescending(x => x.ChangedAt)
+            .ToListAsync(ct);
+
+    public Task AddHistoryAsync(
+        AuthorizationHistory history,
+        CancellationToken ct = default)
+        => db.AuthorizationHistory
+            .AddAsync(history, ct)
+            .AsTask();
+
+    // Authorization notes
+
+    public async Task<IReadOnlyList<AuthorizationNote>>
+        GetNotesAsync(
+            long authorizationId,
+            CancellationToken ct = default)
+        => await db.AuthorizationNotes
+            .AsNoTracking()
+            .Where(x => x.AuthorizationId == authorizationId)
+            .OrderByDescending(x => x.CreatedAt)
+            .ToListAsync(ct);
+
+    public Task AddNoteAsync(
+        AuthorizationNote note,
+        CancellationToken ct = default)
+        => db.AuthorizationNotes
+            .AddAsync(note, ct)
+            .AsTask();
+
+    // Authorization appeals
+
+    public async Task<IReadOnlyList<AuthorizationAppeal>>
+        GetAppealsAsync(
+            long authorizationId,
+            CancellationToken ct = default)
+        => await db.AuthorizationAppeals
+            .AsNoTracking()
+            .Where(x => x.AuthorizationId == authorizationId)
+            .OrderByDescending(x => x.SubmittedAt)
+            .ToListAsync(ct);
+
+    public Task AddAppealAsync(
+        AuthorizationAppeal appeal,
+        CancellationToken ct = default)
+        => db.AuthorizationAppeals
+            .AddAsync(appeal, ct)
+            .AsTask();
+}

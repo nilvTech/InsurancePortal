@@ -1,0 +1,138 @@
+@page "/payments/era"
+
+<div class="payment-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">REMITTANCE</div>
+            <h1>ERA Management</h1>
+            <p>Manage electronic remittance advice and X12 835 transactions.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Dashboard</a>
+            <button class="primary-button">Import ERA</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Received</span>
+            <strong>248</strong>
+            <small>Current period</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Processed</span>
+            <strong>221</strong>
+            <small>89.1%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Pending</span>
+            <strong>18</strong>
+            <small>Requires processing</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Failed</span>
+            <strong>9</strong>
+            <small>Requires review</small>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search ERA, payer or trace number..." />
+        </div>
+
+        <select>
+            <option>All Status</option>
+            <option>Processed</option>
+            <option>Pending</option>
+            <option>Failed</option>
+        </select>
+
+        <select>
+            <option>All Payers</option>
+            <option>UnitedHealthcare</option>
+            <option>Aetna</option>
+            <option>Cigna</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>ERA Transactions</h2>
+                <p>X12 835 electronic remittance transactions</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ERA</th>
+                        <th>Payer</th>
+                        <th>Trace Number</th>
+                        <th>Payment Date</th>
+                        <th>Amount</th>
+                        <th>Claims</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>ERA-202600245</strong><small>835</small></td>
+                        <td>UnitedHealthcare</td>
+                        <td>TRC-829182</td>
+                        <td>09/08/2026</td>
+                        <td>$48,420.00</td>
+                        <td>128</td>
+                        <td><span class="status processed">Processed</span></td>
+                        <td><a href="/payments/era/1">Details</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>ERA-202600244</strong><small>835</small></td>
+                        <td>Aetna</td>
+                        <td>TRC-829177</td>
+                        <td>09/07/2026</td>
+                        <td>$32,180.00</td>
+                        <td>86</td>
+                        <td><span class="status pending">Pending</span></td>
+                        <td><a href="/payments/era/2">Details</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>ERA-202600243</strong><small>835</small></td>
+                        <td>Cigna</td>
+                        <td>TRC-829169</td>
+                        <td>09/06/2026</td>
+                        <td>$27,840.00</td>
+                        <td>71</td>
+                        <td><span class="status failed">Failed</span></td>
+                        <td><a href="/payments/era/3">Details</a></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

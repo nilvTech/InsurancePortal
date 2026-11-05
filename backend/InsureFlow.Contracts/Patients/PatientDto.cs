@@ -1,0 +1,26 @@
+namespace InsureFlow.Contracts.Patients;
+
+public sealed record PatientDto(
+    Guid Id,
+    long TenantId,
+    string PatientId,
+    string Mrn,
+    string AccountNumber,
+    string FirstName,
+    string? MiddleName,
+    string LastName,
+    string? PreferredName,
+    DateTime DateOfBirth,
+    string Gender,
+    string Status,
+    DateTime? RegistrationDate,
+    DateTime? LastVisitDate,
+    string PatientClass,
+    string PortalAccess,
+    string CommunicationConsent,
+    string? PreferredPharmacy,
+    string? ReferralSource,
+    string FinancialAssistance,
+    string? Notes,
+    DateTime CreatedAtUtc,
+    DateTime? UpdatedAtUtc);

@@ -1,0 +1,180 @@
+@page "/claims/resubmission"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CORRECTED CLAIM</div>
+            <h1>Claim Resubmission</h1>
+            <p>Correct the rejected claim and submit a replacement transaction.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/rejection" class="secondary-button">← Rejection</a>
+        </div>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Original Claim</h2>
+                <p>Claim being corrected.</p>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <span>Original Claim</span>
+                <strong>CLM-2026-001246</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Payer</span>
+                <strong>UnitedHealthcare</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Original Status</span>
+                <strong class="danger-text">Rejected</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Original Submission</span>
+                <strong>SUB-2026-009800</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Claim Amount</span>
+                <strong>$2,450.00</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Correction Type</span>
+                <strong>Provider Information</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Resubmission Information</h2>
+                <p>Define how the corrected claim will be submitted.</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Claim Frequency Code</label>
+                <select>
+                    <option>7 — Replacement of Prior Claim</option>
+                    <option>8 — Void/Cancel Prior Claim</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Original Claim Number</label>
+                <input value="CLM-2026-001246" />
+            </div>
+
+            <div class="field">
+                <label>Corrected Rendering Provider</label>
+                <select>
+                    <option>Dr. James Wilson — NPI 1234567890</option>
+                    <option>Dr. Emily Carter — NPI 9876543210</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Resubmission Reason</label>
+                <select>
+                    <option>Provider Information Correction</option>
+                    <option>Coding Correction</option>
+                    <option>Insurance Correction</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Changes</h2>
+                <p>Information changed from the original claim.</p>
+            </div>
+        </div>
+
+        <div class="change-table">
+
+            <div class="change-header">
+                <span>Field</span>
+                <span>Original</span>
+                <span>Corrected</span>
+            </div>
+
+            <div class="change-row">
+                <strong>Rendering Provider</strong>
+                <span>Missing / Invalid</span>
+                <span>Dr. James Wilson</span>
+            </div>
+
+            <div class="change-row">
+                <strong>Provider NPI</strong>
+                <span>—</span>
+                <span>1234567890</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Supporting Documents</h2>
+                <p>Documents supporting the corrected submission.</p>
+            </div>
+
+            <button class="secondary-button">+ Add Document</button>
+        </div>
+
+        <div class="document-row">
+
+            <span class="document-icon">PDF</span>
+
+            <div>
+                <strong>Provider_Information.pdf</strong>
+                <small>245 KB • Added 09/04/2026</small>
+            </div>
+
+            <button class="remove-button">Remove</button>
+
+        </div>
+
+    </section>
+
+    <div class="form-footer">
+
+        <a href="/claims/rejection" class="secondary-button">Cancel</a>
+
+        <div>
+            <button class="secondary-button">Save Draft</button>
+            <button class="primary-button">Validate & Resubmit →</button>
+        </div>
+
+    </div>
+
+</div>

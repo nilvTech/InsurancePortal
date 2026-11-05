@@ -1,0 +1,154 @@
+@page "/claims/rejection"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CLAIM REJECTION</div>
+            <h1>Claim Rejection</h1>
+            <p>Review rejection details, identify root cause and determine the next action.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/details" class="secondary-button">← Claim Details</a>
+            <a href="/claims/resubmission" class="primary-button">Correct & Resubmit</a>
+        </div>
+
+    </div>
+
+    <div class="rejection-banner">
+
+        <div class="rejection-icon">!</div>
+
+        <div>
+            <span>CLAIM STATUS</span>
+            <strong>Rejected</strong>
+            <small>Correction is required before resubmission.</small>
+        </div>
+
+        <span class="status rejected">Rejected</span>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Claim Number</span>
+            <strong>CLM-2026-001246</strong>
+            <small>Original claim</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Payer</span>
+            <strong>UnitedHealthcare</strong>
+            <small>UHC</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Rejected Amount</span>
+            <strong>$2,450.00</strong>
+            <small>Total submitted charge</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Rejection Date</span>
+            <strong>09/04/2026</strong>
+            <small>10:14 AM</small>
+        </div>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Rejection Reason</h2>
+                <p>Payer rejection information.</p>
+            </div>
+        </div>
+
+        <div class="rejection-detail">
+
+            <div class="reason-code">
+                <span>REJECTION CODE</span>
+                <strong>A7</strong>
+            </div>
+
+            <div class="reason-content">
+                <strong>Invalid or missing provider information</strong>
+                <p>
+                    Rendering provider information could not be validated against
+                    the payer's provider records.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Recommended Action</h2>
+                <p>Suggested resolution based on the rejection.</p>
+            </div>
+        </div>
+
+        <div class="action-list">
+
+            <div class="action-row">
+                <span>1</span>
+                <div>
+                    <strong>Review rendering provider</strong>
+                    <small>Verify provider NPI and payer enrollment.</small>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <span>2</span>
+                <div>
+                    <strong>Update claim information</strong>
+                    <small>Correct the provider information on the claim.</small>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <span>3</span>
+                <div>
+                    <strong>Revalidate the claim</strong>
+                    <small>Run claim validation and scrubbing again.</small>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <span>4</span>
+                <div>
+                    <strong>Resubmit corrected claim</strong>
+                    <small>Create a corrected submission referencing the original claim.</small>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Internal Notes</h2>
+                <p>Document resolution activity.</p>
+            </div>
+        </div>
+
+        <textarea placeholder="Enter notes about the rejection and resolution..."></textarea>
+
+        <div class="notes-footer">
+            <button class="secondary-button">Save Note</button>
+        </div>
+
+    </section>
+
+</div>

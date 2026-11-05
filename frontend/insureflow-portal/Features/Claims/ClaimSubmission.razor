@@ -1,0 +1,178 @@
+@page "/claims/submission"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CLAIM TRANSMISSION</div>
+            <h1>Claim Submission</h1>
+            <p>Review submission readiness and transmit the claim to the payer or clearinghouse.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/details" class="secondary-button">← Claim Details</a>
+        </div>
+
+    </div>
+
+    <div class="submission-banner">
+
+        <div class="banner-icon">✓</div>
+
+        <div>
+            <strong>Claim is ready for submission</strong>
+            <p>All required claim validation checks have passed.</p>
+        </div>
+
+        <span class="status ready">Ready</span>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Submission Information</h2>
+                <p>Claim and payer transmission details.</p>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <span>Claim Number</span>
+                <strong>CLM-2026-001248</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Claim Type</span>
+                <strong>Professional</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Transaction</span>
+                <strong>837P</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Payer</span>
+                <strong>Blue Cross Blue Shield</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Payer ID</span>
+                <strong>12345</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Total Charge</span>
+                <strong>$1,250.00</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Readiness Checks</h2>
+                <p>Required checks before transmission.</p>
+            </div>
+        </div>
+
+        <div class="check-list">
+
+            <div class="check-row">
+                <span class="check-icon">✓</span>
+                <div>
+                    <strong>Claim Validation</strong>
+                    <small>All required claim fields validated.</small>
+                </div>
+                <span class="check-status">Passed</span>
+            </div>
+
+            <div class="check-row">
+                <span class="check-icon">✓</span>
+                <div>
+                    <strong>Claim Scrubbing</strong>
+                    <small>No blocking scrubber errors found.</small>
+                </div>
+                <span class="check-status">Passed</span>
+            </div>
+
+            <div class="check-row">
+                <span class="check-icon">✓</span>
+                <div>
+                    <strong>Eligibility</strong>
+                    <small>Coverage verified for date of service.</small>
+                </div>
+                <span class="check-status">Verified</span>
+            </div>
+
+            <div class="check-row">
+                <span class="check-icon">✓</span>
+                <div>
+                    <strong>Authorization</strong>
+                    <small>Required authorization is available.</small>
+                </div>
+                <span class="check-status">Verified</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Transmission Method</h2>
+                <p>Select how this claim will be transmitted.</p>
+            </div>
+        </div>
+
+        <div class="submission-options">
+
+            <label class="submission-option selected">
+                <input type="radio" checked />
+
+                <div>
+                    <strong>Clearinghouse</strong>
+                    <small>Submit using configured clearinghouse connection.</small>
+                </div>
+            </label>
+
+            <label class="submission-option">
+                <input type="radio" />
+
+                <div>
+                    <strong>Payer API</strong>
+                    <small>Submit directly using payer API integration.</small>
+                </div>
+            </label>
+
+            <label class="submission-option">
+                <input type="radio" />
+
+                <div>
+                    <strong>Manual / File Export</strong>
+                    <small>Generate transaction file for manual transmission.</small>
+                </div>
+            </label>
+
+        </div>
+
+    </section>
+
+    <div class="submission-footer">
+
+        <a href="/claims/details" class="secondary-button">Cancel</a>
+
+        <button class="primary-button">Submit Claim →</button>
+
+    </div>
+
+</div>

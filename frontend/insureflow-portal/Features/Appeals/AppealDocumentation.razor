@@ -1,0 +1,135 @@
+@page "/appeals/documentation/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>Appeal Documentation</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">APPEAL WORKSPACE</div>
+            <h1>Documentation</h1>
+            <p>Manage required documentation before appeal submission.</p>
+        </div>
+
+        <a href="/appeals/details/100245" class="secondary-button">Back to Appeal</a>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Required</span>
+            <strong>5</strong>
+            <small>Documents</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Received</span>
+            <strong>4</strong>
+            <small>Documents</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Verified</span>
+            <strong>3</strong>
+            <small>Documents</small>
+        </div>
+
+        <div class="summary-card warning-card">
+            <span>Missing</span>
+            <strong>1</strong>
+            <small>Authorization document</small>
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <div>
+                <h2>Documentation Checklist</h2>
+                <p>Required documentation for APL-100245.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Required</th>
+                        <th>Received</th>
+                        <th>Date</th>
+                        <th>Verified By</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>Clinical Notes</strong><small>Provider documentation</small></td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Sep 08</td>
+                        <td>Sarah Wilson</td>
+                        <td><span class="status complete">Complete</span></td>
+                        <td><a href="/appeals/attachments/100245">View</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Medical Records</strong><small>Patient records</small></td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Sep 08</td>
+                        <td>Sarah Wilson</td>
+                        <td><span class="status complete">Complete</span></td>
+                        <td><a href="/appeals/attachments/100245">View</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>EOB</strong><small>Explanation of Benefits</small></td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Sep 08</td>
+                        <td>Sarah Wilson</td>
+                        <td><span class="status complete">Complete</span></td>
+                        <td><a href="/appeals/attachments/100245">View</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Authorization</strong><small>Prior authorization</small></td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><span class="status missing">Missing</span></td>
+                        <td><a href="/appeals/attachments/100245">Upload</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Referral</strong><small>Specialist referral</small></td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><span class="status optional">Not Required</span></td>
+                        <td>-</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

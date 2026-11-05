@@ -1,0 +1,277 @@
+@page "/eligibility/failures"
+
+
+<div class="failures-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <a href="/eligibility" class="back-link">
+                ← Eligibility
+            </a>
+
+            <div class="eyebrow">
+                ELIGIBILITY OPERATIONS
+            </div>
+
+            <h1>
+                Eligibility Failures
+            </h1>
+
+            <p>
+                Review failed eligibility requests, payer errors and retry processing.
+            </p>
+
+        </div>
+
+        <button class="primary-button">
+            Retry All Eligible
+        </button>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="failure-summary">
+
+        <div>
+            <span>Failed Requests</span>
+            <strong>32</strong>
+        </div>
+
+        <div>
+            <span>Retry Eligible</span>
+            <strong>26</strong>
+        </div>
+
+        <div>
+            <span>Payer Errors</span>
+            <strong>18</strong>
+        </div>
+
+        <div>
+            <span>Data Errors</span>
+            <strong>14</strong>
+        </div>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="toolbar">
+
+        <div class="search">
+            ⌕
+            <input placeholder="Search patient, payer, error code..." />
+        </div>
+
+        <select>
+            <option>All Error Types</option>
+            <option>Payer Error</option>
+            <option>Validation Error</option>
+            <option>Timeout</option>
+            <option>Connectivity</option>
+        </select>
+
+        <select>
+            <option>All Retry Status</option>
+            <option>Retry Eligible</option>
+            <option>Max Retries Reached</option>
+        </select>
+
+    </div>
+
+
+    <!-- FAILURES -->
+
+    <div class="failure-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Patient</th>
+                    <th>Payer</th>
+                    <th>Request ID</th>
+                    <th>Error</th>
+                    <th>Attempts</th>
+                    <th>Failed At</th>
+                    <th>Retry</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        <strong>Linda Davis</strong>
+                        <small>MRN-10004</small>
+                    </td>
+
+                    <td>
+                        State Medicaid
+                    </td>
+
+                    <td>
+                        ELG-20260902-0004
+                    </td>
+
+                    <td>
+                        <span class="error-code">
+                            AAA-42
+                        </span>
+
+                        <small>
+                            Unable to respond at current time
+                        </small>
+                    </td>
+
+                    <td>
+                        2 / 3
+                    </td>
+
+                    <td>
+                        09/02/2026
+                        <small>08:42 AM</small>
+                    </td>
+
+                    <td>
+                        <span class="retry">
+                            Eligible
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="retry-button">
+                            Retry
+                        </button>
+
+                        <button class="more-button">
+                            ⋮
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <strong>David Miller</strong>
+                        <small>MRN-10006</small>
+                    </td>
+
+                    <td>
+                        Illinois Workers Comp
+                    </td>
+
+                    <td>
+                        ELG-20260902-0007
+                    </td>
+
+                    <td>
+                        <span class="error-code">
+                            VAL-001
+                        </span>
+
+                        <small>
+                            Invalid member information
+                        </small>
+                    </td>
+
+                    <td>
+                        1 / 3
+                    </td>
+
+                    <td>
+                        09/02/2026
+                        <small>08:12 AM</small>
+                    </td>
+
+                    <td>
+                        <span class="retry">
+                            Eligible
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="retry-button">
+                            Retry
+                        </button>
+
+                        <button class="more-button">
+                            ⋮
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <strong>Thomas Williams</strong>
+                        <small>MRN-10008</small>
+                    </td>
+
+                    <td>
+                        ABC Auto Insurance
+                    </td>
+
+                    <td>
+                        ELG-20260902-0010
+                    </td>
+
+                    <td>
+                        <span class="error-code">
+                            NET-504
+                        </span>
+
+                        <small>
+                            Payer gateway timeout
+                        </small>
+                    </td>
+
+                    <td>
+                        3 / 3
+                    </td>
+
+                    <td>
+                        09/02/2026
+                        <small>07:51 AM</small>
+                    </td>
+
+                    <td>
+                        <span class="max-retry">
+                            Max Retries
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="more-button">
+                            ⋮
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

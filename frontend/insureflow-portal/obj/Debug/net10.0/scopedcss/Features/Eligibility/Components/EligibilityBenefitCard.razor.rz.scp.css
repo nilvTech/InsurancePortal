@@ -1,0 +1,39 @@
+.benefit-card[b-0cgf0ocwgw] {
+    background: #f8fafb;
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+    padding: 13px;
+}
+
+.benefit-header[b-0cgf0ocwgw] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.benefit-header > span:first-child[b-0cgf0ocwgw] {
+    color: #718096;
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+.covered[b-0cgf0ocwgw] {
+    background: #e8f7f2;
+    color: #167b70;
+    border-radius: 20px;
+    padding: 3px 6px;
+    font-size: 8px;
+}
+
+.benefit-card strong[b-0cgf0ocwgw] {
+    display: block;
+    margin-top: 7px;
+    font-size: 18px;
+}
+
+.benefit-card small[b-0cgf0ocwgw] {
+    display: block;
+    color: #718096;
+    font-size: 9px;
+    margin-top: 3px;
+}

@@ -1,0 +1,244 @@
+@page "/denials/appeal/{DenialId}"
+
+<div class="appeal-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+                <a href="/denials">Denials</a>
+                <span>/</span>
+                <span>Appeal</span>
+            </div>
+
+            <div class="eyebrow">DENIAL APPEAL</div>
+
+            <h1>Appeal Denial</h1>
+
+            <p>
+                Prepare and submit an appeal for the denied claim.
+            </p>
+
+        </div>
+
+        <a href="/denials/details/@DenialId"
+           class="secondary-button">
+            Back to Denial
+        </a>
+
+    </div>
+
+
+    <!-- DENIAL SUMMARY -->
+
+    <section class="summary-card">
+
+        <div>
+            <span>Denial</span>
+            <strong>DEN-2026-00142</strong>
+        </div>
+
+        <div>
+            <span>Patient</span>
+            <strong>James Anderson</strong>
+        </div>
+
+        <div>
+            <span>Payer</span>
+            <strong>UnitedHealthcare</strong>
+        </div>
+
+        <div>
+            <span>Denied Amount</span>
+            <strong>$4,280.00</strong>
+        </div>
+
+        <div>
+            <span>Denial Code</span>
+            <strong>CO-197</strong>
+        </div>
+
+    </section>
+
+
+    <!-- APPEAL -->
+
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <h2>Appeal Information</h2>
+
+            <p>
+                Provide the reason and supporting information for the appeal.
+            </p>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>Appeal Type *</label>
+
+                <select>
+
+                    <option>First Level Appeal</option>
+                    <option>Second Level Appeal</option>
+                    <option>Expedited Appeal</option>
+                    <option>External Review</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Submission Method</label>
+
+                <select>
+
+                    <option>Payer Portal</option>
+                    <option>Electronic</option>
+                    <option>Fax</option>
+                    <option>Mail</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Appeal Due Date</label>
+
+                <input type="date"
+                       value="2026-09-15" />
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Priority</label>
+
+                <select>
+
+                    <option>Normal</option>
+                    <option>Urgent</option>
+                    <option>Expedited</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Appeal Reason *</label>
+
+                <textarea
+                placeholder="Explain why the denial should be overturned..."></textarea>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Clinical / Supporting Information</label>
+
+                <textarea
+                placeholder="Enter supporting clinical, authorization or insurance information..."></textarea>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DOCUMENTS -->
+
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <h2>Supporting Documentation</h2>
+
+            <p>
+                Attach documentation supporting the appeal.
+            </p>
+
+        </div>
+
+
+        <div class="upload-area">
+
+            <div class="upload-icon">
+                +
+            </div>
+
+            <strong>
+                Add supporting documents
+            </strong>
+
+            <small>
+                Clinical records, authorization documents, payer correspondence
+                and other supporting files.
+            </small>
+
+            <button class="secondary-button">
+                Select Files
+            </button>
+
+        </div>
+
+
+        <div class="attachment-list">
+
+            <div class="attachment">
+
+                <span>PDF</span>
+
+                <div>
+                    <strong>clinical-documentation.pdf</strong>
+                    <small>2.4 MB</small>
+                </div>
+
+                <button>Remove</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="form-actions">
+
+        <a href="/denials"
+           class="secondary-button">
+            Cancel
+        </a>
+
+        <button class="secondary-button">
+            Save Draft
+        </button>
+
+        <button class="primary-button">
+            Submit Appeal
+        </button>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public string? DenialId { get; set; }
+
+}

@@ -1,0 +1,148 @@
+@page "/appeals/external-review"
+@page "/appeals/external-review/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>External Review</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">ESCALATED APPEALS</div>
+            <h1>External Review</h1>
+            <p>Manage appeals escalated to an independent external review organization.</p>
+        </div>
+
+        <a href="/appeals" class="secondary-button">Back to Appeals</a>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>External Reviews</span>
+            <strong>30</strong>
+            <small>Current cases</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Submitted</span>
+            <strong>18</strong>
+            <small>Awaiting review</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Under Review</span>
+            <strong>9</strong>
+            <small>Active reviews</small>
+        </div>
+
+        <div class="summary-card warning-card">
+            <span>Due Soon</span>
+            <strong>3</strong>
+            <small>Within 7 days</small>
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <div>
+                <h2>External Review Case</h2>
+                <p>APL-100242 · Sarah Williams · BCBS</p>
+            </div>
+
+            <span class="status review">Under Review</span>
+        </div>
+
+        <div class="detail-grid">
+
+            <div>
+                <span>External Review Organization</span>
+                <strong>Independent Review Organization</strong>
+            </div>
+
+            <div>
+                <span>Review Type</span>
+                <strong>Standard</strong>
+            </div>
+
+            <div>
+                <span>Request Date</span>
+                <strong>Sep 08, 2026</strong>
+            </div>
+
+            <div>
+                <span>Submission Deadline</span>
+                <strong>Sep 22, 2026</strong>
+            </div>
+
+            <div>
+                <span>Reference Number</span>
+                <strong>EXT-88421</strong>
+            </div>
+
+            <div>
+                <span>Expected Decision</span>
+                <strong>Sep 28, 2026</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <h2>External Review Timeline</h2>
+            <p>Current review lifecycle.</p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item completed">
+                <span>1</span>
+                <div>
+                    <strong>Review Requested</strong>
+                    <small>Sep 08, 2026</small>
+                </div>
+            </div>
+
+            <div class="timeline-item completed">
+                <span>2</span>
+                <div>
+                    <strong>Documentation Submitted</strong>
+                    <small>Sep 09, 2026</small>
+                </div>
+            </div>
+
+            <div class="timeline-item active">
+                <span>3</span>
+                <div>
+                    <strong>Under Review</strong>
+                    <small>Current stage</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <span>4</span>
+                <div>
+                    <strong>Decision</strong>
+                    <small>Pending</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <button class="secondary-button">Update Review</button>
+        <button class="primary-button">Record Decision</button>
+    </div>
+
+</div>

@@ -1,0 +1,87 @@
+<div class="request-summary">
+
+    <div class="summary-header">
+
+        <div>
+
+            <span class="eyebrow">
+                ELIGIBILITY REQUEST
+            </span>
+
+            <strong>
+                @RequestId
+            </strong>
+
+        </div>
+
+        <span class="status">
+            @Status
+        </span>
+
+    </div>
+
+
+    <div class="summary-grid">
+
+        <div>
+            <label>Patient</label>
+            <strong>@PatientName</strong>
+        </div>
+
+        <div>
+            <label>MRN</label>
+            <strong>@Mrn</strong>
+        </div>
+
+        <div>
+            <label>Payer</label>
+            <strong>@Payer</strong>
+        </div>
+
+        <div>
+            <label>Member ID</label>
+            <strong>@MemberId</strong>
+        </div>
+
+        <div>
+            <label>Source</label>
+            <strong>@Source</strong>
+        </div>
+
+        <div>
+            <label>Transaction</label>
+            <strong>@TransactionType</strong>
+        </div>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string RequestId { get; set; } = string.Empty;
+
+    [Parameter]
+    public string PatientName { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Mrn { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Payer { get; set; } = string.Empty;
+
+    [Parameter]
+    public string MemberId { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Source { get; set; } = string.Empty;
+
+    [Parameter]
+    public string TransactionType { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Status { get; set; } = string.Empty;
+
+}

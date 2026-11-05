@@ -1,0 +1,376 @@
+/* =========================================================
+   INSUREFLOW APPLICATION LAYOUT
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.app-shell {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #f5f7fa;
+}
+
+/* =========================================================
+   STATIC SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #087f79;
+    color: #ffffff;
+
+    z-index: 1000;
+
+    box-shadow: 3px 0 12px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.sidebar-brand {
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 20px;
+
+    background: #087f79;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    background: #ffffff;
+    color: #087f79;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    margin-right: 11px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-text strong {
+    font-size: 17px;
+    line-height: 20px;
+}
+
+.brand-text span {
+    font-size: 10px;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+.sidebar-menu {
+    flex: 1;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 14px 10px;
+}
+
+/* Scrollbar */
+
+.sidebar-menu::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+
+    padding: 14px 16px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    background: #06736e;
+
+    flex-shrink: 0;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #087f79;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.user-info strong {
+    font-size: 12px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info span {
+    font-size: 10px;
+
+    opacity: 0.75;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================================================
+   MAIN AREA
+   ========================================================= */
+
+.main-area {
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #f5f7fa;
+}
+
+/* =========================================================
+   TOP HEADER
+   ========================================================= */
+
+.top-header {
+    height: 64px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e6eaf0;
+
+    z-index: 100;
+}
+
+.header-title {
+    color: #172b4d;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.notification {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.header-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #e7f6f4;
+    color: #087f79;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.header-user strong,
+.header-user small {
+    display: block;
+}
+
+.header-user strong {
+    font-size: 12px;
+    color: #172b4d;
+}
+
+.header-user small {
+    margin-top: 2px;
+
+    color: #718096;
+    font-size: 10px;
+}
+
+/* =========================================================
+   CONTENT AREA
+   THIS IS THE ONLY MAIN PAGE SCROLL
+   ========================================================= */
+
+.content-area {
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: #f5f7fa;
+}
+
+/* Main content scrollbar */
+
+.content-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-area::-webkit-scrollbar-track {
+    background: #f5f7fa;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+    background: #c7d4d3;
+    border-radius: 10px;
+}
+
+.content-area::-webkit-scrollbar-thumb:hover {
+    background: #9fb8b6;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-area {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .top-header {
+        padding: 0 20px;
+    }
+
+    .header-title {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .sidebar {
+        position: fixed;
+
+        width: 70px;
+    }
+
+    .brand-text,
+    .user-info {
+        display: none;
+    }
+
+    .sidebar-brand {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .brand-logo {
+        margin: 0;
+    }
+
+    .sidebar-footer {
+        justify-content: center;
+        padding: 12px 0;
+    }
+
+    .user-avatar {
+        margin: 0;
+    }
+
+    .main-area {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+
+    .top-header {
+        height: 58px;
+    }
+}

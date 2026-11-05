@@ -1,0 +1,130 @@
+@page "/payments/eob"
+
+<div class="payment-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">REMITTANCE</div>
+            <h1>EOB Management</h1>
+            <p>Review explanation of benefits and payer adjudication details.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Dashboard</a>
+            <button class="primary-button">Upload EOB</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Total EOBs</span>
+            <strong>1,284</strong>
+            <small>This month</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Processed</span>
+            <strong>1,172</strong>
+            <small>91.3%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Pending Review</span>
+            <strong>74</strong>
+            <small>Requires review</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Patient Responsibility</span>
+            <strong>$84K</strong>
+            <small>Current month</small>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search EOB, patient or claim..." />
+        </div>
+
+        <select>
+            <option>All Status</option>
+            <option>Processed</option>
+            <option>Pending</option>
+            <option>Review</option>
+        </select>
+
+        <select>
+            <option>All Payers</option>
+            <option>Medicare</option>
+            <option>Medicaid</option>
+            <option>Commercial</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Explanation of Benefits</h2>
+                <p>Payer payment and patient responsibility information</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>EOB</th>
+                        <th>Patient</th>
+                        <th>Claim</th>
+                        <th>Payer</th>
+                        <th>Billed</th>
+                        <th>Allowed</th>
+                        <th>Paid</th>
+                        <th>Patient Resp.</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>EOB-100245</strong><small>09/08/2026</small></td>
+                        <td>John Carter</td>
+                        <td>CLM-20260045</td>
+                        <td>Medicare</td>
+                        <td>$1,500</td>
+                        <td>$1,280</td>
+                        <td>$1,024</td>
+                        <td>$256</td>
+                        <td><span class="status processed">Processed</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>EOB-100244</strong><small>09/07/2026</small></td>
+                        <td>Sarah Wilson</td>
+                        <td>CLM-20260041</td>
+                        <td>Aetna</td>
+                        <td>$2,100</td>
+                        <td>$1,750</td>
+                        <td>$1,400</td>
+                        <td>$350</td>
+                        <td><span class="status pending">Review</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

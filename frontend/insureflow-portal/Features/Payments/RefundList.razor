@@ -1,0 +1,103 @@
+@page "/payments/refunds"
+
+<div class="payment-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">REFUNDS</div>
+            <h1>Refund Management</h1>
+            <p>Manage payer and patient refunds generated from payment activity.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Dashboard</a>
+            <a class="primary-button" href="/payments/refunds/new">Create Refund</a>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Refund Requests</span>
+            <strong>24</strong>
+            <small>This month</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Pending</span>
+            <strong>8</strong>
+            <small>Awaiting approval</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Processed</span>
+            <strong>$18,420</strong>
+            <small>This month</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Rejected</span>
+            <strong>2</strong>
+            <small>Requires review</small>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Refund Requests</h2>
+                <p>Track refund lifecycle and approvals</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Refund</th>
+                        <th>Patient</th>
+                        <th>Claim</th>
+                        <th>Reason</th>
+                        <th>Amount</th>
+                        <th>Requested</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>REF-10012</strong></td>
+                        <td>John Carter</td>
+                        <td>CLM-20260045</td>
+                        <td>Overpayment</td>
+                        <td>$125.00</td>
+                        <td>09/08/2026</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>REF-10011</strong></td>
+                        <td>Sarah Wilson</td>
+                        <td>CLM-20260041</td>
+                        <td>Duplicate Payment</td>
+                        <td>$350.00</td>
+                        <td>09/07/2026</td>
+                        <td><span class="status processed">Processed</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

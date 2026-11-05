@@ -1,0 +1,282 @@
+@page "/authorizations/{Id:guid}/appeal"
+
+<PageTitle>InsureFlow | Authorization Appeal</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span>/</span>
+                <a href="/authorizations">Authorizations</a>
+                <span>/</span>
+                <span>Appeal</span>
+            </div>
+
+            <h1>Submit Authorization Appeal</h1>
+
+            <p>
+                Submit supporting information for the denied authorization.
+            </p>
+
+        </div>
+
+        <a href="@($"/authorizations/{Id}")"
+           class="secondary-button">
+            Cancel
+        </a>
+
+    </div>
+
+    <div class="appeal-layout">
+
+        <main>
+
+            <section class="form-card">
+
+                <div class="card-header">
+
+                    <h2>Appeal Information</h2>
+
+                    <p>
+                        Provide the reason and supporting clinical information.
+                    </p>
+
+                </div>
+
+                <EditForm Model="@model"
+                          OnValidSubmit="SubmitAppeal">
+
+                    <DataAnnotationsValidator />
+
+                    <div class="field">
+
+                        <label for="appeal-type">
+                            Appeal Level
+                        </label>
+
+                        <select id="appeal-type"
+                                class="form-control"
+                                @bind="model.AppealType">
+
+                            <option value="First Level Appeal">
+                                First Level Appeal
+                            </option>
+
+                            <option value="Second Level Appeal">
+                                Second Level Appeal
+                            </option>
+
+                            <option value="External Review">
+                                External Review
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="field">
+
+                        <label for="reason">
+                            Appeal Reason
+                        </label>
+
+                        <textarea id="reason"
+                                  class="form-control textarea"
+                                  rows="8"
+                                  @bind="model.Reason"
+                                  placeholder="Explain why the authorization denial should be reconsidered."></textarea>
+
+                        <ValidationMessage For="@(() => model.Reason)" />
+
+                    </div>
+
+                    <div class="field">
+
+                        <label for="clinical-information">
+                            Clinical Information
+                        </label>
+
+                        <textarea id="clinical-information"
+                                  class="form-control textarea"
+                                  rows="8"
+                                  @bind="model.ClinicalInformation"
+                                  placeholder="Provide relevant clinical findings, medical necessity information, treatment history, or supporting context."></textarea>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <a href="@($"/authorizations/{Id}")"
+                           class="secondary-button">
+                            Cancel
+                        </a>
+
+                        <button type="submit"
+                                class="primary-button"
+                                disabled="@submitting">
+
+                            @(submitting ? "Submitting..." : "Submit Appeal")
+
+                        </button>
+
+                    </div>
+
+                </EditForm>
+
+            </section>
+
+            @if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                <div class="error-message">
+                    @errorMessage
+                </div>
+            }
+
+        </main>
+
+        <aside>
+
+            <section class="summary-card">
+
+                <div class="card-header">
+                    <h2>Authorization</h2>
+                </div>
+
+                <div class="summary-list">
+
+                    <div>
+                        <span>Authorization</span>
+                        <strong>@authorization.AuthorizationNumber</strong>
+                    </div>
+
+                    <div>
+                        <span>Patient</span>
+                        <strong>@authorization.PatientName</strong>
+                    </div>
+
+                    <div>
+                        <span>MRN</span>
+                        <strong>@authorization.PatientMrn</strong>
+                    </div>
+
+                    <div>
+                        <span>Payer</span>
+                        <strong>@authorization.PayerName</strong>
+                    </div>
+
+                    <div>
+                        <span>Status</span>
+
+                        <strong>
+                            <span class="status denied">
+                                @authorization.Status
+                            </span>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="info-card">
+
+                <h3>Appeal Guidance</h3>
+
+                <ul>
+                    <li>Clearly explain why the denial should be reconsidered.</li>
+                    <li>Include relevant clinical information.</li>
+                    <li>Reference medical necessity when applicable.</li>
+                    <li>Attach supporting documentation through the appropriate workflow.</li>
+                </ul>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private bool submitting;
+
+    private string errorMessage = string.Empty;
+
+    private AppealModel model = new();
+
+    private readonly AuthorizationSummary authorization = new()
+    {
+        AuthorizationNumber = "AUTH-2026-0003",
+        PatientName = "Robert Davis",
+        PatientMrn = "MRN-10003",
+        PayerName = "Cigna",
+        Status = "Denied"
+    };
+
+    private async Task SubmitAppeal()
+    {
+        if (submitting)
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.Reason))
+        {
+            errorMessage = "Please provide an appeal reason.";
+            return;
+        }
+
+        submitting = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            await Task.Delay(500);
+
+            Navigation.NavigateTo($"/authorizations/{Id}");
+        }
+        catch
+        {
+            errorMessage =
+                "The appeal could not be submitted. Please try again.";
+        }
+        finally
+        {
+            submitting = false;
+        }
+    }
+
+    [Inject]
+    private NavigationManager Navigation { get; set; } = default!;
+
+    private sealed class AppealModel
+    {
+        public string AppealType { get; set; } = "First Level Appeal";
+
+        public string Reason { get; set; } = string.Empty;
+
+        public string ClinicalInformation { get; set; } = string.Empty;
+    }
+
+    private sealed class AuthorizationSummary
+    {
+        public string AuthorizationNumber { get; init; } = string.Empty;
+
+        public string PatientName { get; init; } = string.Empty;
+
+        public string PatientMrn { get; init; } = string.Empty;
+
+        public string PayerName { get; init; } = string.Empty;
+
+        public string Status { get; init; } = string.Empty;
+    }
+}

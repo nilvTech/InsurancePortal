@@ -1,0 +1,454 @@
+@page "/patients"
+
+@inject NavigationManager NavigationManager
+
+<div class="master-page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">PATIENT MASTER DATA</div>
+            <h1>Patients</h1>
+            <p>Search and manage patient master records.</p>
+        </div>
+
+        <a href="/patients/create"
+           class="primary-button">
+
+            <span>＋</span>
+            Add Patient
+
+        </a>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="search-box">
+            <span>⌕</span>
+
+            <input @bind="SearchText"
+                   placeholder="Search by patient name, MRN, ID or phone..." />
+        </div>
+
+        <select @bind="StatusFilter">
+            <option>All Statuses</option>
+            <option>Active</option>
+            <option>Inactive</option>
+            <option>Pending</option>
+        </select>
+    </div>
+
+    <!-- PATIENT TABLE -->
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>MRN</th>
+                    <th>Patient</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Provider</th>
+                    <th>Insurance</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var row in FilteredRows)
+                {
+                    <tr>
+                        <td>
+                            <span class="patient-id">
+                                @row.PatientId
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>@row.MRN</strong>
+                        </td>
+
+                        <td>
+                            <div class="patient-name">
+                                <div class="patient-avatar">
+                                    @GetInitials(row.FirstName, row.LastName)
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        @row.FirstName @row.LastName
+                                    </strong>
+
+                                    <small>
+                                        @row.Phone
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>@row.DOB</td>
+
+                        <td>@row.Gender</td>
+
+                        <td>
+                            <div class="provider-info">
+                                <strong>@row.Provider</strong>
+
+                                <small>
+                                    @row.Location
+                                </small>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="insurance-info">
+                                <strong>@row.Insurance</strong>
+
+                                <small>
+                                    @row.MemberId
+                                </small>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="status @GetStatusClass(row.Status)">
+                                @row.Status
+                            </span>
+                        </td>
+
+                        <td class="actions-cell">
+                            <button type="button"
+                                    class="icon-button"
+                                    title="View Patient"
+                                    @onclick="() => ViewPatient(row.PatientGuid)">
+                                ◉
+                            </button>
+
+                            <button type="button"
+                                    class="icon-button"
+                                    title="Edit Patient"
+                                    @onclick="() => EditPatient(row.PatientGuid)">
+                                ✎
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- FOOTER -->
+        <div class="table-footer">
+            <span>
+                Showing @FilteredRows.Count of @Data.Count records
+            </span>
+
+            <div>
+                <button type="button"
+                        class="page-button">
+                    ‹
+                </button>
+
+                <button type="button"
+                        class="page-button active">
+                    1
+                </button>
+
+                <button type="button"
+                        class="page-button">
+                    ›
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    private string SearchText = string.Empty;
+
+    private string StatusFilter = "All Statuses";
+
+    // =========================
+    // NAVIGATION FUNCTIONS
+    // =========================
+
+    
+    private void ViewPatient(Guid patientGuid)
+    {
+        NavigationManager.NavigateTo($"/patients/details/{patientGuid}");
+    }
+
+    private void EditPatient(Guid patientGuid)
+    {
+        NavigationManager.NavigateTo($"/patients/{patientGuid}/edit");
+    }
+
+    // =========================
+    // PATIENT DATA
+    // =========================
+
+    private List<PatientRow> Data = new()
+    {
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000001"),
+            "PAT-10001",
+            "MRN-10001",
+            "John",
+            "Smith",
+            "01/15/1980",
+            "Male",
+            "(312) 555-0101",
+            "Dr. Sarah Wilson",
+            "Chicago Medical Center",
+            "Aetna",
+            "AET-458921",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000002"),
+            "PAT-10002",
+            "MRN-10002",
+            "Mary",
+            "Jones",
+            "04/20/1975",
+            "Female",
+            "(312) 555-0102",
+            "Dr. Michael Brown",
+            "Chicago Medical Center",
+            "Blue Cross Blue Shield",
+            "BCBS-784512",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000003"),
+            "PAT-10003",
+            "MRN-10003",
+            "Robert",
+            "Brown",
+            "09/12/1968",
+            "Male",
+            "(773) 555-0103",
+            "Dr. Emily Johnson",
+            "Northwestern Clinic",
+            "UnitedHealthcare",
+            "UHC-321456",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000004"),
+            "PAT-10004",
+            "MRN-10004",
+            "Linda",
+            "Davis",
+            "11/03/1959",
+            "Female",
+            "(773) 555-0104",
+            "Dr. David Miller",
+            "Northwestern Clinic",
+            "Cigna",
+            "CIG-654789",
+            "Inactive"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000005"),
+            "PAT-10005",
+            "MRN-10005",
+            "James",
+            "Wilson",
+            "02/18/1987",
+            "Male",
+            "(630) 555-0105",
+            "Dr. Sarah Wilson",
+            "Lakeside Health",
+            "Aetna",
+            "AET-987654",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000006"),
+            "PAT-10006",
+            "MRN-10006",
+            "Patricia",
+            "Taylor",
+            "07/25/1990",
+            "Female",
+            "(630) 555-0106",
+            "Dr. Robert Anderson",
+            "Lakeside Health",
+            "Humana",
+            "HUM-456123",
+            "Pending"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000007"),
+            "PAT-10007",
+            "MRN-10007",
+            "William",
+            "Anderson",
+            "12/10/1972",
+            "Male",
+            "(847) 555-0107",
+            "Dr. Emily Johnson",
+            "Northwestern Clinic",
+            "UnitedHealthcare",
+            "UHC-789321",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000008"),
+            "PAT-10008",
+            "MRN-10008",
+            "Jennifer",
+            "Thomas",
+            "03/30/1984",
+            "Female",
+            "(847) 555-0108",
+            "Dr. Michael Brown",
+            "Chicago Medical Center",
+            "Cigna",
+            "CIG-123789",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000009"),
+            "PAT-10009",
+            "MRN-10009",
+            "Charles",
+            "Jackson",
+            "06/14/1965",
+            "Male",
+            "(312) 555-0109",
+            "Dr. David Miller",
+            "Lakeside Health",
+            "Medicare",
+            "MED-654321",
+            "Active"
+        ),
+
+        new PatientRow(
+            Guid.Parse("10000000-0000-0000-0000-000000000010"),
+            "PAT-10010",
+            "MRN-10010",
+            "Elizabeth",
+            "White",
+            "10/22/1978",
+            "Female",
+            "(312) 555-0110",
+            "Dr. Robert Anderson",
+            "Northwestern Clinic",
+            "Blue Cross Blue Shield",
+            "BCBS-987123",
+            "Inactive"
+        )
+    };
+
+    // =========================
+    // FILTERING
+    // =========================
+
+    private List<PatientRow> FilteredRows =>
+        Data
+            .Where(x =>
+                string.IsNullOrWhiteSpace(SearchText) ||
+                $"{x.PatientId} {x.MRN} {x.FirstName} {x.LastName} {x.Phone} {x.Insurance}"
+                    .Contains(
+                        SearchText,
+                        StringComparison.OrdinalIgnoreCase))
+            .Where(x =>
+                StatusFilter == "All Statuses" ||
+                x.Status == StatusFilter)
+            .ToList();
+
+    // =========================
+    // HELPERS
+    // =========================
+
+    private string GetInitials(string firstName, string lastName)
+    {
+        return $"{firstName[0]}{lastName[0]}".ToUpper();
+    }
+
+    private string GetStatusClass(string status)
+    {
+        return status.ToLower() switch
+        {
+            "active" => "active",
+            "inactive" => "inactive",
+            "pending" => "pending",
+            _ => ""
+        };
+    }
+
+    // =========================
+    // PATIENT MODEL
+    // =========================
+
+    private class PatientRow
+    {
+        public Guid PatientGuid { get; }
+
+        public string PatientId { get; }
+
+        public string MRN { get; }
+
+        public string FirstName { get; }
+
+        public string LastName { get; }
+
+        public string DOB { get; }
+
+        public string Gender { get; }
+
+        public string Phone { get; }
+
+        public string Provider { get; }
+
+        public string Location { get; }
+
+        public string Insurance { get; }
+
+        public string MemberId { get; }
+
+        public string Status { get; }
+
+        public PatientRow(
+            Guid patientGuid,
+            string patientId,
+            string mrn,
+            string firstName,
+            string lastName,
+            string dob,
+            string gender,
+            string phone,
+            string provider,
+            string location,
+            string insurance,
+            string memberId,
+            string status)
+        {
+            PatientGuid = patientGuid;
+            PatientId = patientId;
+            MRN = mrn;
+            FirstName = firstName;
+            LastName = lastName;
+            DOB = dob;
+            Gender = gender;
+            Phone = phone;
+            Provider = provider;
+            Location = location;
+            Insurance = insurance;
+            MemberId = memberId;
+            Status = status;
+        }
+    }
+}

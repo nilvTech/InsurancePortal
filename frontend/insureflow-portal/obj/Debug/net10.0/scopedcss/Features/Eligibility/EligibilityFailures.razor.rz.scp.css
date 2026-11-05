@@ -1,0 +1,225 @@
+.failures-page[b-pir764gj10] {
+    padding: 28px 32px;
+    background: #f5f7fa;
+    min-height: 100vh;
+    color: #172b4d;
+}
+
+.back-link[b-pir764gj10] {
+    color: #718096;
+    text-decoration: none;
+    font-size: 12px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.page-header[b-pir764gj10] {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.eyebrow[b-pir764gj10] {
+    color: #18978f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.page-header h1[b-pir764gj10] {
+    margin: 4px 0;
+    font-size: 27px;
+}
+
+.page-header p[b-pir764gj10] {
+    margin: 0;
+    color: #718096;
+    font-size: 12px;
+}
+
+.primary-button[b-pir764gj10] {
+    border: 0;
+    background: #18978f;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* SUMMARY */
+
+.failure-summary[b-pir764gj10] {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.failure-summary > div[b-pir764gj10] {
+    background: white;
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.failure-summary span[b-pir764gj10] {
+    color: #718096;
+    display: block;
+    font-size: 10px;
+}
+
+.failure-summary strong[b-pir764gj10] {
+    display: block;
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+/* TOOLBAR */
+
+.toolbar[b-pir764gj10] {
+    display: flex;
+    gap: 9px;
+    background: white;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    padding: 12px;
+    margin-bottom: 14px;
+}
+
+.search[b-pir764gj10] {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid #dfe4ea;
+    border-radius: 6px;
+    padding: 0 10px;
+    color: #718096;
+}
+
+.search input[b-pir764gj10] {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding: 9px;
+}
+
+.toolbar select[b-pir764gj10] {
+    border: 1px solid #dfe4ea;
+    background: white;
+    border-radius: 6px;
+    padding: 0 10px;
+    color: #344563;
+}
+
+/* TABLE */
+
+.failure-card[b-pir764gj10] {
+    background: white;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    overflow: auto;
+}
+
+table[b-pir764gj10] {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+th[b-pir764gj10] {
+    padding: 12px 14px;
+    background: #f8fafb;
+    text-align: left;
+    color: #718096;
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+td[b-pir764gj10] {
+    padding: 13px 14px;
+    border-top: 1px solid #edf0f3;
+    font-size: 10px;
+}
+
+td strong[b-pir764gj10],
+td small[b-pir764gj10] {
+    display: block;
+}
+
+td small[b-pir764gj10] {
+    color: #718096;
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+.error-code[b-pir764gj10] {
+    background: #fff0f0;
+    color: #c53030;
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-weight: 800;
+    font-size: 9px;
+}
+
+.retry[b-pir764gj10] {
+    background: #fff4df;
+    color: #b7791f;
+    padding: 5px 8px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.max-retry[b-pir764gj10] {
+    background: #f1f3f5;
+    color: #718096;
+    padding: 5px 8px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.retry-button[b-pir764gj10] {
+    border: 1px solid #bfe5e1;
+    background: #e7f6f4;
+    color: #167b70;
+    padding: 5px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.more-button[b-pir764gj10] {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: #718096;
+}
+
+@media (max-width: 800px) {
+
+    .failures-page[b-pir764gj10] {
+        padding: 20px;
+    }
+
+    .page-header[b-pir764gj10] {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .failure-summary[b-pir764gj10] {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .toolbar[b-pir764gj10] {
+        flex-wrap: wrap;
+    }
+
+    .search[b-pir764gj10] {
+        flex-basis: 100%;
+    }
+}

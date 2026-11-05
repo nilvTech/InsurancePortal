@@ -1,0 +1,101 @@
+@page "/payments/posting"
+
+<div class="payment-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">PAYMENT POSTING</div>
+            <h1>Payment Posting</h1>
+            <p>Post insurance payments against claims and claim lines.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Cancel</a>
+            <button class="primary-button">Post Payment</button>
+        </div>
+    </div>
+
+    <div class="form-layout">
+
+        <section class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Payment Information</h2>
+                    <p>Enter payment and remittance details</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Payment Reference</label>
+                    <input value="PAY-100246" />
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select>
+                        <option>ACH</option>
+                        <option>Check</option>
+                        <option>Wire</option>
+                        <option>Credit Balance</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Payer</label>
+                    <select>
+                        <option>UnitedHealthcare</option>
+                        <option>Aetna</option>
+                        <option>Cigna</option>
+                        <option>Medicare</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Date</label>
+                    <input type="date" value="2026-09-08" />
+                </div>
+
+                <div class="form-group">
+                    <label>Check / Trace Number</label>
+                    <input value="ACH-918273" />
+                </div>
+
+                <div class="form-group">
+                    <label>Total Payment</label>
+                    <input value="1240.00" />
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Claim Allocation</h2>
+                    <p>Apply payment to claim balances</p>
+                </div>
+            </div>
+
+            <div class="allocation">
+
+                <div class="allocation-row">
+                    <div>
+                        <strong>CLM-20260045</strong>
+                        <small>John Carter · DOS 09/01/2026</small>
+                    </div>
+
+                    <input value="1240.00" />
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>

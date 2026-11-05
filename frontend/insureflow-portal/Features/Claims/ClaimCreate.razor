@@ -1,0 +1,328 @@
+@page "/claims/create"
+
+<div class="claim-form-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CLAIMS MANAGEMENT</div>
+            <h1>Create Claim</h1>
+            <p>Create a professional healthcare claim for payer submission.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/list" class="secondary-button">Cancel</a>
+            <button class="primary-button">Save Draft</button>
+        </div>
+
+    </div>
+
+    <div class="workflow">
+
+        <div class="workflow-step active">
+            <span>1</span>
+            <div>
+                <strong>Claim Information</strong>
+                <small>Patient and insurance</small>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <span>2</span>
+            <div>
+                <strong>Clinical Information</strong>
+                <small>Diagnosis and procedures</small>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <span>3</span>
+            <div>
+                <strong>Claim Lines</strong>
+                <small>Services and charges</small>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <span>4</span>
+            <div>
+                <strong>Validation</strong>
+                <small>Review claim</small>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="form-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Patient Information</h2>
+                <p>Select the patient associated with this claim.</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="field field-wide">
+                <label>Patient</label>
+                <select>
+                    <option>Select patient</option>
+                    <option>Robert Johnson — MRN-10245</option>
+                    <option>Sarah Williams — MRN-10246</option>
+                    <option>Michael Brown — MRN-10247</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Patient Account Number</label>
+                <input placeholder="Patient account number" />
+            </div>
+
+            <div class="field">
+                <label>Date of Birth</label>
+                <input type="date" />
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="form-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Insurance</h2>
+                <p>Insurance coverage used for this claim.</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Coverage Priority</label>
+                <select>
+                    <option>Primary</option>
+                    <option>Secondary</option>
+                    <option>Tertiary</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Payer</label>
+                <select>
+                    <option>Select payer</option>
+                    <option>Blue Cross Blue Shield</option>
+                    <option>Aetna</option>
+                    <option>UnitedHealthcare</option>
+                    <option>Cigna</option>
+                    <option>Medicare</option>
+                    <option>Medicaid</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Member ID</label>
+                <input placeholder="Member ID" />
+            </div>
+
+            <div class="field">
+                <label>Subscriber ID</label>
+                <input placeholder="Subscriber ID" />
+            </div>
+
+            <div class="field">
+                <label>Group Number</label>
+                <input placeholder="Group number" />
+            </div>
+
+            <div class="field">
+                <label>Relationship to Subscriber</label>
+                <select>
+                    <option>Self</option>
+                    <option>Spouse</option>
+                    <option>Child</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="form-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Provider & Claim Information</h2>
+                <p>Billing and rendering information.</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Billing Provider</label>
+                <select>
+                    <option>Select provider</option>
+                    <option>InsureFlow Medical Group</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Rendering Provider</label>
+                <select>
+                    <option>Select provider</option>
+                    <option>Dr. James Wilson</option>
+                    <option>Dr. Emily Carter</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Claim Type</label>
+                <select>
+                    <option>Professional</option>
+                    <option>Institutional</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Place of Service</label>
+                <select>
+                    <option>11 — Office</option>
+                    <option>02 — Telehealth</option>
+                    <option>12 — Home</option>
+                    <option>22 — Outpatient Hospital</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Date of Service From</label>
+                <input type="date" />
+            </div>
+
+            <div class="field">
+                <label>Date of Service To</label>
+                <input type="date" />
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Diagnoses</h2>
+                <p>ICD-10-CM diagnosis information.</p>
+            </div>
+
+            <button class="secondary-button">+ Add Diagnosis</button>
+
+        </div>
+
+        <div class="diagnosis-row">
+
+            <div>
+                <strong>1</strong>
+            </div>
+
+            <input placeholder="ICD-10 code" />
+
+            <input class="description" placeholder="Diagnosis description" />
+
+            <button class="remove-button">Remove</button>
+
+        </div>
+
+    </section>
+
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Claim Lines</h2>
+                <p>CPT/HCPCS services and charges.</p>
+            </div>
+
+            <button class="secondary-button">+ Add Claim Line</button>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table class="line-table">
+
+                <thead>
+                    <tr>
+                        <th>Line</th>
+                        <th>DOS</th>
+                        <th>CPT/HCPCS</th>
+                        <th>Modifier</th>
+                        <th>Units</th>
+                        <th>Charge</th>
+                        <th>Diagnosis Pointer</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td><input type="date" /></td>
+                        <td><input placeholder="99213" /></td>
+                        <td><input placeholder="25" /></td>
+                        <td><input value="1" /></td>
+                        <td><input placeholder="$0.00" /></td>
+                        <td><input placeholder="1" /></td>
+                        <td><button class="remove-button">×</button></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <section class="form-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Attachments</h2>
+                <p>Supporting documentation for the claim.</p>
+            </div>
+
+            <button class="secondary-button">+ Add Attachment</button>
+        </div>
+
+        <div class="attachment-box">
+
+            <div class="attachment-icon">DOC</div>
+
+            <div>
+                <strong>No attachments added</strong>
+                <small>Clinical documentation, authorization or referral documents can be attached.</small>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="form-footer">
+
+        <a href="/claims/list" class="secondary-button">Cancel</a>
+
+        <div>
+            <button class="secondary-button">Save Draft</button>
+            <a href="/claims/validation" class="primary-button">Continue to Validation →</a>
+        </div>
+
+    </div>
+
+</div>

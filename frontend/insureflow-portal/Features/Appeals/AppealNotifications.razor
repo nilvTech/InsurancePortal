@@ -1,0 +1,128 @@
+@page "/appeals/notifications"
+@page "/appeals/notifications/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>Appeal Notifications</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">APPEAL WORKFLOW</div>
+            <h1>Notifications</h1>
+            <p>Monitor appeal deadlines, payer responses and required actions.</p>
+        </div>
+
+        <a href="/appeals" class="secondary-button">Back to Appeals</a>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Open Notifications</span>
+            <strong>24</strong>
+            <small>Require attention</small>
+        </div>
+
+        <div class="summary-card warning-card">
+            <span>Deadline Alerts</span>
+            <strong>18</strong>
+            <small>Due within 7 days</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Missing Documents</span>
+            <strong>7</strong>
+            <small>Documentation required</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Payer Responses</span>
+            <strong>5</strong>
+            <small>New responses</small>
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <div>
+                <h2>Appeal Notifications</h2>
+                <p>Notifications requiring action by the RCM team.</p>
+            </div>
+
+            <button class="secondary-button">Mark All Read</button>
+        </div>
+
+        <div class="notification-list">
+
+            <div class="notification urgent">
+                <div class="notification-icon">!</div>
+
+                <div class="notification-content">
+                    <strong>Appeal deadline approaching</strong>
+                    <p>APL-100245 must be submitted to Aetna by Sep 20, 2026.</p>
+                    <small>Today · 09:15 AM</small>
+                </div>
+
+                <a href="/appeals/submission/100245">Open</a>
+            </div>
+
+            <div class="notification warning">
+                <div class="notification-icon">D</div>
+
+                <div class="notification-content">
+                    <strong>Required documentation missing</strong>
+                    <p>Authorization document is missing for APL-100245.</p>
+                    <small>Today · 08:42 AM</small>
+                </div>
+
+                <a href="/appeals/documentation/100245">Review</a>
+            </div>
+
+            <div class="notification">
+                <div class="notification-icon">P</div>
+
+                <div class="notification-content">
+                    <strong>Payer response received</strong>
+                    <p>Aetna acknowledged appeal APL-100244.</p>
+                    <small>Yesterday · 04:20 PM</small>
+                </div>
+
+                <a href="/appeals/details/100244">View</a>
+            </div>
+
+            <div class="notification">
+                <div class="notification-icon">E</div>
+
+                <div class="notification-content">
+                    <strong>External review update</strong>
+                    <p>External review EXT-88421 is currently under review.</p>
+                    <small>Yesterday · 01:30 PM</small>
+                </div>
+
+                <a href="/appeals/external-review/100242">View</a>
+            </div>
+
+            <div class="notification">
+                <div class="notification-icon">✓</div>
+
+                <div class="notification-content">
+                    <strong>Appeal approved</strong>
+                    <p>Cigna approved appeal APL-100243 for $575.</p>
+                    <small>Sep 06, 2026 · 03:10 PM</small>
+                </div>
+
+                <a href="/appeals/decision/100243">View</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

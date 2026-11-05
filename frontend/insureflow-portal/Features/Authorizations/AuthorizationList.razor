@@ -1,0 +1,419 @@
+@page "/authorizations/list"
+
+
+<div class="authorization-list-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span>/</span>
+                <a href="/authorizations">Authorizations</a>
+                <span>/</span>
+                <span>List</span>
+            </div>
+
+            <h1>Authorizations</h1>
+
+            <p>
+                Search and manage prior authorization requests.
+            </p>
+        </div>
+
+        <a href="/authorizations/create" class="primary-button">
+            ＋ Create Authorization
+        </a>
+
+    </div>
+
+    <section class="filter-card">
+
+        <div class="search-field">
+            <label for="authorization-search">Search</label>
+
+            <input id="authorization-search"
+                   type="search"
+                   @bind="SearchText"
+                   placeholder="Authorization number, patient, MRN, payer..." />
+        </div>
+
+        <div class="filter-field">
+            <label for="status-filter">Status</label>
+
+            <select id="status-filter" @bind="StatusFilter">
+
+                <option value="">All Statuses</option>
+                <option value="Draft">Draft</option>
+                <option value="Submitted">Submitted</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Partially Approved">Partially Approved</option>
+                <option value="Denied">Denied</option>
+                <option value="Expired">Expired</option>
+                <option value="Cancelled">Cancelled</option>
+
+            </select>
+        </div>
+
+        <div class="filter-field">
+            <label for="priority-filter">Priority</label>
+
+            <select id="priority-filter" @bind="PriorityFilter">
+
+                <option value="">All Priorities</option>
+                <option value="Routine">Routine</option>
+                <option value="Urgent">Urgent</option>
+                <option value="Stat">Stat</option>
+
+            </select>
+        </div>
+
+        <div class="filter-field">
+            <label for="payer-filter">Payer</label>
+
+            <select id="payer-filter" @bind="PayerFilter">
+
+                <option value="">All Payers</option>
+                <option value="Aetna">Aetna</option>
+                <option value="Cigna">Cigna</option>
+                <option value="Humana">Humana</option>
+                <option value="UnitedHealthcare">UnitedHealthcare</option>
+
+            </select>
+        </div>
+
+    </section>
+
+    <section class="results-card">
+
+        <div class="results-header">
+
+            <div>
+                <strong>@FilteredAuthorizations.Count()</strong>
+                <span> authorization(s)</span>
+            </div>
+
+            <span class="results-summary">
+                Showing filtered results
+            </span>
+
+        </div>
+
+        @if (!FilteredAuthorizations.Any())
+        {
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    A
+                </div>
+
+                <h3>No records found</h3>
+
+                <p>
+                    No authorizations match the current search and filters.
+                </p>
+
+                <button type="button"
+                        class="secondary-button"
+                        @onclick="ClearFilters">
+                    Clear Filters
+                </button>
+
+            </div>
+        }
+        else
+        {
+            <div class="table-wrapper">
+
+                <table class="authorization-table">
+
+                    <thead>
+                        <tr>
+                            <th>Authorization Number</th>
+                            <th>Patient</th>
+                            <th>Provider</th>
+                            <th>Payer</th>
+                            <th>Service</th>
+                            <th>Units</th>
+                            <th>Service Date</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in FilteredAuthorizations)
+                        {
+                            <tr>
+
+                                <td>
+                                    <strong>@item.AuthorizationNumber</strong>
+
+                                    <small>
+                                        @item.AuthorizationType
+                                    </small>
+                                </td>
+
+                                <td>
+                                    <strong>@item.PatientName</strong>
+
+                                    <small>
+                                        @item.PatientMrn
+                                    </small>
+                                </td>
+
+                                <td>
+                                    @item.ProviderName
+                                </td>
+
+                                <td>
+                                    @item.PayerName
+                                </td>
+
+                                <td>
+                                    @item.Service
+                                </td>
+
+                                <td>
+                                    @item.RequestedUnits
+                                </td>
+
+                                <td>
+                                    @item.ServiceDate.ToString("MM/dd/yyyy")
+                                </td>
+
+                                <td>
+                                    <span class="priority @GetPriorityClass(item.Priority)">
+                                        @item.Priority
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="status @GetStatusClass(item.Status)">
+                                        @item.Status
+                                    </span>
+                                </td>
+
+                                <td class="actions">
+
+                                    <a href="@($"/authorizations/{item.Id}")"
+                                       aria-label="@($"View {item.AuthorizationNumber}")">
+                                        View
+                                    </a>
+
+                                    <a href="@($"/authorizations/{item.Id}/edit")"
+                                       aria-label="@($"Edit {item.AuthorizationNumber}")">
+                                        Edit
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="table-footer">
+
+                <span>
+                    Showing @FilteredAuthorizations.Count()
+                    of @authorizations.Count records
+                </span>
+
+                <div class="pagination">
+
+                    <button type="button"
+                            disabled>
+                        ‹
+                    </button>
+
+                    <button type="button"
+                            class="active">
+                        1
+                    </button>
+
+                    <button type="button"
+                            disabled>
+                        ›
+                    </button>
+
+                </div>
+
+            </div>
+        }
+
+    </section>
+
+</div>
+
+@code {
+
+    private string SearchText = string.Empty;
+
+    private string StatusFilter = string.Empty;
+
+    private string PriorityFilter = string.Empty;
+
+    private string PayerFilter = string.Empty;
+
+    private IEnumerable<AuthorizationRow> FilteredAuthorizations =>
+        authorizations.Where(x =>
+            (
+                string.IsNullOrWhiteSpace(SearchText) ||
+                x.AuthorizationNumber.Contains(
+                    SearchText,
+                    StringComparison.OrdinalIgnoreCase) ||
+                x.PatientName.Contains(
+                    SearchText,
+                    StringComparison.OrdinalIgnoreCase) ||
+                x.PatientMrn.Contains(
+                    SearchText,
+                    StringComparison.OrdinalIgnoreCase) ||
+                x.PayerName.Contains(
+                    SearchText,
+                    StringComparison.OrdinalIgnoreCase)
+            )
+            &&
+            (
+                string.IsNullOrWhiteSpace(StatusFilter) ||
+                x.Status.Equals(
+                    StatusFilter,
+                    StringComparison.OrdinalIgnoreCase)
+            )
+            &&
+            (
+                string.IsNullOrWhiteSpace(PriorityFilter) ||
+                x.Priority.Equals(
+                    PriorityFilter,
+                    StringComparison.OrdinalIgnoreCase)
+            )
+            &&
+            (
+                string.IsNullOrWhiteSpace(PayerFilter) ||
+                x.PayerName.Equals(
+                    PayerFilter,
+                    StringComparison.OrdinalIgnoreCase)
+            ));
+
+    private readonly List<AuthorizationRow> authorizations =
+    [
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+            AuthorizationNumber = "AUTH-2026-0001",
+            PatientName = "John Smith",
+            PatientMrn = "MRN-10001",
+            ProviderName = "Dr. Sarah Wilson",
+            PayerName = "Aetna",
+            AuthorizationType = "Diagnostic Imaging",
+            Service = "MRI Brain",
+            RequestedUnits = 1,
+            ServiceDate = DateTime.Today.AddDays(7),
+            Priority = "Routine",
+            Status = "Pending"
+        },
+
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("30000000-0000-0000-0000-000000000002"),
+            AuthorizationNumber = "AUTH-2026-0002",
+            PatientName = "Mary Johnson",
+            PatientMrn = "MRN-10002",
+            ProviderName = "Dr. Robert Anderson",
+            PayerName = "UnitedHealthcare",
+            AuthorizationType = "Therapy",
+            Service = "Physical Therapy",
+            RequestedUnits = 12,
+            ServiceDate = DateTime.Today.AddDays(14),
+            Priority = "Routine",
+            Status = "Approved"
+        },
+
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("30000000-0000-0000-0000-000000000003"),
+            AuthorizationNumber = "AUTH-2026-0003",
+            PatientName = "Robert Davis",
+            PatientMrn = "MRN-10003",
+            ProviderName = "Dr. Emily Johnson",
+            PayerName = "Cigna",
+            AuthorizationType = "Diagnostic Imaging",
+            Service = "CT Abdomen",
+            RequestedUnits = 1,
+            ServiceDate = DateTime.Today.AddDays(3),
+            Priority = "Urgent",
+            Status = "Denied"
+        },
+
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("30000000-0000-0000-0000-000000000004"),
+            AuthorizationNumber = "AUTH-2026-0004",
+            PatientName = "Patricia Taylor",
+            PatientMrn = "MRN-10006",
+            ProviderName = "Dr. Michael Brown",
+            PayerName = "Humana",
+            AuthorizationType = "Home Health",
+            Service = "Skilled Nursing",
+            RequestedUnits = 20,
+            ServiceDate = DateTime.Today.AddDays(20),
+            Priority = "Urgent",
+            Status = "Approved"
+        }
+    ];
+
+    private void ClearFilters()
+    {
+        SearchText = string.Empty;
+        StatusFilter = string.Empty;
+        PriorityFilter = string.Empty;
+        PayerFilter = string.Empty;
+    }
+
+    private static string GetStatusClass(string status)
+    {
+        return status
+            .ToLowerInvariant()
+            .Replace(" ", "-");
+    }
+
+    private static string GetPriorityClass(string priority)
+    {
+        return priority
+            .ToLowerInvariant();
+    }
+
+    private sealed class AuthorizationRow
+    {
+        public Guid Id { get; init; }
+
+        public string AuthorizationNumber { get; init; } = string.Empty;
+
+        public string PatientName { get; init; } = string.Empty;
+
+        public string PatientMrn { get; init; } = string.Empty;
+
+        public string ProviderName { get; init; } = string.Empty;
+
+        public string PayerName { get; init; } = string.Empty;
+
+        public string AuthorizationType { get; init; } = string.Empty;
+
+        public string Service { get; init; } = string.Empty;
+
+        public int RequestedUnits { get; init; }
+
+        public DateTime ServiceDate { get; init; }
+
+        public string Priority { get; init; } = string.Empty;
+
+        public string Status { get; init; } = string.Empty;
+    }
+}

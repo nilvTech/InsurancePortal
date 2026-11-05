@@ -1,0 +1,105 @@
+@page "/payments/patient-responsibility"
+
+<div class="payment-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">PATIENT BALANCE</div>
+            <h1>Patient Responsibility</h1>
+            <p>Track deductibles, copays, coinsurance and patient balances.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Dashboard</a>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Total Patient Responsibility</span>
+            <strong>$184K</strong>
+            <small>Current balance</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Deductible</span>
+            <strong>$74K</strong>
+            <small>40%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Coinsurance</span>
+            <strong>$61K</strong>
+            <small>33%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Copay</span>
+            <strong>$49K</strong>
+            <small>27%</small>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Patient Balances</h2>
+                <p>Financial responsibility resulting from payer adjudication</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Claim</th>
+                        <th>Payer</th>
+                        <th>Deductible</th>
+                        <th>Coinsurance</th>
+                        <th>Copay</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>John Carter</strong><small>DOB 03/12/1984</small></td>
+                        <td>CLM-20260045</td>
+                        <td>Medicare</td>
+                        <td>$180</td>
+                        <td>$56</td>
+                        <td>$20</td>
+                        <td><strong>$256</strong></td>
+                        <td><span class="status outstanding">Outstanding</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Sarah Wilson</strong><small>DOB 07/19/1978</small></td>
+                        <td>CLM-20260041</td>
+                        <td>Aetna</td>
+                        <td>$200</td>
+                        <td>$100</td>
+                        <td>$50</td>
+                        <td><strong>$350</strong></td>
+                        <td><span class="status outstanding">Outstanding</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

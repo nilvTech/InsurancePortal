@@ -1,0 +1,491 @@
+.insurance-details-page[b-oywsnd7b8r] {
+    padding: 26px 32px;
+    background: #f5f7fa;
+    min-height: 100vh;
+    color: #172b4d;
+}
+
+/* BACK */
+
+.back-link[b-oywsnd7b8r] {
+    color: #718096;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* HEADER */
+
+.insurance-header[b-oywsnd7b8r] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0;
+}
+
+.insurance-title[b-oywsnd7b8r] {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.payer-logo[b-oywsnd7b8r] {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    background: #e7f6f4;
+    color: #18978f;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.eyebrow[b-oywsnd7b8r] {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    color: #18978f;
+}
+
+.insurance-title h1[b-oywsnd7b8r] {
+    margin: 3px 0;
+    font-size: 27px;
+}
+
+.insurance-title p[b-oywsnd7b8r] {
+    margin: 0;
+    color: #718096;
+    font-size: 13px;
+}
+
+.active-status[b-oywsnd7b8r] {
+    background: #e8f7f2;
+    color: #167b70;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.header-actions[b-oywsnd7b8r] {
+    display: flex;
+    gap: 9px;
+}
+
+.secondary-button[b-oywsnd7b8r] {
+    border: 1px solid #bfe5e1;
+    background: #e7f6f4;
+    color: #167b70;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primary-button[b-oywsnd7b8r] {
+    background: #18978f;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* SUMMARY */
+
+.coverage-summary[b-oywsnd7b8r] {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    margin-bottom: 14px;
+}
+
+.coverage-summary div[b-oywsnd7b8r] {
+    padding: 14px 16px;
+    border-right: 1px solid #edf0f3;
+}
+
+.coverage-summary div:last-child[b-oywsnd7b8r] {
+    border-right: 0;
+}
+
+.coverage-summary label[b-oywsnd7b8r],
+.info-grid label[b-oywsnd7b8r],
+.benefit-card label[b-oywsnd7b8r] {
+    display: block;
+    color: #8a94a6;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.coverage-summary strong[b-oywsnd7b8r] {
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.verified[b-oywsnd7b8r] {
+    color: #167b70;
+}
+
+/* TABS */
+
+.tabs[b-oywsnd7b8r] {
+    display: flex;
+    gap: 23px;
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    padding: 0 17px;
+    overflow: auto;
+}
+
+.tabs a[b-oywsnd7b8r] {
+    padding: 14px 3px;
+    color: #718096;
+    font-size: 13px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+}
+
+.tabs a.active[b-oywsnd7b8r] {
+    color: #18978f;
+    border-bottom-color: #18978f;
+    font-weight: 700;
+}
+
+/* GRID */
+
+.details-grid[b-oywsnd7b8r] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.full-width[b-oywsnd7b8r] {
+    grid-column: 1 / -1;
+}
+
+/* PANEL */
+
+.panel[b-oywsnd7b8r] {
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.panel-title[b-oywsnd7b8r] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.panel-title h2[b-oywsnd7b8r] {
+    font-size: 16px;
+    margin: 0;
+}
+
+.panel-title a[b-oywsnd7b8r] {
+    color: #18978f;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.panel-title button[b-oywsnd7b8r] {
+    border: 0;
+    background: none;
+    color: #18978f;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* PATIENT */
+
+.patient-profile[b-oywsnd7b8r] {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.avatar[b-oywsnd7b8r] {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #e7f6f4;
+    color: #18978f;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.patient-profile strong[b-oywsnd7b8r],
+.patient-profile small[b-oywsnd7b8r] {
+    display: block;
+}
+
+.patient-profile small[b-oywsnd7b8r] {
+    color: #718096;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+/* INFO */
+
+.info-grid[b-oywsnd7b8r] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px;
+}
+
+.info-grid strong[b-oywsnd7b8r] {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+/* BENEFITS */
+
+.benefit-grid[b-oywsnd7b8r] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.benefit-card[b-oywsnd7b8r] {
+    background: #f8fafb;
+    border: 1px solid #edf0f3;
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.benefit-card strong[b-oywsnd7b8r] {
+    display: block;
+    font-size: 19px;
+    margin: 5px 0 2px;
+}
+
+.benefit-card small[b-oywsnd7b8r] {
+    color: #718096;
+    font-size: 10px;
+}
+
+/* VERIFIED */
+
+.verified-pill[b-oywsnd7b8r] {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #e8f7f2;
+    color: #167b70;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.verification-status[b-oywsnd7b8r] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0faf8;
+    border: 1px solid #d7eeea;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 18px;
+}
+
+.verification-icon[b-oywsnd7b8r] {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #18978f;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.verification-status strong[b-oywsnd7b8r] {
+    font-size: 13px;
+}
+
+.verification-status p[b-oywsnd7b8r] {
+    margin: 3px 0;
+    color: #5e6c84;
+    font-size: 11px;
+}
+
+.verification-status small[b-oywsnd7b8r] {
+    color: #718096;
+    font-size: 10px;
+}
+
+/* COVERAGE PRIORITY */
+
+.coverage-priority[b-oywsnd7b8r] {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.priority[b-oywsnd7b8r] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+    padding: 11px;
+}
+
+.priority.active[b-oywsnd7b8r] {
+    border-color: #bfe5e1;
+    background: #f5fcfb;
+}
+
+.priority .number[b-oywsnd7b8r] {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f0f2f5;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 11px;
+}
+
+.priority.active .number[b-oywsnd7b8r] {
+    background: #18978f;
+    color: #ffffff;
+}
+
+.priority strong[b-oywsnd7b8r],
+.priority small[b-oywsnd7b8r] {
+    display: block;
+}
+
+.priority strong[b-oywsnd7b8r] {
+    font-size: 12px;
+}
+
+.priority small[b-oywsnd7b8r] {
+    font-size: 10px;
+    color: #718096;
+    margin-top: 2px;
+}
+
+.priority-label[b-oywsnd7b8r] {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: #e7f6f4;
+    color: #167b70;
+}
+
+.priority-label.secondary[b-oywsnd7b8r] {
+    background: #edf1ff;
+    color: #4a5da8;
+}
+
+.priority.empty[b-oywsnd7b8r] {
+    opacity: .7;
+}
+
+/* ACTIVITY */
+
+.activity-table[b-oywsnd7b8r] {
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.activity-row[b-oywsnd7b8r] {
+    display: grid;
+    grid-template-columns: 1.2fr 1.3fr 1.3fr 1fr .7fr;
+    padding: 12px 14px;
+    border-top: 1px solid #edf0f3;
+    font-size: 11px;
+    align-items: center;
+}
+
+.activity-row.header[b-oywsnd7b8r] {
+    background: #f8fafb;
+    color: #718096;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-top: 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .coverage-summary[b-oywsnd7b8r] {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .details-grid[b-oywsnd7b8r] {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width[b-oywsnd7b8r] {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .insurance-details-page[b-oywsnd7b8r] {
+        padding: 20px;
+    }
+
+    .insurance-header[b-oywsnd7b8r] {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .coverage-summary[b-oywsnd7b8r] {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .activity-table[b-oywsnd7b8r] {
+        overflow-x: auto;
+    }
+
+    .activity-row[b-oywsnd7b8r] {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .coverage-summary[b-oywsnd7b8r] {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-grid[b-oywsnd7b8r],
+    .info-grid[b-oywsnd7b8r] {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions[b-oywsnd7b8r] {
+        width: 100%;
+    }
+
+    .header-actions a[b-oywsnd7b8r],
+    .header-actions button[b-oywsnd7b8r] {
+        flex: 1;
+        text-align: center;
+    }
+}

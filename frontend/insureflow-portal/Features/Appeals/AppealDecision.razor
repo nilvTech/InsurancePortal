@@ -1,0 +1,108 @@
+@page "/appeals/decision/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>Appeal Decision</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">PAYER DECISION</div>
+            <h1>Appeal Decision</h1>
+            <p>Record and manage the payer's decision for APL-100245.</p>
+        </div>
+
+        <a href="/appeals/details/100245" class="secondary-button">Back to Appeal</a>
+    </div>
+
+    <div class="decision-banner">
+        <div>
+            <span>Current Appeal Status</span>
+            <strong>Pending Decision</strong>
+        </div>
+
+        <div>
+            <span>Submitted</span>
+            <strong>Sep 09, 2026</strong>
+        </div>
+
+        <div>
+            <span>Payer</span>
+            <strong>Aetna</strong>
+        </div>
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <h2>Decision Information</h2>
+            <p>Record the payer's final determination.</p>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Decision</label>
+                <select>
+                    <option>Pending</option>
+                    <option>Approved</option>
+                    <option>Partially Approved</option>
+                    <option>Denied</option>
+                    <option>Withdrawn</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Decision Date</label>
+                <input type="date" />
+            </div>
+
+            <div class="form-group">
+                <label>Approved Amount</label>
+                <input value="$0.00" />
+            </div>
+
+            <div class="form-group">
+                <label>Payer Reference</label>
+                <input placeholder="Enter payer decision reference" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <h2>Decision Notes</h2>
+            <p>Capture payer comments and rationale.</p>
+        </div>
+
+        <textarea rows="7" placeholder="Enter payer decision notes..."></textarea>
+
+    </div>
+
+    <div class="next-action">
+
+        <div>
+            <strong>Next Action</strong>
+            <p>If the appeal is denied, a second-level appeal or external review may be initiated.</p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/appeals/create" class="secondary-button">Create Second-Level Appeal</a>
+            <a href="/appeals/external-review/100245" class="primary-button">External Review</a>
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <button class="secondary-button">Cancel</button>
+        <button class="primary-button">Save Decision</button>
+    </div>
+
+</div>

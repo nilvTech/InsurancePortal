@@ -1,0 +1,149 @@
+@page "/denials/resolutions"
+
+<div class="denial-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">DENIAL MANAGEMENT</div>
+            <h1>Denial Resolutions</h1>
+            <p>Track denial corrective actions, financial outcomes, and resolution details.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/denials" class="secondary-button">← Denials</a>
+            <button class="primary-button">+ Record Resolution</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">RS</div>
+            <div>
+                <span>Resolved</span>
+                <strong>84</strong>
+                <small>This reporting period</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">RC</div>
+            <div>
+                <span>Recovered</span>
+                <strong>$184K</strong>
+                <small>Recovered revenue</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">AR</div>
+            <div>
+                <span>Adjusted</span>
+                <strong>$42K</strong>
+                <small>Contractual adjustments</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">WR</div>
+            <div>
+                <span>Written Off</span>
+                <strong>$18K</strong>
+                <small>Unrecoverable amount</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search denial or patient..." />
+        </div>
+
+        <select>
+            <option>All Resolution Types</option>
+            <option>Paid</option>
+            <option>Adjusted</option>
+            <option>Written Off</option>
+            <option>Appeal Successful</option>
+            <option>Corrected Claim</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Resolution History</h2>
+                <p>Financial and operational outcomes for resolved denials.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Denial</th>
+                        <th>Patient</th>
+                        <th>Payer</th>
+                        <th>Original Amount</th>
+                        <th>Recovered</th>
+                        <th>Adjustment</th>
+                        <th>Resolution</th>
+                        <th>Resolved Date</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>DEN-10032</strong></td>
+                        <td>Mary Davis</td>
+                        <td>Aetna</td>
+                        <td>$860.00</td>
+                        <td>$860.00</td>
+                        <td>$0.00</td>
+                        <td><span class="status recovered">Appeal Successful</span></td>
+                        <td>09/06/2026</td>
+                        <td>James Miller</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>DEN-10018</strong></td>
+                        <td>John Smith</td>
+                        <td>BCBS</td>
+                        <td>$2,150.00</td>
+                        <td>$1,700.00</td>
+                        <td>$450.00</td>
+                        <td><span class="status adjusted">Adjusted</span></td>
+                        <td>09/04/2026</td>
+                        <td>Sarah Johnson</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>DEN-10012</strong></td>
+                        <td>Linda Brown</td>
+                        <td>Cigna</td>
+                        <td>$450.00</td>
+                        <td>$0.00</td>
+                        <td>$450.00</td>
+                        <td><span class="status writeoff">Written Off</span></td>
+                        <td>09/03/2026</td>
+                        <td>David Clark</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

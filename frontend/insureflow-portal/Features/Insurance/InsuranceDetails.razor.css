@@ -1,0 +1,491 @@
+.insurance-details-page {
+    padding: 26px 32px;
+    background: #f5f7fa;
+    min-height: 100vh;
+    color: #172b4d;
+}
+
+/* BACK */
+
+.back-link {
+    color: #718096;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* HEADER */
+
+.insurance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0;
+}
+
+.insurance-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.payer-logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    background: #e7f6f4;
+    color: #18978f;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    color: #18978f;
+}
+
+.insurance-title h1 {
+    margin: 3px 0;
+    font-size: 27px;
+}
+
+.insurance-title p {
+    margin: 0;
+    color: #718096;
+    font-size: 13px;
+}
+
+.active-status {
+    background: #e8f7f2;
+    color: #167b70;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.header-actions {
+    display: flex;
+    gap: 9px;
+}
+
+.secondary-button {
+    border: 1px solid #bfe5e1;
+    background: #e7f6f4;
+    color: #167b70;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primary-button {
+    background: #18978f;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* SUMMARY */
+
+.coverage-summary {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    margin-bottom: 14px;
+}
+
+.coverage-summary div {
+    padding: 14px 16px;
+    border-right: 1px solid #edf0f3;
+}
+
+.coverage-summary div:last-child {
+    border-right: 0;
+}
+
+.coverage-summary label,
+.info-grid label,
+.benefit-card label {
+    display: block;
+    color: #8a94a6;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.coverage-summary strong {
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.verified {
+    color: #167b70;
+}
+
+/* TABS */
+
+.tabs {
+    display: flex;
+    gap: 23px;
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    padding: 0 17px;
+    overflow: auto;
+}
+
+.tabs a {
+    padding: 14px 3px;
+    color: #718096;
+    font-size: 13px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+}
+
+.tabs a.active {
+    color: #18978f;
+    border-bottom-color: #18978f;
+    font-weight: 700;
+}
+
+/* GRID */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* PANEL */
+
+.panel {
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.panel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.panel-title h2 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.panel-title a {
+    color: #18978f;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.panel-title button {
+    border: 0;
+    background: none;
+    color: #18978f;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* PATIENT */
+
+.patient-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #e7f6f4;
+    color: #18978f;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.patient-profile strong,
+.patient-profile small {
+    display: block;
+}
+
+.patient-profile small {
+    color: #718096;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+/* INFO */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px;
+}
+
+.info-grid strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+/* BENEFITS */
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.benefit-card {
+    background: #f8fafb;
+    border: 1px solid #edf0f3;
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.benefit-card strong {
+    display: block;
+    font-size: 19px;
+    margin: 5px 0 2px;
+}
+
+.benefit-card small {
+    color: #718096;
+    font-size: 10px;
+}
+
+/* VERIFIED */
+
+.verified-pill {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #e8f7f2;
+    color: #167b70;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.verification-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0faf8;
+    border: 1px solid #d7eeea;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 18px;
+}
+
+.verification-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #18978f;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.verification-status strong {
+    font-size: 13px;
+}
+
+.verification-status p {
+    margin: 3px 0;
+    color: #5e6c84;
+    font-size: 11px;
+}
+
+.verification-status small {
+    color: #718096;
+    font-size: 10px;
+}
+
+/* COVERAGE PRIORITY */
+
+.coverage-priority {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.priority {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+    padding: 11px;
+}
+
+.priority.active {
+    border-color: #bfe5e1;
+    background: #f5fcfb;
+}
+
+.priority .number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f0f2f5;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 11px;
+}
+
+.priority.active .number {
+    background: #18978f;
+    color: #ffffff;
+}
+
+.priority strong,
+.priority small {
+    display: block;
+}
+
+.priority strong {
+    font-size: 12px;
+}
+
+.priority small {
+    font-size: 10px;
+    color: #718096;
+    margin-top: 2px;
+}
+
+.priority-label {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: #e7f6f4;
+    color: #167b70;
+}
+
+.priority-label.secondary {
+    background: #edf1ff;
+    color: #4a5da8;
+}
+
+.priority.empty {
+    opacity: .7;
+}
+
+/* ACTIVITY */
+
+.activity-table {
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.activity-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.3fr 1.3fr 1fr .7fr;
+    padding: 12px 14px;
+    border-top: 1px solid #edf0f3;
+    font-size: 11px;
+    align-items: center;
+}
+
+.activity-row.header {
+    background: #f8fafb;
+    color: #718096;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-top: 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .coverage-summary {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .insurance-details-page {
+        padding: 20px;
+    }
+
+    .insurance-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .coverage-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .activity-table {
+        overflow-x: auto;
+    }
+
+    .activity-row {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .coverage-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-grid,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-actions a,
+    .header-actions button {
+        flex: 1;
+        text-align: center;
+    }
+}

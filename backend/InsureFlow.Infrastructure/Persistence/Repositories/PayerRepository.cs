@@ -1,0 +1,124 @@
+﻿using InsureFlow.Application.Persistence;
+using InsureFlow.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace InsureFlow.Infrastructure.Persistence.Repositories;
+
+public sealed class PayerRepository : IPayerRepository
+{
+    private readonly InsureFlowDbContext _dbContext;
+
+    public PayerRepository(
+        InsureFlowDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<IReadOnlyList<Payer>> GetPagedAsync(
+        string? search,
+        string? type,
+        string? status,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default)
+    {
+        var query = _dbContext.Payers
+            .AsNoTracking()
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var normalizedSearch = search.Trim();
+
+            query = query.Where(x =>
+                x.Code.Contains(normalizedSearch) ||
+                x.Name.Contains(normalizedSearch) ||
+                (x.PayerId != null &&
+                 x.PayerId.Contains(normalizedSearch)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(type))
+        {
+            var normalizedType = type.Trim();
+
+            query = query.Where(x =>
+                x.Type.ToString() == normalizedType);
+        }
+
+        if (!string.IsNullOrWhiteSpace(status))
+        {
+            var normalizedStatus = status.Trim();
+
+            query = query.Where(x =>
+                x.Status.ToString() == normalizedStatus);
+        }
+
+        return await query
+            .OrderBy(x => x.Name)
+            .ThenBy(x => x.Code)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<Payer?> GetByExternalIdAsync(
+        Guid externalId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Payers
+            .FirstOrDefaultAsync(
+                x => x.ExternalId == externalId,
+                cancellationToken);
+    }
+
+    public async Task<Payer?> GetByIdAsync(
+        long id,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Payers
+            .FirstOrDefaultAsync(
+                x => x.Id == id,
+                cancellationToken);
+    }
+
+    public async Task<bool> ExistsByCodeAsync(
+        string code,
+        Guid? excludeExternalId = null,
+        CancellationToken cancellationToken = default)
+    {
+        var query = _dbContext.Payers
+            .Where(x => x.Code == code);
+
+        if (excludeExternalId.HasValue)
+        {
+            query = query.Where(
+                x => x.ExternalId != excludeExternalId.Value);
+        }
+
+        return await query.AnyAsync(cancellationToken);
+    }
+
+    public async Task AddAsync(
+        Payer payer,
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.Payers.AddAsync(
+            payer,
+            cancellationToken);
+    }
+
+    public Task UpdateAsync(
+        Payer payer,
+        CancellationToken cancellationToken = default)
+    {
+        _dbContext.Payers.Update(payer);
+
+        return Task.CompletedTask;
+    }
+
+    public async Task SaveChangesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.SaveChangesAsync(cancellationToken);
+    }
+}

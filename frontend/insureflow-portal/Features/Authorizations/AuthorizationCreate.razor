@@ -1,0 +1,1550 @@
+@page "/authorizations/create"
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components
+
+@inject NavigationManager Navigation
+
+<PageTitle>New Authorization | InsureFlow</PageTitle>
+
+<div class="authorization-create-page">
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+
+        <div class="header-content">
+
+            <a href="/authorizations" class="back-link">
+                <span aria-hidden="true">←</span>
+                Authorizations
+            </a>
+
+            <div class="title-row">
+                <div class="title-icon" aria-hidden="true">
+                    PA
+                </div>
+
+                <div>
+                    <div class="eyebrow">
+                        AUTHORIZATION MANAGEMENT
+                    </div>
+
+                    <h1>
+                        New Authorization Request
+                    </h1>
+
+                    <p>
+                        Create and submit a prior authorization request
+                        for payer review.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <button type="button"
+                    class="secondary-button"
+                    @onclick="SaveDraft"
+                    disabled="@isSaving">
+
+                <span aria-hidden="true">▣</span>
+
+                Save Draft
+            </button>
+
+            <button type="button"
+                    class="primary-button"
+                    @onclick="Submit"
+                    disabled="@isSaving">
+
+                @if (isSaving)
+                {
+                    <span class="button-spinner"
+                          aria-hidden="true"></span>
+
+                    <span>Saving...</span>
+                }
+                else
+                {
+                    <span aria-hidden="true">✓</span>
+
+                    <span>Submit Authorization</span>
+                }
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- PROGRESS STEPPER -->
+    <nav class="stepper"
+         aria-label="Authorization creation progress">
+
+        <div class="step active">
+            <span class="step-number">1</span>
+
+            <div class="step-content">
+                <strong>Request</strong>
+                <small>Patient & payer</small>
+            </div>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+
+            <div class="step-content">
+                <strong>Services</strong>
+                <small>Requested procedures</small>
+            </div>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+
+            <div class="step-content">
+                <strong>Clinical</strong>
+                <small>Medical necessity</small>
+            </div>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+            <span class="step-number">4</span>
+
+            <div class="step-content">
+                <strong>Documents</strong>
+                <small>Supporting records</small>
+            </div>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+            <span class="step-number">5</span>
+
+            <div class="step-content">
+                <strong>Review</strong>
+                <small>Submit request</small>
+            </div>
+        </div>
+
+    </nav>
+
+
+    <!-- VALIDATION / STATUS MESSAGE -->
+    @if (!string.IsNullOrWhiteSpace(validationMessage))
+    {
+        <div class="alert alert-error"
+             role="alert">
+
+            <span class="alert-icon" aria-hidden="true">!</span>
+
+            <div>
+                <strong>Review required</strong>
+                <p>@validationMessage</p>
+            </div>
+
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(successMessage))
+    {
+        <div class="alert alert-success"
+             role="status">
+
+            <span class="alert-icon" aria-hidden="true">✓</span>
+
+            <div>
+                <strong>Authorization saved</strong>
+                <p>@successMessage</p>
+            </div>
+
+        </div>
+    }
+
+
+    <!-- PATIENT & INSURANCE -->
+    <section class="form-card">
+
+        <div class="form-card-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    01
+                </div>
+
+                <div>
+                    <h2>Patient & Insurance</h2>
+
+                    <p>
+                        Select the patient, insurance coverage and
+                        authorization type.
+                    </p>
+                </div>
+
+            </div>
+
+            <span class="required-note">
+                * Required
+            </span>
+
+        </div>
+
+        <div class="form-card-body">
+
+            <div class="form-grid">
+
+                <!-- PATIENT -->
+                <div class="form-group">
+
+                    <label for="patient">
+                        Patient <span>*</span>
+                    </label>
+
+                    <select id="patient"
+                            @bind="model.PatientId"
+                            class="@GetFieldClass(model.PatientId)">
+
+                        <option value="">
+                            Select patient
+                        </option>
+
+                        <option value="PAT001">
+                            John Smith — MRN-10001
+                        </option>
+
+                        <option value="PAT002">
+                            Robert Johnson — MRN-10002
+                        </option>
+
+                        <option value="PAT003">
+                            Sarah Williams — MRN-10003
+                        </option>
+
+                        <option value="PAT004">
+                            Emily Wilson — MRN-10004
+                        </option>
+
+                        <option value="PAT005">
+                            Michael Brown — MRN-10005
+                        </option>
+
+                    </select>
+
+                    <small class="form-help">
+                        Select the patient associated with this request.
+                    </small>
+
+                </div>
+
+
+                <!-- INSURANCE -->
+                <div class="form-group">
+
+                    <label for="insurance">
+                        Insurance <span>*</span>
+                    </label>
+
+                    <select id="insurance"
+                            @bind="model.InsuranceId">
+
+                        <option value="">
+                            Select insurance
+                        </option>
+
+                        <option value="INS001">
+                            Aetna Commercial PPO
+                        </option>
+
+                        <option value="INS002">
+                            UnitedHealthcare Choice Plus
+                        </option>
+
+                        <option value="INS003">
+                            Medicare Advantage
+                        </option>
+
+                        <option value="INS004">
+                            Medicaid Managed Care
+                        </option>
+
+                        <option value="INS005">
+                            Blue Cross Blue Shield PPO
+                        </option>
+
+                    </select>
+
+                    <small class="form-help">
+                        Active coverage associated with the patient.
+                    </small>
+
+                </div>
+
+
+                <!-- PAYER -->
+                <div class="form-group">
+
+                    <label for="payer">
+                        Payer <span>*</span>
+                    </label>
+
+                    <select id="payer"
+                            @bind="model.PayerId">
+
+                        <option value="">
+                            Select payer
+                        </option>
+
+                        <option value="PAY001">
+                            Aetna
+                        </option>
+
+                        <option value="PAY002">
+                            UnitedHealthcare
+                        </option>
+
+                        <option value="PAY003">
+                            Medicare
+                        </option>
+
+                        <option value="PAY004">
+                            Medicaid
+                        </option>
+
+                        <option value="PAY005">
+                            Blue Cross Blue Shield
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- AUTHORIZATION TYPE -->
+                <div class="form-group">
+
+                    <label for="authorizationType">
+                        Authorization Type <span>*</span>
+                    </label>
+
+                    <select id="authorizationType"
+                            @bind="model.AuthorizationType">
+
+                        <option value="">
+                            Select authorization type
+                        </option>
+
+                        <option value="Prior Authorization">
+                            Prior Authorization
+                        </option>
+
+                        <option value="Concurrent Review">
+                            Concurrent Review
+                        </option>
+
+                        <option value="Retrospective Review">
+                            Retrospective Review
+                        </option>
+
+                        <option value="Referral Authorization">
+                            Referral Authorization
+                        </option>
+
+                        <option value="Inpatient Authorization">
+                            Inpatient Authorization
+                        </option>
+
+                        <option value="Outpatient Authorization">
+                            Outpatient Authorization
+                        </option>
+
+                        <option value="Medication Authorization">
+                            Medication Authorization
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRIORITY -->
+                <div class="form-group">
+
+                    <label for="priority">
+                        Priority
+                    </label>
+
+                    <select id="priority"
+                            @bind="model.Priority">
+
+                        <option value="Routine">
+                            Routine
+                        </option>
+
+                        <option value="Urgent">
+                            Urgent
+                        </option>
+
+                        <option value="Emergent">
+                            Emergent
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PLACE OF SERVICE -->
+                <div class="form-group">
+
+                    <label for="placeOfService">
+                        Place of Service
+                    </label>
+
+                    <select id="placeOfService"
+                            @bind="model.PlaceOfService">
+
+                        <option value="">
+                            Select POS
+                        </option>
+
+                        <option value="11">
+                            11 — Office
+                        </option>
+
+                        <option value="12">
+                            12 — Home
+                        </option>
+
+                        <option value="21">
+                            21 — Inpatient Hospital
+                        </option>
+
+                        <option value="22">
+                            22 — Outpatient Hospital
+                        </option>
+
+                        <option value="23">
+                            23 — Emergency Room
+                        </option>
+
+                        <option value="31">
+                            31 — Skilled Nursing Facility
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROVIDERS & FACILITY -->
+    <section class="form-card">
+
+        <div class="form-card-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    02
+                </div>
+
+                <div>
+                    <h2>Providers & Facility</h2>
+
+                    <p>
+                        Identify the providers and facility responsible
+                        for the requested service.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-card-body">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="requestingProvider">
+                        Requesting Provider <span>*</span>
+                    </label>
+
+                    <select id="requestingProvider"
+                            @bind="model.RequestingProviderId">
+
+                        <option value="">
+                            Select provider
+                        </option>
+
+                        <option value="PROV001">
+                            Dr. Michael Anderson — Internal Medicine
+                        </option>
+
+                        <option value="PROV002">
+                            Dr. Emily Davis — Cardiology
+                        </option>
+
+                        <option value="PROV003">
+                            Dr. Sarah Wilson — Orthopedics
+                        </option>
+
+                        <option value="PROV004">
+                            Dr. Robert Anderson — Neurology
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="renderingProvider">
+                        Rendering Provider
+                    </label>
+
+                    <select id="renderingProvider"
+                            @bind="model.RenderingProviderId">
+
+                        <option value="">
+                            Select provider
+                        </option>
+
+                        <option value="PROV001">
+                            Dr. Michael Anderson
+                        </option>
+
+                        <option value="PROV002">
+                            Dr. Emily Davis
+                        </option>
+
+                        <option value="PROV003">
+                            Dr. Sarah Wilson
+                        </option>
+
+                        <option value="PROV004">
+                            Dr. Robert Anderson
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="facility">
+                        Facility
+                    </label>
+
+                    <select id="facility"
+                            @bind="model.FacilityId">
+
+                        <option value="">
+                            Select facility
+                        </option>
+
+                        <option value="FAC001">
+                            Main Medical Center
+                        </option>
+
+                        <option value="FAC002">
+                            Downtown Specialty Clinic
+                        </option>
+
+                        <option value="FAC003">
+                            Lakeside Health Center
+                        </option>
+
+                        <option value="FAC004">
+                            Northwestern Medical Center
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICE DATES -->
+    <section class="form-card">
+
+        <div class="form-card-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    03
+                </div>
+
+                <div>
+                    <h2>Requested Service Dates</h2>
+
+                    <p>
+                        Specify the date range for the requested services.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-card-body">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="serviceStart">
+                        Service Start Date <span>*</span>
+                    </label>
+
+                    <input id="serviceStart"
+                           type="date"
+                           @bind="model.ServiceStartDate" />
+
+                    <small class="form-help">
+                        First date the requested service is expected.
+                    </small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="serviceEnd">
+                        Service End Date <span>*</span>
+                    </label>
+
+                    <input id="serviceEnd"
+                           type="date"
+                           @bind="model.ServiceEndDate" />
+
+                    <small class="form-help">
+                        Last expected date of service.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REQUESTED SERVICES -->
+    <section class="form-card">
+
+        <div class="form-card-header service-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    04
+                </div>
+
+                <div>
+                    <h2>Requested Services</h2>
+
+                    <p>
+                        Add CPT/HCPCS procedure codes, ICD-10 diagnosis
+                        codes and requested units.
+                    </p>
+                </div>
+
+            </div>
+
+            <button type="button"
+                    class="secondary-button"
+                    @onclick="AddService">
+
+                <span aria-hidden="true">+</span>
+                Add Service
+
+            </button>
+
+        </div>
+
+
+        <div class="form-card-body services-body">
+
+            @if (model.ServiceLines.Count == 0)
+            {
+                <div class="empty-services">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>No services added</h3>
+
+                    <p>
+                        Add at least one requested service before
+                        submitting the authorization.
+                    </p>
+
+                    <button type="button"
+                            class="secondary-button"
+                            @onclick="AddService">
+
+                        Add First Service
+
+                    </button>
+
+                </div>
+            }
+            else
+            {
+                <div class="service-table-wrapper">
+
+                    <table class="service-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>CPT/HCPCS <span>*</span></th>
+                                <th>Procedure Description</th>
+                                <th>ICD-10 <span>*</span></th>
+                                <th class="units-column">Units</th>
+                                <th class="action-column">
+                                    <span class="sr-only">
+                                        Actions
+                                    </span>
+                                </th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var service in model.ServiceLines)
+                            {
+                                <tr @key="service.Id">
+
+                                    <td>
+
+                                        <input type="text"
+                                               class="table-input"
+                                               @bind="service.CptHcpcsCode"
+                                               placeholder="99214"
+                                               maxlength="20"
+                                               aria-label="CPT or HCPCS code" />
+
+                                    </td>
+
+                                    <td>
+
+                                        <input type="text"
+                                               class="table-input"
+                                               @bind="service.ProcedureDescription"
+                                               placeholder="Procedure description"
+                                               maxlength="200"
+                                               aria-label="Procedure description" />
+
+                                    </td>
+
+                                    <td>
+
+                                        <input type="text"
+                                               class="table-input"
+                                               @bind="service.Icd10Code"
+                                               placeholder="M54.50"
+                                               maxlength="20"
+                                               aria-label="ICD-10 diagnosis code" />
+
+                                    </td>
+
+                                    <td>
+
+                                        <input type="number"
+                                               class="table-input units-input"
+                                               @bind="service.RequestedUnits"
+                                               min="1"
+                                               max="9999"
+                                               aria-label="Requested units" />
+
+                                    </td>
+
+                                    <td>
+
+                                        <button type="button"
+                                                class="remove-button"
+                                                @onclick="() => RemoveService(service)"
+                                                aria-label="Remove service">
+
+                                            ×
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="service-summary">
+
+                    <span>
+                        @model.ServiceLines.Count
+                        @(model.ServiceLines.Count == 1
+                            ? "service"
+                            : "services")
+                    </span>
+
+                    <span>
+                        Total requested units:
+                        <strong>
+                            @model.ServiceLines.Sum(x => x.RequestedUnits)
+                        </strong>
+                    </span>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+
+    <!-- CLINICAL INFORMATION -->
+    <section class="form-card">
+
+        <div class="form-card-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    05
+                </div>
+
+                <div>
+                    <h2>Clinical Information</h2>
+
+                    <p>
+                        Provide medical necessity and clinical justification
+                        for the requested services.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-card-body">
+
+            <div class="form-group full-width">
+
+                <label for="clinicalSummary">
+                    Clinical Summary <span>*</span>
+                </label>
+
+                <textarea id="clinicalSummary"
+                          rows="6"
+                          @bind="model.ClinicalSummary"
+                          maxlength="4000"
+                          placeholder="Describe the patient's clinical condition, symptoms, diagnosis, relevant findings and treatment history...">
+                </textarea>
+
+                <div class="field-footer">
+
+                    <small class="form-help">
+                        Include information relevant to the medical
+                        necessity determination.
+                    </small>
+
+                    <small class="character-count">
+                        @model.ClinicalSummary.Length / 4000
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group full-width">
+
+                <label for="medicalNecessity">
+                    Medical Necessity
+                </label>
+
+                <textarea id="medicalNecessity"
+                          rows="6"
+                          @bind="model.MedicalNecessity"
+                          maxlength="4000"
+                          placeholder="Explain why the requested service is medically necessary and why alternative treatment options are not appropriate...">
+                </textarea>
+
+                <div class="field-footer">
+
+                    <small class="form-help">
+                        Provide clinical justification supporting
+                        the authorization request.
+                    </small>
+
+                    <small class="character-count">
+                        @model.MedicalNecessity.Length / 4000
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group full-width">
+
+                <label for="notes">
+                    Internal Notes
+                </label>
+
+                <textarea id="notes"
+                          rows="4"
+                          @bind="model.Notes"
+                          maxlength="2000"
+                          placeholder="Add internal notes for the authorization team...">
+                </textarea>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DOCUMENTATION -->
+    <section class="form-card">
+
+        <div class="form-card-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    06
+                </div>
+
+                <div>
+                    <h2>Clinical Documentation</h2>
+
+                    <p>
+                        Attach supporting documentation for payer review.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-card-body">
+
+            <div class="upload-area">
+
+                <div class="upload-icon"
+                     aria-hidden="true">
+                    ↑
+                </div>
+
+                <h3>
+                    Upload Supporting Documents
+                </h3>
+
+                <p>
+                    Upload clinical notes, diagnostic reports,
+                    medical records, imaging reports and other
+                    supporting documentation.
+                </p>
+
+                <button type="button"
+                        class="secondary-button"
+                        @onclick="SelectDocuments">
+
+                    Select Files
+
+                </button>
+
+                <small>
+                    PDF, DOC, DOCX, JPG or PNG
+                    <br />
+                    Maximum 25 MB per file
+                </small>
+
+            </div>
+
+
+            @if (documents.Count > 0)
+            {
+                <div class="document-list">
+
+                    @foreach (var document in documents)
+                    {
+                        <div class="document-item"
+                             @key="document.Id">
+
+                            <div class="document-icon">
+                                PDF
+                            </div>
+
+                            <div class="document-info">
+
+                                <strong>
+                                    @document.FileName
+                                </strong>
+
+                                <small>
+                                    @document.FileSize
+                                </small>
+
+                            </div>
+
+                            <span class="document-status">
+                                Ready
+                            </span>
+
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+
+    <!-- SUBMISSION CHECKLIST -->
+    <section class="form-card checklist-card">
+
+        <div class="form-card-header">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    07
+                </div>
+
+                <div>
+                    <h2>Submission Checklist</h2>
+
+                    <p>
+                        Confirm that the authorization request is ready
+                        for payer submission.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-card-body">
+
+            <label class="check-row">
+
+                <input type="checkbox"
+                       @bind="checkPatientInsurance" />
+
+                <span class="check-box"
+                      aria-hidden="true">
+                </span>
+
+                <span class="check-content">
+
+                    <strong>
+                        Patient and insurance information verified
+                    </strong>
+
+                    <small>
+                        Patient identity, coverage and payer details
+                        have been reviewed.
+                    </small>
+
+                </span>
+
+            </label>
+
+
+            <label class="check-row">
+
+                <input type="checkbox"
+                       @bind="checkCodes" />
+
+                <span class="check-box"
+                      aria-hidden="true">
+                </span>
+
+                <span class="check-content">
+
+                    <strong>
+                        CPT/HCPCS and ICD-10 codes verified
+                    </strong>
+
+                    <small>
+                        Requested procedure and diagnosis codes have
+                        been validated.
+                    </small>
+
+                </span>
+
+            </label>
+
+
+            <label class="check-row">
+
+                <input type="checkbox"
+                       @bind="checkDocumentation" />
+
+                <span class="check-box"
+                      aria-hidden="true">
+                </span>
+
+                <span class="check-content">
+
+                    <strong>
+                        Clinical documentation attached
+                    </strong>
+
+                    <small>
+                        Required supporting records are available
+                        for payer review.
+                    </small>
+
+                </span>
+
+            </label>
+
+
+            <label class="check-row">
+
+                <input type="checkbox"
+                       @bind="checkMedicalNecessity" />
+
+                <span class="check-box"
+                      aria-hidden="true">
+                </span>
+
+                <span class="check-content">
+
+                    <strong>
+                        Medical necessity documented
+                    </strong>
+
+                    <small>
+                        The clinical justification supports the
+                        requested services.
+                    </small>
+
+                </span>
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM ACTION BAR -->
+    <footer class="form-actions">
+
+        <div class="action-info">
+
+            <span class="required-dot">*</span>
+
+            Required fields must be completed before submission.
+
+        </div>
+
+        <div class="action-buttons">
+
+            <button type="button"
+                    class="secondary-button"
+                    @onclick="Cancel">
+
+                Cancel
+
+            </button>
+
+            <button type="button"
+                    class="secondary-button"
+                    @onclick="SaveDraft"
+                    disabled="@isSaving">
+
+                Save Draft
+
+            </button>
+
+            <button type="button"
+                    class="primary-button"
+                    @onclick="Submit"
+                    disabled="@isSaving">
+
+                @if (isSaving)
+                {
+                    <span class="button-spinner"
+                          aria-hidden="true"></span>
+
+                    <span>Submitting...</span>
+                }
+                else
+                {
+                    <span aria-hidden="true">✓</span>
+
+                    <span>Submit Authorization</span>
+                }
+
+            </button>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+@code {
+
+    private AuthorizationRequestModel model = new();
+
+    private bool isSaving;
+
+    private string validationMessage = string.Empty;
+
+    private string successMessage = string.Empty;
+
+    private bool checkPatientInsurance;
+
+    private bool checkCodes;
+
+    private bool checkDocumentation;
+
+    private bool checkMedicalNecessity;
+
+    private readonly List<AuthorizationDocumentModel> documents = [];
+
+
+    protected override void OnInitialized()
+    {
+        AddService();
+    }
+
+
+    private void AddService()
+    {
+        model.ServiceLines.Add(
+            new AuthorizationServiceLineModel
+            {
+                Id = Guid.NewGuid(),
+                ServiceStartDate = model.ServiceStartDate,
+                ServiceEndDate = model.ServiceEndDate,
+                RequestedUnits = 1
+            });
+    }
+
+
+    private void RemoveService(
+        AuthorizationServiceLineModel service)
+    {
+        if (model.ServiceLines.Count <= 1)
+        {
+            return;
+        }
+
+        model.ServiceLines.Remove(service);
+    }
+
+
+    private async Task SaveDraft()
+    {
+        validationMessage = string.Empty;
+        successMessage = string.Empty;
+
+        isSaving = true;
+
+        await Task.Delay(250);
+
+        isSaving = false;
+
+        successMessage =
+            "The authorization draft has been saved successfully.";
+
+        StateHasChanged();
+    }
+
+
+    private async Task Submit()
+    {
+        validationMessage = string.Empty;
+        successMessage = string.Empty;
+
+        if (!ValidateRequest())
+        {
+            return;
+        }
+
+        isSaving = true;
+
+        await Task.Delay(400);
+
+        isSaving = false;
+
+        /*
+         * UI-only implementation.
+         *
+         * The real AuthorizationApiService should replace this
+         * section when backend integration is enabled.
+         */
+
+        var authorizationId = Guid.NewGuid();
+
+        Navigation.NavigateTo(
+            $"/authorizations/{authorizationId}");
+    }
+
+
+    private bool ValidateRequest()
+    {
+        if (string.IsNullOrWhiteSpace(model.PatientId))
+        {
+            validationMessage =
+                "Please select a patient.";
+
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.InsuranceId))
+        {
+            validationMessage =
+                "Please select an insurance plan.";
+
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.PayerId))
+        {
+            validationMessage =
+                "Please select a payer.";
+
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.AuthorizationType))
+        {
+            validationMessage =
+                "Please select an authorization type.";
+
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.RequestingProviderId))
+        {
+            validationMessage =
+                "Please select the requesting provider.";
+
+            return false;
+        }
+
+        if (model.ServiceStartDate == default)
+        {
+            validationMessage =
+                "Please select the service start date.";
+
+            return false;
+        }
+
+        if (model.ServiceEndDate == default)
+        {
+            validationMessage =
+                "Please select the service end date.";
+
+            return false;
+        }
+
+        if (model.ServiceEndDate < model.ServiceStartDate)
+        {
+            validationMessage =
+                "The service end date cannot be earlier than the service start date.";
+
+            return false;
+        }
+
+        if (model.ServiceLines.Count == 0)
+        {
+            validationMessage =
+                "Please add at least one requested service.";
+
+            return false;
+        }
+
+        if (model.ServiceLines.Any(
+                x => string.IsNullOrWhiteSpace(x.CptHcpcsCode)))
+        {
+            validationMessage =
+                "Each requested service must have a CPT/HCPCS code.";
+
+            return false;
+        }
+
+        if (model.ServiceLines.Any(
+                x => string.IsNullOrWhiteSpace(x.Icd10Code)))
+        {
+            validationMessage =
+                "Each requested service must have an ICD-10 code.";
+
+            return false;
+        }
+
+        if (model.ServiceLines.Any(
+                x => x.RequestedUnits <= 0))
+        {
+            validationMessage =
+                "Requested units must be greater than zero.";
+
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.ClinicalSummary))
+        {
+            validationMessage =
+                "Please provide a clinical summary.";
+
+            return false;
+        }
+
+        if (!checkPatientInsurance ||
+            !checkCodes ||
+            !checkDocumentation ||
+            !checkMedicalNecessity)
+        {
+            validationMessage =
+                "Please complete all submission checklist items before submitting the authorization.";
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private void SelectDocuments()
+    {
+        /*
+         * File upload integration will be connected to the
+         * document/storage service later.
+         *
+         * This sample keeps the UI functional without requiring
+         * a JavaScript or backend dependency.
+         */
+
+        documents.Add(
+            new AuthorizationDocumentModel
+            {
+                Id = Guid.NewGuid(),
+                FileName = "Clinical_Supporting_Document.pdf",
+                FileSize = "1.8 MB"
+            });
+    }
+
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/authorizations");
+    }
+
+
+    private string GetFieldClass(string value)
+    {
+        return string.IsNullOrWhiteSpace(value)
+            ? "field-invalid"
+            : string.Empty;
+    }
+
+
+    private sealed class AuthorizationRequestModel
+    {
+        public string PatientId { get; set; } = string.Empty;
+
+        public string InsuranceId { get; set; } = string.Empty;
+
+        public string PayerId { get; set; } = string.Empty;
+
+        public string AuthorizationType { get; set; } = string.Empty;
+
+        public string Priority { get; set; } = "Routine";
+
+        public string PlaceOfService { get; set; } = string.Empty;
+
+        public string RequestingProviderId { get; set; } = string.Empty;
+
+        public string RenderingProviderId { get; set; } = string.Empty;
+
+        public string FacilityId { get; set; } = string.Empty;
+
+        public DateTime ServiceStartDate { get; set; }
+            = DateTime.Today;
+
+        public DateTime ServiceEndDate { get; set; }
+            = DateTime.Today.AddDays(7);
+
+        public string ClinicalSummary { get; set; } = string.Empty;
+
+        public string MedicalNecessity { get; set; } = string.Empty;
+
+        public string Notes { get; set; } = string.Empty;
+
+        public List<AuthorizationServiceLineModel> ServiceLines { get; set; }
+            = [];
+    }
+
+
+    private sealed class AuthorizationServiceLineModel
+    {
+        public Guid Id { get; set; }
+
+        public string CptHcpcsCode { get; set; } = string.Empty;
+
+        public string ProcedureDescription { get; set; } = string.Empty;
+
+        public string Icd10Code { get; set; } = string.Empty;
+
+        public int RequestedUnits { get; set; } = 1;
+
+        public DateTime ServiceStartDate { get; set; }
+
+        public DateTime ServiceEndDate { get; set; }
+    }
+
+
+    private sealed class AuthorizationDocumentModel
+    {
+        public Guid Id { get; set; }
+
+        public string FileName { get; set; } = string.Empty;
+
+        public string FileSize { get; set; } = string.Empty;
+    }
+}

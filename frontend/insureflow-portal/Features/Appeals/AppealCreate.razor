@@ -1,0 +1,175 @@
+@page "/appeals/create"
+
+<PageTitle>Create Appeal</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">APPEALS MANAGEMENT</div>
+            <h1>Create Appeal</h1>
+            <p>Create a payer appeal from a denied claim.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/appeals" class="secondary-button">Cancel</a>
+        </div>
+    </div>
+
+    <div class="form-card">
+
+        <div class="section-header">
+            <div>
+                <h2>Appeal Information</h2>
+                <p>Identify the denial and payer associated with the appeal.</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Denial Number</label>
+                <input value="DN-100245" />
+            </div>
+
+            <div class="form-group">
+                <label>Claim Number</label>
+                <input value="CLM-100245" />
+            </div>
+
+            <div class="form-group">
+                <label>Patient</label>
+                <input value="John Smith" />
+            </div>
+
+            <div class="form-group">
+                <label>Payer</label>
+                <select>
+                    <option>Aetna</option>
+                    <option>UnitedHealthcare</option>
+                    <option>Cigna</option>
+                    <option>BCBS</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Insurance Member ID</label>
+                <input value="AET4589217" />
+            </div>
+
+            <div class="form-group">
+                <label>Provider</label>
+                <input value="Dr. Michael Brown" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-card">
+
+        <div class="section-header">
+            <div>
+                <h2>Appeal Classification</h2>
+                <p>Select the appeal level and reason.</p>
+            </div>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Appeal Level</label>
+                <select>
+                    <option>First Level</option>
+                    <option>Second Level</option>
+                    <option>External Review</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Reason</label>
+                <select>
+                    <option>Medical Necessity</option>
+                    <option>Authorization</option>
+                    <option>Timely Filing</option>
+                    <option>Coverage</option>
+                    <option>Incorrect Denial</option>
+                    <option>Eligibility</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Submission Date</label>
+                <input type="date" value="2026-09-08" />
+            </div>
+
+            <div class="form-group">
+                <label>Appeal Deadline</label>
+                <input type="date" value="2026-09-20" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-card">
+
+        <div class="section-header">
+            <div>
+                <h2>Claim Services</h2>
+                <p>Services and diagnoses associated with the appeal.</p>
+            </div>
+        </div>
+
+        <div class="service-table">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>CPT / HCPCS</th>
+                        <th>ICD-10</th>
+                        <th>Units</th>
+                        <th>Denied Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>99214</td>
+                        <td>E11.9</td>
+                        <td>1</td>
+                        <td>$450.00</td>
+                    </tr>
+                    <tr>
+                        <td>83036</td>
+                        <td>E11.9</td>
+                        <td>1</td>
+                        <td>$125.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="form-card">
+
+        <div class="section-header">
+            <div>
+                <h2>Appeal Notes</h2>
+                <p>Provide the initial rationale for the appeal.</p>
+            </div>
+        </div>
+
+        <textarea rows="6">The services were medically necessary based on the patient's documented clinical condition. Supporting clinical documentation will be submitted with the appeal.</textarea>
+
+    </div>
+
+    <div class="form-actions">
+        <a href="/appeals" class="secondary-button">Cancel</a>
+        <button class="secondary-button">Save Draft</button>
+        <button class="primary-button">Create Appeal</button>
+    </div>
+
+</div>

@@ -1,0 +1,180 @@
+@page "/denials/history"
+
+<div class="history-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="eyebrow">DENIAL MANAGEMENT</div>
+
+            <h1>Denial History</h1>
+
+            <p>
+                Track denial activity, assignments, appeals and resolutions.
+            </p>
+
+        </div>
+
+        <div class="header-actions">
+
+            <a href="/denials"
+               class="secondary-button">
+                Back to Denials
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <section class="table-card">
+
+        <div class="table-header">
+
+            <div>
+
+                <h2>Activity History</h2>
+
+                <p>
+                    Complete audit trail for denial cases.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input placeholder="Search denial, patient or user..." />
+            </div>
+
+            <select>
+                <option>All Activities</option>
+                <option>Created</option>
+                <option>Assigned</option>
+                <option>Status Changed</option>
+                <option>Appealed</option>
+                <option>Resolved</option>
+                <option>Note Added</option>
+            </select>
+
+            <select>
+                <option>All Users</option>
+                <option>Sarah Wilson</option>
+                <option>Mike Johnson</option>
+                <option>Lisa Brown</option>
+            </select>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-icon">
+                    ✓
+                </div>
+
+                <div class="timeline-content">
+
+                    <strong>
+                        Denial assigned
+                    </strong>
+
+                    <p>
+                        DEN-2026-00142 was assigned to Sarah Wilson.
+                    </p>
+
+                    <small>
+                        Sarah Wilson · September 4, 2026 · 10:42 AM
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-icon">
+                    A
+                </div>
+
+                <div class="timeline-content">
+
+                    <strong>
+                        Status changed
+                    </strong>
+
+                    <p>
+                        Status changed from Assigned to In Progress.
+                    </p>
+
+                    <small>
+                        Sarah Wilson · September 4, 2026 · 10:40 AM
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-icon">
+                    +
+                </div>
+
+                <div class="timeline-content">
+
+                    <strong>
+                        Internal note added
+                    </strong>
+
+                    <p>
+                        Payer contacted regarding retroactive authorization.
+                    </p>
+
+                    <small>
+                        Sarah Wilson · September 3, 2026 · 03:18 PM
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-icon">
+                    !
+                </div>
+
+                <div class="timeline-content">
+
+                    <strong>
+                        Denial created
+                    </strong>
+
+                    <p>
+                        Denial received from UnitedHealthcare with code CO-197.
+                    </p>
+
+                    <small>
+                        System · September 2, 2026 · 08:21 AM
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

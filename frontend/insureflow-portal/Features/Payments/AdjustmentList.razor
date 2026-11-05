@@ -1,0 +1,121 @@
+@page "/payments/adjustments"
+
+<div class="payment-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">ADJUSTMENTS</div>
+            <h1>Payment Adjustments</h1>
+            <p>Manage contractual, payer and patient balance adjustments.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments">Dashboard</a>
+            <a class="primary-button" href="/payments/adjustments/new">Add Adjustment</a>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Total Adjustments</span>
+            <strong>$96,420</strong>
+            <small>This month</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Contractual</span>
+            <strong>$72,180</strong>
+            <small>75%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Other</span>
+            <strong>$14,240</strong>
+            <small>15%</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Pending</span>
+            <strong>18</strong>
+            <small>Require review</small>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search claim, adjustment or code..." />
+        </div>
+
+        <select>
+            <option>All Types</option>
+            <option>Contractual</option>
+            <option>COB</option>
+            <option>Administrative</option>
+            <option>Patient</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Adjustment Transactions</h2>
+                <p>Adjustment activity associated with payment posting</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Adjustment</th>
+                        <th>Claim</th>
+                        <th>Code</th>
+                        <th>Type</th>
+                        <th>Payer</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>ADJ-40012</strong></td>
+                        <td>CLM-20260045</td>
+                        <td>CO-45</td>
+                        <td>Contractual</td>
+                        <td>UnitedHealthcare</td>
+                        <td>$220.00</td>
+                        <td>09/08/2026</td>
+                        <td><span class="status posted">Posted</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>ADJ-40013</strong></td>
+                        <td>CLM-20260041</td>
+                        <td>PR-1</td>
+                        <td>Patient</td>
+                        <td>Aetna</td>
+                        <td>$350.00</td>
+                        <td>09/07/2026</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

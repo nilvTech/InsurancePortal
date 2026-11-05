@@ -1,0 +1,28 @@
+namespace InsureFlow.Contracts.PatientInsurances;
+
+public sealed record PatientInsuranceDto(
+    Guid Id,
+    long TenantId,
+    Guid PatientId,
+    string PatientName,
+    Guid PayerId,
+    string PayerName,
+    Guid? InsurancePlanId,
+    string? InsurancePlanName,
+    string InsuranceType,
+    string CoveragePriority,
+    string InsuranceStatus,
+    string MemberId,
+    string? GroupNumber,
+    string? SubscriberId,
+    string? SubscriberFirstName,
+    string? SubscriberLastName,
+    string SubscriberRelationship,
+    DateTime? EffectiveDate,
+    DateTime? TerminationDate,
+    string? PayerIdDisplay,
+    string EligibilityStatus,
+    DateTime? LastVerifiedAt,
+    bool IsActive,
+    DateTime CreatedAtUtc,
+    DateTime? UpdatedAtUtc);

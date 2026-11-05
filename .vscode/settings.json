@@ -1,0 +1,5 @@
+{
+    "editor.formatOnPaste": true,
+    "prettier.requireConfig": true,
+    "dotnet.formatting.organizeImportsOnFormat": true
+}

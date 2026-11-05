@@ -1,0 +1,293 @@
+@page "/denials/create"
+
+<div class="denial-form-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+                <a href="/denials">Denials</a>
+                <span>/</span>
+                <span>Create</span>
+            </div>
+
+            <div class="eyebrow">DENIAL MANAGEMENT</div>
+
+            <h1>Create Denial</h1>
+
+            <p>
+                Create a denial case for investigation and resolution.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a href="/denials"
+               class="secondary-button">
+                Cancel
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- CLAIM INFORMATION -->
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Claim Information</h2>
+                <p>Identify the claim associated with the denial.</p>
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Claim Number *</label>
+                <input placeholder="CLM-100000" />
+            </div>
+
+            <div class="form-group">
+                <label>Patient *</label>
+                <select>
+                    <option>Select patient</option>
+                    <option>James Anderson</option>
+                    <option>Maria Rodriguez</option>
+                    <option>Robert Williams</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Date of Service</label>
+                <input type="date" />
+            </div>
+
+            <div class="form-group">
+                <label>Claim Type</label>
+                <select>
+                    <option>Professional</option>
+                    <option>Institutional</option>
+                    <option>Dental</option>
+                </select>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INSURANCE -->
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Insurance & Payer</h2>
+                <p>Insurance information associated with the denial.</p>
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Payer *</label>
+
+                <select>
+                    <option>Select payer</option>
+                    <option>UnitedHealthcare</option>
+                    <option>Aetna</option>
+                    <option>BCBS</option>
+                    <option>Cigna</option>
+                    <option>Humana</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label>Plan</label>
+                <input placeholder="Insurance plan" />
+            </div>
+
+            <div class="form-group">
+                <label>Member ID</label>
+                <input placeholder="Member ID" />
+            </div>
+
+            <div class="form-group">
+                <label>Group Number</label>
+                <input placeholder="Group number" />
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DENIAL -->
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Denial Details</h2>
+                <p>Capture payer denial information.</p>
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Denial Code *</label>
+
+                <input placeholder="CO-197" />
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Denial Category *</label>
+
+                <select>
+
+                    <option>Select category</option>
+                    <option>Authorization</option>
+                    <option>Eligibility</option>
+                    <option>Medical Necessity</option>
+                    <option>Timely Filing</option>
+                    <option>Duplicate Claim</option>
+                    <option>Coding</option>
+                    <option>Coverage</option>
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Denied Amount *</label>
+
+                <input type="number"
+                       placeholder="0.00" />
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Denial Date</label>
+
+                <input type="date" />
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Denial Reason *</label>
+
+                <textarea
+                    placeholder="Enter the payer denial reason..."></textarea>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Payer Response</label>
+
+                <textarea
+                    placeholder="Enter payer response or remittance message..."></textarea>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ASSIGNMENT -->
+    <section class="form-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Assignment & Priority</h2>
+                <p>Define ownership and follow-up priority.</p>
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>Assign To</label>
+
+                <select>
+
+                    <option>Unassigned</option>
+                    <option>Sarah Wilson</option>
+                    <option>Mike Johnson</option>
+                    <option>Lisa Brown</option>
+                    <option>David Smith</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Priority</label>
+
+                <select>
+
+                    <option>Medium</option>
+                    <option>High</option>
+                    <option>Low</option>
+                    <option>Critical</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Internal Notes</label>
+
+                <textarea
+                    placeholder="Add internal notes..."></textarea>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+    <div class="form-actions">
+
+        <a href="/denials"
+           class="secondary-button">
+            Cancel
+        </a>
+
+        <button class="primary-button">
+            Create Denial
+        </button>
+
+    </div>
+
+</div>

@@ -1,0 +1,170 @@
+@page "/claims/validation"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CLAIM QUALITY</div>
+            <h1>Claim Validation</h1>
+            <p>Validate claim data and identify errors before submission.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/details" class="secondary-button">← Claim Details</a>
+            <button class="primary-button">↻ Run Validation</button>
+        </div>
+
+    </div>
+
+    <div class="claim-reference">
+        <div>
+            <span>CLAIM</span>
+            <strong>CLM-2026-001248</strong>
+        </div>
+
+        <div>
+            <span>PATIENT</span>
+            <strong>Robert Johnson</strong>
+        </div>
+
+        <div>
+            <span>PAYER</span>
+            <strong>Blue Cross Blue Shield</strong>
+        </div>
+
+        <div>
+            <span>STATUS</span>
+            <strong>Draft Review</strong>
+        </div>
+    </div>
+
+    <div class="validation-summary">
+
+        <div class="validation-card error">
+            <span>Errors</span>
+            <strong>2</strong>
+            <small>Blocking submission</small>
+        </div>
+
+        <div class="validation-card warning">
+            <span>Warnings</span>
+            <strong>3</strong>
+            <small>Review recommended</small>
+        </div>
+
+        <div class="validation-card success">
+            <span>Passed</span>
+            <strong>28</strong>
+            <small>Checks passed</small>
+        </div>
+
+        <div class="validation-card">
+            <span>Overall</span>
+            <strong>Failed</strong>
+            <small>Correction required</small>
+        </div>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Validation Results</h2>
+                <p>Issues identified during claim validation.</p>
+            </div>
+        </div>
+
+        <div class="validation-list">
+
+            <div class="validation-item error-item">
+
+                <div class="validation-icon">!</div>
+
+                <div class="validation-content">
+                    <div class="validation-title">
+                        <strong>Rendering Provider NPI is missing</strong>
+                        <span class="severity error">ERROR</span>
+                    </div>
+
+                    <p>Rendering provider NPI is required before this claim can be submitted.</p>
+
+                    <small>Section: Provider Information • Code: NPI_REQUIRED</small>
+                </div>
+
+                <a href="/claims/create">Fix →</a>
+
+            </div>
+
+            <div class="validation-item error-item">
+
+                <div class="validation-icon">!</div>
+
+                <div class="validation-content">
+                    <div class="validation-title">
+                        <strong>Diagnosis pointer is invalid</strong>
+                        <span class="severity error">ERROR</span>
+                    </div>
+
+                    <p>Claim line 2 references diagnosis pointer 4, but only 3 diagnoses exist.</p>
+
+                    <small>Section: Claim Lines • Code: INVALID_DIAGNOSIS_POINTER</small>
+                </div>
+
+                <a href="/claims/create">Fix →</a>
+
+            </div>
+
+            <div class="validation-item warning-item">
+
+                <div class="validation-icon">!</div>
+
+                <div class="validation-content">
+                    <div class="validation-title">
+                        <strong>Authorization expiration approaching</strong>
+                        <span class="severity warning">WARNING</span>
+                    </div>
+
+                    <p>Associated authorization expires within 7 days.</p>
+
+                    <small>Section: Authorization • Code: AUTH_EXPIRING</small>
+                </div>
+
+                <a href="/authorization">Review →</a>
+
+            </div>
+
+            <div class="validation-item warning-item">
+
+                <div class="validation-icon">!</div>
+
+                <div class="validation-content">
+                    <div class="validation-title">
+                        <strong>Modifier combination should be reviewed</strong>
+                        <span class="severity warning">WARNING</span>
+                    </div>
+
+                    <p>Modifier 25 is present on an office visit and should be reviewed.</p>
+
+                    <small>Section: Claim Line 1 • Code: MODIFIER_REVIEW</small>
+                </div>
+
+                <a href="/claims/details">Review →</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="validation-footer">
+        <a href="/claims/details" class="secondary-button">Back to Claim</a>
+
+        <div>
+            <button class="secondary-button">Save Results</button>
+            <a href="/claims/submission" class="primary-button">Continue to Submission →</a>
+        </div>
+    </div>
+
+</div>

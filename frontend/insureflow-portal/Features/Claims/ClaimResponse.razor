@@ -1,0 +1,140 @@
+@page "/claims/response"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">PAYER RESPONSE</div>
+            <h1>Claim Response</h1>
+            <p>Review payer and clearinghouse responses for this claim.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/details" class="secondary-button">← Claim Details</a>
+            <a href="/claims/history" class="secondary-button">View History</a>
+        </div>
+
+    </div>
+
+    <div class="response-banner">
+
+        <div class="response-icon">✓</div>
+
+        <div>
+            <span>CLAIM RESPONSE</span>
+            <strong>Accepted</strong>
+            <small>The claim was accepted for payer processing.</small>
+        </div>
+
+        <span class="status accepted">Accepted</span>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Submission ID</span>
+            <strong>SUB-2026-009821</strong>
+            <small>Internal submission reference</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Payer Control #</span>
+            <strong>PCN-821991</strong>
+            <small>Payer assigned number</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Received</span>
+            <strong>09/04/2026</strong>
+            <small>09:42 AM</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Response Code</span>
+            <strong>A1</strong>
+            <small>Accepted</small>
+        </div>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Response Details</h2>
+                <p>Normalized payer response information.</p>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <span>Claim Number</span>
+                <strong>CLM-2026-001248</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Submission Type</span>
+                <strong>837P</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Response Type</span>
+                <strong>277 Acknowledgment</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Source</span>
+                <strong>Clearinghouse</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Interchange Control #</span>
+                <strong>000821991</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Batch Number</span>
+                <strong>BATCH-20260904-12</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Payer Message</h2>
+                <p>Response message received from the payer or clearinghouse.</p>
+            </div>
+        </div>
+
+        <div class="message-box">
+            Transaction accepted for processing. No transmission-level errors were identified.
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Response Payload</h2>
+                <p>Reference to the original response transaction.</p>
+            </div>
+
+            <button class="secondary-button">View Payload</button>
+        </div>
+
+        <div class="payload-reference">
+            <strong>277_RESPONSE_20260904_009821.edi</strong>
+            <small>Stored securely in document/integration storage.</small>
+        </div>
+
+    </section>
+
+</div>

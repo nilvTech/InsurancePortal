@@ -1,0 +1,157 @@
+@page "/denials/payer-responses"
+
+<div class="denial-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">DENIAL MANAGEMENT</div>
+            <h1>Payer Responses</h1>
+            <p>Track payer correspondence, claim responses, and denial decisions.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/denials" class="secondary-button">← Denials</a>
+            <button class="primary-button">+ Record Response</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">TR</div>
+            <div>
+                <span>Total Responses</span>
+                <strong>126</strong>
+                <small>This reporting period</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">AP</div>
+            <div>
+                <span>Approved</span>
+                <strong>48</strong>
+                <small>Responses favorable</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">PD</div>
+            <div>
+                <span>Pending</span>
+                <strong>31</strong>
+                <small>Awaiting payer response</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">DN</div>
+            <div>
+                <span>Denied</span>
+                <strong>47</strong>
+                <small>Unfavorable responses</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search payer, claim, denial..." />
+        </div>
+
+        <select>
+            <option>All Payers</option>
+            <option>UnitedHealthcare</option>
+            <option>Aetna</option>
+            <option>BCBS</option>
+            <option>Cigna</option>
+            <option>Humana</option>
+        </select>
+
+        <select>
+            <option>All Response Types</option>
+            <option>Approved</option>
+            <option>Denied</option>
+            <option>Partial Payment</option>
+            <option>Additional Information</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Payer Response History</h2>
+                <p>Responses received from insurance payers.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Response</th>
+                        <th>Denial</th>
+                        <th>Claim</th>
+                        <th>Payer</th>
+                        <th>Response Type</th>
+                        <th>Amount</th>
+                        <th>Received</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>PYR-30021</strong></td>
+                        <td>DEN-10032</td>
+                        <td>CLM-240891</td>
+                        <td>Aetna</td>
+                        <td>Approved</td>
+                        <td>$860.00</td>
+                        <td>09/06/2026</td>
+                        <td><span class="status approved">Approved</span></td>
+                        <td class="actions"><button>View</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>PYR-30022</strong></td>
+                        <td>DEN-10045</td>
+                        <td>CLM-240982</td>
+                        <td>UnitedHealthcare</td>
+                        <td>Additional Information</td>
+                        <td>$1,245.00</td>
+                        <td>09/05/2026</td>
+                        <td><span class="status pending">Pending Action</span></td>
+                        <td class="actions"><button>Respond</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>PYR-30023</strong></td>
+                        <td>DEN-10018</td>
+                        <td>CLM-240821</td>
+                        <td>BCBS</td>
+                        <td>Denied</td>
+                        <td>$2,150.00</td>
+                        <td>09/04/2026</td>
+                        <td><span class="status denied">Denied</span></td>
+                        <td class="actions"><button>Appeal</button></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

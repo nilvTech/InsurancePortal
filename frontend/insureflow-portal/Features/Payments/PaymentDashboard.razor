@@ -1,0 +1,239 @@
+@page "/payments"
+
+<div class="payment-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">REVENUE CYCLE MANAGEMENT</div>
+            <h1>Payments & Remittance</h1>
+            <p>Monitor ERA, EOB, insurance payments, adjustments and reconciliation.</p>
+        </div>
+
+        <div class="header-actions">
+            <a class="secondary-button" href="/payments/era">ERA</a>
+            <a class="secondary-button" href="/payments/eob">EOB</a>
+            <a class="primary-button" href="/payments/posting">Post Payment</a>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">ERA</div>
+            <div>
+                <span>ERA Received</span>
+                <strong>248</strong>
+                <small>Last 30 days</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">$</div>
+            <div>
+                <span>Insurance Payments</span>
+                <strong>$482K</strong>
+                <small>This month</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">ADJ</div>
+            <div>
+                <span>Adjustments</span>
+                <strong>$96K</strong>
+                <small>This month</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">!</div>
+            <div>
+                <span>Unreconciled</span>
+                <strong>18</strong>
+                <small>Require review</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="quick-actions">
+
+        <a href="/payments/era">
+            <span>01</span>
+            <div>
+                <strong>ERA Management</strong>
+                <small>835 remittance files</small>
+            </div>
+        </a>
+
+        <a href="/payments/eob">
+            <span>02</span>
+            <div>
+                <strong>EOB Management</strong>
+                <small>Review explanations</small>
+            </div>
+        </a>
+
+        <a href="/payments/posting">
+            <span>03</span>
+            <div>
+                <strong>Payment Posting</strong>
+                <small>Post insurance payments</small>
+            </div>
+        </a>
+
+        <a href="/payments/adjustments">
+            <span>04</span>
+            <div>
+                <strong>Adjustments</strong>
+                <small>Manage adjustments</small>
+            </div>
+        </a>
+
+        <a href="/payments/reconciliation">
+            <span>05</span>
+            <div>
+                <strong>Reconciliation</strong>
+                <small>Balance payment records</small>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="content-grid">
+
+        <section class="table-card">
+
+            <div class="table-header">
+                <div>
+                    <h2>Recent Payments</h2>
+                    <p>Latest insurance payment activity</p>
+                </div>
+
+                <a href="/payments/list">View all</a>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Payment</th>
+                            <th>Claim</th>
+                            <th>Payer</th>
+                            <th>Payment Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <strong>PAY-100245</strong>
+                                <small>CHK-92841</small>
+                            </td>
+
+                            <td>CLM-20260045</td>
+
+                            <td>UnitedHealthcare</td>
+
+                            <td>09/08/2026</td>
+
+                            <td><strong>$1,240.00</strong></td>
+
+                            <td>
+                                <span class="status posted">Posted</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>PAY-100244</strong>
+                                <small>ACH-81742</small>
+                            </td>
+
+                            <td>CLM-20260041</td>
+
+                            <td>Aetna</td>
+
+                            <td>09/07/2026</td>
+
+                            <td><strong>$875.00</strong></td>
+
+                            <td>
+                                <span class="status pending">Pending</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>PAY-100243</strong>
+                                <small>ACH-81739</small>
+                            </td>
+
+                            <td>CLM-20260038</td>
+
+                            <td>Cigna</td>
+
+                            <td>09/07/2026</td>
+
+                            <td><strong>$2,140.00</strong></td>
+
+                            <td>
+                                <span class="status posted">Posted</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Reconciliation</h2>
+                    <p>Payment reconciliation status</p>
+                </div>
+            </div>
+
+            <div class="reconciliation-summary">
+
+                <div>
+                    <span>Total ERA</span>
+                    <strong>$518,420</strong>
+                </div>
+
+                <div>
+                    <span>Posted</span>
+                    <strong>$482,110</strong>
+                </div>
+
+                <div>
+                    <span>Pending</span>
+                    <strong>$21,300</strong>
+                </div>
+
+                <div>
+                    <span>Variance</span>
+                    <strong>$15,010</strong>
+                </div>
+
+            </div>
+
+            <a class="full-link" href="/payments/reconciliation">
+                Open Reconciliation
+            </a>
+
+        </section>
+
+    </div>
+
+</div>

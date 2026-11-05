@@ -1,0 +1,166 @@
+@page "/claims/history"
+
+<div class="claims-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">CLAIM AUDIT TRAIL</div>
+            <h1>Claim History</h1>
+            <p>Complete lifecycle and activity history for the claim.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/details" class="secondary-button">← Claim Details</a>
+            <button class="secondary-button">Export History</button>
+        </div>
+
+    </div>
+
+    <div class="claim-reference">
+
+        <div>
+            <span>CLAIM</span>
+            <strong>CLM-2026-001248</strong>
+        </div>
+
+        <div>
+            <span>PATIENT</span>
+            <strong>Robert Johnson</strong>
+        </div>
+
+        <div>
+            <span>PAYER</span>
+            <strong>Blue Cross Blue Shield</strong>
+        </div>
+
+        <div>
+            <span>CURRENT STATUS</span>
+            <strong class="success-text">Submitted</strong>
+        </div>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Claim Lifecycle</h2>
+                <p>Chronological record of claim events.</p>
+            </div>
+
+            <select class="event-filter">
+                <option>All Events</option>
+                <option>Status Changes</option>
+                <option>submission</option>
+                <option>Validation</option>
+                <option>Updates</option>
+            </select>
+
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-marker success">✓</div>
+
+                <div class="timeline-content">
+
+                    <div class="timeline-top">
+                        <strong>Claim Submitted</strong>
+                        <span>09/04/2026 09:42 AM</span>
+                    </div>
+
+                    <p>Claim submitted to Blue Cross Blue Shield through clearinghouse.</p>
+
+                    <small>
+                        Submission ID: SUB-2026-009821 • Transaction: 837P
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-marker success">✓</div>
+
+                <div class="timeline-content">
+
+                    <div class="timeline-top">
+                        <strong>Claim Validation Passed</strong>
+                        <span>09/04/2026 09:35 AM</span>
+                    </div>
+
+                    <p>All required claim validation and scrubbing rules passed.</p>
+
+                    <small>Performed by: System</small>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-marker">↻</div>
+
+                <div class="timeline-content">
+
+                    <div class="timeline-top">
+                        <strong>Claim Updated</strong>
+                        <span>09/04/2026 09:31 AM</span>
+                    </div>
+
+                    <p>Rendering provider and diagnosis information updated.</p>
+
+                    <small>Updated by: Sarah Miller</small>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-marker success">✓</div>
+
+                <div class="timeline-content">
+
+                    <div class="timeline-top">
+                        <strong>Eligibility Verified</strong>
+                        <span>09/04/2026 09:15 AM</span>
+                    </div>
+
+                    <p>Primary insurance coverage verified for date of service.</p>
+
+                    <small>Source: Eligibility Service</small>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-marker">+</div>
+
+                <div class="timeline-content">
+
+                    <div class="timeline-top">
+                        <strong>Claim Created</strong>
+                        <span>09/03/2026 04:18 PM</span>
+                    </div>
+
+                    <p>Claim created from encounter ENC-2026-004821.</p>
+
+                    <small>Created by: Billing User</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

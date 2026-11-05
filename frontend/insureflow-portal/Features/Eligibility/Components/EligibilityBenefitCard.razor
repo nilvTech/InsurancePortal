@@ -1,0 +1,43 @@
+<div class="benefit-card">
+
+    <div class="benefit-header">
+
+        <span>
+            @BenefitType
+        </span>
+
+        @if (IsCovered)
+        {
+            <span class="covered">
+                Covered
+            </span>
+        }
+
+    </div>
+
+    <strong>
+        @Value
+    </strong>
+
+    <small>
+        @Description
+    </small>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string BenefitType { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Value { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public bool IsCovered { get; set; } = true;
+
+}

@@ -1,0 +1,154 @@
+@page "/denials/assignments"
+
+<div class="denial-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">DENIAL WORK QUEUE</div>
+            <h1>Denial Assignments</h1>
+            <p>Assign denial cases to users, teams, and work queues.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/denials" class="secondary-button">← Denials</a>
+            <button class="primary-button">+ Assign Denial</button>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">UA</div>
+            <div>
+                <span>Unassigned</span>
+                <strong>18</strong>
+                <small>Require assignment</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">AS</div>
+            <div>
+                <span>Assigned</span>
+                <strong>76</strong>
+                <small>Active assignments</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">IP</div>
+            <div>
+                <span>In Progress</span>
+                <strong>43</strong>
+                <small>Being worked</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">OD</div>
+            <div>
+                <span>Overdue</span>
+                <strong>7</strong>
+                <small>Past follow-up date</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search patient, claim, denial..." />
+        </div>
+
+        <select>
+            <option>All Teams</option>
+            <option>AR Team</option>
+            <option>Denial Team</option>
+            <option>Appeals Team</option>
+        </select>
+
+        <select>
+            <option>All Status</option>
+            <option>Assigned</option>
+            <option>In Progress</option>
+            <option>Overdue</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Assignment Queue</h2>
+                <p>Current denial ownership and work status.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Denial</th>
+                        <th>Patient</th>
+                        <th>Payer</th>
+                        <th>Amount</th>
+                        <th>Assigned To</th>
+                        <th>Team</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>DEN-10045</strong><small>CLM-240982</small></td>
+                        <td><strong>Robert Wilson</strong><small>MRN-10082</small></td>
+                        <td>UnitedHealthcare</td>
+                        <td>$1,245.00</td>
+                        <td>Sarah Johnson</td>
+                        <td>Denials</td>
+                        <td>09/10/2026</td>
+                        <td><span class="status progress">In Progress</span></td>
+                        <td class="actions"><button>Reassign</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>DEN-10046</strong><small>CLM-240991</small></td>
+                        <td><strong>Mary Davis</strong><small>MRN-10121</small></td>
+                        <td>Aetna</td>
+                        <td>$860.00</td>
+                        <td>James Miller</td>
+                        <td>AR Team</td>
+                        <td>09/08/2026</td>
+                        <td><span class="status overdue">Overdue</span></td>
+                        <td class="actions"><button>Reassign</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>DEN-10047</strong><small>CLM-241002</small></td>
+                        <td><strong>John Smith</strong><small>MRN-10442</small></td>
+                        <td>BCBS</td>
+                        <td>$2,150.00</td>
+                        <td>Unassigned</td>
+                        <td>—</td>
+                        <td>09/12/2026</td>
+                        <td><span class="status unassigned">Unassigned</span></td>
+                        <td class="actions"><button>Assign</button></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

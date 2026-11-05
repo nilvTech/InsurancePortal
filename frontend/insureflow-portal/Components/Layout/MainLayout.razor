@@ -1,0 +1,51 @@
+﻿@inherits LayoutComponentBase
+
+<div class="app-shell">
+
+    <!-- STATIC SIDEBAR -->
+    <aside class="sidebar">
+       
+        <div class="sidebar-menu">
+            <NavMenu />
+        </div>
+
+        @* <div class="sidebar-footer">
+            <div class="user-avatar">MS</div>
+
+            <div class="user-info">
+                <strong>Maria Santos</strong>
+                <span>Operations Manager</span>
+            </div>
+        </div> *@
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main-area">
+
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <span class="header-title"></span>
+            </div>
+
+            <div class="header-right">
+                <span class="notification">🔔</span>
+
+                <div class="header-user">
+                    <div class="header-avatar">MS</div>
+                    <div>
+                        <strong>Maria Santos</strong>
+                        <small>Operations Manager</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ONLY THIS AREA SCROLLS -->
+        <div class="content-area">
+            @Body
+        </div>
+
+    </main>
+
+</div>

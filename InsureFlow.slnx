@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/InsureFlow.Api/InsureFlow.Api.csproj" />
+    <Project Path="backend/InsureFlow.Application/InsureFlow.Application.csproj" />
+    <Project Path="backend/InsureFlow.Contracts/InsureFlow.Contracts.csproj" />
+    <Project Path="backend/InsureFlow.Domain/InsureFlow.Domain.csproj" />
+    <Project Path="backend/InsureFlow.Infrastructure/InsureFlow.Infrastructure.csproj" />
+    <Project Path="backend/InsureFlow.Integrations/InsureFlow.Integrations.csproj" />
+  </Folder>
+  <Folder Name="/frontend/">
+    <Project Path="frontend/insureflow-portal/insureflow-portal.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/InsureFlow.Api.Tests/InsureFlow.Api.Tests.csproj" />
+    <Project Path="tests/InsureFlow.Application.Tests/InsureFlow.Application.Tests.csproj" />
+    <Project Path="tests/InsureFlow.Domain.Tests/InsureFlow.Domain.Tests.csproj" />
+    <Project Path="tests/InsureFlow.Infrastructure.Tests/InsureFlow.Infrastructure.Tests.csproj" />
+    <Project Path="tests/InsureFlow.Integration.Tests/InsureFlow.Integration.Tests.csproj" />
+  </Folder>
+</Solution>

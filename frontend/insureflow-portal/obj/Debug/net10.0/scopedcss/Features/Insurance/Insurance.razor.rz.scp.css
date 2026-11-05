@@ -1,0 +1,353 @@
+.insurance-page[b-au5031sazl] {
+    padding: 28px 32px;
+    background: #f5f7fa;
+    min-height: 100vh;
+    color: #172b4d;
+}
+
+/* HEADER */
+
+.page-header[b-au5031sazl] {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+
+.eyebrow[b-au5031sazl] {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #18978f;
+    margin-bottom: 6px;
+}
+
+.page-header h1[b-au5031sazl] {
+    margin: 0;
+    font-size: 28px;
+}
+
+.page-header p[b-au5031sazl] {
+    margin: 5px 0 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.primary-button[b-au5031sazl] {
+    display: inline-block;
+    background: #18978f;
+    color: #ffffff;
+    border-radius: 7px;
+    padding: 11px 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+}
+
+/* SUMMARY */
+
+.summary-grid[b-au5031sazl] {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.summary-card[b-au5031sazl] {
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 9px;
+    padding: 17px;
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
+
+.summary-icon[b-au5031sazl] {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #e7f6f4;
+    color: #18978f;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.summary-card span[b-au5031sazl] {
+    display: block;
+    color: #718096;
+    font-size: 11px;
+}
+
+.summary-card strong[b-au5031sazl] {
+    display: block;
+    font-size: 23px;
+    margin: 3px 0;
+}
+
+.summary-card small[b-au5031sazl] {
+    color: #18978f;
+    font-size: 10px;
+}
+
+.warning-card .summary-icon[b-au5031sazl] {
+    background: #fff5df;
+    color: #b7791f;
+}
+
+.warning-card small[b-au5031sazl] {
+    color: #b7791f;
+}
+
+/* TOOLBAR */
+
+.toolbar[b-au5031sazl] {
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    padding: 13px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.search-box[b-au5031sazl] {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border: 1px solid #dfe4ea;
+    border-radius: 7px;
+    padding: 0 10px;
+}
+
+.search-box span[b-au5031sazl] {
+    font-size: 20px;
+    color: #718096;
+}
+
+.search-box input[b-au5031sazl] {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.toolbar select[b-au5031sazl],
+.filter-button[b-au5031sazl] {
+    border: 1px solid #dfe4ea;
+    background: #ffffff;
+    border-radius: 7px;
+    padding: 0 12px;
+    color: #344563;
+    font-size: 12px;
+}
+
+.filter-button[b-au5031sazl] {
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+/* TABLE */
+
+.table-card[b-au5031sazl] {
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.table-card table[b-au5031sazl] {
+    width: 100%;
+    min-width: 1250px;
+    border-collapse: collapse;
+}
+
+.table-card th[b-au5031sazl] {
+    background: #f8fafb;
+    color: #718096;
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 13px 14px;
+}
+
+.table-card td[b-au5031sazl] {
+    padding: 13px 14px;
+    border-top: 1px solid #edf0f3;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.table-card td strong[b-au5031sazl] {
+    font-size: 12px;
+}
+
+.table-card td small[b-au5031sazl] {
+    display: block;
+    font-size: 10px;
+    color: #718096;
+    margin-top: 3px;
+}
+
+/* PATIENT */
+
+.patient-cell[b-au5031sazl] {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.avatar[b-au5031sazl] {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e7f6f4;
+    color: #18978f;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+/* COVERAGE */
+
+.coverage-badge[b-au5031sazl] {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.coverage-badge.primary[b-au5031sazl] {
+    background: #e7f6f4;
+    color: #167b70;
+}
+
+.coverage-badge.secondary[b-au5031sazl] {
+    background: #edf1ff;
+    color: #4a5da8;
+}
+
+.coverage-badge.tertiary[b-au5031sazl] {
+    background: #f3eafa;
+    color: #7b4aa5;
+}
+
+/* ELIGIBILITY */
+
+.eligibility[b-au5031sazl] {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.eligibility.verified[b-au5031sazl] {
+    background: #e8f7f2;
+    color: #167b70;
+}
+
+.eligibility.required[b-au5031sazl] {
+    background: #fff4df;
+    color: #b7791f;
+}
+
+.eligibility.pending[b-au5031sazl] {
+    background: #edf1ff;
+    color: #4a5da8;
+}
+
+.eligibility.na[b-au5031sazl] {
+    background: #f0f2f5;
+    color: #718096;
+}
+
+/* ACTIONS */
+
+.actions[b-au5031sazl] {
+    white-space: nowrap;
+}
+
+.actions a[b-au5031sazl],
+.actions button[b-au5031sazl] {
+    border: 0;
+    background: none;
+    color: #18978f;
+    text-decoration: none;
+    font-size: 11px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+
+.table-footer[b-au5031sazl] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    color: #718096;
+    font-size: 11px;
+    border-top: 1px solid #edf0f3;
+}
+
+.pagination[b-au5031sazl] {
+    display: flex;
+    gap: 5px;
+}
+
+.page-button[b-au5031sazl] {
+    width: 30px;
+    height: 28px;
+    border: 1px solid #dfe4ea;
+    background: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page-button.active[b-au5031sazl] {
+    background: #18978f;
+    color: #ffffff;
+    border-color: #18978f;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+
+    .summary-grid[b-au5031sazl] {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .toolbar[b-au5031sazl] {
+        flex-wrap: wrap;
+    }
+
+    .search-box[b-au5031sazl] {
+        flex-basis: 100%;
+        height: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .insurance-page[b-au5031sazl] {
+        padding: 20px;
+    }
+
+    .summary-grid[b-au5031sazl] {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header[b-au5031sazl] {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

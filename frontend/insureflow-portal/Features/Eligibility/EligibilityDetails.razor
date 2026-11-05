@@ -1,0 +1,853 @@
+@page "/eligibility/details"
+
+
+<div class="eligibility-details-page">
+
+    <a href="/eligibility" class="back-link">
+        ← Eligibility
+    </a>
+
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <div class="request-title">
+
+            <div class="status-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <div class="eyebrow">
+                    ELIGIBILITY VERIFICATION
+                </div>
+
+                <h1>
+                    Verified Coverage
+                </h1>
+
+                <p>
+                    ELG-20260901-0001 · September 1, 2026
+                </p>
+
+            </div>
+
+            <span class="verified-status">
+                Verified
+            </span>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button class="secondary-button">
+                Retry
+            </button>
+
+            <button class="secondary-button">
+                View Raw Response
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- REQUEST PIPELINE -->
+
+    <div class="pipeline">
+
+        <div class="pipeline-step completed">
+
+            <span>✓</span>
+
+            <div>
+                <strong>Request</strong>
+                <small>Created</small>
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-line completed"></div>
+
+
+        <div class="pipeline-step completed">
+
+            <span>✓</span>
+
+            <div>
+                <strong>Payer</strong>
+                <small>Received</small>
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-line completed"></div>
+
+
+        <div class="pipeline-step completed">
+
+            <span>✓</span>
+
+            <div>
+                <strong>Response</strong>
+                <small>Received</small>
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-line completed"></div>
+
+
+        <div class="pipeline-step completed">
+
+            <span>✓</span>
+
+            <div>
+                <strong>Normalized</strong>
+                <small>Completed</small>
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-line completed"></div>
+
+
+        <div class="pipeline-step completed">
+
+            <span>✓</span>
+
+            <div>
+                <strong>Benefits</strong>
+                <small>Available</small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <label>Patient</label>
+
+            <strong>
+                John Smith
+            </strong>
+
+            <small>
+                MRN-10001
+            </small>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <label>Payer</label>
+
+            <strong>
+                ABC Health
+            </strong>
+
+            <small>
+                Commercial PPO
+            </small>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <label>Member ID</label>
+
+            <strong>
+                ABC123456
+            </strong>
+
+            <small>
+                Primary Coverage
+            </small>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <label>Response Source</label>
+
+            <strong>
+                X12 271
+            </strong>
+
+            <small>
+                Clearinghouse
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div class="content-grid">
+
+
+        <!-- COVERAGE -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <div>
+                    <h2>Coverage Information</h2>
+                    <p>Normalized eligibility response</p>
+                </div>
+
+                <span class="active-pill">
+                    Active
+                </span>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Coverage Status</label>
+                    <strong class="verified">
+                        Active
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Coverage Level</label>
+                    <strong>
+                        Primary
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Effective Date</label>
+                    <strong>
+                        01/01/2026
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Termination Date</label>
+                    <strong>
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Plan</label>
+                    <strong>
+                        Commercial PPO
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Plan Type</label>
+                    <strong>
+                        PPO
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAYER -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <div>
+                    <h2>Payer Response</h2>
+                    <p>Response and transaction details</p>
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Payer</label>
+                    <strong>
+                        ABC Health
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Payer ID</label>
+                    <strong>
+                        ABC001
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Transaction</label>
+                    <strong>
+                        X12 270 / 271
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Trace Number</label>
+                    <strong>
+                        TRACE829341
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Clearinghouse</label>
+                    <strong>
+                        Default Clearinghouse
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Response Time</label>
+                    <strong>
+                        1.42 seconds
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMBER -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>Member Information</h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Member ID</label>
+                    <strong>
+                        ABC123456
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Subscriber ID</label>
+                    <strong>
+                        SUB123456
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Group Number</label>
+                    <strong>
+                        GRP-001
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Relationship</label>
+                    <strong>
+                        Self
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Policy Holder</label>
+                    <strong>
+                        John Michael Smith
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Patient</label>
+                    <strong>
+                        John Smith
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BENEFITS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <div>
+                    <h2>Benefits</h2>
+                    <p>Normalized benefit information</p>
+                </div>
+
+            </div>
+
+
+            <div class="benefit-grid">
+
+                <div class="benefit-card">
+
+                    <label>Office Visit</label>
+
+                    <strong>
+                        $30
+                    </strong>
+
+                    <small>
+                        Copay
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>Specialist</label>
+
+                    <strong>
+                        $50
+                    </strong>
+
+                    <small>
+                        Copay
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>Deductible</label>
+
+                    <strong>
+                        $1,500
+                    </strong>
+
+                    <small>
+                        Individual
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>Deductible Met</label>
+
+                    <strong>
+                        $850
+                    </strong>
+
+                    <small>
+                        Remaining $650
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>Coinsurance</label>
+
+                    <strong>
+                        20%
+                    </strong>
+
+                    <small>
+                        After deductible
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>Out-of-Pocket Maximum</label>
+
+                    <strong>
+                        $6,500
+                    </strong>
+
+                    <small>
+                        Individual
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVICE BENEFITS -->
+
+        <section class="panel full-width">
+
+            <div class="panel-title">
+
+                <div>
+                    <h2>Service-Level Benefits</h2>
+                    <p>Benefits returned by the payer</p>
+                </div>
+
+            </div>
+
+
+            <div class="service-table">
+
+                <div class="service-row header">
+
+                    <span>Service Type</span>
+                    <span>Coverage</span>
+                    <span>Copay</span>
+                    <span>Coinsurance</span>
+                    <span>Deductible</span>
+                    <span>Status</span>
+
+                </div>
+
+
+                <div class="service-row">
+
+                    <span>
+                        Primary Care
+                    </span>
+
+                    <span>
+                        Covered
+                    </span>
+
+                    <span>
+                        $30
+                    </span>
+
+                    <span>
+                        20%
+                    </span>
+
+                    <span>
+                        Applies
+                    </span>
+
+                    <span class="active-pill">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="service-row">
+
+                    <span>
+                        Specialist
+                    </span>
+
+                    <span>
+                        Covered
+                    </span>
+
+                    <span>
+                        $50
+                    </span>
+
+                    <span>
+                        20%
+                    </span>
+
+                    <span>
+                        Applies
+                    </span>
+
+                    <span class="active-pill">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="service-row">
+
+                    <span>
+                        Emergency
+                    </span>
+
+                    <span>
+                        Covered
+                    </span>
+
+                    <span>
+                        $250
+                    </span>
+
+                    <span>
+                        20%
+                    </span>
+
+                    <span>
+                        Applies
+                    </span>
+
+                    <span class="active-pill">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="service-row">
+
+                    <span>
+                        Hospital
+                    </span>
+
+                    <span>
+                        Covered
+                    </span>
+
+                    <span>
+                        $500
+                    </span>
+
+                    <span>
+                        20%
+                    </span>
+
+                    <span>
+                        Applies
+                    </span>
+
+                    <span class="active-pill">
+                        Active
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REQUEST DETAILS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>Request Details</h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Request ID</label>
+                    <strong>
+                        ELG-20260901-0001
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Request Type</label>
+                    <strong>
+                        Eligibility
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Submitted</label>
+                    <strong>
+                        09/01/2026 09:12 AM
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Completed</label>
+                    <strong>
+                        09/01/2026 09:12 AM
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Source</label>
+                    <strong>
+                        Automated
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Processing Status</label>
+                    <strong class="verified">
+                        Completed
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NORMALIZATION -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>Normalization</h2>
+
+            </div>
+
+
+            <div class="normalization">
+
+                <div>
+                    <span class="check">✓</span>
+                    <strong>Response received</strong>
+                </div>
+
+                <div>
+                    <span class="check">✓</span>
+                    <strong>Coverage normalized</strong>
+                </div>
+
+                <div>
+                    <span class="check">✓</span>
+                    <strong>Benefits normalized</strong>
+                </div>
+
+                <div>
+                    <span class="check">✓</span>
+                    <strong>Result stored</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AUDIT -->
+
+        <section class="panel full-width">
+
+            <div class="panel-title">
+
+                <h2>Processing Timeline</h2>
+
+            </div>
+
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <span class="timeline-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Eligibility request created
+                        </strong>
+
+                        <small>
+                            09/01/2026 09:12:01 AM
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            X12 270 submitted to clearinghouse
+                        </strong>
+
+                        <small>
+                            09/01/2026 09:12:02 AM
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            X12 271 response received
+                        </strong>
+
+                        <small>
+                            09/01/2026 09:12:03 AM
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="timeline-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Response normalized and benefits extracted
+                        </strong>
+
+                        <small>
+                            09/01/2026 09:12:04 AM
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+@code {
+
+}

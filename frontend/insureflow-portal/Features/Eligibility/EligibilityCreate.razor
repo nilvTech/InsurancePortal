@@ -1,0 +1,498 @@
+@page "/eligibility/create"
+
+
+<div class="eligibility-create-page">
+
+    <a href="/eligibility" class="back-link">
+        ← Eligibility
+    </a>
+
+    <div class="page-header">
+
+        <div class="eyebrow">
+            ELIGIBILITY VERIFICATION
+        </div>
+
+        <h1>
+            Verify Eligibility
+        </h1>
+
+        <p>
+            Submit an eligibility request to the payer or clearinghouse.
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+
+        <!-- REQUEST TYPE -->
+
+        <div class="section-heading">
+
+            <span>01</span>
+
+            <div>
+                <h2>Verification Method</h2>
+
+                <p>
+                    Select how this eligibility verification should be processed.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="method-grid">
+
+            <label class="method-card selected">
+
+                <input type="radio"
+                       name="method"
+                       checked />
+
+                <span class="method-icon">
+                    ✓
+                </span>
+
+                <span>
+                    <strong>Manual Verification</strong>
+                    <small>
+                        Submit an immediate verification request.
+                    </small>
+                </span>
+
+            </label>
+
+
+            <label class="method-card">
+
+                <input type="radio"
+                       name="method" />
+
+                <span class="method-icon">
+                    ⚡
+                </span>
+
+                <span>
+                    <strong>Automated</strong>
+                    <small>
+                        Process using configured payer integration.
+                    </small>
+                </span>
+
+            </label>
+
+
+            <label class="method-card">
+
+                <input type="radio"
+                       name="method" />
+
+                <span class="method-icon">
+                    ◷
+                </span>
+
+                <span>
+                    <strong>Scheduled</strong>
+                    <small>
+                        Schedule recurring verification.
+                    </small>
+                </span>
+
+            </label>
+
+
+            <label class="method-card">
+
+                <input type="radio"
+                       name="method" />
+
+                <span class="method-icon">
+                    ▦
+                </span>
+
+                <span>
+                    <strong>Batch</strong>
+                    <small>
+                        Verify multiple patient coverages.
+                    </small>
+                </span>
+
+            </label>
+
+        </div>
+
+
+        <!-- PATIENT -->
+
+        <div class="section-heading">
+
+            <span>02</span>
+
+            <div>
+                <h2>Patient & Insurance</h2>
+
+                <p>
+                    Select the patient and insurance coverage to verify.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-field full">
+
+                <label>Patient *</label>
+
+                <select>
+
+                    <option>
+                        Select patient
+                    </option>
+
+                    <option selected>
+                        John Smith — MRN-10001
+                    </option>
+
+                    <option>
+                        Mary Jones — MRN-10002
+                    </option>
+
+                    <option>
+                        Robert Brown — MRN-10003
+                    </option>
+
+                    <option>
+                        Linda Davis — MRN-10004
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Coverage *</label>
+
+                <select>
+
+                    <option>
+                        ABC Health — Commercial PPO — Primary
+                    </option>
+
+                    <option>
+                        Demo Medicare — Medicare Advantage — Secondary
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Coverage Level</label>
+
+                <input value="Primary"
+                       readonly />
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Insurance Type</label>
+
+                <input value="Commercial"
+                       readonly />
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Payer</label>
+
+                <input value="ABC Health"
+                       readonly />
+
+            </div>
+
+        </div>
+
+
+        <!-- MEMBER -->
+
+        <div class="section-heading">
+
+            <span>03</span>
+
+            <div>
+                <h2>Member Information</h2>
+
+                <p>
+                    Information used to construct the eligibility request.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-field">
+
+                <label>Member ID *</label>
+
+                <input value="ABC123456" />
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Subscriber ID</label>
+
+                <input value="SUB123456" />
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Group Number</label>
+
+                <input value="GRP-001" />
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Relationship</label>
+
+                <select>
+
+                    <option>Self</option>
+                    <option>Spouse</option>
+                    <option>Child</option>
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRANSACTION -->
+
+        <div class="section-heading">
+
+            <span>04</span>
+
+            <div>
+                <h2>Eligibility Transaction</h2>
+
+                <p>
+                    Configure the transaction source and payer routing.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-field">
+
+                <label>Transaction Standard</label>
+
+                <select>
+
+                    <option>X12 270/271</option>
+                    <option>REST API</option>
+                    <option>SOAP API</option>
+                    <option>Manual</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Clearinghouse</label>
+
+                <select>
+
+                    <option>Default Clearinghouse</option>
+                    <option>Availity</option>
+                    <option>Change Healthcare</option>
+                    <option>Direct Payer</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Service Type</label>
+
+                <select>
+
+                    <option>Health Benefit Plan Coverage</option>
+                    <option>Hospital</option>
+                    <option>Medical Care</option>
+                    <option>Dental Care</option>
+                    <option>Mental Health</option>
+                    <option>Pharmacy</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-field">
+
+                <label>Service Date</label>
+
+                <input type="date"
+                       value="2026-09-02" />
+
+            </div>
+
+        </div>
+
+
+        <!-- SCHEDULE -->
+
+        <div class="section-heading">
+
+            <span>05</span>
+
+            <div>
+                <h2>Scheduling</h2>
+
+                <p>
+                    Optional scheduling configuration for recurring verification.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-box">
+
+            <label class="checkbox-row">
+
+                <input type="checkbox" />
+
+                <span>
+                    Schedule recurring eligibility verification
+                </span>
+
+            </label>
+
+
+            <div class="form-grid">
+
+                <div class="form-field">
+
+                    <label>Frequency</label>
+
+                    <select>
+
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>Next Verification</label>
+
+                    <input type="date"
+                           value="2026-10-01" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+
+        <div class="section-heading">
+
+            <span>06</span>
+
+            <div>
+                <h2>Processing Options</h2>
+
+                <p>
+                    Control how the request should be processed.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="options">
+
+            <label>
+                <input type="checkbox" checked />
+                Store normalized eligibility response
+            </label>
+
+            <label>
+                <input type="checkbox" checked />
+                Store payer response
+            </label>
+
+            <label>
+                <input type="checkbox" checked />
+                Extract benefit information
+            </label>
+
+            <label>
+                <input type="checkbox" checked />
+                Create audit record
+            </label>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+            <a href="/eligibility"
+               class="cancel-button">
+                Cancel
+            </a>
+
+            <button class="draft-button">
+                Save Draft
+            </button>
+
+            <button class="primary-button">
+                Submit Verification
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

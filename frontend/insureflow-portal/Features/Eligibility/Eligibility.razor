@@ -1,0 +1,512 @@
+@page "/eligibility"
+
+
+<div class="eligibility-page">
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="eyebrow">
+                ELIGIBILITY MANAGEMENT
+            </div>
+
+            <h1>
+                Eligibility Verification
+            </h1>
+
+            <p>
+                Verify patient insurance coverage, track payer responses,
+                manage failures and monitor eligibility activity.
+            </p>
+
+        </div>
+
+        <div class="header-actions">
+
+            <a href="/eligibility/create"
+               class="primary-button">
+                + Verify Eligibility
+            </a>
+
+            <button class="secondary-button">
+                Batch Verification
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+                <span>Verified Today</span>
+                <strong>1,284</strong>
+                <small>82.4% success rate</small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ◷
+            </div>
+
+            <div>
+                <span>Pending</span>
+                <strong>47</strong>
+                <small>Requests processing</small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon warning">
+                !
+            </div>
+
+            <div>
+                <span>Failed</span>
+                <strong>32</strong>
+                <small>Requires retry</small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                $
+            </div>
+
+            <div>
+                <span>Active Coverage</span>
+                <strong>14,921</strong>
+                <small>Across all payers</small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="quick-actions">
+
+        <a href="/eligibility/create">
+            <span>✓</span>
+            <div>
+                <strong>Single Verification</strong>
+                <small>Verify one patient</small>
+            </div>
+        </a>
+
+        <button>
+            <span>▦</span>
+            <div>
+                <strong>Batch Verification</strong>
+                <small>Verify multiple patients</small>
+            </div>
+        </button>
+
+        <button>
+            <span>↻</span>
+            <div>
+                <strong>Retry Failed</strong>
+                <small>Retry failed requests</small>
+            </div>
+        </button>
+
+        <a href="/eligibility/history">
+            <span>◷</span>
+            <div>
+                <strong>History</strong>
+                <small>View verification history</small>
+            </div>
+        </a>
+
+        <a href="/eligibility/failures">
+            <span>!</span>
+            <div>
+                <strong>Failures</strong>
+                <small>Review failed requests</small>
+            </div>
+        </a>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="toolbar">
+
+        <div class="search-box">
+
+            <span>⌕</span>
+
+            <input
+                @bind="SearchText"
+                placeholder="Search patient, MRN, member ID, payer..." />
+
+        </div>
+
+
+        <select @bind="StatusFilter">
+
+            <option>All Statuses</option>
+            <option>Verified</option>
+            <option>Pending</option>
+            <option>Failed</option>
+            <option>Inactive</option>
+
+        </select>
+
+
+        <select @bind="SourceFilter">
+
+            <option>All Sources</option>
+            <option>API</option>
+            <option>X12 270/271</option>
+            <option>Manual</option>
+
+        </select>
+
+
+       
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <div>
+                <h2>Recent Eligibility Requests</h2>
+
+                <p>
+                    Latest eligibility verification activity
+                </p>
+            </div>
+
+            <a href="/eligibility/history">
+                View History →
+            </a>
+
+        </div>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Patient</th>
+                    <th>Insurance</th>
+                    <th>Member ID</th>
+                    <th>Request</th>
+                    <th>Source</th>
+                    <th>Requested</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                @foreach (var request in FilteredRequests)
+                {
+                    <tr>
+
+                        <td>
+
+                            <div class="patient-cell">
+
+                                <div class="avatar">
+                                    @request.Initials
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        @request.PatientName
+                                    </strong>
+
+                                    <small>
+                                        @request.Mrn
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                @request.Payer
+                            </strong>
+
+                            <small>
+                                @request.Plan
+                            </small>
+
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                @request.MemberId
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                @request.RequestNumber
+                            </strong>
+
+                            <small>
+                                @request.TransactionType
+                            </small>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="source-badge">
+                                @request.Source
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                @request.RequestedDate
+                            </strong>
+
+                            <small>
+                                @request.RequestedTime
+                            </small>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status @request.StatusClass">
+                                @request.Status
+                            </span>
+
+                        </td>
+
+
+                        <td class="actions">
+
+                            <a href="/eligibility/details">
+                                View
+                            </a>
+
+                            @if (request.Status == "Failed")
+                            {
+                                <button>
+                                    Retry
+                                </button>
+                            }
+
+                            <button>
+                                ⋮
+                            </button>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+
+        <div class="table-footer">
+
+            <span>
+                Showing @FilteredRequests.Count() eligibility requests
+            </span>
+
+            <div class="pagination">
+
+                <button>‹</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>›</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    private string SearchText = string.Empty;
+
+    private string StatusFilter = "All Statuses";
+
+    private string SourceFilter = "All Sources";
+
+
+
+    private readonly List<EligibilityRequestRow> Requests =
+    [
+        new(
+            "JS",
+            "John Smith",
+            "MRN-10001",
+            "ABC Health",
+            "Commercial PPO",
+            "ABC123456",
+            "ELG-20260901-0001",
+            "Eligibility",
+            "API",
+            "09/02/2026",
+            "09:12 AM",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "MJ",
+            "Mary Jones",
+            "MRN-10002",
+            "XYZ Health",
+            "Commercial HMO",
+            "XYZ782345",
+            "ELG-20260902-0002",
+            "Eligibility",
+            "X12 270/271",
+            "09/02/2026",
+            "09:05 AM",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "RB",
+            "Robert Brown",
+            "MRN-10003",
+            "Demo Medicare",
+            "Medicare Advantage",
+            "MCR923481",
+            "ELG-20260902-0003",
+            "Eligibility",
+            "API",
+            "09/02/2026",
+            "08:54 AM",
+            "Pending",
+            "pending"
+        ),
+
+        new(
+            "LD",
+            "Linda Davis",
+            "MRN-10004",
+            "State Medicaid",
+            "Medicaid Managed Care",
+            "MED771204",
+            "ELG-20260902-0004",
+            "Eligibility",
+            "X12 270/271",
+            "09/02/2026",
+            "08:42 AM",
+            "Failed",
+            "failed"
+        ),
+
+        new(
+            "EW",
+            "Emily Wilson",
+            "MRN-10005",
+            "ABC Health",
+            "Commercial HMO",
+            "ABC551920",
+            "ELG-20260902-0005",
+            "Eligibility",
+            "Manual",
+            "09/02/2026",
+            "08:31 AM",
+            "Verified",
+            "verified"
+        )
+    ];
+
+
+    private IEnumerable<EligibilityRequestRow> FilteredRequests =>
+        Requests.Where(x =>
+            (
+                string.IsNullOrWhiteSpace(SearchText) ||
+                $"{x.PatientName} {x.Mrn} {x.Payer} {x.MemberId} {x.RequestNumber}"
+                    .Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            )
+            &&
+            (
+                StatusFilter == "All Statuses" ||
+                x.Status == StatusFilter
+            )
+            &&
+            (
+                SourceFilter == "All Sources" ||
+                x.Source == SourceFilter
+            )
+        );
+
+
+    private record EligibilityRequestRow(
+        string Initials,
+        string PatientName,
+        string Mrn,
+        string Payer,
+        string Plan,
+        string MemberId,
+        string RequestNumber,
+        string TransactionType,
+        string Source,
+        string RequestedDate,
+        string RequestedTime,
+        string Status,
+        string StatusClass
+    );
+}

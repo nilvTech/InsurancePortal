@@ -1,0 +1,778 @@
+@page "/denials"
+
+<div class="denials-page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">REVENUE CYCLE MANAGEMENT</div>
+
+            <h1>Denials</h1>
+
+            <p>
+                Monitor, assign, analyze and resolve insurance claim denials.
+            </p>
+        </div>
+
+        <div class="header-actions">
+
+            <a href="/denials/create" class="primary-button">
+                + Create Denial
+            </a>
+
+            <button class="secondary-button">
+                Export
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">
+                $
+            </div>
+
+            <div>
+                <span>Total Denials</span>
+                <strong>$184,720</strong>
+                <small>142 denial records</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon warning">
+                !
+            </div>
+
+            <div>
+                <span>New Denials</span>
+                <strong>32</strong>
+                <small>Requires review</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon">
+                A
+            </div>
+
+            <div>
+                <span>Assigned</span>
+                <strong>24</strong>
+                <small>Assigned to teams</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon">
+                →
+            </div>
+
+            <div>
+                <span>In Progress</span>
+                <strong>38</strong>
+                <small>Under investigation</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon">
+                AP
+            </div>
+
+            <div>
+                <span>Appealed</span>
+                <strong>17</strong>
+                <small>Awaiting payer response</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+                <span>Resolved</span>
+                <strong>31</strong>
+                <small>Closed denials</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon warning">
+                $
+            </div>
+
+            <div>
+                <span>Recoverable Amount</span>
+                <strong>$96,420</strong>
+                <small>Potential recovery</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon warning">
+                D
+            </div>
+
+            <div>
+                <span>Over 30 Days</span>
+                <strong>19</strong>
+                <small>Requires escalation</small>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+
+        <a href="/denials/create">
+
+            <span>+</span>
+
+            <div>
+                <strong>Create Denial</strong>
+                <small>Record a denial manually</small>
+            </div>
+
+        </a>
+
+
+        <a href="/denials?status=New">
+
+            <span>N</span>
+
+            <div>
+                <strong>New Denials</strong>
+                <small>Review newly received denials</small>
+            </div>
+
+        </a>
+
+
+        <a href="/denials?status=Assigned">
+
+            <span>A</span>
+
+            <div>
+                <strong>Assigned</strong>
+                <small>View assigned work</small>
+            </div>
+
+        </a>
+
+
+        <a href="/denials?status=Appealed">
+
+            <span>AP</span>
+
+            <div>
+                <strong>Appeals</strong>
+                <small>Track submitted appeals</small>
+            </div>
+
+        </a>
+
+
+        <a href="/denials/history">
+
+            <span>H</span>
+
+            <div>
+                <strong>Denial History</strong>
+                <small>View denial activity</small>
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- ANALYTICS -->
+    <div class="analytics-grid">
+
+        <section class="analytics-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Denial by Payer</h2>
+                    <p>Highest denial volume by insurance payer</p>
+                </div>
+
+                <a href="/payers">View Payers</a>
+
+            </div>
+
+            <div class="analytics-list">
+
+                <div class="analytics-row">
+                    <div>
+                        <strong>UnitedHealthcare</strong>
+                        <small>34 denials</small>
+                    </div>
+
+                    <div class="bar-container">
+                        <div class="bar" style="width: 82%;"></div>
+                    </div>
+
+                    <strong>$48,620</strong>
+                </div>
+
+
+                <div class="analytics-row">
+                    <div>
+                        <strong>Aetna</strong>
+                        <small>27 denials</small>
+                    </div>
+
+                    <div class="bar-container">
+                        <div class="bar" style="width: 67%;"></div>
+                    </div>
+
+                    <strong>$36,410</strong>
+                </div>
+
+
+                <div class="analytics-row">
+                    <div>
+                        <strong>BCBS</strong>
+                        <small>24 denials</small>
+                    </div>
+
+                    <div class="bar-container">
+                        <div class="bar" style="width: 58%;"></div>
+                    </div>
+
+                    <strong>$29,840</strong>
+                </div>
+
+
+                <div class="analytics-row">
+                    <div>
+                        <strong>Cigna</strong>
+                        <small>19 denials</small>
+                    </div>
+
+                    <div class="bar-container">
+                        <div class="bar" style="width: 46%;"></div>
+                    </div>
+
+                    <strong>$24,260</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="analytics-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Denial by Reason</h2>
+                    <p>Primary denial categories</p>
+                </div>
+
+            </div>
+
+            <div class="reason-grid">
+
+                <div class="reason-card">
+                    <strong>28</strong>
+                    <span>Authorization</span>
+                    <small>$38,420</small>
+                </div>
+
+                <div class="reason-card">
+                    <strong>24</strong>
+                    <span>Eligibility</span>
+                    <small>$29,850</small>
+                </div>
+
+                <div class="reason-card">
+                    <strong>21</strong>
+                    <span>Medical Necessity</span>
+                    <small>$27,640</small>
+                </div>
+
+                <div class="reason-card">
+                    <strong>18</strong>
+                    <span>Timely Filing</span>
+                    <small>$21,420</small>
+                </div>
+
+                <div class="reason-card">
+                    <strong>15</strong>
+                    <span>Duplicate Claim</span>
+                    <small>$18,230</small>
+                </div>
+
+                <div class="reason-card">
+                    <strong>11</strong>
+                    <span>Coding</span>
+                    <small>$14,670</small>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- DENIAL TABLE -->
+    <section class="table-card">
+
+        <div class="table-header">
+
+            <div>
+                <h2>Denial Work Queue</h2>
+                <p>Review and manage active denial cases</p>
+            </div>
+
+            <a href="/denials/history">
+                View History
+            </a>
+
+        </div>
+
+
+        <!-- FILTER TOOLBAR -->
+        <div class="toolbar">
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input placeholder="Search patient, claim, denial code or payer..." />
+            </div>
+
+            <select>
+                <option>All Statuses</option>
+                <option>New</option>
+                <option>Assigned</option>
+                <option>In Progress</option>
+                <option>Appealed</option>
+                <option>Resolved</option>
+            </select>
+
+            <select>
+                <option>All Payers</option>
+                <option>UnitedHealthcare</option>
+                <option>Aetna</option>
+                <option>BCBS</option>
+                <option>Cigna</option>
+            </select>
+
+            <select>
+                <option>All Reasons</option>
+                <option>Authorization</option>
+                <option>Eligibility</option>
+                <option>Medical Necessity</option>
+                <option>Timely Filing</option>
+                <option>Coding</option>
+            </select>
+
+            <select>
+                <option>All Priorities</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Denial</th>
+                        <th>Patient</th>
+                        <th>Claim</th>
+                        <th>Payer</th>
+                        <th>Denial Code</th>
+                        <th>Reason</th>
+                        <th>Amount</th>
+                        <th>Age</th>
+                        <th>Assigned To</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            <strong>DEN-2026-00142</strong>
+                            <small>09/02/2026</small>
+                        </td>
+
+                        <td>
+                            <strong>James Anderson</strong>
+                            <small>DOB: 04/12/1962</small>
+                        </td>
+
+                        <td>
+                            <strong>CLM-100482</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            UnitedHealthcare
+                        </td>
+
+                        <td>
+                            <strong>CO-197</strong>
+                            <small>Authorization</small>
+                        </td>
+
+                        <td>
+                            Prior authorization required
+                        </td>
+
+                        <td>
+                            <strong>$4,280.00</strong>
+                        </td>
+
+                        <td>
+                            <span class="age-badge danger">34 days</span>
+                        </td>
+
+                        <td>
+                            Sarah Wilson
+                        </td>
+
+                        <td>
+                            <span class="status in-progress">
+                                In Progress
+                            </span>
+                        </td>
+
+                        <td class="actions">
+
+                            <a href="/denials/details/DEN-2026-00142">
+                                View
+                            </a>
+
+                            <a href="/denials/appeal/DEN-2026-00142">
+                                Appeal
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>DEN-2026-00141</strong>
+                            <small>09/01/2026</small>
+                        </td>
+
+                        <td>
+                            <strong>Maria Rodriguez</strong>
+                            <small>DOB: 08/19/1958</small>
+                        </td>
+
+                        <td>
+                            <strong>CLM-100471</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            Aetna
+                        </td>
+
+                        <td>
+                            <strong>CO-16</strong>
+                            <small>Eligibility</small>
+                        </td>
+
+                        <td>
+                            Missing information
+                        </td>
+
+                        <td>
+                            <strong>$2,140.00</strong>
+                        </td>
+
+                        <td>
+                            <span class="age-badge warning">18 days</span>
+                        </td>
+
+                        <td>
+                            Mike Johnson
+                        </td>
+
+                        <td>
+                            <span class="status assigned">
+                                Assigned
+                            </span>
+                        </td>
+
+                        <td class="actions">
+
+                            <a href="/denials/details/DEN-2026-00141">
+                                View
+                            </a>
+
+                            <a href="/denials/appeal/DEN-2026-00141">
+                                Appeal
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>DEN-2026-00140</strong>
+                            <small>08/30/2026</small>
+                        </td>
+
+                        <td>
+                            <strong>Robert Williams</strong>
+                            <small>DOB: 11/03/1954</small>
+                        </td>
+
+                        <td>
+                            <strong>CLM-100462</strong>
+                            <small>Institutional</small>
+                        </td>
+
+                        <td>
+                            BCBS
+                        </td>
+
+                        <td>
+                            <strong>CO-50</strong>
+                            <small>Medical Necessity</small>
+                        </td>
+
+                        <td>
+                            Not medically necessary
+                        </td>
+
+                        <td>
+                            <strong>$8,750.00</strong>
+                        </td>
+
+                        <td>
+                            <span class="age-badge danger">41 days</span>
+                        </td>
+
+                        <td>
+                            Lisa Brown
+                        </td>
+
+                        <td>
+                            <span class="status appealed">
+                                Appealed
+                            </span>
+                        </td>
+
+                        <td class="actions">
+
+                            <a href="/denials/details/DEN-2026-00140">
+                                View
+                            </a>
+
+                            <a href="/denials/appeal/DEN-2026-00140">
+                                Appeal
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>DEN-2026-00139</strong>
+                            <small>08/28/2026</small>
+                        </td>
+
+                        <td>
+                            <strong>Linda Miller</strong>
+                            <small>DOB: 06/23/1966</small>
+                        </td>
+
+                        <td>
+                            <strong>CLM-100451</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            Cigna
+                        </td>
+
+                        <td>
+                            <strong>CO-29</strong>
+                            <small>Timely Filing</small>
+                        </td>
+
+                        <td>
+                            Claim submitted after filing limit
+                        </td>
+
+                        <td>
+                            <strong>$1,860.00</strong>
+                        </td>
+
+                        <td>
+                            <span class="age-badge normal">12 days</span>
+                        </td>
+
+                        <td>
+                            David Smith
+                        </td>
+
+                        <td>
+                            <span class="status new">
+                                New
+                            </span>
+                        </td>
+
+                        <td class="actions">
+
+                            <a href="/denials/details/DEN-2026-00139">
+                                View
+                            </a>
+
+                            <a href="/denials/appeal/DEN-2026-00139">
+                                Appeal
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>DEN-2026-00138</strong>
+                            <small>08/25/2026</small>
+                        </td>
+
+                        <td>
+                            <strong>Patricia Davis</strong>
+                            <small>DOB: 02/14/1961</small>
+                        </td>
+
+                        <td>
+                            <strong>CLM-100439</strong>
+                            <small>Professional</small>
+                        </td>
+
+                        <td>
+                            Humana
+                        </td>
+
+                        <td>
+                            <strong>CO-18</strong>
+                            <small>Duplicate</small>
+                        </td>
+
+                        <td>
+                            Duplicate claim submission
+                        </td>
+
+                        <td>
+                            <strong>$3,240.00</strong>
+                        </td>
+
+                        <td>
+                            <span class="age-badge normal">9 days</span>
+                        </td>
+
+                        <td>
+                            James Carter
+                        </td>
+
+                        <td>
+                            <span class="status resolved">
+                                Resolved
+                            </span>
+                        </td>
+
+                        <td class="actions">
+
+                            <a href="/denials/details/DEN-2026-00138">
+                                View
+                            </a>
+
+                            <a href="/denials/history/DEN-2026-00138">
+                                History
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="table-footer">
+
+            <span>
+                Showing 1–5 of 142 denials
+            </span>
+
+            <div class="pagination">
+
+                <button>‹</button>
+
+                <button class="active">
+                    1
+                </button>
+
+                <button>2</button>
+
+                <button>3</button>
+
+                <button>4</button>
+
+                <button>5</button>
+
+                <button>›</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

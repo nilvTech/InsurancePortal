@@ -1,0 +1,688 @@
+@page "/insurance/details"
+@page "/insurance/{InsuranceId:guid}"
+
+
+<div class="insurance-details-page">
+
+    <a href="/insurance" class="back-link">
+        ← Back to Insurance
+    </a>
+
+
+    <!-- HEADER -->
+
+    <div class="insurance-header">
+
+        <div class="insurance-title">
+
+            <div class="payer-logo">
+                ABC
+            </div>
+
+            <div>
+
+                <div class="eyebrow">
+                    PRIMARY INSURANCE
+                </div>
+
+                <h1>
+                    ABC Health
+                </h1>
+
+                <p>
+                    Commercial PPO · John Smith · MRN-10001
+                </p>
+
+            </div>
+
+            <span class="active-status">
+                Active
+            </span>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button class="secondary-button">
+                Verify Eligibility
+            </button>
+
+            <a href="/insurance/create" class="primary-button">
+                Edit Insurance
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- COVERAGE SUMMARY -->
+
+    <div class="coverage-summary">
+
+        <div>
+            <label>Coverage Level</label>
+            <strong>Primary</strong>
+        </div>
+
+        <div>
+            <label>Insurance Type</label>
+            <strong>Commercial</strong>
+        </div>
+
+        <div>
+            <label>Plan Type</label>
+            <strong>PPO</strong>
+        </div>
+
+        <div>
+            <label>Effective Date</label>
+            <strong>01/01/2026</strong>
+        </div>
+
+        <div>
+            <label>Eligibility</label>
+            <strong class="verified">
+                ✓ Verified
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- TABS -->
+
+    <div class="tabs">
+
+        <a class="active">
+            Overview
+        </a>
+
+        <a>
+            Eligibility
+        </a>
+
+        <a>
+            Benefits
+        </a>
+
+        <a>
+            Claims
+        </a>
+
+        <a>
+            Authorizations
+        </a>
+
+        <a>
+            Verification History
+        </a>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div class="details-grid">
+
+
+        <!-- PATIENT -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    Patient
+                </h2>
+
+                <a href="/patients/details">
+                    View Patient
+                </a>
+
+            </div>
+
+
+            <div class="patient-profile">
+
+                <div class="avatar">
+                    JS
+                </div>
+
+                <div>
+
+                    <strong>
+                        John Smith
+                    </strong>
+
+                    <small>
+                        MRN-10001
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Date of Birth</label>
+                    <strong>01/15/1980</strong>
+                </div>
+
+                <div>
+                    <label>Gender</label>
+                    <strong>Male</strong>
+                </div>
+
+                <div>
+                    <label>Organization</label>
+                    <strong>Demo Medical Group</strong>
+                </div>
+
+                <div>
+                    <label>Location</label>
+                    <strong>Main Clinic</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAYER -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    Payer Information
+                </h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Payer</label>
+                    <strong>ABC Health</strong>
+                </div>
+
+                <div>
+                    <label>Plan</label>
+                    <strong>Commercial PPO</strong>
+                </div>
+
+                <div>
+                    <label>Plan Type</label>
+                    <strong>PPO</strong>
+                </div>
+
+                <div>
+                    <label>Coverage Type</label>
+                    <strong>Commercial</strong>
+                </div>
+
+                <div>
+                    <label>Member ID</label>
+                    <strong>ABC123456</strong>
+                </div>
+
+                <div>
+                    <label>Subscriber ID</label>
+                    <strong>SUB123456</strong>
+                </div>
+
+                <div>
+                    <label>Group Number</label>
+                    <strong>GRP-001</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUBSCRIBER -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    Subscriber / Policy Holder
+                </h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Policy Holder</label>
+                    <strong>
+                        John Michael Smith
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Relationship</label>
+                    <strong>
+                        Self
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Subscriber ID</label>
+                    <strong>
+                        SUB123456
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Effective Date</label>
+                    <strong>
+                        01/01/2026
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Termination Date</label>
+                    <strong>
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Coverage Status</label>
+                    <strong class="verified">
+                        Active
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BENEFITS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    Benefits & Cost Sharing
+                </h2>
+
+                <a>
+                    Update
+                </a>
+
+            </div>
+
+
+            <div class="benefit-grid">
+
+                <div class="benefit-card">
+
+                    <label>
+                        Copay
+                    </label>
+
+                    <strong>
+                        $30.00
+                    </strong>
+
+                    <small>
+                        Office Visit
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>
+                        Coinsurance
+                    </label>
+
+                    <strong>
+                        20%
+                    </strong>
+
+                    <small>
+                        After deductible
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>
+                        Deductible
+                    </label>
+
+                    <strong>
+                        $1,500.00
+                    </strong>
+
+                    <small>
+                        Individual
+                    </small>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <label>
+                        Out-of-Pocket Maximum
+                    </label>
+
+                    <strong>
+                        $6,500.00
+                    </strong>
+
+                    <small>
+                        Individual
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ELIGIBILITY -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    Eligibility Verification
+                </h2>
+
+                <span class="verified-pill">
+                    ✓ Verified
+                </span>
+
+            </div>
+
+
+            <div class="verification-status">
+
+                <div class="verification-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Coverage is active
+                    </strong>
+
+                    <p>
+                        ABC Health confirmed active coverage for this patient.
+                    </p>
+
+                    <small>
+                        Last verified: September 1, 2026 at 09:12 AM
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div>
+                    <label>Verification Source</label>
+                    <strong>
+                        Electronic Eligibility
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Response</label>
+                    <strong>
+                        Active Coverage
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Effective Date</label>
+                    <strong>
+                        01/01/2026
+                    </strong>
+                </div>
+
+                <div>
+                    <label>Next Verification</label>
+                    <strong>
+                        10/01/2026
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COVERAGE PRIORITY -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    Coverage Priority
+                </h2>
+
+            </div>
+
+
+            <div class="coverage-priority">
+
+                <div class="priority active">
+
+                    <span class="number">
+                        1
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            ABC Health
+                        </strong>
+
+                        <small>
+                            Commercial PPO
+                        </small>
+
+                    </div>
+
+                    <span class="priority-label">
+                        Primary
+                    </span>
+
+                </div>
+
+
+                <div class="priority">
+
+                    <span class="number">
+                        2
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Demo Medicare
+                        </strong>
+
+                        <small>
+                            Medicare Advantage
+                        </small>
+
+                    </div>
+
+                    <span class="priority-label secondary">
+                        Secondary
+                    </span>
+
+                </div>
+
+
+                <div class="priority empty">
+
+                    <span class="number">
+                        3
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            No Tertiary Coverage
+                        </strong>
+
+                        <small>
+                            Additional coverage not recorded
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTIVITY -->
+
+        <section class="panel full-width">
+
+            <div class="panel-title">
+
+                <h2>
+                    Verification History
+                </h2>
+
+                <a>
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="activity-table">
+
+                <div class="activity-row header">
+
+                    <span>Date / Time</span>
+                    <span>Source</span>
+                    <span>Response</span>
+                    <span>Performed By</span>
+                    <span>Status</span>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <span>
+                        09/01/2026 09:12 AM
+                    </span>
+
+                    <span>
+                        Electronic Eligibility
+                    </span>
+
+                    <span>
+                        Active Coverage
+                    </span>
+
+                    <span>
+                        System
+                    </span>
+
+                    <span class="verified-pill">
+                        Verified
+                    </span>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <span>
+                        08/01/2026 10:21 AM
+                    </span>
+
+                    <span>
+                        Electronic Eligibility
+                    </span>
+
+                    <span>
+                        Active Coverage
+                    </span>
+
+                    <span>
+                        System
+                    </span>
+
+                    <span class="verified-pill">
+                        Verified
+                    </span>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <span>
+                        07/01/2026 02:44 PM
+                    </span>
+
+                    <span>
+                        Payer Portal
+                    </span>
+
+                    <span>
+                        Active Coverage
+                    </span>
+
+                    <span>
+                        Jane Admin
+                    </span>
+
+                    <span class="verified-pill">
+                        Verified
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Guid? InsuranceId { get; set; }
+
+}

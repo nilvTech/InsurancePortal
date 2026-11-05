@@ -1,0 +1,677 @@
+/* =========================================================
+   INSUREFLOW
+   AUTHORIZATION EDIT PAGE
+   ========================================================= */
+
+.authorization-edit-page {
+    min-height: 100vh;
+    padding: 28px 32px 40px;
+    background: #f5f7fa;
+    color: #172b4d;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+.page-header-content {
+    min-width: 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #18978f;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.eyebrow,
+.section-eyebrow {
+    color: #18978f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.title-block h1 {
+    margin: 4px 0 3px;
+    color: #172b4d;
+    font-size: 28px;
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.title-block p {
+    margin: 0;
+    color: #718096;
+    font-size: 12px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button,
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 38px;
+    padding: 9px 15px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease,
+        transform .15s ease;
+}
+
+.primary-button {
+    color: #ffffff;
+    background: #18978f;
+    border: 1px solid #18978f;
+}
+
+.primary-button:hover {
+    background: #147f78;
+    border-color: #147f78;
+}
+
+.primary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(24, 151, 143, .14);
+}
+
+.secondary-button {
+    color: #344563;
+    background: #ffffff;
+    border: 1px solid #dfe4ea;
+}
+
+.secondary-button:hover {
+    background: #f8fafb;
+    border-color: #cbd3dc;
+}
+
+.secondary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(23, 43, 77, .08);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOADING / ERROR STATES
+   ========================================================= */
+
+.state-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 35px;
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.state-card h2 {
+    margin: 15px 0 5px;
+    color: #172b4d;
+    font-size: 17px;
+}
+
+.state-card p {
+    max-width: 430px;
+    margin: 0 0 18px;
+    color: #718096;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.loading-spinner {
+    width: 34px;
+    height: 34px;
+    border: 3px solid #e6eaf0;
+    border-top-color: #18978f;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+
+.button-spinner {
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, .45);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+}
+
+.state-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff0f0;
+    color: #c53030;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.error-state {
+    border-color: #f1d0d0;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   FORM CARDS
+   ========================================================= */
+
+.edit-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.form-card {
+    margin-bottom: 15px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+}
+
+.form-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 17px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.form-card-header h2 {
+    margin: 4px 0 0;
+    color: #172b4d;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.form-card-header p {
+    margin: 4px 0 0;
+    color: #718096;
+    font-size: 10px;
+}
+
+.form-card-body {
+    padding: 17px;
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.form-grid.single-column {
+    grid-template-columns: 1fr;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.form-group label {
+    color: #344563;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    color: #172b4d;
+    background: #ffffff;
+    border: 1px solid #dfe4ea;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.4;
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+.form-group input,
+.form-group select {
+    min-height: 37px;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #cbd3dc;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #18978f;
+    box-shadow: 0 0 0 3px rgba(24, 151, 143, .08);
+}
+
+.form-help {
+    color: #718096;
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   PATIENT / INSURANCE
+   ========================================================= */
+
+.selection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.selection-item {
+    padding: 13px;
+    background: #fafbfc;
+    border: 1px solid #e6eaf0;
+    border-radius: 7px;
+}
+
+.selection-item span {
+    display: block;
+    margin-bottom: 5px;
+    color: #718096;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.selection-item strong {
+    display: block;
+    color: #172b4d;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.selection-item small {
+    display: block;
+    margin-top: 4px;
+    color: #718096;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   REQUESTED SERVICES
+   ========================================================= */
+
+.service-header {
+    align-items: center;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.service-row {
+    display: grid;
+    grid-template-columns: 30px minmax(120px, .8fr) minmax(180px, 1.4fr) minmax(120px, .8fr) 80px 36px;
+    gap: 10px;
+    align-items: end;
+    padding: 13px;
+    background: #fafbfc;
+    border: 1px solid #e6eaf0;
+    border-radius: 8px;
+}
+
+.service-number {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 4px;
+    color: #167b70;
+    background: #e7f6f4;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.procedure-field {
+    min-width: 0;
+}
+
+.units-field input {
+    text-align: center;
+}
+
+.remove-button {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 37px;
+    padding: 0;
+    margin-bottom: 0;
+    color: #c53030;
+    background: #fff5f5;
+    border: 1px solid #f1c4c4;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background-color .15s ease,
+        border-color .15s ease;
+}
+
+.remove-button:hover {
+    background: #fff0f0;
+    border-color: #e7aaaa;
+}
+
+.remove-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(197, 48, 48, .08);
+}
+
+
+/* =========================================================
+   EMPTY SERVICES
+   ========================================================= */
+
+.empty-services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    padding: 25px;
+    text-align: center;
+    border: 1px dashed #cbd5df;
+    border-radius: 8px;
+    background: #fafbfc;
+}
+
+.empty-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 10px;
+    color: #18978f;
+    background: #e7f6f4;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.empty-services h3 {
+    margin: 0 0 5px;
+    color: #172b4d;
+    font-size: 12px;
+}
+
+.empty-services p {
+    margin: 0 0 13px;
+    color: #718096;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DOCUMENTATION
+   ========================================================= */
+
+.documentation-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: #fafbfc;
+    border: 1px solid #e6eaf0;
+    border-radius: 7px;
+}
+
+.documentation-icon {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    background: #e7f6f4;
+    border-radius: 7px;
+    font-size: 17px;
+}
+
+.documentation-box > div:nth-child(2) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.documentation-box strong {
+    color: #172b4d;
+    font-size: 11px;
+}
+
+.documentation-box span {
+    margin-top: 3px;
+    color: #718096;
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.text-link {
+    flex: 0 0 auto;
+    color: #18978f;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 5px 0 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .service-row {
+        grid-template-columns: 30px repeat(2, minmax(0, 1fr));
+    }
+
+    .service-row .form-group:nth-of-type(3),
+    .service-row .form-group:nth-of-type(4) {
+        grid-column: span 1;
+    }
+
+    .remove-button {
+        grid-column: 3;
+        justify-self: end;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    .authorization-edit-page {
+        padding: 22px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-actions .primary-button,
+    .header-actions .secondary-button {
+        flex: 1;
+    }
+
+    .form-grid,
+    .selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-row {
+        grid-template-columns: 30px 1fr;
+    }
+
+    .service-row .form-group {
+        grid-column: 2;
+    }
+
+    .service-number {
+        grid-column: 1;
+        grid-row: span 1;
+    }
+
+    .remove-button {
+        grid-column: 2;
+        justify-self: start;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .authorization-edit-page {
+        padding: 16px;
+    }
+
+    .title-block h1 {
+        font-size: 23px;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-actions .primary-button,
+    .header-actions .secondary-button {
+        width: 100%;
+    }
+
+    .form-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .form-card-body,
+    .form-card-header {
+        padding: 14px;
+    }
+
+    .documentation-box {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .documentation-box .text-link {
+        width: 100%;
+        margin-left: 50px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,718 @@
+@page "/dashboard"
+
+
+
+<div class="dashboard-page">
+
+    <!-- =========================
+         PAGE HEADER
+         ========================= -->
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">INSUREFLOW PORTAL</div>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Healthcare insurance operations at a glance.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PRIMARY KPI CARDS
+         ========================= -->
+    <section class="stats-grid">
+
+        <!-- 1. Total Patients -->
+        <div class="stat-card">
+            <div class="stat-icon">P</div>
+
+            <div>
+                <span class="stat-label">Total Patients</span>
+                <strong>12,480</strong>
+                <small>+8.4% this month</small>
+            </div>
+        </div>
+
+
+        <!-- 2. Insurance Verification -->
+        <div class="stat-card">
+            <div class="stat-icon">I</div>
+
+            <div>
+                <span class="stat-label">Insurance Verification</span>
+                <strong>96.4%</strong>
+                <small>12,031 verified</small>
+            </div>
+        </div>
+
+
+        <!-- 3. Eligibility -->
+        <div class="stat-card">
+            <div class="stat-icon">E</div>
+
+            <div>
+                <span class="stat-label">Eligibility Success</span>
+                <strong>94.2%</strong>
+                <small>5.8% failed</small>
+            </div>
+        </div>
+
+
+        <!-- 4. Pending Authorizations -->
+        <div class="stat-card">
+            <div class="stat-icon">A</div>
+
+            <div>
+                <span class="stat-label">Pending Authorizations</span>
+                <strong>127</strong>
+                <small>18 due today</small>
+            </div>
+        </div>
+
+
+        <!-- 5. Claims Submitted -->
+        <div class="stat-card">
+            <div class="stat-icon">C</div>
+
+            <div>
+                <span class="stat-label">Claims Submitted</span>
+                <strong>3,842</strong>
+                <small>+6.8% this month</small>
+            </div>
+        </div>
+
+
+        <!-- 6. Claims Rejected -->
+        <div class="stat-card">
+            <div class="stat-icon warning-icon">R</div>
+
+            <div>
+                <span class="stat-label">Claims Rejected</span>
+                <strong>184</strong>
+                <small>4.8% rejection rate</small>
+            </div>
+        </div>
+
+
+        <!-- 7. Claims Denied -->
+        <div class="stat-card">
+            <div class="stat-icon danger-icon">D</div>
+
+            <div>
+                <span class="stat-label">Claims Denied</span>
+                <strong>96</strong>
+                <small>2.5% denial rate</small>
+            </div>
+        </div>
+
+
+        <!-- 8. Appeals -->
+        <div class="stat-card">
+            <div class="stat-icon">AP</div>
+
+            <div>
+                <span class="stat-label">Appeals</span>
+                <strong>42</strong>
+                <small>18 awaiting review</small>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINANCIAL KPI CARDS
+         ========================= -->
+    <section class="financial-grid">
+
+        <!-- 9. Payments -->
+        <div class="financial-card">
+
+            <div class="financial-header">
+                <span>Payments</span>
+                <span class="financial-icon">$</span>
+            </div>
+
+            <strong>$428,650</strong>
+
+            <div class="financial-footer">
+                <span>Collected this month</span>
+                <b>+12.4%</b>
+            </div>
+
+        </div>
+
+
+        <!-- 10. Outstanding AR -->
+        <div class="financial-card">
+
+            <div class="financial-header">
+                <span>Outstanding AR</span>
+                <span class="financial-icon">$</span>
+            </div>
+
+            <strong>$1.24M</strong>
+
+            <div class="financial-footer">
+                <span>Total outstanding</span>
+                <b>↓ 4.6%</b>
+            </div>
+
+        </div>
+
+
+        <!-- 11. Patient Responsibility -->
+        <div class="financial-card">
+
+            <div class="financial-header">
+                <span>Patient Responsibility</span>
+                <span class="financial-icon">PR</span>
+            </div>
+
+            <strong>$286,420</strong>
+
+            <div class="financial-footer">
+                <span>Patient balance</span>
+                <b>+2.8%</b>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ELIGIBILITY + QUICK ACTIONS
+         ========================= -->
+    <section class="dashboard-grid">
+
+
+        <!-- Eligibility Activity -->
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Eligibility Activity</h2>
+                    <p>Last 7 days</p>
+                </div>
+
+                <span class="status-pill success">
+                    94.2% success
+                </span>
+
+            </div>
+
+
+            <div class="eligibility-summary">
+
+                <div class="eligibility-box success-box">
+                    <span>Successful</span>
+                    <strong>1,209</strong>
+                </div>
+
+                <div class="eligibility-box failure-box">
+                    <span>Failed</span>
+                    <strong>75</strong>
+                </div>
+
+                <div class="eligibility-box pending-box">
+                    <span>Pending</span>
+                    <strong>32</strong>
+                </div>
+
+            </div>
+
+
+            <div class="chart">
+
+                @foreach (var item in Activity)
+                {
+                    <div class="bar-item">
+
+                        <div class="bar-value">
+                            @item.Value
+                        </div>
+
+                        <div class="bar"
+                             style="height:@(item.Value / 2)px">
+                        </div>
+
+                        <div class="bar-label">
+                            @item.Day
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Common insurance operations</p>
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <a href="/patients/create"
+                   class="quick-action">
+
+                    <span>＋</span>
+
+                    <div>
+                        <strong>Add Patient</strong>
+                        <small>Create a patient record</small>
+                    </div>
+
+                </a>
+
+
+                <!-- Manage Providers -->
+                <button type="button"
+                        class="quick-action"
+                        @onclick="ManageProviders">
+
+                    <span>＋</span>
+
+                    <div>
+                        <strong>Manage Providers</strong>
+                        <small>View provider records</small>
+                    </div>
+
+                </button>
+
+
+                <!-- Add Insurance -->
+                <button type="button"
+                        class="quick-action"
+                        @onclick="AddInsurance">
+
+                    <span>＋</span>
+
+                    <div>
+                        <strong>Add Insurance</strong>
+                        <small>Manage patient coverage</small>
+                    </div>
+
+                </button>
+
+
+                <!-- Eligibility -->
+                <button type="button"
+                        class="quick-action"
+                        @onclick="RunEligibility">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>Run Eligibility</strong>
+                        <small>Verify patient coverage</small>
+                    </div>
+
+                </button>
+
+
+                <!-- Authorizations -->
+                <button type="button"
+                        class="quick-action"
+                        @onclick="ReviewAuthorizations">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>Review Authorizations</strong>
+                        <small>View pending requests</small>
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CLAIMS OVERVIEW
+         ========================= -->
+    <section class="panel claims-panel">
+
+        <div class="panel-header">
+
+            <div>
+                <h2>Claims Overview</h2>
+                <p>Current claim processing status</p>
+            </div>
+
+            <button type="button"
+                    class="panel-link"
+                    @onclick="ViewClaims">
+                View Claims →
+            </button>
+
+        </div>
+
+
+        <div class="claims-grid">
+
+            <div class="claim-status submitted">
+                <span class="claim-icon">✓</span>
+
+                <div>
+                    <span>Submitted</span>
+                    <strong>3,842</strong>
+                </div>
+
+                <small>88.7%</small>
+            </div>
+
+
+            <div class="claim-status rejected">
+                <span class="claim-icon">!</span>
+
+                <div>
+                    <span>Rejected</span>
+                    <strong>184</strong>
+                </div>
+
+                <small>4.8%</small>
+            </div>
+
+
+            <div class="claim-status denied">
+                <span class="claim-icon">×</span>
+
+                <div>
+                    <span>Denied</span>
+                    <strong>96</strong>
+                </div>
+
+                <small>2.5%</small>
+            </div>
+
+
+            <div class="claim-status pending">
+                <span class="claim-icon">...</span>
+
+                <div>
+                    <span>Pending</span>
+                    <strong>173</strong>
+                </div>
+
+                <small>4.0%</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AGING + PAYER PERFORMANCE
+         ========================= -->
+    <section class="dashboard-grid">
+
+
+        <!-- AR Aging -->
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>AR Aging</h2>
+                    <p>Outstanding accounts receivable</p>
+                </div>
+
+                <span class="status-pill">
+                    $1.24M Total
+                </span>
+
+            </div>
+
+
+            <div class="aging-list">
+
+                <div class="aging-row">
+
+                    <div class="aging-label">
+                        <span>0–30 Days</span>
+                        <strong>$540,000</strong>
+                    </div>
+
+                    <div class="aging-progress">
+                        <div class="aging-bar"
+                             style="width:44%">
+                        </div>
+                    </div>
+
+                    <span>44%</span>
+
+                </div>
+
+
+                <div class="aging-row">
+
+                    <div class="aging-label">
+                        <span>31–60 Days</span>
+                        <strong>$310,000</strong>
+                    </div>
+
+                    <div class="aging-progress">
+                        <div class="aging-bar"
+                             style="width:25%">
+                        </div>
+                    </div>
+
+                    <span>25%</span>
+
+                </div>
+
+
+                <div class="aging-row">
+
+                    <div class="aging-label">
+                        <span>61–90 Days</span>
+                        <strong>$210,000</strong>
+                    </div>
+
+                    <div class="aging-progress">
+                        <div class="aging-bar"
+                             style="width:17%">
+                        </div>
+                    </div>
+
+                    <span>17%</span>
+
+                </div>
+
+
+                <div class="aging-row">
+
+                    <div class="aging-label">
+                        <span>90+ Days</span>
+                        <strong>$180,000</strong>
+                    </div>
+
+                    <div class="aging-progress">
+                        <div class="aging-bar aging-danger"
+                             style="width:14%">
+                        </div>
+                    </div>
+
+                    <span>14%</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Payer Performance -->
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Payer Performance</h2>
+                    <p>Top insurance payers</p>
+                </div>
+
+                <button type="button"
+                        class="panel-link"
+                        @onclick="ViewReports">
+                    View Report →
+                </button>
+
+            </div>
+
+
+            <div class="payer-table">
+
+                <div class="payer-header">
+                    <span>Payer</span>
+                    <span>Claims</span>
+                    <span>Paid</span>
+                    <span>Denial</span>
+                </div>
+
+
+                @foreach (var payer in Payers)
+                {
+                    <div class="payer-row">
+
+                        <strong>@payer.Name</strong>
+
+                        <span>@payer.Claims</span>
+
+                        <span class="paid-rate">
+                            @payer.PaidRate
+                        </span>
+
+                        <span class="denial-rate">
+                            @payer.DenialRate
+                        </span>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RECENT ACTIVITY
+         ========================= -->
+    <section class="panel recent-panel">
+
+        <div class="panel-header">
+
+            <div>
+                <h2>Recent Activity</h2>
+                <p>Latest portal events</p>
+            </div>
+
+            <button type="button"
+                    class="panel-link"
+                    @onclick="ViewPatients">
+                View patients →
+            </button>
+
+        </div>
+
+
+        <div class="activity-list">
+
+            @foreach (var item in Recent)
+            {
+                <div class="activity-row">
+
+                    <span class="activity-dot @item.Type"></span>
+
+                    <div>
+                        <strong>@item.Title</strong>
+                        <small>@item.Description</small>
+                    </div>
+
+                    <time>@item.Time</time>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+</div>
+
+
+@code {
+
+    // =========================================
+    // ELIGIBILITY ACTIVITY
+    // =========================================
+
+    private readonly (string Day, int Value)[] Activity =
+    [
+        ("Mon", 160),
+        ("Tue", 220),
+        ("Wed", 190),
+        ("Thu", 260),
+        ("Fri", 230),
+        ("Sat", 145),
+        ("Sun", 90)
+    ];
+
+
+    // =========================================
+    // PAYER PERFORMANCE
+    // =========================================
+
+    private readonly (
+        string Name,
+        string Claims,
+        string PaidRate,
+        string DenialRate
+    )[] Payers =
+    [
+        ("Aetna", "1,240", "94.2%", "3.1%"),
+        ("BCBS", "1,085", "92.8%", "4.2%"),
+        ("UHC", "968", "95.1%", "2.8%"),
+        ("Cigna", "549", "91.7%", "5.1%")
+    ];
+
+
+    // =========================================
+    // RECENT ACTIVITY
+    // =========================================
+
+    private readonly (
+        string Type,
+        string Title,
+        string Description,
+        string Time
+    )[] Recent =
+    [
+        (
+            "success",
+            "Eligibility verification completed",
+            "John Smith · ABC Health",
+            "5 min ago"
+        ),
+
+        (
+            "info",
+            "New patient created",
+            "Mary Jones · MRN-10002",
+            "18 min ago"
+        ),
+
+        (
+            "warning",
+            "Insurance updated",
+            "Robert Brown · XYZ Health",
+            "42 min ago"
+        ),
+
+        (
+            "success",
+            "Provider added",
+            "Dr. Sarah Wilson · NPI ending 4521",
+            "1 hr ago"
+        ),
+
+        (
+            "danger",
+            "Claim denied",
+            "Claim CLM-10284 · Aetna",
+            "2 hrs ago"
+        )
+    ];
+
+
+    // =========================================
+    // NAVIGATION FUNCTIONS
+    // =========================================
+
+   
+}

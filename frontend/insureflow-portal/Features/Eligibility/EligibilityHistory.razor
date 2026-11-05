@@ -1,0 +1,176 @@
+@page "/eligibility/history"
+
+<div class="history-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <a href="/eligibility" class="back-link">
+                ← Eligibility
+            </a>
+
+            <div class="eyebrow">
+                ELIGIBILITY MANAGEMENT
+            </div>
+
+            <h1>
+                Eligibility History
+            </h1>
+
+            <p>
+                Complete history of eligibility verification requests and responses.
+            </p>
+
+        </div>
+
+        <button class="primary-button">
+            Export History
+        </button>
+
+    </div>
+
+
+    <div class="filter-bar">
+
+        <div class="search">
+            ⌕
+            <input placeholder="Search patient, member ID, request ID..." />
+        </div>
+
+        <select>
+            <option>All Results</option>
+            <option>Verified</option>
+            <option>Failed</option>
+            <option>Inactive</option>
+        </select>
+
+        <select>
+            <option>All Sources</option>
+            <option>API</option>
+            <option>X12 270/271</option>
+            <option>Manual</option>
+        </select>
+
+        <input type="date" value="2026-09-01" />
+
+        <input type="date" value="2026-09-02" />
+
+    </div>
+
+
+    <div class="history-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Date</th>
+                    <th>Patient</th>
+                    <th>Payer</th>
+                    <th>Member ID</th>
+                    <th>Request ID</th>
+                    <th>Source</th>
+                    <th>Response</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        09/02/2026
+                        <small>09:12 AM</small>
+                    </td>
+
+                    <td>
+                        <strong>John Smith</strong>
+                        <small>MRN-10001</small>
+                    </td>
+
+                    <td>
+                        ABC Health
+                        <small>Commercial PPO</small>
+                    </td>
+
+                    <td>
+                        ABC123456
+                    </td>
+
+                    <td>
+                        ELG-20260902-0001
+                    </td>
+
+                    <td>
+                        X12 270/271
+                    </td>
+
+                    <td>
+                        <span class="verified">
+                            Active
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="/eligibility/details">
+                            View
+                        </a>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        09/01/2026
+                        <small>08:42 AM</small>
+                    </td>
+
+                    <td>
+                        <strong>Linda Davis</strong>
+                        <small>MRN-10004</small>
+                    </td>
+
+                    <td>
+                        State Medicaid
+                        <small>Medicaid</small>
+                    </td>
+
+                    <td>
+                        MED771204
+                    </td>
+
+                    <td>
+                        ELG-20260901-0004
+                    </td>
+
+                    <td>
+                        API
+                    </td>
+
+                    <td>
+                        <span class="failed">
+                            Failed
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="/eligibility/failures">
+                            Review
+                        </a>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

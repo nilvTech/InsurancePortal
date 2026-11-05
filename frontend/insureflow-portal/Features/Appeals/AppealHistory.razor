@@ -1,0 +1,99 @@
+@page "/appeals/history"
+@page "/appeals/history/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>Appeal History</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">APPEAL AUDIT TRAIL</div>
+            <h1>Appeal History</h1>
+            <p>Track every significant action performed against an appeal.</p>
+        </div>
+
+        <a href="/appeals" class="secondary-button">Back to Appeals</a>
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <div>
+                <h2>APL-100245</h2>
+                <p>John Smith · Aetna · CLM-100245</p>
+            </div>
+
+            <span class="status pending">Pending Review</span>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot">1</div>
+                <div class="timeline-content">
+                    <span>Sep 08, 2026 · 09:12 AM</span>
+                    <h3>Appeal Created</h3>
+                    <p>Appeal APL-100245 was created from denial DN-100245.</p>
+                    <small>Performed by: Sarah Wilson</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <div class="timeline-content">
+                    <span>Sep 08, 2026 · 09:25 AM</span>
+                    <h3>Documentation Added</h3>
+                    <p>Clinical notes and medical records were attached.</p>
+                    <small>Performed by: Sarah Wilson</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">3</div>
+                <div class="timeline-content">
+                    <span>Sep 08, 2026 · 10:05 AM</span>
+                    <h3>Appeal Assigned</h3>
+                    <p>Appeal assigned to the RCM Appeals Team.</p>
+                    <small>Performed by: RCM Administrator</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">4</div>
+                <div class="timeline-content">
+                    <span>Sep 09, 2026 · 11:15 AM</span>
+                    <h3>Submission Prepared</h3>
+                    <p>Appeal package passed the submission readiness checklist.</p>
+                    <small>Performed by: Sarah Wilson</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">5</div>
+                <div class="timeline-content">
+                    <span>Sep 09, 2026 · 11:32 AM</span>
+                    <h3>Payer Acknowledgement</h3>
+                    <p>Aetna acknowledged receipt of the appeal package.</p>
+                    <small>Payer Reference: AET-AP-88221</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot current">6</div>
+                <div class="timeline-content">
+                    <span>Current Status</span>
+                    <h3>Pending Payer Review</h3>
+                    <p>The appeal is currently under payer review.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

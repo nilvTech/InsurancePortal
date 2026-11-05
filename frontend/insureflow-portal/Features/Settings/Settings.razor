@@ -1,0 +1,2331 @@
+@page "/settings"
+@page "/settings/{Tab}"
+
+
+
+<div class="settings-page">
+
+    <!-- =========================================================
+         PAGE HEADER
+         ========================================================= -->
+
+    <div class="page-header">
+
+        <div class="page-header-content">
+
+            <div class="eyebrow">
+                SYSTEM CONFIGURATION
+            </div>
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Manage organization, security, notifications,
+                claims, integrations, roles and system configuration.
+            </p>
+
+        </div>
+
+        <div class="header-actions">
+
+            @if (!IsEditing)
+            {
+                <button type="button"
+                        class="primary-button"
+                        @onclick="StartEditing">
+
+                    <span>✎</span>
+                    Edit Settings
+
+                </button>
+            }
+            else
+            {
+                <button type="button"
+                        class="secondary-button"
+                        @onclick="CancelEditing">
+
+                    Cancel
+
+                </button>
+
+                <button type="button"
+                        class="primary-button"
+                        @onclick="SaveChanges">
+
+                    ✓ Save Changes
+
+                </button>
+            }
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         SETTINGS NAVIGATION
+         ========================================================= -->
+
+    <div class="settings-navigation-card">
+
+        <nav class="settings-tabs">
+
+            <a href="/settings/general"
+               class="@GetTabClass("general")">
+
+                <span class="tab-icon">
+                    ⚙
+                </span>
+
+                <span class="tab-text">
+                    <strong>General</strong>
+                    <small>Organization</small>
+                </span>
+
+            </a>
+
+
+            <a href="/settings/security"
+               class="@GetTabClass("security")">
+
+                <span class="tab-icon">
+                    🔒
+                </span>
+
+                <span class="tab-text">
+                    <strong>Security</strong>
+                    <small>Access control</small>
+                </span>
+
+            </a>
+
+
+            <a href="/settings/notifications"
+               class="@GetTabClass("notifications")">
+
+                <span class="tab-icon">
+                    🔔
+                </span>
+
+                <span class="tab-text">
+                    <strong>Notifications</strong>
+                    <small>Alerts</small>
+                </span>
+
+            </a>
+
+
+            <a href="/settings/claims-billing"
+               class="@GetTabClass("claims-billing")">
+
+                <span class="tab-icon">
+                    💳
+                </span>
+
+                <span class="tab-text">
+                    <strong>Claims & Billing</strong>
+                    <small>Processing</small>
+                </span>
+
+            </a>
+
+
+            <a href="/settings/integrations"
+               class="@GetTabClass("integrations")">
+
+                <span class="tab-icon">
+                    🔗
+                </span>
+
+                <span class="tab-text">
+                    <strong>Integrations</strong>
+                    <small>Connections</small>
+                </span>
+
+            </a>
+
+
+            <a href="/settings/roles"
+               class="@GetTabClass("roles")">
+
+                <span class="tab-icon">
+                    👥
+                </span>
+
+                <span class="tab-text">
+                    <strong>Roles</strong>
+                    <small>Permissions</small>
+                </span>
+
+            </a>
+
+
+            <a href="/settings/system"
+               class="@GetTabClass("system")">
+
+                <span class="tab-icon">
+                    🖥
+                </span>
+
+                <span class="tab-text">
+                    <strong>System</strong>
+                    <small>Configuration</small>
+                </span>
+
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- =========================================================
+         EDIT MODE BANNER
+         ========================================================= -->
+
+    @if (IsEditing)
+    {
+        <div class="edit-mode-banner">
+
+            <div class="edit-mode-content">
+
+                <div class="edit-mode-icon">
+                    ✎
+                </div>
+
+                <div>
+
+                    <strong>
+                        Edit Mode
+                    </strong>
+
+                    <small>
+                        Modify the settings below and select
+                        Save Changes when finished.
+                    </small>
+
+                </div>
+
+            </div>
+
+            <button type="button"
+                    class="secondary-button"
+                    @onclick="CancelEditing">
+
+                Exit Edit Mode
+
+            </button>
+
+        </div>
+    }
+
+
+    <!-- =========================================================
+         SAVE MESSAGE
+         ========================================================= -->
+
+    @if (ShowSavedMessage)
+    {
+        <div class="edit-mode-banner">
+
+            <div class="edit-mode-content">
+
+                <div class="edit-mode-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Settings Updated
+                    </strong>
+
+                    <small>
+                        Your changes have been applied successfully.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+
+    <!-- =========================================================
+         SETTINGS CONTENT
+         ========================================================= -->
+
+    <div class="settings-content">
+
+
+        <!-- =====================================================
+             GENERAL
+             ===================================================== -->
+
+        @if (CurrentTab == "general")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Organization Settings
+                        </h2>
+
+                        <p>
+                            Configure your organization's basic information.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Organization Name
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <input type="text"
+                                   @bind="OrganizationName"
+                                   placeholder="Organization name" />
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @OrganizationName
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Organization Type
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <select @bind="OrganizationType">
+
+                                <option>
+                                    Healthcare Organization
+                                </option>
+
+                                <option>
+                                    Insurance Organization
+                                </option>
+
+                                <option>
+                                    Provider Organization
+                                </option>
+
+                                <option>
+                                    Care Management Organization
+                                </option>
+
+                            </select>
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @OrganizationType
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Contact Email
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <input type="email"
+                                   @bind="ContactEmail" />
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @ContactEmail
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Contact Phone
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <input type="tel"
+                                   @bind="ContactPhone" />
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @ContactPhone
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Address
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <textarea @bind="Address"></textarea>
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @Address
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-header"
+                     style="margin-top:24px;">
+
+                    <div class="section-header-main">
+
+                        <div class="section-icon">
+                            LOC
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Regional Settings
+                            </h2>
+
+                            <p>
+                                Configure timezone and regional preferences.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Timezone
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <select @bind="Timezone">
+
+                                <option>
+                                    Eastern Time (ET)
+                                </option>
+
+                                <option>
+                                    Central Time (CT)
+                                </option>
+
+                                <option>
+                                    Mountain Time (MT)
+                                </option>
+
+                                <option>
+                                    Pacific Time (PT)
+                                </option>
+
+                            </select>
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @Timezone
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date Format
+                        </label>
+
+                        @if (IsEditing)
+                        {
+                            <select @bind="DateFormat">
+
+                                <option>
+                                    MM/DD/YYYY
+                                </option>
+
+                                <option>
+                                    DD/MM/YYYY
+                                </option>
+
+                                <option>
+                                    YYYY-MM-DD
+                                </option>
+
+                            </select>
+                        }
+                        else
+                        {
+                            <div class="readonly-value">
+                                @DateFormat
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- =====================================================
+             SECURITY
+             ===================================================== -->
+
+        @if (CurrentTab == "security")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Security Controls
+                        </h2>
+
+                        <p>
+                            Manage authentication and security policies.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="toggle-grid">
+
+                    <!-- MFA -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Multi-Factor Authentication
+                            </strong>
+
+                            <small>
+                                Require MFA for all users.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(MfaEnabled)"
+                                        @onclick="() => SetMfa(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!MfaEnabled)"
+                                        @onclick="() => SetMfa(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(MfaEnabled)">
+                                @(MfaEnabled ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Strong Password Policy
+                            </strong>
+
+                            <small>
+                                Enforce strong password requirements.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(StrongPasswordPolicy)"
+                                        @onclick="() => SetStrongPassword(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!StrongPasswordPolicy)"
+                                        @onclick="() => SetStrongPassword(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(StrongPasswordPolicy)">
+                                @(StrongPasswordPolicy ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- SESSION -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Session Timeout
+                            </strong>
+
+                            <small>
+                                Automatically sign out inactive users.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(SessionTimeout)"
+                                        @onclick="() => SetSessionTimeout(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!SessionTimeout)"
+                                        @onclick="() => SetSessionTimeout(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(SessionTimeout)">
+                                @(SessionTimeout ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- IP -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                IP Restriction
+                            </strong>
+
+                            <small>
+                                Restrict access to approved IP addresses.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(IpRestriction)"
+                                        @onclick="() => SetIpRestriction(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!IpRestriction)"
+                                        @onclick="() => SetIpRestriction(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(IpRestriction)">
+                                @(IpRestriction ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- =====================================================
+             NOTIFICATIONS
+             ===================================================== -->
+
+        @if (CurrentTab == "notifications")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Notification Preferences
+                        </h2>
+
+                        <p>
+                            Configure system and operational notifications.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="toggle-grid">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Email Notifications
+                            </strong>
+
+                            <small>
+                                Send important notifications through email.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(EmailNotifications)"
+                                        @onclick="() => SetEmailNotifications(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!EmailNotifications)"
+                                        @onclick="() => SetEmailNotifications(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(EmailNotifications)">
+                                @(EmailNotifications ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- CLAIM ALERTS -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Claims Alerts
+                            </strong>
+
+                            <small>
+                                Receive alerts for claim processing events.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(ClaimsAlerts)"
+                                        @onclick="() => SetClaimsAlerts(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!ClaimsAlerts)"
+                                        @onclick="() => SetClaimsAlerts(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(ClaimsAlerts)">
+                                @(ClaimsAlerts ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- ELIGIBILITY -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Eligibility Alerts
+                            </strong>
+
+                            <small>
+                                Receive eligibility verification notifications.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(EligibilityAlerts)"
+                                        @onclick="() => SetEligibilityAlerts(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!EligibilityAlerts)"
+                                        @onclick="() => SetEligibilityAlerts(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(EligibilityAlerts)">
+                                @(EligibilityAlerts ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- MAINTENANCE ALERT -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                System Maintenance Alerts
+                            </strong>
+
+                            <small>
+                                Receive system maintenance notifications.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(MaintenanceAlerts)"
+                                        @onclick="() => SetMaintenanceAlerts(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!MaintenanceAlerts)"
+                                        @onclick="() => SetMaintenanceAlerts(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(MaintenanceAlerts)">
+                                @(MaintenanceAlerts ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- =====================================================
+             CLAIMS & BILLING
+             ===================================================== -->
+
+        @if (CurrentTab == "claims-billing")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Claims Processing
+                        </h2>
+
+                        <p>
+                            Configure claim processing behavior.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="toggle-grid">
+
+
+                    <!-- VALIDATION -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Automatic Claim Validation
+                            </strong>
+
+                            <small>
+                                Validate claims automatically before submission.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(AutomaticClaimValidation)"
+                                        @onclick="() => SetAutomaticClaimValidation(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!AutomaticClaimValidation)"
+                                        @onclick="() => SetAutomaticClaimValidation(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(AutomaticClaimValidation)">
+                                @(AutomaticClaimValidation ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- AUTO SUBMISSION -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Auto Submission
+                            </strong>
+
+                            <small>
+                                Automatically submit validated claims.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(AutoSubmission)"
+                                        @onclick="() => SetAutoSubmission(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!AutoSubmission)"
+                                        @onclick="() => SetAutoSubmission(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(AutoSubmission)">
+                                @(AutoSubmission ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- DUPLICATE -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Duplicate Claim Detection
+                            </strong>
+
+                            <small>
+                                Detect potentially duplicate claims.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(DuplicateClaimDetection)"
+                                        @onclick="() => SetDuplicateClaimDetection(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!DuplicateClaimDetection)"
+                                        @onclick="() => SetDuplicateClaimDetection(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(DuplicateClaimDetection)">
+                                @(DuplicateClaimDetection ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- =====================================================
+             INTEGRATIONS
+             ===================================================== -->
+
+        @if (CurrentTab == "integrations")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            System Integrations
+                        </h2>
+
+                        <p>
+                            Manage external healthcare and insurance integrations.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="integration-grid">
+
+
+                    <!-- CLEARINGHOUSE -->
+
+                    <div class="integration-card">
+
+                        <div class="integration-card-header">
+
+                            <div class="integration-icon">
+                                EDI
+                            </div>
+
+                            <span class="@GetStatusClass(ClearinghouseEnabled)">
+                                @(ClearinghouseEnabled ? "Connected" : "Disabled")
+                            </span>
+
+                        </div>
+
+
+                        <div class="integration-card-content">
+
+                            <div>
+
+                                <strong>
+                                    Clearinghouse
+                                </strong>
+
+                                <small>
+                                    Claims and eligibility transactions.
+                                </small>
+
+                            </div>
+
+                            @if (IsEditing)
+                            {
+                                <div class="row-actions">
+
+                                    <button type="button"
+                                            class="@GetStatusButtonClass(ClearinghouseEnabled)"
+                                            @onclick="() => SetClearinghouse(true)">
+
+                                        Enabled
+
+                                    </button>
+
+                                    <button type="button"
+                                            class="@GetDisabledButtonClass(!ClearinghouseEnabled)"
+                                            @onclick="() => SetClearinghouse(false)">
+
+                                        Disabled
+
+                                    </button>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FHIR -->
+
+                    <div class="integration-card">
+
+                        <div class="integration-card-header">
+
+                            <div class="integration-icon">
+                                FHIR
+                            </div>
+
+                            <span class="@GetStatusClass(FhirEnabled)">
+                                @(FhirEnabled ? "Connected" : "Disabled")
+                            </span>
+
+                        </div>
+
+
+                        <div class="integration-card-content">
+
+                            <div>
+
+                                <strong>
+                                    FHIR
+                                </strong>
+
+                                <small>
+                                    Healthcare interoperability.
+                                </small>
+
+                            </div>
+
+                            @if (IsEditing)
+                            {
+                                <div class="row-actions">
+
+                                    <button type="button"
+                                            class="@GetStatusButtonClass(FhirEnabled)"
+                                            @onclick="() => SetFhir(true)">
+
+                                        Enabled
+
+                                    </button>
+
+                                    <button type="button"
+                                            class="@GetDisabledButtonClass(!FhirEnabled)"
+                                            @onclick="() => SetFhir(false)">
+
+                                        Disabled
+
+                                    </button>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HL7 -->
+
+                    <div class="integration-card">
+
+                        <div class="integration-card-header">
+
+                            <div class="integration-icon">
+                                HL7
+                            </div>
+
+                            <span class="@GetStatusClass(Hl7Enabled)">
+                                @(Hl7Enabled ? "Connected" : "Disabled")
+                            </span>
+
+                        </div>
+
+
+                        <div class="integration-card-content">
+
+                            <div>
+
+                                <strong>
+                                    HL7
+                                </strong>
+
+                                <small>
+                                    Clinical messaging integration.
+                                </small>
+
+                            </div>
+
+                            @if (IsEditing)
+                            {
+                                <div class="row-actions">
+
+                                    <button type="button"
+                                            class="@GetStatusButtonClass(Hl7Enabled)"
+                                            @onclick="() => SetHl7(true)">
+
+                                        Enabled
+
+                                    </button>
+
+                                    <button type="button"
+                                            class="@GetDisabledButtonClass(!Hl7Enabled)"
+                                            @onclick="() => SetHl7(false)">
+
+                                        Disabled
+
+                                    </button>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYER API -->
+
+                    <div class="integration-card">
+
+                        <div class="integration-card-header">
+
+                            <div class="integration-icon">
+                                API
+                            </div>
+
+                            <span class="@GetStatusClass(PayerApiEnabled)">
+                                @(PayerApiEnabled ? "Connected" : "Disabled")
+                            </span>
+
+                        </div>
+
+
+                        <div class="integration-card-content">
+
+                            <div>
+
+                                <strong>
+                                    Payer APIs
+                                </strong>
+
+                                <small>
+                                    Insurance payer connectivity.
+                                </small>
+
+                            </div>
+
+                            @if (IsEditing)
+                            {
+                                <div class="row-actions">
+
+                                    <button type="button"
+                                            class="@GetStatusButtonClass(PayerApiEnabled)"
+                                            @onclick="() => SetPayerApi(true)">
+
+                                        Enabled
+
+                                    </button>
+
+                                    <button type="button"
+                                            class="@GetDisabledButtonClass(!PayerApiEnabled)"
+                                            @onclick="() => SetPayerApi(false)">
+
+                                        Disabled
+
+                                    </button>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- =====================================================
+             ROLES
+             ===================================================== -->
+
+        @if (CurrentTab == "roles")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Roles & Permissions
+                        </h2>
+
+                        <p>
+                            Manage application roles and access levels.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="role-grid">
+
+
+                    <!-- ADMIN -->
+
+                    <div class="role-item">
+
+                        <div class="role-icon">
+                            ADM
+                        </div>
+
+                        <div class="role-content">
+
+                            <strong>
+                                Administrator
+                            </strong>
+
+                            <small>
+                                Full system access
+                            </small>
+
+                        </div>
+
+                        <span class="status verified">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <!-- BILLING -->
+
+                    <div class="role-item">
+
+                        <div class="role-icon">
+                            BILL
+                        </div>
+
+                        <div class="role-content">
+
+                            <strong>
+                                Billing Manager
+                            </strong>
+
+                            <small>
+                                Claims and billing access
+                            </small>
+
+                        </div>
+
+                        <span class="status verified">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <!-- CARE MANAGER -->
+
+                    <div class="role-item">
+
+                        <div class="role-icon">
+                            CM
+                        </div>
+
+                        <div class="role-content">
+
+                            <strong>
+                                Care Manager
+                            </strong>
+
+                            <small>
+                                Patient and care management
+                            </small>
+
+                        </div>
+
+                        <span class="status verified">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <!-- PROVIDER -->
+
+                    <div class="role-item">
+
+                        <div class="role-icon">
+                            PROV
+                        </div>
+
+                        <div class="role-content">
+
+                            <strong>
+                                Provider
+                            </strong>
+
+                            <small>
+                                Provider portal access
+                            </small>
+
+                        </div>
+
+                        <span class="status verified">
+                            Active
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- =====================================================
+             SYSTEM
+             ===================================================== -->
+
+        @if (CurrentTab == "system")
+        {
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            System Configuration
+                        </h2>
+
+                        <p>
+                            Manage application-level system settings.
+                        </p>
+
+                    </div>
+
+                    @if (!IsEditing)
+                    {
+                        <button type="button"
+                                class="edit-button"
+                                @onclick="StartEditing">
+
+                            ✎ Edit
+
+                        </button>
+                    }
+
+                </div>
+
+
+                <div class="toggle-grid">
+
+
+                    <!-- AUDIT -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Audit Logging
+                            </strong>
+
+                            <small>
+                                Record system and user activity.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(AuditLogging)"
+                                        @onclick="() => SetAuditLogging(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!AuditLogging)"
+                                        @onclick="() => SetAuditLogging(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(AuditLogging)">
+                                @(AuditLogging ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- BACKGROUND -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Background Processing
+                            </strong>
+
+                            <small>
+                                Run asynchronous system jobs.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(BackgroundProcessing)"
+                                        @onclick="() => SetBackgroundProcessing(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!BackgroundProcessing)"
+                                        @onclick="() => SetBackgroundProcessing(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(BackgroundProcessing)">
+                                @(BackgroundProcessing ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- MAINTENANCE -->
+
+                    <div class="toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Maintenance Mode
+                            </strong>
+
+                            <small>
+                                Temporarily restrict application access.
+                            </small>
+
+                        </div>
+
+                        @if (IsEditing)
+                        {
+                            <div class="row-actions">
+
+                                <button type="button"
+                                        class="@GetStatusButtonClass(MaintenanceMode)"
+                                        @onclick="() => SetMaintenanceMode(true)">
+
+                                    Enabled
+
+                                </button>
+
+                                <button type="button"
+                                        class="@GetDisabledButtonClass(!MaintenanceMode)"
+                                        @onclick="() => SetMaintenanceMode(false)">
+
+                                    Disabled
+
+                                </button>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="@GetStatusClass(MaintenanceMode)">
+                                @(MaintenanceMode ? "Enabled" : "Disabled")
+                            </span>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="maintenance-card">
+
+                <div class="maintenance-content">
+
+                    <div class="maintenance-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            System Maintenance
+                        </h2>
+
+                        <p>
+                            System maintenance settings should only be changed
+                            by authorized administrators.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                @if (!IsEditing)
+                {
+                    <button type="button"
+                            class="secondary-button"
+                            @onclick="StartEditing">
+
+                        Configure
+
+                    </button>
+                }
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+@code {
+
+    // =========================================================
+    // PAGE STATE
+    // =========================================================
+
+    [Parameter]
+    public string? Tab { get; set; }
+
+
+    private bool IsEditing { get; set; }
+
+    private bool ShowSavedMessage { get; set; }
+
+
+    // =========================================================
+    // GENERAL SETTINGS
+    // =========================================================
+
+    private string OrganizationName { get; set; }
+        = "InsureFlow Healthcare";
+
+    private string OrganizationType { get; set; }
+        = "Healthcare Organization";
+
+    private string ContactEmail { get; set; }
+        = "admin@insureflow.com";
+
+    private string ContactPhone { get; set; }
+        = "+1 800 555 0100";
+
+    private string Address { get; set; }
+        = "100 Healthcare Avenue\nNew York, NY 10001\nUnited States";
+
+    private string Timezone { get; set; }
+        = "Eastern Time (ET)";
+
+    private string DateFormat { get; set; }
+        = "MM/DD/YYYY";
+
+
+    // =========================================================
+    // SECURITY SETTINGS
+    // =========================================================
+
+    private bool MfaEnabled { get; set; } = true;
+
+    private bool StrongPasswordPolicy { get; set; } = true;
+
+    private bool SessionTimeout { get; set; } = true;
+
+    private bool IpRestriction { get; set; } = false;
+
+
+    // =========================================================
+    // NOTIFICATION SETTINGS
+    // =========================================================
+
+    private bool EmailNotifications { get; set; } = true;
+
+    private bool ClaimsAlerts { get; set; } = true;
+
+    private bool EligibilityAlerts { get; set; } = true;
+
+    private bool MaintenanceAlerts { get; set; } = false;
+
+
+    // =========================================================
+    // CLAIM SETTINGS
+    // =========================================================
+
+    private bool AutomaticClaimValidation { get; set; } = true;
+
+    private bool AutoSubmission { get; set; } = false;
+
+    private bool DuplicateClaimDetection { get; set; } = true;
+
+
+    // =========================================================
+    // INTEGRATION SETTINGS
+    // =========================================================
+
+    private bool ClearinghouseEnabled { get; set; } = true;
+
+    private bool FhirEnabled { get; set; } = true;
+
+    private bool Hl7Enabled { get; set; } = false;
+
+    private bool PayerApiEnabled { get; set; } = true;
+
+
+    // =========================================================
+    // SYSTEM SETTINGS
+    // =========================================================
+
+    private bool AuditLogging { get; set; } = true;
+
+    private bool BackgroundProcessing { get; set; } = true;
+
+    private bool MaintenanceMode { get; set; } = false;
+
+
+    // =========================================================
+    // BACKUP VALUES
+    //
+    // Used by Cancel so the user can discard changes.
+    // =========================================================
+
+    private string BackupOrganizationName = string.Empty;
+    private string BackupOrganizationType = string.Empty;
+    private string BackupContactEmail = string.Empty;
+    private string BackupContactPhone = string.Empty;
+    private string BackupAddress = string.Empty;
+    private string BackupTimezone = string.Empty;
+    private string BackupDateFormat = string.Empty;
+
+    private bool BackupMfaEnabled;
+    private bool BackupStrongPasswordPolicy;
+    private bool BackupSessionTimeout;
+    private bool BackupIpRestriction;
+
+    private bool BackupEmailNotifications;
+    private bool BackupClaimsAlerts;
+    private bool BackupEligibilityAlerts;
+    private bool BackupMaintenanceAlerts;
+
+    private bool BackupAutomaticClaimValidation;
+    private bool BackupAutoSubmission;
+    private bool BackupDuplicateClaimDetection;
+
+    private bool BackupClearinghouseEnabled;
+    private bool BackupFhirEnabled;
+    private bool BackupHl7Enabled;
+    private bool BackupPayerApiEnabled;
+
+    private bool BackupAuditLogging;
+    private bool BackupBackgroundProcessing;
+    private bool BackupMaintenanceMode;
+
+
+    // =========================================================
+    // CURRENT TAB
+    // =========================================================
+
+    private string CurrentTab
+    {
+        get
+        {
+            var tab = Tab?.ToLowerInvariant();
+
+            return tab switch
+            {
+                "general" => "general",
+                "security" => "security",
+                "notifications" => "notifications",
+                "claims-billing" => "claims-billing",
+                "integrations" => "integrations",
+                "roles" => "roles",
+                "system" => "system",
+
+                _ => "general"
+            };
+        }
+    }
+
+
+    // =========================================================
+    // TAB CSS
+    // =========================================================
+
+    private string GetTabClass(string tab)
+    {
+        return CurrentTab == tab
+            ? "settings-tab active"
+            : "settings-tab";
+    }
+
+
+    // =========================================================
+    // START EDITING
+    // =========================================================
+
+    private void StartEditing()
+    {
+        CreateBackup();
+
+        IsEditing = true;
+
+        ShowSavedMessage = false;
+    }
+
+
+    // =========================================================
+    // CREATE BACKUP
+    // =========================================================
+
+    private void CreateBackup()
+    {
+        BackupOrganizationName = OrganizationName;
+        BackupOrganizationType = OrganizationType;
+        BackupContactEmail = ContactEmail;
+        BackupContactPhone = ContactPhone;
+        BackupAddress = Address;
+        BackupTimezone = Timezone;
+        BackupDateFormat = DateFormat;
+
+        BackupMfaEnabled = MfaEnabled;
+        BackupStrongPasswordPolicy = StrongPasswordPolicy;
+        BackupSessionTimeout = SessionTimeout;
+        BackupIpRestriction = IpRestriction;
+
+        BackupEmailNotifications = EmailNotifications;
+        BackupClaimsAlerts = ClaimsAlerts;
+        BackupEligibilityAlerts = EligibilityAlerts;
+        BackupMaintenanceAlerts = MaintenanceAlerts;
+
+        BackupAutomaticClaimValidation =
+            AutomaticClaimValidation;
+
+        BackupAutoSubmission =
+            AutoSubmission;
+
+        BackupDuplicateClaimDetection =
+            DuplicateClaimDetection;
+
+        BackupClearinghouseEnabled =
+            ClearinghouseEnabled;
+
+        BackupFhirEnabled =
+            FhirEnabled;
+
+        BackupHl7Enabled =
+            Hl7Enabled;
+
+        BackupPayerApiEnabled =
+            PayerApiEnabled;
+
+        BackupAuditLogging =
+            AuditLogging;
+
+        BackupBackgroundProcessing =
+            BackgroundProcessing;
+
+        BackupMaintenanceMode =
+            MaintenanceMode;
+    }
+
+
+    // =========================================================
+    // CANCEL EDITING
+    // =========================================================
+
+    private void CancelEditing()
+    {
+        RestoreBackup();
+
+        IsEditing = false;
+
+        ShowSavedMessage = false;
+    }
+
+
+    // =========================================================
+    // RESTORE BACKUP
+    // =========================================================
+
+    private void RestoreBackup()
+    {
+        OrganizationName = BackupOrganizationName;
+        OrganizationType = BackupOrganizationType;
+        ContactEmail = BackupContactEmail;
+        ContactPhone = BackupContactPhone;
+        Address = BackupAddress;
+        Timezone = BackupTimezone;
+        DateFormat = BackupDateFormat;
+
+        MfaEnabled = BackupMfaEnabled;
+        StrongPasswordPolicy = BackupStrongPasswordPolicy;
+        SessionTimeout = BackupSessionTimeout;
+        IpRestriction = BackupIpRestriction;
+
+        EmailNotifications = BackupEmailNotifications;
+        ClaimsAlerts = BackupClaimsAlerts;
+        EligibilityAlerts = BackupEligibilityAlerts;
+        MaintenanceAlerts = BackupMaintenanceAlerts;
+
+        AutomaticClaimValidation =
+            BackupAutomaticClaimValidation;
+
+        AutoSubmission =
+            BackupAutoSubmission;
+
+        DuplicateClaimDetection =
+            BackupDuplicateClaimDetection;
+
+        ClearinghouseEnabled =
+            BackupClearinghouseEnabled;
+
+        FhirEnabled =
+            BackupFhirEnabled;
+
+        Hl7Enabled =
+            BackupHl7Enabled;
+
+        PayerApiEnabled =
+            BackupPayerApiEnabled;
+
+        AuditLogging =
+            BackupAuditLogging;
+
+        BackgroundProcessing =
+            BackupBackgroundProcessing;
+
+        MaintenanceMode =
+            BackupMaintenanceMode;
+    }
+
+
+    // =========================================================
+    // SAVE
+    // =========================================================
+
+    private void SaveChanges()
+    {
+        /*
+         * The values have already been changed in component state.
+         *
+         * This is where your backend API/database call will be
+         * added later.
+         */
+
+        IsEditing = false;
+
+        ShowSavedMessage = true;
+    }
+
+
+    // =========================================================
+    // SECURITY METHODS
+    // =========================================================
+
+    private void SetMfa(bool value)
+    {
+        MfaEnabled = value;
+    }
+
+    private void SetStrongPassword(bool value)
+    {
+        StrongPasswordPolicy = value;
+    }
+
+    private void SetSessionTimeout(bool value)
+    {
+        SessionTimeout = value;
+    }
+
+    private void SetIpRestriction(bool value)
+    {
+        IpRestriction = value;
+    }
+
+
+    // =========================================================
+    // NOTIFICATION METHODS
+    // =========================================================
+
+    private void SetEmailNotifications(bool value)
+    {
+        EmailNotifications = value;
+    }
+
+    private void SetClaimsAlerts(bool value)
+    {
+        ClaimsAlerts = value;
+    }
+
+    private void SetEligibilityAlerts(bool value)
+    {
+        EligibilityAlerts = value;
+    }
+
+    private void SetMaintenanceAlerts(bool value)
+    {
+        MaintenanceAlerts = value;
+    }
+
+
+    // =========================================================
+    // CLAIM METHODS
+    // =========================================================
+
+    private void SetAutomaticClaimValidation(bool value)
+    {
+        AutomaticClaimValidation = value;
+    }
+
+    private void SetAutoSubmission(bool value)
+    {
+        AutoSubmission = value;
+    }
+
+    private void SetDuplicateClaimDetection(bool value)
+    {
+        DuplicateClaimDetection = value;
+    }
+
+
+    // =========================================================
+    // INTEGRATION METHODS
+    // =========================================================
+
+    private void SetClearinghouse(bool value)
+    {
+        ClearinghouseEnabled = value;
+    }
+
+    private void SetFhir(bool value)
+    {
+        FhirEnabled = value;
+    }
+
+    private void SetHl7(bool value)
+    {
+        Hl7Enabled = value;
+    }
+
+    private void SetPayerApi(bool value)
+    {
+        PayerApiEnabled = value;
+    }
+
+
+    // =========================================================
+    // SYSTEM METHODS
+    // =========================================================
+
+    private void SetAuditLogging(bool value)
+    {
+        AuditLogging = value;
+    }
+
+    private void SetBackgroundProcessing(bool value)
+    {
+        BackgroundProcessing = value;
+    }
+
+    private void SetMaintenanceMode(bool value)
+    {
+        MaintenanceMode = value;
+    }
+
+
+    // =========================================================
+    // STATUS CSS
+    // =========================================================
+
+    private string GetStatusClass(bool enabled)
+    {
+        return enabled
+            ? "status verified"
+            : "status disabled";
+    }
+
+
+    private string GetStatusButtonClass(bool selected)
+    {
+        return selected
+            ? "status verified setting-option selected"
+            : "status verified setting-option";
+    }
+
+
+    private string GetDisabledButtonClass(bool selected)
+    {
+        return selected
+            ? "status disabled setting-option selected"
+            : "status disabled setting-option";
+    }
+
+}

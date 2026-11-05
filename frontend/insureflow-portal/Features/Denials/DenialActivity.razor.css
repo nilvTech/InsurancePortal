@@ -1,0 +1,168 @@
+.denial-page {
+    padding: 28px 32px;
+    min-height: 100vh;
+    background: #f5f7fa;
+    color: #172b4d;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+
+.eyebrow {
+    color: #18978f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.page-header h1 {
+    margin: 4px 0;
+    font-size: 28px;
+}
+
+.page-header p {
+    margin: 0;
+    color: #718096;
+    font-size: 13px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 9px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primary-button {
+    background: #18978f;
+    color: white;
+    border: 1px solid #18978f;
+}
+
+.secondary-button {
+    background: white;
+    color: #344563;
+    border: 1px solid #dfe4ea;
+}
+
+.activity-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 15px;
+}
+
+.content-card,
+.side-card {
+    background: white;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.card-header h2,
+.side-card h2 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.card-header p {
+    margin: 4px 0 0;
+    color: #718096;
+    font-size: 10px;
+}
+
+.card-header select {
+    border: 1px solid #dfe4ea;
+    border-radius: 6px;
+    padding: 7px;
+    font-size: 11px;
+}
+
+.timeline {
+    padding: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 14px;
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.timeline-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #e7f6f4;
+    color: #18978f;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.timeline-item strong {
+    font-size: 12px;
+}
+
+.timeline-item p {
+    margin: 5px 0;
+    font-size: 11px;
+    color: #344563;
+}
+
+.timeline-item small {
+    color: #718096;
+    font-size: 9px;
+}
+
+.side-card {
+    padding: 18px;
+    height: fit-content;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #edf0f3;
+    font-size: 11px;
+}
+
+.summary-row span {
+    color: #718096;
+}
+
+.summary-row strong {
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .activity-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

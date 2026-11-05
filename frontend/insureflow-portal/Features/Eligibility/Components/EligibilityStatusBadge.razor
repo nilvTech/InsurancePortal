@@ -1,0 +1,22 @@
+<span class="status-badge @CssClass">
+    @Status
+</span>
+
+@code {
+
+    [Parameter]
+    public string Status { get; set; } = "Pending";
+
+
+    private string CssClass =>
+        Status.ToLowerInvariant() switch
+        {
+            "verified" => "verified",
+            "active" => "verified",
+            "pending" => "pending",
+            "failed" => "failed",
+            "inactive" => "inactive",
+            _ => "pending"
+        };
+
+}

@@ -1,0 +1,317 @@
+@page "/denials/details/{DenialId}"
+
+<div class="denial-details-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+                <a href="/denials">Denials</a>
+                <span>/</span>
+                <span>DEN-2026-00142</span>
+            </div>
+
+            <div class="eyebrow">DENIAL CASE</div>
+
+            <h1>DEN-2026-00142</h1>
+
+            <p>
+                Claim denial investigation and resolution workspace.
+            </p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a href="/denials/appeal/@DenialId"
+               class="primary-button">
+                Create Appeal
+            </a>
+
+            <a href="/denials"
+               class="secondary-button">
+                Back to Denials
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+    <div class="status-banner">
+
+        <div>
+            <span>Current Status</span>
+
+            <strong>
+                In Progress
+            </strong>
+        </div>
+
+        <div>
+            <span>Denial Amount</span>
+
+            <strong>
+                $4,280.00
+            </strong>
+        </div>
+
+        <div>
+            <span>Denial Age</span>
+
+            <strong>
+                34 Days
+            </strong>
+        </div>
+
+        <div>
+            <span>Assigned To</span>
+
+            <strong>
+                Sarah Wilson
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="details-grid">
+
+        <!-- CLAIM -->
+        <section class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Claim Information</h2>
+                    <p>Claim associated with this denial</p>
+                </div>
+            </div>
+
+            <div class="field-grid">
+
+                <div>
+                    <span>Claim Number</span>
+                    <strong>CLM-100482</strong>
+                </div>
+
+                <div>
+                    <span>Claim Type</span>
+                    <strong>Professional</strong>
+                </div>
+
+                <div>
+                    <span>Date of Service</span>
+                    <strong>07/15/2026</strong>
+                </div>
+
+                <div>
+                    <span>Submitted Date</span>
+                    <strong>07/20/2026</strong>
+                </div>
+
+                <div>
+                    <span>Billed Amount</span>
+                    <strong>$5,120.00</strong>
+                </div>
+
+                <div>
+                    <span>Denied Amount</span>
+                    <strong>$4,280.00</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PATIENT -->
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Patient</h2>
+                    <p>Patient associated with the denied claim</p>
+                </div>
+
+                <a href="/patients">
+                    View Patient
+                </a>
+
+            </div>
+
+            <div class="patient-info">
+
+                <div class="avatar">
+                    JA
+                </div>
+
+                <div>
+                    <strong>James Anderson</strong>
+                    <small>MRN: MRN-002184</small>
+                    <small>DOB: 04/12/1962</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DENIAL -->
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Denial Information</h2>
+                    <p>Payer response details</p>
+                </div>
+
+            </div>
+
+            <div class="field-grid">
+
+                <div>
+                    <span>Denial Code</span>
+                    <strong>CO-197</strong>
+                </div>
+
+                <div>
+                    <span>Category</span>
+                    <strong>Authorization</strong>
+                </div>
+
+                <div class="wide">
+                    <span>Denial Reason</span>
+                    <strong>
+                        Prior authorization was required for the billed service.
+                    </strong>
+                </div>
+
+                <div class="wide">
+                    <span>Payer Message</span>
+                    <strong>
+                        The submitted claim does not contain a valid authorization
+                        number for the reported service.
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INSURANCE -->
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Insurance</h2>
+                    <p>Insurance information related to the claim</p>
+                </div>
+
+            </div>
+
+            <div class="field-grid">
+
+                <div>
+                    <span>Payer</span>
+                    <strong>UnitedHealthcare</strong>
+                </div>
+
+                <div>
+                    <span>Plan</span>
+                    <strong>UHC Choice Plus</strong>
+                </div>
+
+                <div>
+                    <span>Member ID</span>
+                    <strong>UHC4589217</strong>
+                </div>
+
+                <div>
+                    <span>Group Number</span>
+                    <strong>GRP-45821</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESOLUTION -->
+        <section class="content-card full-width">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Resolution</h2>
+                    <p>Current denial resolution plan</p>
+                </div>
+
+            </div>
+
+            <div class="resolution-grid">
+
+                <div>
+                    <label>Resolution Type</label>
+
+                    <select>
+                        <option>Correct and Resubmit</option>
+                        <option>Appeal</option>
+                        <option>Write Off</option>
+                        <option>Provider Responsibility</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Next Action</label>
+
+                    <input value="Obtain authorization documentation" />
+                </div>
+
+                <div>
+                    <label>Due Date</label>
+
+                    <input type="date" value="2026-09-08" />
+                </div>
+
+            </div>
+
+            <div class="notes">
+
+                <label>Internal Notes</label>
+
+                <textarea>
+Contacting payer to determine retroactive authorization availability.
+                </textarea>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button class="secondary-button">
+                    Save
+                </button>
+
+                <button class="primary-button">
+                    Update Resolution
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public string? DenialId { get; set; }
+
+}

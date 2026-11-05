@@ -1,0 +1,380 @@
+@page "/authorizations/{Id:guid}"
+
+
+<div class="details-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span>/</span>
+                <a href="/authorizations">Authorizations</a>
+                <span>/</span>
+                <span>Details</span>
+            </div>
+
+            <div class="title-row">
+
+                <div>
+                    <h1>Authorization Details</h1>
+
+                    <p>
+                        @authorization.AuthorizationNumber
+                    </p>
+                </div>
+
+                <span class="status @GetStatusClass(authorization.Status)">
+                    @authorization.Status
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="page-actions">
+
+            <a href="@($"/authorizations/{Id}/edit")"
+               class="secondary-button">
+                Edit
+            </a>
+
+            <a href="/authorizations"
+               class="secondary-button">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+            <span>Patient</span>
+            <strong>@authorization.PatientName</strong>
+            <small>@authorization.PatientMrn</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Payer</span>
+            <strong>@authorization.PayerName</strong>
+            <small>@authorization.PlanName</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Provider</span>
+            <strong>@authorization.ProviderName</strong>
+            <small>@authorization.PlaceOfService</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Priority</span>
+            <strong>@authorization.Priority</strong>
+            <small>@authorization.AuthorizationType</small>
+        </div>
+
+    </section>
+
+    <div class="details-grid">
+
+        <main>
+
+            <section class="content-card">
+
+                <div class="card-header">
+                    <div>
+                        <h2>Authorization Information</h2>
+                        <p>Core authorization request information.</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <span>Authorization Number</span>
+                        <strong>@authorization.AuthorizationNumber</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Authorization Type</span>
+                        <strong>@authorization.AuthorizationType</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Requested Date</span>
+                        <strong>
+                            @authorization.RequestedDate.ToString("MM/dd/yyyy")
+                        </strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Service Start</span>
+                        <strong>
+                            @authorization.ServiceStartDate.ToString("MM/dd/yyyy")
+                        </strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Service End</span>
+                        <strong>
+                            @authorization.ServiceEndDate.ToString("MM/dd/yyyy")
+                        </strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Requested Units</span>
+                        <strong>@authorization.RequestedUnits</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h2>Clinical Summary</h2>
+                        <p>Clinical information submitted with the request.</p>
+                    </div>
+
+                </div>
+
+                <div class="clinical-summary">
+                    @authorization.ClinicalSummary
+                </div>
+
+            </section>
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h2>Service Lines</h2>
+                        <p>Requested healthcare services.</p>
+                    </div>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table class="service-table">
+
+                        <thead>
+                            <tr>
+                                <th>Procedure</th>
+                                <th>CPT/HCPCS</th>
+                                <th>Diagnosis</th>
+                                <th>Units</th>
+                                <th>Service Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var service in authorization.ServiceLines)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@service.Description</strong>
+                                    </td>
+
+                                    <td>@service.Code</td>
+
+                                    <td>@service.Diagnosis</td>
+
+                                    <td>@service.Units</td>
+
+                                    <td>
+                                        @service.ServiceDate.ToString("MM/dd/yyyy")
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <aside>
+
+            <section class="content-card">
+
+                <div class="card-header">
+                    <h2>Actions</h2>
+                </div>
+
+                <div class="action-list">
+
+                    @if (authorization.Status == "Draft")
+                    {
+                        <a href="@($"/authorizations/{Id}/edit")">
+                            Edit Authorization
+                        </a>
+                    }
+
+                    @if (authorization.Status == "Denied")
+                    {
+                        <a href="@($"/authorizations/{Id}/appeal")">
+                            Submit Appeal
+                        </a>
+                    }
+
+                    <a href="/authorizations/list">
+                        View Authorization List
+                    </a>
+
+                </div>
+
+            </section>
+
+            <section class="content-card">
+
+                <div class="card-header">
+                    <h2>Request History</h2>
+                </div>
+
+                <div class="history">
+
+                    @foreach (var history in authorization.History
+                        .OrderByDescending(x => x.Date))
+                    {
+                        <div class="history-item">
+
+                            <div class="history-dot"></div>
+
+                            <div>
+                                <strong>@history.Status</strong>
+
+                                <small>
+                                    @history.Date.ToString("MM/dd/yyyy HH:mm")
+                                </small>
+
+                                <p>
+                                    @history.Description
+                                </p>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private AuthorizationDetailsModel authorization = new()
+    {
+        AuthorizationNumber = "AUTH-2026-0001",
+        PatientName = "John Smith",
+        PatientMrn = "MRN-10001",
+        ProviderName = "Dr. Sarah Wilson",
+        PayerName = "Aetna",
+        PlanName = "Aetna PPO",
+        AuthorizationType = "Diagnostic Imaging",
+        Priority = "Routine",
+        PlaceOfService = "Outpatient Hospital",
+        Status = "Pending",
+        RequestedDate = DateTime.Today.AddDays(-2),
+        ServiceStartDate = DateTime.Today.AddDays(7),
+        ServiceEndDate = DateTime.Today.AddDays(37),
+        RequestedUnits = 1,
+        ClinicalSummary =
+            "Patient requires diagnostic imaging based on current clinical findings and provider assessment.",
+        ServiceLines =
+        [
+            new ServiceLine
+            {
+                Description = "MRI Brain without contrast",
+                Code = "70551",
+                Diagnosis = "R51.9",
+                Units = 1,
+                ServiceDate = DateTime.Today.AddDays(7)
+            }
+        ],
+        History =
+        [
+            new AuthorizationHistory
+            {
+                Status = "Pending",
+                Date = DateTime.Now.AddDays(-2),
+                Description = "Authorization request submitted to payer."
+            },
+            new AuthorizationHistory
+            {
+                Status = "Submitted",
+                Date = DateTime.Now.AddDays(-2).AddHours(-1),
+                Description = "Request completed validation and was submitted."
+            },
+            new AuthorizationHistory
+            {
+                Status = "Draft",
+                Date = DateTime.Now.AddDays(-3),
+                Description = "Authorization request created."
+            }
+        ]
+    };
+
+    private static string GetStatusClass(string status)
+    {
+        return status
+            .ToLowerInvariant()
+            .Replace(" ", "-");
+    }
+
+    private sealed class AuthorizationDetailsModel
+    {
+        public string AuthorizationNumber { get; init; } = string.Empty;
+        public string PatientName { get; init; } = string.Empty;
+        public string PatientMrn { get; init; } = string.Empty;
+        public string ProviderName { get; init; } = string.Empty;
+        public string PayerName { get; init; } = string.Empty;
+        public string PlanName { get; init; } = string.Empty;
+        public string AuthorizationType { get; init; } = string.Empty;
+        public string Priority { get; init; } = string.Empty;
+        public string PlaceOfService { get; init; } = string.Empty;
+        public string Status { get; init; } = string.Empty;
+        public DateTime RequestedDate { get; init; }
+        public DateTime ServiceStartDate { get; init; }
+        public DateTime ServiceEndDate { get; init; }
+        public int RequestedUnits { get; init; }
+        public string ClinicalSummary { get; init; } = string.Empty;
+        public List<ServiceLine> ServiceLines { get; init; } = [];
+        public List<AuthorizationHistory> History { get; init; } = [];
+    }
+
+    private sealed class ServiceLine
+    {
+        public string Description { get; init; } = string.Empty;
+        public string Code { get; init; } = string.Empty;
+        public string Diagnosis { get; init; } = string.Empty;
+        public int Units { get; init; }
+        public DateTime ServiceDate { get; init; }
+    }
+
+    private sealed class AuthorizationHistory
+    {
+        public string Status { get; init; } = string.Empty;
+        public DateTime Date { get; init; }
+        public string Description { get; init; } = string.Empty;
+    }
+}

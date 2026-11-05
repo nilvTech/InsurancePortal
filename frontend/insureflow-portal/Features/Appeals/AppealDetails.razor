@@ -1,0 +1,176 @@
+@page "/appeals/details/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>Appeal Details</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+
+        <div>
+            <div class="eyebrow">APPEAL WORKSPACE</div>
+            <h1>Appeal #APL-100245</h1>
+            <p>Claim #CLM-100245 · Denial #DN-100245</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/appeals/submission/100245" class="primary-button">Submit Appeal</a>
+            <a href="/appeals" class="secondary-button">Back</a>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Patient</span>
+            <strong>John Smith</strong>
+            <small>MRN-100245</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Payer</span>
+            <strong>Aetna</strong>
+            <small>AET4589217</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Appeal Level</span>
+            <strong>First Level</strong>
+            <small>Medical Necessity</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Deadline</span>
+            <strong>Sep 20</strong>
+            <small class="danger-text">12 days remaining</small>
+        </div>
+
+    </div>
+
+    <div class="status-banner">
+        <div>
+            <span>Current Status</span>
+            <strong>Pending Review</strong>
+        </div>
+
+        <div class="banner-actions">
+            <a href="/appeals/documentation/100245">Documentation</a>
+            <a href="/appeals/attachments/100245">Attachments</a>
+            <a href="/appeals/history/100245">History</a>
+        </div>
+    </div>
+
+    <div class="content-card">
+
+        <div class="tab-navigation">
+            <a class="active" href="/appeals/details/100245">Overview</a>
+            <a href="/appeals/documentation/100245">Documentation</a>
+            <a href="/appeals/attachments/100245">Attachments</a>
+            <a href="/appeals/submission/100245">Submission</a>
+            <a href="/appeals/history/100245">History</a>
+            <a href="/appeals/decision/100245">Decision</a>
+            <a href="/appeals/external-review/100245">External Review</a>
+            <a href="/appeals/notifications/100245">Notifications</a>
+        </div>
+
+        <div class="detail-grid">
+
+            <div class="detail-section">
+
+                <h2>Appeal Information</h2>
+
+                <div class="detail-list">
+
+                    <div>
+                        <span>Appeal Number</span>
+                        <strong>APL-100245</strong>
+                    </div>
+
+                    <div>
+                        <span>Appeal Level</span>
+                        <strong>First Level</strong>
+                    </div>
+
+                    <div>
+                        <span>Reason</span>
+                        <strong>Medical Necessity</strong>
+                    </div>
+
+                    <div>
+                        <span>Payer</span>
+                        <strong>Aetna</strong>
+                    </div>
+
+                    <div>
+                        <span>Submission Date</span>
+                        <strong>Sep 08, 2026</strong>
+                    </div>
+
+                    <div>
+                        <span>Deadline</span>
+                        <strong>Sep 20, 2026</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="detail-section">
+
+                <h2>Claim Information</h2>
+
+                <div class="detail-list">
+
+                    <div>
+                        <span>Claim Number</span>
+                        <strong>CLM-100245</strong>
+                    </div>
+
+                    <div>
+                        <span>Denied Amount</span>
+                        <strong>$575.00</strong>
+                    </div>
+
+                    <div>
+                        <span>CPT</span>
+                        <strong>99214</strong>
+                    </div>
+
+                    <div>
+                        <span>ICD-10</span>
+                        <strong>E11.9</strong>
+                    </div>
+
+                    <div>
+                        <span>Provider</span>
+                        <strong>Dr. Michael Brown</strong>
+                    </div>
+
+                    <div>
+                        <span>Location</span>
+                        <strong>Downtown Medical Center</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="note-section">
+            <h2>Appeal Rationale</h2>
+            <p>
+                The claim was denied for medical necessity. The provider has submitted
+                clinical documentation demonstrating that the services were medically
+                necessary based on the patient's documented condition.
+            </p>
+        </div>
+
+    </div>
+
+</div>

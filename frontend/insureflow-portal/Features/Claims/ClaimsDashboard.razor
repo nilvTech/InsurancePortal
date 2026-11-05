@@ -1,0 +1,283 @@
+@page "/claims"
+
+<div class="claims-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">REVENUE CYCLE MANAGEMENT</div>
+            <h1>Claims</h1>
+            <p>Manage claim creation, validation, submission, responses, rejections and resubmission.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/create" class="primary-button">+ Create Claim</a>
+            <a href="/claims/submission" class="secondary-button">Submission Queue</a>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">CL</div>
+            <div>
+                <span>Total Claims</span>
+                <strong>1,248</strong>
+                <small>Current billing period</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">DR</div>
+            <div>
+                <span>Draft Claims</span>
+                <strong>86</strong>
+                <small>Require completion</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">SB</div>
+            <div>
+                <span>Submitted</span>
+                <strong>342</strong>
+                <small>Awaiting payer response</small>
+            </div>
+        </div>
+
+        <div class="summary-card warning">
+            <div class="summary-icon warning">RJ</div>
+            <div>
+                <span>Rejected</span>
+                <strong>24</strong>
+                <small>Require attention</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="quick-actions">
+
+        <a href="/claims/create">
+            <span>+</span>
+            <div>
+                <strong>Create Claim</strong>
+                <small>Create a new claim</small>
+            </div>
+        </a>
+
+        <a href="/claims/validation">
+            <span>✓</span>
+            <div>
+                <strong>Validate Claims</strong>
+                <small>Review claim errors</small>
+            </div>
+        </a>
+
+        <a href="/claims/submission">
+            <span>↑</span>
+            <div>
+                <strong>Submit Claims</strong>
+                <small>Submission queue</small>
+            </div>
+        </a>
+
+        <a href="/claims/rejections">
+            <span>!</span>
+            <div>
+                <strong>Rejections</strong>
+                <small>Resolve rejected claims</small>
+            </div>
+        </a>
+
+        <a href="/claims/history">
+            <span>↔</span>
+            <div>
+                <strong>Claim History</strong>
+                <small>View claim activity</small>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="content-grid">
+
+        <section class="table-card">
+
+            <div class="table-header">
+                <div>
+                    <h2>Recent Claims</h2>
+                    <p>Latest claims requiring attention</p>
+                </div>
+
+                <a href="/claims/list">View All</a>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Claim</th>
+                            <th>Patient</th>
+                            <th>Payer</th>
+                            <th>DOS</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <strong>CLM-2026-001248</strong>
+                                <small>Professional</small>
+                            </td>
+
+                            <td>
+                                <strong>Robert Johnson</strong>
+                                <small>MRN-10245</small>
+                            </td>
+
+                            <td>
+                                <strong>Blue Cross Blue Shield</strong>
+                                <small>BCBS</small>
+                            </td>
+
+                            <td>09/03/2026</td>
+
+                            <td>$1,250.00</td>
+
+                            <td>
+                                <span class="status submitted">Submitted</span>
+                            </td>
+
+                            <td>
+                                <a href="/claims/details">View</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>CLM-2026-001247</strong>
+                                <small>Professional</small>
+                            </td>
+
+                            <td>
+                                <strong>Sarah Williams</strong>
+                                <small>MRN-10246</small>
+                            </td>
+
+                            <td>
+                                <strong>Aetna</strong>
+                                <small>AETNA</small>
+                            </td>
+
+                            <td>09/02/2026</td>
+
+                            <td>$860.00</td>
+
+                            <td>
+                                <span class="status pending">Pending</span>
+                            </td>
+
+                            <td>
+                                <a href="/claims/details">View</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>CLM-2026-001246</strong>
+                                <small>Professional</small>
+                            </td>
+
+                            <td>
+                                <strong>Michael Brown</strong>
+                                <small>MRN-10247</small>
+                            </td>
+
+                            <td>
+                                <strong>UnitedHealthcare</strong>
+                                <small>UHC</small>
+                            </td>
+
+                            <td>09/01/2026</td>
+
+                            <td>$2,450.00</td>
+
+                            <td>
+                                <span class="status rejected">Rejected</span>
+                            </td>
+
+                            <td>
+                                <a href="/claims/rejection">Review</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+        <section class="side-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Claim Pipeline</h2>
+                    <p>Current claim workflow</p>
+                </div>
+            </div>
+
+            <div class="pipeline">
+
+                <div class="pipeline-item">
+                    <span>1</span>
+                    <div>
+                        <strong>Draft</strong>
+                        <small>86 claims</small>
+                    </div>
+                </div>
+
+                <div class="pipeline-item">
+                    <span>2</span>
+                    <div>
+                        <strong>Validated</strong>
+                        <small>118 claims</small>
+                    </div>
+                </div>
+
+                <div class="pipeline-item">
+                    <span>3</span>
+                    <div>
+                        <strong>Submitted</strong>
+                        <small>342 claims</small>
+                    </div>
+                </div>
+
+                <div class="pipeline-item">
+                    <span>4</span>
+                    <div>
+                        <strong>Accepted</strong>
+                        <small>521 claims</small>
+                    </div>
+                </div>
+
+                <div class="pipeline-item">
+                    <span>5</span>
+                    <div>
+                        <strong>Rejected</strong>
+                        <small>24 claims</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>

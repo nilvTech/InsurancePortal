@@ -1,0 +1,336 @@
+@page "/authorizations"
+
+
+<div class="authorization-page">
+
+    <div class="page-header">
+        <div>
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span>/</span>
+                <span>Authorizations</span>
+            </div>
+
+            <h1>Authorization Dashboard</h1>
+
+            <p>
+                Monitor prior authorization requests, approvals, denials,
+                and upcoming expiration dates.
+            </p>
+        </div>
+
+        <div class="page-actions">
+            <a href="/authorizations/list" class="btn-secondary">
+                View All
+            </a>
+
+            <a href="/authorizations/create" class="btn-primary">
+                <span>＋</span>
+                Create Authorization
+            </a>
+        </div>
+    </div>
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon pending">P</div>
+            <div>
+                <span>Pending</span>
+                <strong>@PendingCount</strong>
+                <small>Awaiting payer decision</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon approved">A</div>
+            <div>
+                <span>Approved</span>
+                <strong>@ApprovedCount</strong>
+                <small>Approved requests</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon denied">D</div>
+            <div>
+                <span>Denied</span>
+                <strong>@DeniedCount</strong>
+                <small>Requires review</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon expiring">!</div>
+            <div>
+                <span>Expiring Soon</span>
+                <strong>@ExpiringCount</strong>
+                <small>Within 30 days</small>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="content-card">
+
+        <div class="card-header">
+            <div>
+                <h2>Recent Authorizations</h2>
+                <p>Most recently submitted authorization requests.</p>
+            </div>
+
+            <a href="/authorizations/list" class="text-link">
+                View all →
+            </a>
+        </div>
+
+        @if (authorizations.Count == 0)
+        {
+            <div class="empty-state">
+                <div class="empty-icon">A</div>
+                <h3>No authorizations found</h3>
+                <p>
+                    Create an authorization request to begin tracking
+                    payer decisions.
+                </p>
+
+                <a href="/authorizations/create" class="btn-primary">
+                    Create Authorization
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="table-wrapper">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Authorization</th>
+                            <th>Patient</th>
+                            <th>Provider</th>
+                            <th>Payer</th>
+                            <th>Service Date</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in authorizations
+                            .OrderByDescending(x => x.RequestedDate)
+                            .Take(8))
+                        {
+                            <tr>
+
+                                <td>
+                                    <strong>@item.AuthorizationNumber</strong>
+
+                                    <small>
+                                        @item.AuthorizationType
+                                    </small>
+                                </td>
+
+                                <td>
+                                    <strong>@item.PatientName</strong>
+
+                                    <small>
+                                        @item.PatientMrn
+                                    </small>
+                                </td>
+
+                                <td>
+                                    @item.ProviderName
+                                </td>
+
+                                <td>
+                                    @item.PayerName
+                                </td>
+
+                                <td>
+                                    @item.ServiceStartDate.ToString("MM/dd/yyyy")
+                                </td>
+
+                                <td>
+                                    <span class="status @GetStatusClass(item.Status)">
+                                        @item.Status
+                                    </span>
+                                </td>
+
+                                <td class="actions">
+                                    <a href="@($"/authorizations/{item.Id}")">
+                                        View
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </section>
+
+    <section class="quick-actions">
+
+        <div class="section-heading">
+            <div>
+                <h2>Quick Actions</h2>
+                <p>Common authorization workflows.</p>
+            </div>
+        </div>
+
+        <div class="quick-action-grid">
+
+            <a href="/authorizations/create" class="quick-action">
+                <span class="quick-icon">＋</span>
+                <div>
+                    <strong>Create Authorization</strong>
+                    <small>Submit a new authorization request.</small>
+                </div>
+            </a>
+
+            <a href="/authorizations/list" class="quick-action">
+                <span class="quick-icon">≡</span>
+                <div>
+                    <strong>Review Requests</strong>
+                    <small>Search and filter authorization requests.</small>
+                </div>
+            </a>
+
+            <a href="/authorizations/list?status=Pending" class="quick-action">
+                <span class="quick-icon">P</span>
+                <div>
+                    <strong>Pending Requests</strong>
+                    <small>Review requests awaiting payer response.</small>
+                </div>
+            </a>
+
+            <a href="/authorizations/list?status=Denied" class="quick-action">
+                <span class="quick-icon">!</span>
+                <div>
+                    <strong>Denied Requests</strong>
+                    <small>Review denied authorization requests.</small>
+                </div>
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+@code {
+
+    private readonly List<AuthorizationRow> authorizations =
+    [
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("20000000-0000-0000-0000-000000000001"),
+            AuthorizationNumber = "AUTH-2026-0001",
+            PatientName = "John Smith",
+            PatientMrn = "MRN-10001",
+            ProviderName = "Dr. Sarah Wilson",
+            PayerName = "Aetna",
+            AuthorizationType = "MRI",
+            RequestedDate = DateTime.Today.AddDays(-2),
+            ServiceStartDate = DateTime.Today.AddDays(7),
+            Status = "Pending"
+        },
+
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("20000000-0000-0000-0000-000000000002"),
+            AuthorizationNumber = "AUTH-2026-0002",
+            PatientName = "Mary Johnson",
+            PatientMrn = "MRN-10002",
+            ProviderName = "Dr. Robert Anderson",
+            PayerName = "UnitedHealthcare",
+            AuthorizationType = "Physical Therapy",
+            RequestedDate = DateTime.Today.AddDays(-5),
+            ServiceStartDate = DateTime.Today.AddDays(14),
+            Status = "Approved"
+        },
+
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("20000000-0000-0000-0000-000000000003"),
+            AuthorizationNumber = "AUTH-2026-0003",
+            PatientName = "Robert Davis",
+            PatientMrn = "MRN-10003",
+            ProviderName = "Dr. Emily Johnson",
+            PayerName = "Cigna",
+            AuthorizationType = "CT Scan",
+            RequestedDate = DateTime.Today.AddDays(-8),
+            ServiceStartDate = DateTime.Today.AddDays(3),
+            Status = "Denied"
+        },
+
+        new AuthorizationRow
+        {
+            Id = Guid.Parse("20000000-0000-0000-0000-000000000004"),
+            AuthorizationNumber = "AUTH-2026-0004",
+            PatientName = "Patricia Taylor",
+            PatientMrn = "MRN-10006",
+            ProviderName = "Dr. Michael Brown",
+            PayerName = "Humana",
+            AuthorizationType = "Home Health",
+            RequestedDate = DateTime.Today.AddDays(-10),
+            ServiceStartDate = DateTime.Today.AddDays(20),
+            Status = "Approved"
+        }
+    ];
+
+    private int PendingCount =>
+        authorizations.Count(x =>
+            x.Status.Equals("Pending", StringComparison.OrdinalIgnoreCase));
+
+    private int ApprovedCount =>
+        authorizations.Count(x =>
+            x.Status.Equals("Approved", StringComparison.OrdinalIgnoreCase));
+
+    private int DeniedCount =>
+        authorizations.Count(x =>
+            x.Status.Equals("Denied", StringComparison.OrdinalIgnoreCase));
+
+    private int ExpiringCount =>
+        authorizations.Count(x =>
+            x.ServiceStartDate >= DateTime.Today &&
+            x.ServiceStartDate <= DateTime.Today.AddDays(30));
+
+    private static string GetStatusClass(string status)
+    {
+        return status
+            .ToLowerInvariant()
+            .Replace(" ", "-");
+    }
+
+    private sealed class AuthorizationRow
+    {
+        public Guid Id { get; init; }
+
+        public string AuthorizationNumber { get; init; } = string.Empty;
+
+        public string PatientName { get; init; } = string.Empty;
+
+        public string PatientMrn { get; init; } = string.Empty;
+
+        public string ProviderName { get; init; } = string.Empty;
+
+        public string PayerName { get; init; } = string.Empty;
+
+        public string AuthorizationType { get; init; } = string.Empty;
+
+        public DateTime RequestedDate { get; init; }
+
+        public DateTime ServiceStartDate { get; init; }
+
+        public string Status { get; init; } = string.Empty;
+    }
+}

@@ -1,0 +1,269 @@
+@page "/claims/details"
+
+<div class="claims-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">CLAIMS MANAGEMENT</div>
+            <h1>Claim Details</h1>
+            <p>Review claim information, clinical details, submission activity and financial status.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/claims/list" class="secondary-button">← Back</a>
+            <a href="/claims/validation" class="secondary-button">Validate</a>
+            <a href="/claims/submission" class="primary-button">Submit Claim</a>
+        </div>
+    </div>
+
+    <div class="claim-header-card">
+
+        <div class="claim-title">
+            <div class="claim-icon">CL</div>
+
+            <div>
+                <span>CLAIM NUMBER</span>
+                <h2>CLM-2026-001248</h2>
+                <small>Professional Claim • Created 09/03/2026</small>
+            </div>
+        </div>
+
+        <div class="claim-status">
+            <span class="status submitted">Submitted</span>
+            <small>Last updated 09/04/2026 09:42 AM</small>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span>Total Charge</span>
+            <strong>$1,250.00</strong>
+            <small>Submitted amount</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Allowed</span>
+            <strong>$980.00</strong>
+            <small>Payer allowed amount</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Paid</span>
+            <strong>$784.00</strong>
+            <small>Payment received</small>
+        </div>
+
+        <div class="summary-card warning">
+            <span>Patient Responsibility</span>
+            <strong>$196.00</strong>
+            <small>Outstanding</small>
+        </div>
+
+    </div>
+
+    <div class="tab-bar">
+        <a class="active" href="/claims/details">Overview</a>
+        <a href="/claims/details">Patient</a>
+        <a href="/claims/details">Insurance</a>
+        <a href="/claims/details">Providers</a>
+        <a href="/claims/details">Diagnoses</a>
+        <a href="/claims/details">Procedures</a>
+        <a href="/claims/details">Submission</a>
+        <a href="/claims/details">History</a>
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Claim Information</h2>
+                <p>Core claim and billing information.</p>
+            </div>
+
+            <a href="/claims/create" class="secondary-button">Edit Claim</a>
+        </div>
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <span>Claim Number</span>
+                <strong>CLM-2026-001248</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Claim Type</span>
+                <strong>Professional</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Patient Account</span>
+                <strong>PA-10245</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Place of Service</span>
+                <strong>11 — Office</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Date of Service</span>
+                <strong>09/03/2026</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Claim Frequency</span>
+                <strong>Original</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="two-column">
+
+        <section class="content-card">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Patient</h2>
+                    <p>Patient associated with this claim.</p>
+                </div>
+            </div>
+
+            <div class="detail-grid">
+
+                <div class="detail-item">
+                    <span>Name</span>
+                    <strong>Robert Johnson</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>MRN</span>
+                    <strong>MRN-10245</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Date of Birth</span>
+                    <strong>04/18/1981</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Account Number</span>
+                    <strong>PA-10245</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content-card">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Insurance</h2>
+                    <p>Coverage used for this claim.</p>
+                </div>
+            </div>
+
+            <div class="detail-grid">
+
+                <div class="detail-item">
+                    <span>Payer</span>
+                    <strong>Blue Cross Blue Shield</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Member ID</span>
+                    <strong>X123456789</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Group Number</span>
+                    <strong>GRP-88219</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Priority</span>
+                    <strong>Primary</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <section class="content-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Claim Lines</h2>
+                <p>Services billed on this claim.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table class="data-table">
+
+                <thead>
+                    <tr>
+                        <th>Line</th>
+                        <th>DOS</th>
+                        <th>CPT/HCPCS</th>
+                        <th>Modifier</th>
+                        <th>Units</th>
+                        <th>Charge</th>
+                        <th>Allowed</th>
+                        <th>Paid</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td>09/03/2026</td>
+                        <td>
+                            <strong>99213</strong>
+                            <small>Office visit</small>
+                        </td>
+                        <td>25</td>
+                        <td>1</td>
+                        <td>$175.00</td>
+                        <td>$140.00</td>
+                        <td>$112.00</td>
+                        <td>
+                            <span class="status paid">Paid</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>09/03/2026</td>
+                        <td>
+                            <strong>99490</strong>
+                            <small>Care management</small>
+                        </td>
+                        <td>—</td>
+                        <td>1</td>
+                        <td>$1,075.00</td>
+                        <td>$840.00</td>
+                        <td>$672.00</td>
+                        <td>
+                            <span class="status paid">Paid</span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>

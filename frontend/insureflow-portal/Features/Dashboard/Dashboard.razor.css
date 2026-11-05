@@ -1,0 +1,718 @@
+/* =========================================
+   INSUREFLOW DASHBOARD
+   ========================================= */
+
+.dashboard-page {
+    min-height: 100vh;
+    padding: 28px 32px 45px;
+    background: #f5f7fa;
+    color: #172b4d;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #18978f;
+    margin-bottom: 6px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 5px 0 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   PRIMARY KPI GRID
+   ========================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.stat-card {
+    min-height: 92px;
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(23, 43, 77, .04);
+    padding: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: #e7f6f4;
+    color: #18978f;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.warning-icon {
+    background: #fff7e6;
+    color: #c58a18;
+}
+
+.danger-icon {
+    background: #fff0f0;
+    color: #c94b4b;
+}
+
+.stat-label {
+    display: block;
+    color: #718096;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.stat-card strong {
+    display: block;
+    color: #172b4d;
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+.stat-card small {
+    display: block;
+    margin-top: 5px;
+    color: #18978f;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   FINANCIAL CARDS
+   ========================================= */
+
+.financial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.financial-card {
+    background: #18978f;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(24, 151, 143, .15);
+}
+
+.financial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: .95;
+}
+
+.financial-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    background: rgba(255,255,255,.16);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.financial-card > strong {
+    display: block;
+    margin: 15px 0;
+    font-size: 27px;
+}
+
+.financial-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.2);
+    font-size: 11px;
+}
+
+.financial-footer b {
+    font-size: 11px;
+}
+
+
+/* =========================================
+   MAIN DASHBOARD GRID
+   ========================================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   PANEL
+   ========================================= */
+
+.panel {
+    background: #ffffff;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(23, 43, 77, .04);
+    padding: 22px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.panel-header h2 {
+    margin: 0;
+    color: #172b4d;
+    font-size: 17px;
+}
+
+.panel-header p {
+    margin: 5px 0 0;
+    color: #718096;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   PANEL NAVIGATION BUTTON
+   ========================================= */
+
+.panel-link {
+    border: 0;
+    background: transparent;
+    color: #18978f;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.panel-link:hover {
+    color: #11766f;
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   STATUS PILL
+   ========================================= */
+
+.status-pill {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #edf3f5;
+    color: #526174;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status-pill.success {
+    background: #e8f7f2;
+    color: #167b70;
+}
+
+
+/* =========================================
+   ELIGIBILITY SUMMARY
+   ========================================= */
+
+.eligibility-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.eligibility-box {
+    padding: 11px;
+    border-radius: 7px;
+    background: #f8fafb;
+}
+
+.eligibility-box span {
+    display: block;
+    color: #718096;
+    font-size: 11px;
+}
+
+.eligibility-box strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 18px;
+}
+
+.success-box {
+    background: #eaf8f5;
+}
+
+.success-box strong {
+    color: #168076;
+}
+
+.failure-box {
+    background: #fff2f2;
+}
+
+.failure-box strong {
+    color: #c84e4e;
+}
+
+.pending-box {
+    background: #fff8e8;
+}
+
+.pending-box strong {
+    color: #c18b21;
+}
+
+
+/* =========================================
+   ELIGIBILITY CHART
+   ========================================= */
+
+.chart {
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 20px 10px 0;
+}
+
+.bar-item {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 34px;
+    max-height: 170px;
+    min-height: 18px;
+    background: #18978f;
+    border-radius: 5px 5px 0 0;
+}
+
+.bar-value {
+    color: #718096;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.bar-label {
+    color: #718096;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   QUICK ACTIONS
+   ========================================= */
+
+.quick-actions {
+    display: grid;
+    gap: 9px;
+}
+
+.quick-action {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #edf0f4;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #172b4d;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: .18s ease;
+}
+
+.quick-action:hover {
+    border-color: #18978f;
+    background: #f4fbfa;
+}
+
+.quick-action > span {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    background: #e7f6f4;
+    color: #18978f;
+    font-size: 18px;
+}
+
+.quick-action strong,
+.quick-action small {
+    display: block;
+}
+
+.quick-action strong {
+    font-size: 12px;
+}
+
+.quick-action small {
+    color: #718096;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+
+/* =========================================
+   CLAIMS
+   ========================================= */
+
+.claims-panel {
+    margin-bottom: 18px;
+}
+
+.claims-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.claim-status {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 8px;
+    background: #f8fafb;
+}
+
+.claim-icon {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-weight: 800;
+}
+
+.claim-status > div span,
+.claim-status > div strong {
+    display: block;
+}
+
+.claim-status > div span {
+    color: #718096;
+    font-size: 11px;
+}
+
+.claim-status > div strong {
+    margin-top: 3px;
+    font-size: 18px;
+}
+
+.claim-status > small {
+    color: #718096;
+    font-size: 10px;
+}
+
+.submitted .claim-icon {
+    background: #e7f6f4;
+    color: #18978f;
+}
+
+.rejected .claim-icon {
+    background: #fff7e6;
+    color: #c58a18;
+}
+
+.denied .claim-icon {
+    background: #fff0f0;
+    color: #c94b4b;
+}
+
+.pending .claim-icon {
+    background: #edf3f5;
+    color: #526174;
+}
+
+
+/* =========================================
+   AR AGING
+   ========================================= */
+
+.aging-list {
+    display: grid;
+    gap: 18px;
+}
+
+.aging-row {
+    display: grid;
+    grid-template-columns: 115px 1fr 35px;
+    gap: 12px;
+    align-items: center;
+}
+
+.aging-label span,
+.aging-label strong {
+    display: block;
+}
+
+.aging-label span {
+    color: #718096;
+    font-size: 11px;
+}
+
+.aging-label strong {
+    margin-top: 3px;
+    color: #172b4d;
+    font-size: 12px;
+}
+
+.aging-progress {
+    height: 8px;
+    background: #edf1f4;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.aging-bar {
+    height: 100%;
+    background: #18978f;
+    border-radius: 20px;
+}
+
+.aging-danger {
+    background: #c94b4b;
+}
+
+.aging-row > span {
+    color: #718096;
+    font-size: 11px;
+    text-align: right;
+}
+
+
+/* =========================================
+   PAYER TABLE
+   ========================================= */
+
+.payer-table {
+    width: 100%;
+}
+
+.payer-header,
+.payer-row {
+    display: grid;
+    grid-template-columns: 1.4fr .8fr .8fr .8fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.payer-header {
+    padding: 0 0 10px;
+    color: #8a96a6;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.payer-row {
+    padding: 12px 0;
+    border-top: 1px solid #edf0f3;
+    font-size: 11px;
+}
+
+.payer-row strong {
+    color: #172b4d;
+}
+
+.paid-rate {
+    color: #18978f;
+    font-weight: 700;
+}
+
+.denial-rate {
+    color: #c94b4b;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   RECENT ACTIVITY
+   ========================================= */
+
+.recent-panel {
+    margin-bottom: 20px;
+}
+
+.activity-list {
+    display: grid;
+}
+
+.activity-row {
+    display: grid;
+    grid-template-columns: 12px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid #eef1f4;
+}
+
+.activity-row strong,
+.activity-row small {
+    display: block;
+}
+
+.activity-row strong {
+    font-size: 12px;
+}
+
+.activity-row small {
+    margin-top: 3px;
+    color: #718096;
+    font-size: 11px;
+}
+
+.activity-row time {
+    color: #718096;
+    font-size: 11px;
+}
+
+.activity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #18978f;
+}
+
+.activity-dot.warning {
+    background: #d79b20;
+}
+
+.activity-dot.info {
+    background: #5081b8;
+}
+
+.activity-dot.danger {
+    background: #c94b4b;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1050px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .claims-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .dashboard-page {
+        padding: 20px 14px 30px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .financial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .claims-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eligibility-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .panel-header {
+        align-items: flex-start;
+    }
+
+    .aging-row {
+        grid-template-columns: 95px 1fr 30px;
+        gap: 8px;
+    }
+
+    .payer-header,
+    .payer-row {
+        grid-template-columns: 1.3fr .7fr .7fr .7fr;
+    }
+
+}

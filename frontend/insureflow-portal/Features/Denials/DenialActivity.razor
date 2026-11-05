@@ -1,0 +1,107 @@
+@page "/denials/activity"
+
+<div class="denial-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">DENIAL MANAGEMENT</div>
+            <h1>Denial Activity</h1>
+            <p>Track all actions, communications, status changes, and follow-ups.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/denials" class="secondary-button">← Denials</a>
+            <button class="primary-button">+ Add Activity</button>
+        </div>
+    </div>
+
+    <div class="activity-layout">
+
+        <div class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Activity Timeline</h2>
+                    <p>Recent denial management activity.</p>
+                </div>
+
+                <select>
+                    <option>All Activities</option>
+                    <option>Notes</option>
+                    <option>Calls</option>
+                    <option>Emails</option>
+                    <option>Status Changes</option>
+                </select>
+            </div>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">N</div>
+                    <div>
+                        <strong>Denial note added</strong>
+                        <p>Clinical documentation requested from provider.</p>
+                        <small>Sarah Johnson · 09/07/2026 10:42 AM</small>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">C</div>
+                    <div>
+                        <strong>Payer contacted</strong>
+                        <p>Spoke with UnitedHealthcare representative regarding denial.</p>
+                        <small>James Miller · 09/06/2026 03:18 PM</small>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">S</div>
+                    <div>
+                        <strong>Status changed</strong>
+                        <p>Denial status changed from New to In Progress.</p>
+                        <small>System · 09/06/2026 11:20 AM</small>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">A</div>
+                    <div>
+                        <strong>Denial assigned</strong>
+                        <p>Assigned to Sarah Johnson.</p>
+                        <small>Manager · 09/05/2026 09:15 AM</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="side-card">
+
+            <h2>Activity Summary</h2>
+
+            <div class="summary-row">
+                <span>Activities</span>
+                <strong>28</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Notes</span>
+                <strong>14</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Payer Contacts</span>
+                <strong>6</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Status Changes</span>
+                <strong>8</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

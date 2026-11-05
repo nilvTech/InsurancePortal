@@ -1,0 +1,150 @@
+@page "/appeals/submission/{AppealId}"
+
+@code {
+    [Parameter]
+    public string? AppealId { get; set; }
+}
+
+<PageTitle>Appeal Submission</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">APPEAL WORKSPACE</div>
+            <h1>Appeal Submission</h1>
+            <p>Validate and submit the appeal package to the payer.</p>
+        </div>
+
+        <a href="/appeals/details/100245" class="secondary-button">Back to Appeal</a>
+    </div>
+
+    <div class="readiness-card">
+
+        <div class="readiness-title">
+            <div>
+                <h2>Submission Readiness</h2>
+                <p>Validate all required information before submission.</p>
+            </div>
+
+            <span class="ready-badge">READY</span>
+        </div>
+
+        <div class="check-grid">
+
+            <div class="check-item">
+                <span>✓</span>
+                <div>
+                    <strong>Patient Information</strong>
+                    <small>Complete</small>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <span>✓</span>
+                <div>
+                    <strong>Insurance Information</strong>
+                    <small>Complete</small>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <span>✓</span>
+                <div>
+                    <strong>Denial Information</strong>
+                    <small>Complete</small>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <span>✓</span>
+                <div>
+                    <strong>Appeal Reason</strong>
+                    <small>Complete</small>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <span>✓</span>
+                <div>
+                    <strong>Documentation</strong>
+                    <small>Complete</small>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <span>✓</span>
+                <div>
+                    <strong>Attachments</strong>
+                    <small>Complete</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <h2>Submission Details</h2>
+            <p>Select how the appeal will be delivered to the payer.</p>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Submission Method</label>
+                <select>
+                    <option>Payer Portal</option>
+                    <option>API</option>
+                    <option>Clearinghouse</option>
+                    <option>Fax</option>
+                    <option>Mail</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Payer</label>
+                <input value="Aetna" />
+            </div>
+
+            <div class="form-group">
+                <label>Appeal Level</label>
+                <input value="First Level" />
+            </div>
+
+            <div class="form-group">
+                <label>Submission Date</label>
+                <input type="date" value="2026-09-09" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="card-header">
+            <h2>Submission Package</h2>
+            <p>Documents that will be sent to the payer.</p>
+        </div>
+
+        <div class="package-list">
+
+            <div>✓ Clinical Notes <span>1.8 MB</span></div>
+            <div>✓ Medical Records <span>2.4 MB</span></div>
+            <div>✓ EOB <span>480 KB</span></div>
+            <div>✓ Appeal Letter <span>720 KB</span></div>
+
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <a href="/appeals/details/100245" class="secondary-button">Cancel</a>
+        <button class="secondary-button">Save Draft</button>
+        <button class="primary-button">Submit Appeal</button>
+    </div>
+
+</div>

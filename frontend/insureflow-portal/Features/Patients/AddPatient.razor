@@ -1,0 +1,825 @@
+@page "/patients/create"
+@page "/patients/{PatientId:guid}/edit"
+
+@inject NavigationManager NavigationManager
+
+
+<div class="form-page">
+
+    <!-- =========================================
+         PAGE HEADER
+         ========================================= -->
+    <div class="page-header">
+
+        <button type="button"
+                class="back-button"
+                @onclick="GoToPatients">
+            ← Patients
+        </button>
+
+        <div class="eyebrow">
+            PATIENT MASTER DATA
+        </div>
+
+        <h1>
+            @(PatientId.HasValue ? "Edit Patient" : "Add Patient")
+        </h1>
+
+        <p>
+            Manage patient demographics, contact, insurance,
+            provider, guarantor, and billing information.
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         PATIENT FORM
+         ========================================= -->
+    <div class="form-card">
+
+
+        <!-- =====================================
+             1. PATIENT IDENTIFICATION
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">ID</div>
+
+                <div>
+                    <h2>Patient Identification</h2>
+                    <p>Core identifiers used throughout InsureFlow.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Patient ID
+                    <input value="PAT-10005"
+                           placeholder="PAT-10005"
+                           readonly />
+                    <small>System-generated identifier</small>
+                </label>
+
+                <label>
+                    Medical Record Number (MRN)
+                    <input placeholder="MRN-10005" />
+                    <small>Unique medical record number</small>
+                </label>
+
+                <label>
+                    Patient Account Number
+                    <input placeholder="ACC-10005" />
+                </label>
+
+                <label>
+                    First Name *
+                    <input placeholder="First name" />
+                </label>
+
+                <label>
+                    Middle Name
+                    <input placeholder="Middle name" />
+                </label>
+
+                <label>
+                    Last Name *
+                    <input placeholder="Last name" />
+                </label>
+
+                <label>
+                    Preferred Name
+                    <input placeholder="Preferred name" />
+                </label>
+
+                <label>
+                    Date of Birth *
+                    <input type="date" />
+                </label>
+
+                <label>
+                    Gender
+                    <select>
+                        <option>Select</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                        <option>Unknown</option>
+                        <option>Declined to Answer</option>
+                    </select>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             2. CONTACT INFORMATION
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">☎</div>
+
+                <div>
+                    <h2>Contact Information</h2>
+                    <p>Primary patient communication details.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Primary Phone *
+                    <input type="tel"
+                           placeholder="(555) 123-4567" />
+                </label>
+
+                <label>
+                    Secondary Phone
+                    <input type="tel"
+                           placeholder="(555) 987-6543" />
+                </label>
+
+                <label>
+                    Email Address
+                    <input type="email"
+                           placeholder="patient@example.com" />
+                </label>
+
+                <label>
+                    Preferred Contact Method
+                    <select>
+                        <option>Phone</option>
+                        <option>Email</option>
+                        <option>SMS</option>
+                        <option>Mail</option>
+                    </select>
+                </label>
+
+                <label>
+                    Preferred Language
+                    <select>
+                        <option>English</option>
+                        <option>Spanish</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Interpreter Required
+                    <select>
+                        <option>No</option>
+                        <option>Yes</option>
+                    </select>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             3. ADDRESS
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">⌂</div>
+
+                <div>
+                    <h2>Address</h2>
+                    <p>Patient's primary residential and mailing address.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label class="wide">
+                    Street Address *
+                    <input placeholder="123 Main Street" />
+                </label>
+
+                <label>
+                    Apartment / Unit
+                    <input placeholder="Suite / Unit" />
+                </label>
+
+                <label>
+                    City *
+                    <input placeholder="Chicago" />
+                </label>
+
+                <label>
+                    State *
+                    <select>
+                        <option>Select State</option>
+                        <option>Illinois</option>
+                        <option>New York</option>
+                        <option>California</option>
+                        <option>Texas</option>
+                        <option>Florida</option>
+                        <option>Pennsylvania</option>
+                    </select>
+                </label>
+
+                <label>
+                    ZIP Code *
+                    <input placeholder="60601" />
+                </label>
+
+                <label>
+                    ZIP+4
+                    <input placeholder="60601-1234" />
+                </label>
+
+                <label>
+                    County
+                    <input placeholder="Cook County" />
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             4. PROVIDER & LOCATION
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">DR</div>
+
+                <div>
+                    <h2>Provider & Location</h2>
+                    <p>Assign the patient's primary provider and service location.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Primary Provider *
+                    <select>
+                        <option>Select Provider</option>
+                        <option>Dr. Sarah Wilson</option>
+                        <option>Dr. Michael Johnson</option>
+                        <option>Dr. Emily Davis</option>
+                        <option>Dr. Robert Brown</option>
+                    </select>
+                </label>
+
+                <label>
+                    Provider NPI
+                    <input placeholder="1234567890" />
+                </label>
+
+                <label>
+                    Specialty
+                    <select>
+                        <option>Select Specialty</option>
+                        <option>Primary Care</option>
+                        <option>Cardiology</option>
+                        <option>Orthopedics</option>
+                        <option>Internal Medicine</option>
+                        <option>Pediatrics</option>
+                    </select>
+                </label>
+
+                <label>
+                    Primary Location *
+                    <select>
+                        <option>Select Location</option>
+                        <option>Chicago Medical Center</option>
+                        <option>Northside Clinic</option>
+                        <option>Downtown Health Center</option>
+                    </select>
+                </label>
+
+                <label>
+                    Department
+                    <select>
+                        <option>Select Department</option>
+                        <option>Primary Care</option>
+                        <option>Billing</option>
+                        <option>Specialty Care</option>
+                        <option>Outpatient</option>
+                    </select>
+                </label>
+
+                <label>
+                    Care Team
+                    <input placeholder="Care team name" />
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             5. INSURANCE INFORMATION
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">INS</div>
+
+                <div>
+                    <h2>Insurance Information</h2>
+                    <p>Primary coverage used for eligibility and claims.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Insurance Status
+                    <select>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Pending Verification</option>
+                        <option>Terminated</option>
+                        <option>Unknown</option>
+                    </select>
+                </label>
+
+                <label>
+                    Insurance Type
+                    <select>
+                        <option>Commercial</option>
+                        <option>Medicare</option>
+                        <option>Medicaid</option>
+                        <option>Workers Compensation</option>
+                        <option>Self Pay</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Payer
+                    <select>
+                        <option>Select Payer</option>
+                        <option>Aetna</option>
+                        <option>Blue Cross Blue Shield</option>
+                        <option>UnitedHealthcare</option>
+                        <option>Cigna</option>
+                        <option>Humana</option>
+                    </select>
+                </label>
+
+                <label>
+                    Payer ID
+                    <input placeholder="60054" />
+                </label>
+
+                <label>
+                    Member ID
+                    <input placeholder="Member ID" />
+                </label>
+
+                <label>
+                    Group Number
+                    <input placeholder="Group number" />
+                </label>
+
+                <label>
+                    Subscriber ID
+                    <input placeholder="Subscriber ID" />
+                </label>
+
+                <label>
+                    Subscriber Name
+                    <input placeholder="Subscriber name" />
+                </label>
+
+                <label>
+                    Subscriber Relationship
+                    <select>
+                        <option>Self</option>
+                        <option>Spouse</option>
+                        <option>Parent</option>
+                        <option>Child</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Effective Date
+                    <input type="date" />
+                </label>
+
+                <label>
+                    Termination Date
+                    <input type="date" />
+                </label>
+
+                <label>
+                    Plan Name
+                    <input placeholder="Health plan name" />
+                </label>
+
+            </div>
+
+            <div class="verification-banner">
+
+                <div class="verification-icon">
+                    ✓
+                </div>
+
+                <div>
+                    <strong>Eligibility Verification</strong>
+                    <span>
+                        Last verified: Today at 10:42 AM
+                    </span>
+                </div>
+
+                <span class="verified-status">
+                    Verified
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             6. GUARANTOR
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">G</div>
+
+                <div>
+                    <h2>Guarantor Information</h2>
+                    <p>Person financially responsible for the patient's account.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Guarantor Relationship
+                    <select>
+                        <option>Self</option>
+                        <option>Parent</option>
+                        <option>Spouse</option>
+                        <option>Guardian</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Guarantor First Name
+                    <input placeholder="First name" />
+                </label>
+
+                <label>
+                    Guarantor Last Name
+                    <input placeholder="Last name" />
+                </label>
+
+                <label>
+                    Guarantor Phone
+                    <input type="tel"
+                           placeholder="(555) 123-4567" />
+                </label>
+
+                <label>
+                    Guarantor Email
+                    <input type="email"
+                           placeholder="guarantor@example.com" />
+                </label>
+
+                <label>
+                    Guarantor Account ID
+                    <input placeholder="GUA-10005" />
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             7. PATIENT STATUS
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">ST</div>
+
+                <div>
+                    <h2>Patient Status</h2>
+                    <p>Current lifecycle and account status.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Patient Status
+                    <select>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Deceased</option>
+                        <option>Archived</option>
+                    </select>
+                </label>
+
+                <label>
+                    Registration Date
+                    <input type="date" />
+                </label>
+
+                <label>
+                    Last Visit Date
+                    <input type="date" />
+                </label>
+
+                <label>
+                    Patient Class
+                    <select>
+                        <option>Outpatient</option>
+                        <option>Inpatient</option>
+                        <option>Emergency</option>
+                        <option>Observation</option>
+                    </select>
+                </label>
+
+                <label>
+                    Portal Access
+                    <select>
+                        <option>Enabled</option>
+                        <option>Disabled</option>
+                        <option>Pending Invitation</option>
+                    </select>
+                </label>
+
+                <label>
+                    Communication Consent
+                    <select>
+                        <option>Granted</option>
+                        <option>Not Granted</option>
+                        <option>Pending</option>
+                    </select>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             8. EMERGENCY CONTACT
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">EC</div>
+
+                <div>
+                    <h2>Emergency Contact</h2>
+                    <p>Contact person for emergency communication.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Contact First Name
+                    <input placeholder="First name" />
+                </label>
+
+                <label>
+                    Contact Last Name
+                    <input placeholder="Last name" />
+                </label>
+
+                <label>
+                    Relationship
+                    <select>
+                        <option>Spouse</option>
+                        <option>Parent</option>
+                        <option>Child</option>
+                        <option>Sibling</option>
+                        <option>Friend</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Phone
+                    <input type="tel"
+                           placeholder="(555) 123-4567" />
+                </label>
+
+                <label>
+                    Alternate Phone
+                    <input type="tel"
+                           placeholder="(555) 987-6543" />
+                </label>
+
+                <label>
+                    Email
+                    <input type="email"
+                           placeholder="contact@example.com" />
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             9. IDENTIFIER / COMPLIANCE
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <div class="section-icon">SEC</div>
+
+                <div>
+                    <h2>Identifier & Privacy</h2>
+                    <p>Sensitive identifiers should be securely managed.</p>
+                </div>
+            </div>
+
+            <div class="security-notice">
+
+                <strong>Protected Information</strong>
+
+                <span>
+                    Sensitive identifiers should be tokenized or encrypted
+                    and access should be restricted according to applicable
+                    organizational policies and legal requirements.
+                </span>
+
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    SSN / Tokenized Identifier
+                    <input type="password"
+                           placeholder="Tokenized identifier" />
+                    <small>
+                        Do not store plaintext SSN unless legally and
+                        operationally required.
+                    </small>
+                </label>
+
+                <label>
+                    External Patient Identifier
+                    <input placeholder="External system ID" />
+                </label>
+
+                <label>
+                    Source System
+                    <input placeholder="EHR / Practice Management" />
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             10. ADDITIONAL INFORMATION
+             ===================================== -->
+        <section class="form-section">
+
+            <div class="section-heading">
+
+                <div class="section-icon">+</div>
+
+                <div>
+                    <h2>Additional Information</h2>
+                    <p>Additional administrative information.</p>
+                </div>
+
+            </div>
+
+            <div class="form-grid">
+
+                <label>
+                    Preferred Pharmacy
+                    <input placeholder="Pharmacy name" />
+                </label>
+
+                <label>
+                    Referral Source
+                    <select>
+                        <option>Select</option>
+                        <option>Provider Referral</option>
+                        <option>Insurance</option>
+                        <option>Self Referral</option>
+                        <option>Hospital</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Financial Assistance
+                    <select>
+                        <option>None</option>
+                        <option>Pending</option>
+                        <option>Approved</option>
+                        <option>Not Eligible</option>
+                    </select>
+                </label>
+
+                <label class="wide">
+                    Notes
+                    <textarea placeholder="Enter additional patient-related administrative notes..."></textarea>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             FORM ACTIONS
+             ===================================== -->
+        <div class="actions">
+
+            <button type="button"
+                    class="cancel-button"
+                    @onclick="Cancel">
+                Cancel
+            </button>
+
+            <button type="button"
+                    class="secondary-button"
+                    @onclick="SaveAndAddAnother">
+                Save & Add Another
+            </button>
+
+            <button type="button"
+                    class="primary-button"
+                    @onclick="SavePatient">
+                @(PatientId.HasValue ? "Update Patient" : "Save Patient")
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Guid? PatientId { get; set; }
+
+
+    // =========================================
+    // NAVIGATION
+    // =========================================
+
+    private void GoToPatients()
+    {
+        NavigationManager.NavigateTo("/patients");
+    }
+
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/patients");
+    }
+
+
+    // =========================================
+    // SAVE PATIENT
+    // =========================================
+
+    private void SavePatient()
+    {
+        // TODO:
+        // Replace this with PatientService/API/database
+        // persistence when backend integration is added.
+
+        NavigationManager.NavigateTo("/patients");
+    }
+
+
+    // =========================================
+    // SAVE AND ADD ANOTHER
+    // =========================================
+
+    private void SaveAndAddAnother()
+    {
+        // TODO:
+        // Save current patient before resetting the form.
+
+        NavigationManager.NavigateTo("/patients/addpatient");
+    }
+
+}

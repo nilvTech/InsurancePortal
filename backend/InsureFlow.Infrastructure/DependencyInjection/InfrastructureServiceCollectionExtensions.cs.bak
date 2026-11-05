@@ -1,0 +1,94 @@
+using InsureFlow.Application.Abstractions;
+using InsureFlow.Application.Persistence;
+using InsureFlow.Infrastructure.Auditing;
+using InsureFlow.Infrastructure.Persistence;
+using InsureFlow.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace InsureFlow.Infrastructure.DependencyInjection;
+
+public static class InfrastructureServiceCollectionExtensions
+{
+    public static IServiceCollection AddInsureFlowInfrastructure(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var connectionString =
+            configuration.GetConnectionString("InsureFlow");
+
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException(
+                "ConnectionStrings:InsureFlow is not configured.");
+        }
+
+        services.AddDbContext<InsureFlowDbContext>(options =>
+        {
+            options.UseMySQL(connectionString);
+
+            if (configuration.GetValue<bool>(
+                    "Database:EnableDetailedErrors"))
+            {
+                options.EnableDetailedErrors();
+            }
+
+            if (configuration.GetValue<bool>(
+                    "Database:EnableSensitiveDataLogging"))
+            {
+                options.EnableSensitiveDataLogging();
+            }
+        });
+
+        services.AddScoped<
+            ITenantRepository,
+            TenantRepository>();
+
+        services.AddScoped<
+            IOrganizationRepository,
+            OrganizationRepository>();
+
+        services.AddScoped<
+            IProviderRepository,
+            ProviderRepository>();
+        
+        services.AddScoped<
+            IPayerRepository,
+            PayerRepository>();
+        
+        services.AddScoped<
+            IPatientRepository,
+            PatientRepository>();
+
+        services.AddScoped<
+            IInsurancePlanRepository,
+            InsurancePlanRepository>();
+
+        services.AddScoped<
+            IPatientInsuranceRepository,
+            PatientInsuranceRepository>();
+
+        services.AddScoped<
+IEligibilityRequestRepository,
+EligibilityRequestRepository>();
+
+        services.AddScoped<
+            IEligibilityResponseRepository,
+            EligibilityResponseRepository>();
+
+        services.AddScoped<
+            IEligibilityBenefitRepository,
+            EligibilityBenefitRepository>();
+
+        services.AddScoped<
+            IEligibilityHistoryRepository,
+            EligibilityHistoryRepository>();
+
+        services.AddScoped<
+            IAuditService,
+            LoggingAuditService>();
+
+        return services;
+    }
+}

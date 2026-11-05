@@ -1,0 +1,45 @@
+using InsureFlow.Domain.Entities;
+
+namespace InsureFlow.Application.Persistence;
+
+public interface IPatientRepository
+{
+    Task<IReadOnlyList<Patient>> GetPagedAsync(
+        string? search,
+        string? status,
+        string? gender,
+        string? patientClass,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default);
+
+    Task<Patient?> GetByExternalIdAsync(
+        Guid externalId,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> ExistsByPatientIdAsync(
+        string patientId,
+        Guid? excludeExternalId = null,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> ExistsByMrnAsync(
+        string mrn,
+        Guid? excludeExternalId = null,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> ExistsByAccountNumberAsync(
+        string accountNumber,
+        Guid? excludeExternalId = null,
+        CancellationToken cancellationToken = default);
+
+    Task AddAsync(
+        Patient patient,
+        CancellationToken cancellationToken = default);
+
+    Task UpdateAsync(
+        Patient patient,
+        CancellationToken cancellationToken = default);
+
+    Task SaveChangesAsync(
+        CancellationToken cancellationToken = default);
+}

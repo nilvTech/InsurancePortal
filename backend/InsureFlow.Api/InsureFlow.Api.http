@@ -1,0 +1,6 @@
+@InsureFlow.Api_HostAddress = http://localhost:5228
+
+GET {{InsureFlow.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

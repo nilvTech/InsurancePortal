@@ -1,0 +1,251 @@
+@page "/appeals"
+
+<PageTitle>Appeals Management</PageTitle>
+
+<div class="appeal-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">REVENUE CYCLE MANAGEMENT</div>
+            <h1>Appeals Management</h1>
+            <p>Manage payer appeals, documentation, submissions, decisions and deadlines.</p>
+        </div>
+
+        <div class="header-actions">
+            <a href="/appeals/create" class="primary-button">+ Create Appeal</a>
+            <a href="/denials" class="secondary-button">View Denials</a>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">A</div>
+            <div>
+                <span>Total Appeals</span>
+                <strong>248</strong>
+                <small>Active and closed</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon warning">1</div>
+            <div>
+                <span>First Level</span>
+                <strong>156</strong>
+                <small>Current appeals</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">2</div>
+            <div>
+                <span>Second Level</span>
+                <strong>62</strong>
+                <small>Escalated appeals</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">E</div>
+            <div>
+                <span>External Review</span>
+                <strong>30</strong>
+                <small>Under external review</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="quick-actions">
+
+        <a href="/appeals/create">
+            <span>+</span>
+            <div>
+                <strong>Create Appeal</strong>
+                <small>Start a new appeal</small>
+            </div>
+        </a>
+
+        <a href="/appeals?status=pending">
+            <span>P</span>
+            <div>
+                <strong>Pending Review</strong>
+                <small>74 appeals</small>
+            </div>
+        </a>
+
+        <a href="/appeals?deadline=soon">
+            <span>!</span>
+            <div>
+                <strong>Due Soon</strong>
+                <small>18 deadlines</small>
+            </div>
+        </a>
+
+        <a href="/appeals/external-review">
+            <span>E</span>
+            <div>
+                <strong>External Review</strong>
+                <small>30 cases</small>
+            </div>
+        </a>
+
+        <a href="/appeals/history">
+            <span>H</span>
+            <div>
+                <strong>Appeal History</strong>
+                <small>View activity</small>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input placeholder="Search appeal, patient, claim or payer..." />
+        </div>
+
+        <select>
+            <option>All Statuses</option>
+            <option>Draft</option>
+            <option>Submitted</option>
+            <option>Pending Review</option>
+            <option>Approved</option>
+            <option>Denied</option>
+        </select>
+
+        <select>
+            <option>All Levels</option>
+            <option>First Level</option>
+            <option>Second Level</option>
+            <option>External Review</option>
+        </select>
+
+        <select>
+            <option>All Payers</option>
+            <option>Aetna</option>
+            <option>UnitedHealthcare</option>
+            <option>Cigna</option>
+            <option>BCBS</option>
+        </select>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <div>
+                <h2>Appeals</h2>
+                <p>Active appeal cases requiring RCM action.</p>
+            </div>
+
+            <a href="/appeals/history">View History →</a>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Appeal</th>
+                        <th>Patient</th>
+                        <th>Claim</th>
+                        <th>Payer</th>
+                        <th>Level</th>
+                        <th>Reason</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Decision</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>APL-100245</strong><small>Created Sep 08</small></td>
+                        <td><strong>John Smith</strong><small>DOB 04/12/1981</small></td>
+                        <td>CLM-100245</td>
+                        <td>Aetna</td>
+                        <td>First Level</td>
+                        <td>Medical Necessity</td>
+                        <td>Sep 20, 2026</td>
+                        <td><span class="status pending">Pending Review</span></td>
+                        <td>Pending</td>
+                        <td class="actions">
+                            <a href="/appeals/details/100245">View</a>
+                            <a href="/appeals/history/100245">History</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>APL-100244</strong><small>Created Sep 07</small></td>
+                        <td><strong>Mary Johnson</strong><small>DOB 11/09/1975</small></td>
+                        <td>CLM-100244</td>
+                        <td>UnitedHealthcare</td>
+                        <td>Second Level</td>
+                        <td>Authorization</td>
+                        <td>Sep 18, 2026</td>
+                        <td><span class="status submitted">Submitted</span></td>
+                        <td>Pending</td>
+                        <td class="actions">
+                            <a href="/appeals/details/100244">View</a>
+                            <a href="/appeals/history/100244">History</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>APL-100243</strong><small>Created Sep 06</small></td>
+                        <td><strong>Robert Lee</strong><small>DOB 02/22/1968</small></td>
+                        <td>CLM-100243</td>
+                        <td>Cigna</td>
+                        <td>First Level</td>
+                        <td>Timely Filing</td>
+                        <td>Sep 15, 2026</td>
+                        <td><span class="status approved">Approved</span></td>
+                        <td>Approved</td>
+                        <td class="actions">
+                            <a href="/appeals/details/100243">View</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>APL-100242</strong><small>Created Sep 05</small></td>
+                        <td><strong>Sarah Williams</strong><small>DOB 07/15/1984</small></td>
+                        <td>CLM-100242</td>
+                        <td>BCBS</td>
+                        <td>External Review</td>
+                        <td>Coverage</td>
+                        <td>Sep 22, 2026</td>
+                        <td><span class="status external">External Review</span></td>
+                        <td>Pending</td>
+                        <td class="actions">
+                            <a href="/appeals/external-review/100242">View</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-footer">
+            <span>Showing 1–4 of 248 appeals</span>
+
+            <div class="pagination">
+                <button>‹</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>›</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

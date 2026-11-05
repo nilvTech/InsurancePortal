@@ -1,0 +1,531 @@
+@page "/insurance"
+
+
+<div class="insurance-page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">INSURANCE MANAGEMENT</div>
+            <h1>Insurance</h1>
+            <p>
+                Manage patient insurance coverage, payer information,
+                benefits and coverage priority.
+            </p>
+        </div>
+
+        <a href="/insurance/create" class="primary-button">
+            ＋ Add Insurance
+        </a>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">▣</div>
+            <div>
+                <span>Total Coverage Records</span>
+                <strong>15,842</strong>
+                <small>All patient coverage</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">1</div>
+            <div>
+                <span>Primary Insurance</span>
+                <strong>11,932</strong>
+                <small>Active primary coverage</small>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-icon">✓</div>
+            <div>
+                <span>Verified Coverage</span>
+                <strong>10,846</strong>
+                <small>Verified successfully</small>
+            </div>
+        </div>
+
+        <div class="summary-card warning-card">
+            <div class="summary-icon">!</div>
+            <div>
+                <span>Verification Required</span>
+                <strong>184</strong>
+                <small>Requires attention</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FILTER TOOLBAR -->
+    <div class="toolbar">
+
+        <div class="search-box">
+            <span>⌕</span>
+
+            <input
+                @bind="SearchText"
+                placeholder="Search patient, MRN, payer, member ID..." />
+        </div>
+
+        <select @bind="CoverageFilter">
+            <option>All Coverage Levels</option>
+            <option>Primary</option>
+            <option>Secondary</option>
+            <option>Tertiary</option>
+        </select>
+
+        <select @bind="InsuranceTypeFilter">
+            <option>All Insurance Types</option>
+            <option>Commercial</option>
+            <option>Medicare</option>
+            <option>Medicaid</option>
+            <option>Workers Compensation</option>
+            <option>Auto Insurance</option>
+            <option>Self Pay</option>
+        </select>
+
+        <select @bind="StatusFilter">
+            <option>All Statuses</option>
+            <option>Active</option>
+            <option>Inactive</option>
+            <option>Verification Required</option>
+        </select>
+
+        <button class="filter-button">
+            ⚙ Filters
+        </button>
+
+    </div>
+
+    <!-- INSURANCE TABLE -->
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Coverage</th>
+                    <th>Insurance Type</th>
+                    <th>Payer</th>
+                    <th>Plan</th>
+                    <th>Member ID</th>
+                    <th>Effective</th>
+                    <th>Eligibility</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var insurance in FilteredInsurance)
+                {
+                    <tr>
+
+                        <!-- PATIENT -->
+                        <td>
+                            <div class="patient-cell">
+
+                                <div class="avatar">
+                                    @insurance.Initials
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        @insurance.PatientName
+                                    </strong>
+
+                                    <small>
+                                        @insurance.Mrn
+                                    </small>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <!-- COVERAGE -->
+                        <td>
+
+                            <span class="coverage-badge @insurance.CoverageLevel.ToLowerInvariant()">
+                                @insurance.CoverageLevel
+                            </span>
+
+                        </td>
+
+                        <!-- TYPE -->
+                        <td>
+                            <strong>
+                                @insurance.InsuranceType
+                            </strong>
+                        </td>
+
+                        <!-- PAYER -->
+                        <td>
+                            <strong>
+                                @insurance.Payer
+                            </strong>
+
+                            <small>
+                                @insurance.PlanType
+                            </small>
+                        </td>
+
+                        <!-- PLAN -->
+                        <td>
+                            @insurance.Plan
+                        </td>
+
+                        <!-- MEMBER -->
+                        <td>
+                            <strong>
+                                @insurance.MemberId
+                            </strong>
+
+                            <small>
+                                Subscriber: @insurance.SubscriberId
+                            </small>
+                        </td>
+
+                        <!-- EFFECTIVE -->
+                        <td>
+                            <strong>
+                                @insurance.EffectiveDate
+                            </strong>
+
+                            @if (!string.IsNullOrWhiteSpace(insurance.TerminationDate))
+                            {
+                                <small>
+                                    Ends @insurance.TerminationDate
+                                </small>
+                            }
+                            else
+                            {
+                                <small>
+                                    No termination
+                                </small>
+                            }
+
+                        </td>
+
+                        <!-- ELIGIBILITY -->
+                        <td>
+
+                            <span class="eligibility @insurance.EligibilityStatusClass">
+                                @insurance.EligibilityStatus
+                            </span>
+
+                        </td>
+
+                        <!-- ACTIONS -->
+                        <td class="actions">
+
+                            <a href="/insurance/details">
+                                View
+                            </a>
+
+                            <a href="/insurance/create">
+                                Edit
+                            </a>
+
+                            <button title="More actions">
+                                ⋮
+                            </button>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+        <!-- PAGINATION -->
+        <div class="table-footer">
+
+            <span>
+    Showing @FilteredInsurance.Count() of @InsuranceRecords.Count insurance records
+            </span>
+
+            <div class="pagination">
+
+                <button class="page-button">
+                    ‹
+                </button>
+
+                <button class="page-button active">
+                    1
+                </button>
+
+                <button class="page-button">
+                    2
+                </button>
+
+                <button class="page-button">
+                    3
+                </button>
+
+                <button class="page-button">
+                    4
+                </button>
+
+                <button class="page-button">
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+
+    private string SearchText = string.Empty;
+
+    private string CoverageFilter = "All Coverage Levels";
+
+    private string InsuranceTypeFilter = "All Insurance Types";
+
+    private string StatusFilter = "All Statuses";
+
+
+    private readonly List<InsuranceRow> InsuranceRecords =
+    [
+        new(
+            "JS",
+            "John Smith",
+            "MRN-10001",
+            "Primary",
+            "Commercial",
+            "ABC Health",
+            "Commercial PPO",
+            "PPO",
+            "ABC123456",
+            "SUB123456",
+            "01/01/2026",
+            "",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "JS",
+            "John Smith",
+            "MRN-10001",
+            "Secondary",
+            "Medicare",
+            "Demo Medicare",
+            "Medicare Advantage",
+            "Medicare Advantage",
+            "MCR882341",
+            "SUB882341",
+            "01/01/2026",
+            "",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "MJ",
+            "Mary Jones",
+            "MRN-10002",
+            "Primary",
+            "Commercial",
+            "XYZ Health",
+            "Commercial HMO",
+            "HMO",
+            "XYZ782345",
+            "SUB782345",
+            "03/01/2026",
+            "",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "RB",
+            "Robert Brown",
+            "MRN-10003",
+            "Primary",
+            "Medicare",
+            "Demo Medicare",
+            "Medicare Advantage",
+            "Medicare Advantage",
+            "MCR923481",
+            "MCR923481",
+            "01/01/2026",
+            "",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "LD",
+            "Linda Davis",
+            "MRN-10004",
+            "Primary",
+            "Medicaid",
+            "State Medicaid",
+            "Medicaid Managed Care",
+            "Medicaid",
+            "MED771204",
+            "MED771204",
+            "01/01/2026",
+            "",
+            "Verification Required",
+            "required"
+        ),
+
+        new(
+            "EW",
+            "Emily Wilson",
+            "MRN-10005",
+            "Primary",
+            "Commercial",
+            "ABC Health",
+            "Commercial HMO",
+            "HMO",
+            "ABC551920",
+            "SUB551920",
+            "02/01/2026",
+            "",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "DM",
+            "David Miller",
+            "MRN-10006",
+            "Primary",
+            "Workers Compensation",
+            "Illinois Workers Comp",
+            "Workers Compensation",
+            "Workers Compensation",
+            "WC-78291",
+            "WC-78291",
+            "05/15/2026",
+            "",
+            "Pending",
+            "pending"
+        ),
+
+        new(
+            "SJ",
+            "Susan Johnson",
+            "MRN-10007",
+            "Primary",
+            "Medicare",
+            "Demo Medicare",
+            "Medicare Advantage",
+            "Medicare Advantage",
+            "MCR771230",
+            "MCR771230",
+            "01/01/2026",
+            "",
+            "Verified",
+            "verified"
+        ),
+
+        new(
+            "TW",
+            "Thomas Williams",
+            "MRN-10008",
+            "Primary",
+            "Auto Insurance",
+            "ABC Auto Insurance",
+            "PIP",
+            "Auto",
+            "AUTO667821",
+            "AUTO667821",
+            "06/01/2026",
+            "",
+            "Verification Required",
+            "required"
+        ),
+
+        new(
+            "KA",
+            "Karen Anderson",
+            "MRN-10009",
+            "Primary",
+            "Self Pay",
+            "Self Pay",
+            "Self Pay",
+            "Self Pay",
+            "SELF-10009",
+            "SELF-10009",
+            "01/01/2026",
+            "",
+            "Not Applicable",
+            "na"
+        ),
+
+        new(
+            "JT",
+            "James Taylor",
+            "MRN-10010",
+            "Tertiary",
+            "Commercial",
+            "ABC Health",
+            "Commercial PPO",
+            "PPO",
+            "ABC667821",
+            "SUB667821",
+            "01/01/2026",
+            "01/01/2026",
+            "Verified",
+            "Verified"
+          
+        )
+    ];
+
+    private IEnumerable<InsuranceRow> FilteredInsurance =>
+        InsuranceRecords.Where(x =>
+            (
+                string.IsNullOrWhiteSpace(SearchText) ||
+                $"{x.PatientName} {x.Mrn} {x.Payer} {x.MemberId} {x.SubscriberId}"
+                    .Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            )
+            &&
+            (
+                CoverageFilter == "All Coverage Levels" ||
+                x.CoverageLevel == CoverageFilter
+            )
+            &&
+            (
+                InsuranceTypeFilter == "All Insurance Types" ||
+                x.InsuranceType == InsuranceTypeFilter
+            )
+            &&
+            (
+                StatusFilter == "All Statuses" ||
+                x.EligibilityStatus == StatusFilter
+            )
+        );
+
+
+    private record InsuranceRow(
+        string Initials,
+        string PatientName,
+        string Mrn,
+        string CoverageLevel,
+        string InsuranceType,
+        string Payer,
+        string Plan,
+        string PlanType,
+        string MemberId,
+        string SubscriberId,
+        string EffectiveDate,
+        string TerminationDate,
+        string EligibilityStatus,
+        string EligibilityStatusClass
+    );
+}

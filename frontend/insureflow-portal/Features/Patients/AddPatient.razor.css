@@ -1,0 +1,503 @@
+/* =========================================
+   INSUREFLOW - ADD PATIENT
+   ========================================= */
+
+.form-page {
+    min-height: 100vh;
+    padding: 28px 32px 45px;
+    background: #f5f7fa;
+    color: #172b4d;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.page-header {
+    margin-bottom: 22px;
+}
+
+.back-button {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0 0 16px;
+    color: #18978f;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    color: #11766f;
+    text-decoration: underline;
+}
+
+.eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #18978f;
+    margin-bottom: 6px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #172b4d;
+}
+
+.page-header p {
+    margin: 6px 0 0;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MAIN FORM CARD
+   ========================================= */
+
+.form-card {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(23, 43, 77, 0.05);
+    overflow: hidden;
+}
+
+
+/* =========================================
+   FORM SECTION
+   ========================================= */
+
+.form-section {
+    padding: 25px 28px 28px;
+    border-bottom: 1px solid #e8edf2;
+}
+
+.form-section:nth-child(even) {
+    background: #f8fbfb;
+}
+
+.form-section:last-of-type {
+    border-bottom: 0;
+}
+
+
+/* =========================================
+   SECTION HEADING
+   ========================================= */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 22px;
+}
+
+.section-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #e7f6f4;
+    color: #18978f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .3px;
+    border: 1px solid #ccebe7;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: #172b4d;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.section-heading p {
+    margin: 4px 0 0;
+    color: #718096;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   FORM GRID
+   ========================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 18px;
+    row-gap: 18px;
+    align-items: start;
+}
+
+
+/* =========================================
+   FORM LABEL
+   ========================================= */
+
+.form-grid label {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: #4a5568;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   INPUT / SELECT / TEXTAREA
+   ========================================= */
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 7px;
+    border: 1px solid #d8e0e7;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #172b4d;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+
+/* Inputs */
+
+.form-grid input,
+.form-grid select {
+    height: 40px;
+    padding: 0 11px;
+}
+
+
+/* Textarea */
+
+.form-grid textarea {
+    min-height: 105px;
+    padding: 11px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+
+/* Focus */
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus {
+    border-color: #18978f;
+    box-shadow: 0 0 0 3px rgba(24, 151, 143, 0.10);
+}
+
+
+/* Readonly */
+
+.form-grid input[readonly] {
+    background: #f1f6f6;
+    color: #526174;
+    cursor: not-allowed;
+}
+
+
+/* Placeholder */
+
+.form-grid input::placeholder,
+.form-grid textarea::placeholder {
+    color: #a0aec0;
+}
+
+
+/* =========================================
+   FIELD HELP TEXT
+   ========================================= */
+
+.form-grid label small {
+    margin-top: 5px;
+    color: #8a96a6;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   WIDE FIELD
+   ========================================= */
+
+.wide {
+    grid-column: span 2;
+}
+
+
+/* =========================================
+   ELIGIBILITY VERIFICATION
+   ========================================= */
+
+.verification-banner {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 22px;
+    padding: 13px 15px;
+    background: #eaf8f5;
+    border: 1px solid #c9ebe5;
+    border-radius: 8px;
+}
+
+.verification-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #18978f;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.verification-banner > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.verification-banner strong {
+    color: #176f69;
+    font-size: 13px;
+}
+
+.verification-banner span {
+    color: #667085;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.verified-status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #d7f1eb;
+    color: #13756e !important;
+    font-size: 11px !important;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   SECURITY NOTICE
+   ========================================= */
+
+.security-notice {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background: #f0f8f7;
+    border-left: 4px solid #18978f;
+    border-radius: 6px;
+}
+
+.security-notice strong {
+    color: #176f69;
+    font-size: 12px;
+}
+
+.security-notice span {
+    color: #667085;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM ACTIONS
+   ========================================= */
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 28px;
+    background: #ffffff;
+    border-top: 1px solid #e8edf2;
+}
+
+
+/* =========================================
+   CANCEL
+   ========================================= */
+
+.cancel-button {
+    height: 40px;
+    padding: 0 17px;
+    border: 1px solid #d8e0e7;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #5e6c84;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+.cancel-button:hover {
+    background: #f5f7fa;
+    border-color: #c5ced8;
+    color: #172b4d;
+}
+
+
+/* =========================================
+   SECONDARY BUTTON
+   ========================================= */
+
+.secondary-button {
+    height: 40px;
+    padding: 0 17px;
+    border: 1px solid #18978f;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #18978f;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .18s ease;
+    text-decoration: none;
+}
+
+.secondary-button:hover {
+    background: #e7f6f4;
+}
+
+
+/* =========================================
+   PRIMARY BUTTON
+   ========================================= */
+
+.primary-button {
+    height: 40px;
+    padding: 0 19px;
+    border: 1px solid #18978f;
+    border-radius: 7px;
+    background: #18978f;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .18s ease;
+    text-decoration: none;
+}
+
+.primary-button:hover {
+    background: #147f78;
+    border-color: #147f78;
+    box-shadow: 0 3px 8px rgba(24, 151, 143, .20);
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+   ========================================= */
+
+@media (max-width: 950px) {
+
+    .form-page {
+        padding: 24px;
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wide {
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .form-page {
+        padding: 18px 14px 30px;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .form-section {
+        padding: 20px 17px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .wide {
+        grid-column: auto;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .section-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    .verification-banner {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .verified-status {
+        margin-left: 45px;
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        padding: 18px;
+    }
+
+    .cancel-button,
+    .secondary-button,
+    .primary-button {
+        width: 100%;
+    }
+}
