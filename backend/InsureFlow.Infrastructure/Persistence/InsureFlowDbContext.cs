@@ -94,7 +94,7 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
     public DbSet<AuthorizationAppeal> AuthorizationAppeals =>
         Set<AuthorizationAppeal>();
 
-        
+    public DbSet<Denial> Denials => Set<Denial>();
 
     /// <summary>
     /// Gets the tenant ID associated with the current request.
@@ -235,6 +235,11 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
         modelBuilder.Entity<AuthorizationNote>()
             .HasQueryFilter(x =>
                 x.TenantId == CurrentTenantId);
+
+        modelBuilder.Entity<Denial>()
+        .HasQueryFilter(x =>
+            x.TenantId == CurrentTenantId);
+
     }
 
     private void EnforceTenantWriteRules()
@@ -329,7 +334,9 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
             or ClaimDiagnosis
             or ClaimAttachment
             or InsureFlow.Domain.Entities.ClaimHistory
-            or InsureFlow.Domain.Entities.ClaimRejection;
+            or InsureFlow.Domain.Entities.ClaimRejection
+             or Denial;
+
     }
 }
 

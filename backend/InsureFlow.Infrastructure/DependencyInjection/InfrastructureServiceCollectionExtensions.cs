@@ -95,6 +95,10 @@ public static class InfrastructureServiceCollectionExtensions
             IAuditService,
             LoggingAuditService>();
 
+        services.AddScoped<
+            IDenialRepository,
+            DenialRepository>();
+
         return services;
     }
 }
