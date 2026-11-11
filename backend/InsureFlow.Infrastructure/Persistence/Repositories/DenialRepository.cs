@@ -114,4 +114,95 @@ public sealed class DenialRepository : IDenialRepository
     {
         return _dbContext.SaveChangesAsync(cancellationToken);
     }
+
+    public Task<Guid?> GetClaimExternalIdAsync(
+    long claimId,
+    CancellationToken cancellationToken = default)
+    {
+        return _dbContext.Claims
+            .Where(x => x.Id == claimId)
+            .Select(x => (Guid?)x.ExternalId)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+
+    public async Task<IReadOnlyList<DenialActivity>> GetActivitiesAsync(
+        long denialId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.DenialActivities
+            .AsNoTracking()
+            .Where(x => x.DenialId == denialId)
+            .OrderByDescending(x => x.ActivityDateUtc)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task AddActivityAsync(
+        DenialActivity activity,
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.DenialActivities.AddAsync(
+            activity,
+            cancellationToken);
+    }
+    // Denial Attachments
+
+    public async Task<IReadOnlyList<DenialAttachment>> GetAttachmentsAsync(
+        long denialId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.DenialAttachments
+            .AsNoTracking()
+            .Where(x => x.DenialId == denialId)
+            .OrderByDescending(x => x.UploadedAtUtc)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<DenialAttachment?> GetAttachmentByExternalIdAsync(
+        long denialId,
+        Guid attachmentExternalId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.DenialAttachments
+            .FirstOrDefaultAsync(
+                x => x.DenialId == denialId &&
+                     x.ExternalId == attachmentExternalId,
+                cancellationToken);
+    }
+
+    public async Task AddAttachmentAsync(
+        DenialAttachment attachment,
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.DenialAttachments.AddAsync(
+            attachment,
+            cancellationToken);
+    }
+
+    public void RemoveAttachment(DenialAttachment attachment)
+    {
+        _dbContext.DenialAttachments.Remove(attachment);
+    }
+
+    // Denial Payer Responses
+
+    public async Task<IReadOnlyList<DenialPayerResponse>> GetPayerResponsesAsync(
+        long denialId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.DenialPayerResponses
+            .AsNoTracking()
+            .Where(x => x.DenialId == denialId)
+            .OrderByDescending(x => x.ResponseDateUtc)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task AddPayerResponseAsync(
+        DenialPayerResponse response,
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.DenialPayerResponses.AddAsync(
+            response,
+            cancellationToken);
+    }
 }

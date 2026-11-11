@@ -96,6 +96,13 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
 
     public DbSet<Denial> Denials => Set<Denial>();
 
+    public DbSet<DenialActivity> DenialActivities => Set<DenialActivity>();
+
+    public DbSet<DenialAttachment> DenialAttachments => Set<DenialAttachment>();
+
+    public DbSet<DenialPayerResponse> DenialPayerResponses
+    => Set<DenialPayerResponse>();
+
     /// <summary>
     /// Gets the tenant ID associated with the current request.
     /// </summary>
@@ -240,6 +247,15 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
         .HasQueryFilter(x =>
             x.TenantId == CurrentTenantId);
 
+        modelBuilder.Entity<DenialActivity>()
+            .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+            modelBuilder.Entity<DenialAttachment>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+        modelBuilder.Entity<DenialPayerResponse>()
+            .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
     }
 
     private void EnforceTenantWriteRules()
@@ -335,7 +351,10 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
             or ClaimAttachment
             or InsureFlow.Domain.Entities.ClaimHistory
             or InsureFlow.Domain.Entities.ClaimRejection
-             or Denial;
+            or Denial
+            or DenialActivity
+            or DenialAttachment
+            or DenialPayerResponse;
 
     }
 }
