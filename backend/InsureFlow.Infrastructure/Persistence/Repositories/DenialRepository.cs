@@ -205,4 +205,85 @@ public sealed class DenialRepository : IDenialRepository
             response,
             cancellationToken);
     }
+
+    // Denial Resolutions
+
+    public async Task<IReadOnlyList<DenialResolution>> GetResolutionsAsync(
+        long denialId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.DenialResolutions
+            .AsNoTracking()
+            .Where(x => x.DenialId == denialId)
+            .OrderByDescending(x => x.ResolutionDateUtc)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task AddResolutionAsync(
+        DenialResolution resolution,
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.DenialResolutions.AddAsync(
+            resolution,
+            cancellationToken);
+    }
+    public async Task<IReadOnlyList<DenialReason>> GetReasonsAsync(
+    bool? isActive,
+    CancellationToken cancellationToken = default)
+    {
+        var query = _dbContext.DenialReasons
+            .AsNoTracking()
+            .AsQueryable();
+
+        if (isActive.HasValue)
+        {
+            query = query.Where(x => x.IsActive == isActive.Value);
+        }
+
+        return await query
+            .OrderBy(x => x.Category)
+            .ThenBy(x => x.ReasonCode)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<DenialReason?> GetReasonByExternalIdAsync(
+        Guid externalId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.DenialReasons
+            .FirstOrDefaultAsync(
+                x => x.ExternalId == externalId,
+                cancellationToken);
+    }
+
+    public async Task<bool> ExistsReasonCodeAsync(
+        string reasonCode,
+        Guid? excludeExternalId = null,
+        CancellationToken cancellationToken = default)
+    {
+        var query = _dbContext.DenialReasons
+            .Where(x => x.ReasonCode == reasonCode);
+
+        if (excludeExternalId.HasValue)
+        {
+            query = query.Where(
+                x => x.ExternalId != excludeExternalId.Value);
+        }
+
+        return await query.AnyAsync(cancellationToken);
+    }
+
+    public async Task AddReasonAsync(
+        DenialReason reason,
+        CancellationToken cancellationToken = default)
+    {
+        await _dbContext.DenialReasons.AddAsync(
+            reason,
+            cancellationToken);
+    }
+
+    public void UpdateReason(DenialReason reason)
+    {
+        _dbContext.DenialReasons.Update(reason);
+    }
 }

@@ -103,9 +103,13 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
     public DbSet<DenialPayerResponse> DenialPayerResponses
     => Set<DenialPayerResponse>();
 
-    /// <summary>
-    /// Gets the tenant ID associated with the current request.
-    /// </summary>
+    public DbSet<DenialResolution> DenialResolutions
+    => Set<DenialResolution>();
+
+    public DbSet<DenialReason> DenialReasons
+        => Set<DenialReason>();
+    
+    
     public long? CurrentTenantId =>
         _tenantContext.TenantId;
 
@@ -250,10 +254,16 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
         modelBuilder.Entity<DenialActivity>()
             .HasQueryFilter(x => x.TenantId == CurrentTenantId);
 
-            modelBuilder.Entity<DenialAttachment>()
-    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+        modelBuilder.Entity<DenialAttachment>()
+            .HasQueryFilter(x => x.TenantId == CurrentTenantId);
 
         modelBuilder.Entity<DenialPayerResponse>()
+            .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+        modelBuilder.Entity<DenialResolution>()
+            .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+        modelBuilder.Entity<DenialReason>()
             .HasQueryFilter(x => x.TenantId == CurrentTenantId);
 
     }
@@ -354,7 +364,9 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
             or Denial
             or DenialActivity
             or DenialAttachment
-            or DenialPayerResponse;
+            or DenialPayerResponse
+            or DenialResolution
+            or DenialReason;
 
     }
 }

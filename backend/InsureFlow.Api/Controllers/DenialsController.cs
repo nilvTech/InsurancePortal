@@ -252,4 +252,122 @@ public sealed class DenialsController : ControllerBase
 
         return Ok(response);
     }
+
+    // Denial Resolutions
+
+    [HttpGet("{id:guid}/resolutions")]
+    [ProducesResponseType(typeof(IReadOnlyList<DenialResolutionResponse>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetResolutions(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        var resolutions = await _denialService.GetResolutionsAsync(
+            id,
+            cancellationToken);
+
+        return Ok(resolutions);
+    }
+
+    [HttpPost("{id:guid}/resolutions")]
+    [ProducesResponseType(typeof(DenialResolutionResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> AddResolution(
+        Guid id,
+        [FromBody] CreateDenialResolutionRequest request,
+        CancellationToken cancellationToken)
+    {
+        var resolution = await _denialService.AddResolutionAsync(
+            id,
+            request,
+            cancellationToken);
+
+        if (resolution is null)
+            return NotFound();
+
+        return Ok(resolution);
+    }
+    [HttpGet("reasons")]
+    [ProducesResponseType(typeof(IReadOnlyList<DenialReasonResponse>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetReasons(
+    [FromQuery] bool? isActive,
+    CancellationToken cancellationToken)
+    {
+        var result = await _denialService.GetReasonsAsync(
+            isActive,
+            cancellationToken);
+
+        return Ok(result);
+    }
+
+    [HttpPost("reasons")]
+    [ProducesResponseType(typeof(DenialReasonResponse), StatusCodes.Status201Created)]
+    public async Task<IActionResult> CreateReason(
+        [FromBody] CreateDenialReasonRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await _denialService.CreateReasonAsync(
+            request,
+            cancellationToken);
+
+        return CreatedAtAction(
+            nameof(GetReasons),
+            new { },
+            result);
+    }
+
+    [HttpPut("reasons/{id:guid}")]
+    [ProducesResponseType(typeof(DenialReasonResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> UpdateReason(
+        Guid id,
+        [FromBody] UpdateDenialReasonRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await _denialService.UpdateReasonAsync(
+            id,
+            request,
+            cancellationToken);
+
+        if (result is null)
+            return NotFound();
+
+        return Ok(result);
+    }
+
+    // Denial Appeal
+
+    [HttpPost("{id:guid}/appeal")]
+    [ProducesResponseType(typeof(DenialResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Appeal(
+        Guid id,
+        [FromBody] AppealDenialRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await _denialService.AppealAsync(
+            id,
+            request,
+            cancellationToken);
+
+        if (result is null)
+            return NotFound();
+
+        return Ok(result);
+    }
+
+    // Denial History
+
+    [HttpGet("{id:guid}/history")]
+    [ProducesResponseType(typeof(IReadOnlyList<DenialActivityResponse>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetHistory(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        var result = await _denialService.GetHistoryAsync(
+            id,
+            cancellationToken);
+
+        return Ok(result);
+    }
+
 }

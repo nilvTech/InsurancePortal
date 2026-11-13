@@ -73,4 +73,41 @@ public interface IDenialService
         Guid denialExternalId,
         CreateDenialPayerResponseRequest request,
         CancellationToken cancellationToken = default);
+
+    // Denial Resolutions
+
+    Task<IReadOnlyList<DenialResolutionResponse>> GetResolutionsAsync(
+        Guid denialExternalId,
+        CancellationToken cancellationToken = default);
+
+    Task<DenialResolutionResponse?> AddResolutionAsync(
+        Guid denialExternalId,
+        CreateDenialResolutionRequest request,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<DenialReasonResponse>> GetReasonsAsync(
+bool? isActive,
+CancellationToken cancellationToken = default);
+
+    Task<DenialReasonResponse> CreateReasonAsync(
+        CreateDenialReasonRequest request,
+        CancellationToken cancellationToken = default);
+
+    Task<DenialReasonResponse?> UpdateReasonAsync(
+        Guid externalId,
+        UpdateDenialReasonRequest request,
+        CancellationToken cancellationToken = default);
+
+
+    // Denial Appeal and History
+
+    Task<DenialResponse?> AppealAsync(
+        Guid denialExternalId,
+        AppealDenialRequest request,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<DenialActivityResponse>> GetHistoryAsync(
+        Guid denialExternalId,
+        CancellationToken cancellationToken = default);
+
 }

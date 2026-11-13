@@ -226,6 +226,57 @@ public sealed class DenialService : IDenialService
             activity.CreatedAtUtc);
     }
 
+
+    public async Task<DenialResponse?> AppealAsync(
+        Guid denialExternalId,
+        AppealDenialRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var tenantId = RequireTenant();
+
+        var denial = await _denialRepository.GetByExternalIdAsync(
+            denialExternalId,
+            cancellationToken);
+
+        if (denial is null)
+            return null;
+
+        // Change denial status from OPEN to APPEALED.
+        denial.MarkAppealed();
+
+        var description = string.IsNullOrWhiteSpace(request.AppealNotes)
+            ? "Denial appeal submitted."
+            : $"Denial appeal submitted. Notes: {request.AppealNotes.Trim()}";
+
+        // Create an activity record for the appeal.
+        var activity = new DenialActivity(
+            tenantId,
+            denial.Id,
+            "APPEAL_SUBMITTED",
+            description);
+
+        _denialRepository.Update(denial);
+
+        await _denialRepository.AddActivityAsync(
+            activity,
+            cancellationToken);
+
+        // Save status change and activity together.
+        await _denialRepository.SaveChangesAsync(cancellationToken);
+
+        return await MapAsync(denial, cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<DenialActivityResponse>> GetHistoryAsync(
+        Guid denialExternalId,
+        CancellationToken cancellationToken = default)
+    {
+        return await GetActivitiesAsync(
+            denialExternalId,
+            cancellationToken);
+    }
+
+
     private long RequireTenant()
     {
         return _tenantContext.TenantId
@@ -482,5 +533,186 @@ public sealed class DenialService : IDenialService
             ReceivedByUserId = response.ReceivedByUserId,
             CreatedAtUtc = response.CreatedAtUtc
         };
+    }
+
+    // Denial Resolutions
+
+    public async Task<IReadOnlyList<DenialResolutionResponse>> GetResolutionsAsync(
+        Guid denialExternalId,
+        CancellationToken cancellationToken = default)
+    {
+        var denial = await _denialRepository.GetByExternalIdAsync(
+            denialExternalId,
+            cancellationToken);
+
+        if (denial is null)
+            return Array.Empty<DenialResolutionResponse>();
+
+        var resolutions = await _denialRepository.GetResolutionsAsync(
+            denial.Id,
+            cancellationToken);
+
+        return resolutions.Select(MapResolution).ToList();
+    }
+
+    public async Task<DenialResolutionResponse?> AddResolutionAsync(
+        Guid denialExternalId,
+        CreateDenialResolutionRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var denial = await _denialRepository.GetByExternalIdAsync(
+            denialExternalId,
+            cancellationToken);
+
+        if (denial is null)
+            return null;
+
+        if (string.IsNullOrWhiteSpace(request.ResolutionType))
+            throw new ArgumentException("Resolution type is required.");
+
+        if (string.IsNullOrWhiteSpace(request.ResolutionNotes))
+            throw new ArgumentException("Resolution notes are required.");
+
+        if (request.ResolvedAmount < 0)
+            throw new ArgumentException("Resolved amount cannot be negative.");
+
+        if (request.ResolutionDateUtc == default)
+            throw new ArgumentException("Resolution date is required.");
+
+        var resolution = new DenialResolution
+        {
+            TenantId = _tenantContext.TenantId
+                ?? throw new InvalidOperationException("Tenant context is required."),
+            DenialId = denial.Id,
+            ResolutionType = request.ResolutionType.Trim(),
+            ResolutionNotes = request.ResolutionNotes.Trim(),
+            ResolvedAmount = request.ResolvedAmount,
+            ResolutionDateUtc = DateTime.SpecifyKind(
+                request.ResolutionDateUtc,
+                DateTimeKind.Utc)
+        };
+
+        await _denialRepository.AddResolutionAsync(
+            resolution,
+            cancellationToken);
+
+        await _denialRepository.SaveChangesAsync(cancellationToken);
+
+        return MapResolution(resolution);
+    }
+
+    private static DenialResolutionResponse MapResolution(
+        DenialResolution resolution)
+    {
+        return new DenialResolutionResponse
+        {
+            ExternalId = resolution.ExternalId,
+            ResolutionType = resolution.ResolutionType,
+            ResolutionNotes = resolution.ResolutionNotes,
+            ResolvedAmount = resolution.ResolvedAmount,
+            ResolutionDateUtc = resolution.ResolutionDateUtc,
+            ResolvedByUserId = resolution.ResolvedByUserId,
+            CreatedAtUtc = resolution.CreatedAtUtc
+        };
+    }
+
+    public async Task<IReadOnlyList<DenialReasonResponse>> GetReasonsAsync(
+    bool? isActive,
+    CancellationToken cancellationToken = default)
+    {
+        var reasons = await _denialRepository.GetReasonsAsync(
+            isActive,
+            cancellationToken);
+
+        return reasons.Select(MapReason).ToList();
+    }
+
+    public async Task<DenialReasonResponse> CreateReasonAsync(
+        CreateDenialReasonRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        RequireTenant();
+
+        if (string.IsNullOrWhiteSpace(request.ReasonCode))
+            throw new ArgumentException("Reason code is required.");
+
+        if (string.IsNullOrWhiteSpace(request.ReasonName))
+            throw new ArgumentException("Reason name is required.");
+
+        if (string.IsNullOrWhiteSpace(request.Category))
+            throw new ArgumentException("Reason category is required.");
+
+        var reasonCode = request.ReasonCode.Trim();
+
+        if (await _denialRepository.ExistsReasonCodeAsync(
+            reasonCode,
+            cancellationToken: cancellationToken))
+        {
+            throw new InvalidOperationException(
+                "A denial reason with this code already exists.");
+        }
+
+        var reason = new DenialReason
+        {
+            TenantId = _tenantContext.TenantId!.Value,
+            ReasonCode = reasonCode,
+            ReasonName = request.ReasonName.Trim(),
+            Description = request.Description?.Trim(),
+            Category = request.Category.Trim(),
+            IsActive = true
+        };
+
+        await _denialRepository.AddReasonAsync(
+            reason,
+            cancellationToken);
+
+        await _denialRepository.SaveChangesAsync(cancellationToken);
+
+        return MapReason(reason);
+    }
+
+    public async Task<DenialReasonResponse?> UpdateReasonAsync(
+        Guid externalId,
+        UpdateDenialReasonRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        RequireTenant();
+
+        var reason = await _denialRepository.GetReasonByExternalIdAsync(
+            externalId,
+            cancellationToken);
+
+        if (reason is null)
+            return null;
+
+        if (string.IsNullOrWhiteSpace(request.ReasonName))
+            throw new ArgumentException("Reason name is required.");
+
+        if (string.IsNullOrWhiteSpace(request.Category))
+            throw new ArgumentException("Reason category is required.");
+
+        reason.ReasonName = request.ReasonName.Trim();
+        reason.Description = request.Description?.Trim();
+        reason.Category = request.Category.Trim();
+        reason.IsActive = request.IsActive;
+
+        _denialRepository.UpdateReason(reason);
+
+        await _denialRepository.SaveChangesAsync(cancellationToken);
+
+        return MapReason(reason);
+    }
+
+    private static DenialReasonResponse MapReason(DenialReason reason)
+    {
+        return new DenialReasonResponse(
+            reason.ExternalId,
+            reason.ReasonCode,
+            reason.ReasonName,
+            reason.Description,
+            reason.Category,
+            reason.IsActive,
+            reason.CreatedAtUtc,
+            reason.UpdatedAtUtc);
     }
 }

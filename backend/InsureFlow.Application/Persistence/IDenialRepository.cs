@@ -73,4 +73,35 @@ public interface IDenialRepository
         DenialPayerResponse response,
         CancellationToken cancellationToken = default);
 
+    // Denial Resolutions
+
+    Task<IReadOnlyList<DenialResolution>> GetResolutionsAsync(
+        long denialId,
+        CancellationToken cancellationToken = default);
+
+    Task AddResolutionAsync(
+        DenialResolution resolution,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<DenialReason>> GetReasonsAsync(
+bool? isActive,
+CancellationToken cancellationToken = default);
+
+    Task<DenialReason?> GetReasonByExternalIdAsync(
+        Guid externalId,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> ExistsReasonCodeAsync(
+        string reasonCode,
+        Guid? excludeExternalId = null,
+        CancellationToken cancellationToken = default);
+
+    Task AddReasonAsync(
+        DenialReason reason,
+        CancellationToken cancellationToken = default);
+
+    void UpdateReason(DenialReason reason);
+
+    
+
 }
