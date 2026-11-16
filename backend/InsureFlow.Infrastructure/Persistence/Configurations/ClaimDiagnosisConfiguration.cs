@@ -48,5 +48,15 @@ public sealed class ClaimDiagnosisConfiguration
             x.ClaimId,
             x.Sequence
         });
+
+        builder.HasOne<Claim>()
+    .WithMany()
+    .HasForeignKey(x => x.ClaimId)
+    .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne<Tenant>()
+            .WithMany()
+            .HasForeignKey(x => x.TenantId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -109,7 +109,25 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
     public DbSet<DenialReason> DenialReasons
         => Set<DenialReason>();
     
-    
+    // General Appeals
+
+public DbSet<Appeal> Appeals =>
+    Set<Appeal>();
+
+public DbSet<AppealDocumentation> AppealDocumentation =>
+    Set<AppealDocumentation>();
+
+public DbSet<AppealAttachment> AppealAttachments =>
+    Set<AppealAttachment>();
+
+public DbSet<AppealExternalReview> AppealExternalReviews =>
+    Set<AppealExternalReview>();
+
+public DbSet<AppealHistory> AppealHistory =>
+    Set<AppealHistory>();
+
+public DbSet<AppealNotification> AppealNotifications =>
+    Set<AppealNotification>();
     public long? CurrentTenantId =>
         _tenantContext.TenantId;
 
@@ -266,6 +284,26 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
         modelBuilder.Entity<DenialReason>()
             .HasQueryFilter(x => x.TenantId == CurrentTenantId);
 
+            // General Appeals tenant filters
+
+modelBuilder.Entity<Appeal>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+modelBuilder.Entity<AppealDocumentation>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+modelBuilder.Entity<AppealAttachment>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+modelBuilder.Entity<AppealExternalReview>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+modelBuilder.Entity<AppealHistory>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
+modelBuilder.Entity<AppealNotification>()
+    .HasQueryFilter(x => x.TenantId == CurrentTenantId);
+
     }
 
     private void EnforceTenantWriteRules()
@@ -366,7 +404,13 @@ public DbSet<ClaimAttachment> ClaimAttachments =>
             or DenialAttachment
             or DenialPayerResponse
             or DenialResolution
-            or DenialReason;
+            or DenialReason
+            or Appeal
+            or InsureFlow.Domain.Entities.AppealDocumentation
+            or AppealAttachment
+            or AppealExternalReview
+            or InsureFlow.Domain.Entities.AppealHistory
+            or AppealNotification;
 
     }
 }

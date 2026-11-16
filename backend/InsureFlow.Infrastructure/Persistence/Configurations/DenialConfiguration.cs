@@ -14,8 +14,9 @@ public sealed class DenialConfiguration : IEntityTypeConfiguration<Denial>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+    .HasColumnName("id")
+    .HasColumnType("bigint unsigned")
+    .ValueGeneratedOnAdd();
 
         builder.Property(x => x.ExternalId)
             .HasColumnName("denial_guid")
@@ -30,8 +31,9 @@ public sealed class DenialConfiguration : IEntityTypeConfiguration<Denial>
             .IsRequired();
 
         builder.Property(x => x.ClaimId)
-            .HasColumnName("claim_id")
-            .IsRequired();
+     .HasColumnName("claim_id")
+     .HasColumnType("bigint unsigned")
+     .IsRequired();
 
         builder.Property(x => x.DenialNumber)
             .HasColumnName("denial_number")

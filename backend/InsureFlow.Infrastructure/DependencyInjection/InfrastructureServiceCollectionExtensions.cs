@@ -99,6 +99,10 @@ public static class InfrastructureServiceCollectionExtensions
             IDenialRepository,
             DenialRepository>();
 
+        services.AddScoped<
+            IAppealRepository,
+             AppealRepository>();
+
         return services;
     }
 }

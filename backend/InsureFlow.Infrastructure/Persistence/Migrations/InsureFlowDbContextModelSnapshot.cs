@@ -19,6 +19,488 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "10.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Appeal", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("AppealDeadlineUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("appeal_deadline_utc");
+
+                    b.Property<string>("AppealLevel")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("appeal_level");
+
+                    b.Property<string>("AppealNotes")
+                        .HasMaxLength(4000)
+                        .HasColumnType("varchar(4000)")
+                        .HasColumnName("appeal_notes");
+
+                    b.Property<string>("AppealNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("appeal_number");
+
+                    b.Property<string>("AppealReason")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("appeal_reason");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<string>("Decision")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("decision");
+
+                    b.Property<DateTime?>("DecisionAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("decision_at_utc");
+
+                    b.Property<string>("DecisionNotes")
+                        .HasMaxLength(4000)
+                        .HasColumnType("varchar(4000)")
+                        .HasColumnName("decision_notes");
+
+                    b.Property<ulong>("DenialId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("denial_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("external_id");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime?>("SubmittedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("submitted_at_utc");
+
+                    b.Property<long>("TenantId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.Property<DateTime?>("WithdrawnAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("withdrawn_at_utc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DenialId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "AppealNumber")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "DenialId");
+
+                    b.HasIndex("TenantId", "Status");
+
+                    b.ToTable("appeals", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealAttachment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<long>("AppealId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("appeal_id");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("content_type");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("external_id");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("file_name");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint")
+                        .HasColumnName("file_size_bytes");
+
+                    b.Property<string>("StorageReference")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)")
+                        .HasColumnName("storage_reference");
+
+                    b.Property<long>("TenantId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.Property<DateTime>("UploadedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("uploaded_at_utc");
+
+                    b.Property<long?>("UploadedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("uploaded_by_user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppealId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "AppealId");
+
+                    b.ToTable("appeal_attachments", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealDocumentation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<long>("AppealId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("appeal_id");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("DocumentTitle")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("document_title");
+
+                    b.Property<string>("DocumentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("document_type");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("external_id");
+
+                    b.Property<string>("StorageReference")
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)")
+                        .HasColumnName("storage_reference");
+
+                    b.Property<long>("TenantId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppealId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "AppealId");
+
+                    b.ToTable("appeal_documentation", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealExternalReview", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<long>("AppealId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("appeal_id");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("external_id");
+
+                    b.Property<string>("ExternalReferenceNumber")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("external_reference_number");
+
+                    b.Property<DateTime>("RequestedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("requested_at_utc");
+
+                    b.Property<DateTime?>("RespondedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("responded_at_utc");
+
+                    b.Property<DateTime?>("ReviewDueAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("review_due_at_utc");
+
+                    b.Property<string>("ReviewNotes")
+                        .HasMaxLength(4000)
+                        .HasColumnType("varchar(4000)")
+                        .HasColumnName("review_notes");
+
+                    b.Property<string>("ReviewingOrganization")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("reviewing_organization");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("status");
+
+                    b.Property<long>("TenantId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppealId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "AppealId");
+
+                    b.HasIndex("TenantId", "Status");
+
+                    b.ToTable("appeal_external_reviews", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealHistory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("ActivityDateUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("activity_date_utc");
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("activity_type");
+
+                    b.Property<long>("AppealId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("appeal_id");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("external_id");
+
+                    b.Property<long?>("PerformedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("performed_by_user_id");
+
+                    b.Property<long>("TenantId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppealId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "AppealId", "ActivityDateUtc");
+
+                    b.ToTable("appeal_history", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealNotification", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<long>("AppealId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("appeal_id");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("external_id");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("is_read");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("message");
+
+                    b.Property<string>("NotificationType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("notification_type");
+
+                    b.Property<DateTime?>("ReadAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("read_at_utc");
+
+                    b.Property<long?>("RecipientUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("recipient_user_id");
+
+                    b.Property<long>("TenantId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("title");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated_by_user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppealId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "RecipientUserId");
+
+                    b.HasIndex("TenantId", "AppealId", "IsRead");
+
+                    b.ToTable("appeal_notifications", (string)null);
+                });
+
             modelBuilder.Entity("InsureFlow.Domain.Entities.Authorization", b =>
                 {
                     b.Property<long>("Id")
@@ -332,9 +814,9 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.Claim", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint unsigned")
                         .HasColumnName("id");
 
                     b.Property<string>("ClaimNumber")
@@ -455,6 +937,100 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                     b.ToTable("claims", (string)null);
                 });
 
+            modelBuilder.Entity("InsureFlow.Domain.Entities.ClaimAttachment", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("id");
+
+                    b.Property<ulong>("ClaimId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("claim_id");
+
+                    b.Property<string>("ContentType")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("content_type");
+
+                    b.Property<string>("DocumentType")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("document_type");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("file_name");
+
+                    b.Property<ulong?>("FileSize")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("file_size");
+
+                    b.Property<string>("StorageKey")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("storage_key");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("uploaded_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClaimId");
+
+                    b.HasIndex("TenantId", "ClaimId");
+
+                    b.ToTable("claim_attachments", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.ClaimDiagnosis", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("id");
+
+                    b.Property<ulong>("ClaimId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("claim_id");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Icd10Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("icd10_code");
+
+                    b.Property<int>("Sequence")
+                        .HasColumnType("int")
+                        .HasColumnName("sequence");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClaimId");
+
+                    b.HasIndex("TenantId", "ClaimId", "Sequence");
+
+                    b.ToTable("claim_diagnoses", (string)null);
+                });
+
             modelBuilder.Entity("InsureFlow.Domain.Entities.ClaimHistory", b =>
                 {
                     b.Property<ulong>("Id")
@@ -516,8 +1092,8 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                         .HasColumnType("decimal(12,2)")
                         .HasColumnName("charge_amount");
 
-                    b.Property<long>("ClaimId")
-                        .HasColumnType("bigint")
+                    b.Property<ulong>("ClaimId")
+                        .HasColumnType("bigint unsigned")
                         .HasColumnName("claim_id");
 
                     b.Property<string>("DiagnosisPointers")
@@ -661,6 +1237,433 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("idx_claim_rejections_tenant_id");
 
                     b.ToTable("claim_rejections", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Denial", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("AppealDeadline")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("appeal_deadline");
+
+                    b.Property<long?>("AssignedToUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("assigned_to_user_id");
+
+                    b.Property<ulong>("ClaimId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("claim_id");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<string>("DenialCategory")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("denial_category");
+
+                    b.Property<string>("DenialCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("denial_code");
+
+                    b.Property<DateTime>("DenialDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("denial_date");
+
+                    b.Property<string>("DenialNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("denial_number");
+
+                    b.Property<string>("DenialReason")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)")
+                        .HasColumnName("denial_reason");
+
+                    b.Property<decimal>("DeniedAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("denied_amount");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("denial_guid");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("status");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClaimId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "ClaimId");
+
+                    b.HasIndex("TenantId", "DenialDate");
+
+                    b.HasIndex("TenantId", "DenialNumber")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "Status");
+
+                    b.ToTable("denials", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialActivity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("ActivityDateUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("activity_date_utc");
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("activity_type");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<ulong>("DenialId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("denial_id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("activity_guid");
+
+                    b.Property<long?>("PerformedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("performed_by_user_id");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DenialId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "DenialId", "ActivityDateUtc");
+
+                    b.ToTable("denial_activities", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialAttachment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("content_type");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<ulong>("DenialId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("denial_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("attachment_guid");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("file_name");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint")
+                        .HasColumnName("file_size_bytes");
+
+                    b.Property<string>("StorageReference")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)")
+                        .HasColumnName("storage_reference");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<DateTime>("UploadedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("uploaded_at_utc");
+
+                    b.Property<long?>("UploadedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("uploaded_by_user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DenialId");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "DenialId");
+
+                    b.ToTable("denial_attachments", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialPayerResponse", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<ulong>("DenialId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("denial_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("response_guid");
+
+                    b.Property<string>("PayerReferenceNumber")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("payer_reference_number");
+
+                    b.Property<long?>("ReceivedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("received_by_user_id");
+
+                    b.Property<string>("ResponseCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("response_code");
+
+                    b.Property<DateTime>("ResponseDateUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("response_date_utc");
+
+                    b.Property<string>("ResponseMessage")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("response_message");
+
+                    b.Property<string>("ResponseType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("response_type");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("DenialId", "ResponseDateUtc");
+
+                    b.HasIndex("TenantId", "DenialId");
+
+                    b.ToTable("denial_payer_responses", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialReason", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("category");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("reason_guid");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("is_active");
+
+                    b.Property<string>("ReasonCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("reason_code");
+
+                    b.Property<string>("ReasonName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("reason_name");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "ReasonCode")
+                        .IsUnique();
+
+                    b.ToTable("denial_reasons", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialResolution", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<ulong>("DenialId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("denial_id");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("resolution_guid");
+
+                    b.Property<DateTime>("ResolutionDateUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("resolution_date_utc");
+
+                    b.Property<string>("ResolutionNotes")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("resolution_notes");
+
+                    b.Property<string>("ResolutionType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("resolution_type");
+
+                    b.Property<decimal>("ResolvedAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("resolved_amount");
+
+                    b.Property<long?>("ResolvedByUserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("resolved_by_user_id");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("DenialId", "ResolutionDateUtc");
+
+                    b.HasIndex("TenantId", "DenialId");
+
+                    b.ToTable("denial_resolutions", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.EligibilityBenefit", b =>
@@ -1797,6 +2800,60 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                     b.ToTable("tenants", (string)null);
                 });
 
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Appeal", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Denial", null)
+                        .WithMany()
+                        .HasForeignKey("DenialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealAttachment", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Appeal", null)
+                        .WithMany()
+                        .HasForeignKey("AppealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealDocumentation", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Appeal", null)
+                        .WithMany()
+                        .HasForeignKey("AppealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealExternalReview", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Appeal", null)
+                        .WithMany()
+                        .HasForeignKey("AppealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealHistory", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Appeal", null)
+                        .WithMany()
+                        .HasForeignKey("AppealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.AppealNotification", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Appeal", null)
+                        .WithMany()
+                        .HasForeignKey("AppealId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("InsureFlow.Domain.Entities.Claim", b =>
                 {
                     b.HasOne("InsureFlow.Domain.Entities.Patient", null)
@@ -1830,6 +2887,36 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("InsureFlow.Domain.Entities.ClaimAttachment", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Claim", null)
+                        .WithMany()
+                        .HasForeignKey("ClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.ClaimDiagnosis", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Claim", null)
+                        .WithMany()
+                        .HasForeignKey("ClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("InsureFlow.Domain.Entities.ClaimLine", b =>
                 {
                     b.HasOne("InsureFlow.Domain.Entities.Claim", "Claim")
@@ -1853,6 +2940,90 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("ClaimId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Denial", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Claim", null)
+                        .WithMany()
+                        .HasForeignKey("ClaimId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialActivity", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Denial", null)
+                        .WithMany()
+                        .HasForeignKey("DenialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialAttachment", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Denial", null)
+                        .WithMany()
+                        .HasForeignKey("DenialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialPayerResponse", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Denial", null)
+                        .WithMany()
+                        .HasForeignKey("DenialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialReason", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.DenialResolution", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Denial", null)
+                        .WithMany()
+                        .HasForeignKey("DenialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

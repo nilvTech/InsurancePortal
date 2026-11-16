@@ -36,8 +36,9 @@ public sealed class ClaimLineConfiguration
             .HasDatabaseName("idx_claim_lines_tenant_id");
 
         builder.Property(x => x.ClaimId)
-            .HasColumnName("claim_id")
-            .IsRequired();
+    .HasColumnName("claim_id")
+    .HasColumnType("bigint unsigned")
+    .IsRequired();
 
         builder.HasIndex(x => new { x.ClaimId, x.LineNumber })
             .IsUnique()

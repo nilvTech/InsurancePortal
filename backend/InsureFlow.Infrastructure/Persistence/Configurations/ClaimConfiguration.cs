@@ -15,6 +15,7 @@ public sealed class ClaimConfiguration : IEntityTypeConfiguration<Claim>
 
         builder.Property(x => x.Id)
             .HasColumnName("id")
+            .HasColumnType("bigint unsigned")
             .ValueGeneratedOnAdd();
 
         builder.Property(x => x.ExternalId)

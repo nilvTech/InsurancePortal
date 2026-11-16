@@ -9,7 +9,7 @@ using InsureFlow.Application.PatientInsurances;
 using InsureFlow.Application.Eligibility;
 using InsureFlow.Application.Denials;
 using InsureFlow.Application.Claims;
-
+using InsureFlow.Application.Appeals;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InsureFlow.Application.DependencyInjection;
@@ -29,6 +29,7 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<IEligibilityService, EligibilityService>();
         services.AddScoped<IClaimService, ClaimService>();
         services.AddScoped<IDenialService, DenialService>();
+        services.AddScoped<IAppealService, AppealService>();
         return services;
     }
 }
