@@ -11,6 +11,7 @@ using InsureFlow.Application.Denials;
 using InsureFlow.Application.Claims;
 using InsureFlow.Application.Appeals;
 using Microsoft.Extensions.DependencyInjection;
+using InsureFlow.Application.Payments;
 
 namespace InsureFlow.Application.DependencyInjection;
 
@@ -30,6 +31,7 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<IClaimService, ClaimService>();
         services.AddScoped<IDenialService, DenialService>();
         services.AddScoped<IAppealService, AppealService>();
+        services.AddScoped<IPaymentService, PaymentService>();
         return services;
     }
 }

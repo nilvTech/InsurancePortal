@@ -103,6 +103,10 @@ public static class InfrastructureServiceCollectionExtensions
             IAppealRepository,
              AppealRepository>();
 
+        services.AddScoped<
+            IPaymentRepository,
+            PaymentRepository>();
+
         return services;
     }
 }

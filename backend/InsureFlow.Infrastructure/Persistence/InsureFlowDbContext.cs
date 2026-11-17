@@ -128,6 +128,17 @@ public DbSet<AppealHistory> AppealHistory =>
 
 public DbSet<AppealNotification> AppealNotifications =>
     Set<AppealNotification>();
+
+
+    public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<PaymentAllocation> PaymentAllocations => Set<PaymentAllocation>();
+    public DbSet<EraRecord> EraRecords => Set<EraRecord>();
+    public DbSet<EobRecord> EobRecords => Set<EobRecord>();
+    public DbSet<PaymentAdjustment> PaymentAdjustments => Set<PaymentAdjustment>();
+    public DbSet<PaymentReconciliation> PaymentReconciliations => Set<PaymentReconciliation>();
+    public DbSet<Refund> Refunds => Set<Refund>();
+
+
     public long? CurrentTenantId =>
         _tenantContext.TenantId;
 
@@ -304,6 +315,29 @@ modelBuilder.Entity<AppealHistory>()
 modelBuilder.Entity<AppealNotification>()
     .HasQueryFilter(x => x.TenantId == CurrentTenantId);
 
+
+        modelBuilder.Entity<Payment>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+        modelBuilder.Entity<PaymentAllocation>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+        modelBuilder.Entity<EraRecord>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+        modelBuilder.Entity<EobRecord>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+        modelBuilder.Entity<PaymentAdjustment>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+        modelBuilder.Entity<PaymentReconciliation>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+        modelBuilder.Entity<Refund>()
+            .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
+
+
     }
 
     private void EnforceTenantWriteRules()
@@ -410,7 +444,14 @@ modelBuilder.Entity<AppealNotification>()
             or AppealAttachment
             or AppealExternalReview
             or InsureFlow.Domain.Entities.AppealHistory
-            or AppealNotification;
+            or AppealNotification
+            or Payment
+            or PaymentAllocation 
+            or EraRecord 
+            or EobRecord 
+            or PaymentAdjustment 
+            or PaymentReconciliation 
+            or Refund;
 
     }
 }
