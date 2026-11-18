@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using InsureFlow.Api.Tenancy;
 using InsureFlow.Application.Tenants;
+using InsureFlow.Application.Roles;
+using InsureFlow.Infrastructure.Roles;
 
 var builder = WebApplication.CreateBuilder(args);
 

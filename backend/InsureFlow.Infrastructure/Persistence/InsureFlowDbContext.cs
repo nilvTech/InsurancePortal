@@ -138,7 +138,11 @@ public DbSet<AppealNotification> AppealNotifications =>
     public DbSet<PaymentReconciliation> PaymentReconciliations => Set<PaymentReconciliation>();
     public DbSet<Refund> Refunds => Set<Refund>();
 
+    public DbSet<Role> Roles => Set<Role>();
 
+    public DbSet<Permission> Permissions => Set<Permission>();
+
+    public DbSet<RolePermission> RolePermissions => Set<RolePermission>();
     public long? CurrentTenantId =>
         _tenantContext.TenantId;
 
