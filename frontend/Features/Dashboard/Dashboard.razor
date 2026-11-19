@@ -1,0 +1,684 @@
+
+@page "/dashboard"
+
+@inject insureflow_portal.Services.Dashboard.IDashboardApiService DashboardService
+@inject NavigationManager Navigation
+
+@using insureflow_portal.Models.Dashboard
+@using System.Globalization
+
+<div class="dashboard-page">
+
+    <div class="page-header">
+        <div>
+            <div class="eyebrow">INSUREFLOW PORTAL</div>
+            <h1>Dashboard</h1>
+            <p>Healthcare insurance operations at a glance.</p>
+        </div>
+    </div>
+
+    @if (IsLoading)
+    {
+        <div class="panel">
+            <p>Loading dashboard data...</p>
+        </div>
+    }
+    else if (!string.IsNullOrWhiteSpace(LoadError))
+    {
+        <div class="panel">
+            <h2>Unable to load dashboard</h2>
+            <p>@LoadError</p>
+            <button type="button" class="panel-link" @onclick="LoadDashboard">
+                Retry →
+            </button>
+        </div>
+    }
+    else
+    {
+        <!-- PRIMARY KPI CARDS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">P</div>
+                <div>
+                    <span class="stat-label">Total Patients</span>
+                    <strong>@FormatCount(Patients?.Total)</strong>
+                    <small>Registered patients</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">I</div>
+                <div>
+                    <span class="stat-label">Insurance Verification</span>
+                    <strong>@FormatPercentage(Insurance?.VerificationPercentage)</strong>
+                    <small>@FormatCount(Insurance?.Verified) verified / @FormatCount(Insurance?.Total) records</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">E</div>
+                <div>
+                    <span class="stat-label">Eligibility Checks</span>
+                    <strong>@FormatCount(Eligibility?.Total)</strong>
+                    <small>Total eligibility records</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">A</div>
+                <div>
+                    <span class="stat-label">Total Authorizations</span>
+                    <strong>@FormatCount(Authorizations?.Total)</strong>
+                    <small>Total authorization records</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">C</div>
+                <div>
+                    <span class="stat-label">Total Claims</span>
+                    <strong>@FormatCount(Claims?.Total)</strong>
+                    <small>Total claim records</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon warning-icon">D</div>
+                <div>
+                    <span class="stat-label">Total Denials</span>
+                    <strong>@FormatCount(Denials?.Total)</strong>
+                    <small>Total denial records</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon danger-icon">$</div>
+                <div>
+                    <span class="stat-label">Denied Amount</span>
+                    <strong>@FormatMoney(Denials?.TotalDeniedAmount)</strong>
+                    <small>Total denied amount</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">AP</div>
+                <div>
+                    <span class="stat-label">Appeals</span>
+                    <strong>@FormatCount(Appeals?.Total)</strong>
+                    <small>Total appeal records</small>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FINANCIAL KPI CARDS -->
+        <section class="financial-grid">
+
+            <div class="financial-card">
+                <div class="financial-header">
+                    <span>Payments</span>
+                    <span class="financial-icon">$</span>
+                </div>
+                <strong>@FormatMoney(Payments?.TotalPaymentAmount)</strong>
+                <div class="financial-footer">
+                    <span>Total payments recorded</span>
+                    <b>@FormatCount(Payments?.Total)</b>
+                </div>
+            </div>
+
+            <div class="financial-card">
+                <div class="financial-header">
+                    <span>Allocated Payments</span>
+                    <span class="financial-icon">$</span>
+                </div>
+                <strong>@FormatMoney(Payments?.TotalAllocatedAmount)</strong>
+                <div class="financial-footer">
+                    <span>Total allocated</span>
+                    <b>Live data</b>
+                </div>
+            </div>
+
+            <div class="financial-card">
+                <div class="financial-header">
+                    <span>Unallocated Payments</span>
+                    <span class="financial-icon">$</span>
+                </div>
+                <strong>@FormatMoney(Payments?.TotalUnallocatedAmount)</strong>
+                <div class="financial-footer">
+                    <span>Total unallocated</span>
+                    <b>Live data</b>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ELIGIBILITY + QUICK ACTIONS -->
+        <section class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>Eligibility Activity</h2>
+                        <p>Last 7 days</p>
+                    </div>
+
+                    <span class="status-pill success">
+                        @FormatPercentage(EligibilityActivity?.SuccessRate) success
+                    </span>
+                </div>
+
+                <div class="eligibility-summary">
+
+                    <div class="eligibility-box success-box">
+                        <span>Successful</span>
+                        <strong>@FormatCount(EligibilityActivity?.Successful)</strong>
+                    </div>
+
+                    <div class="eligibility-box failure-box">
+                        <span>Failed</span>
+                        <strong>@FormatCount(EligibilityActivity?.Failed)</strong>
+                    </div>
+
+                    <div class="eligibility-box pending-box">
+                        <span>Pending</span>
+                        <strong>@FormatCount(EligibilityActivity?.Pending)</strong>
+                    </div>
+
+                </div>
+
+                <div class="chart">
+
+                    @foreach (var item in EligibilityActivity?.Trend ?? [])
+                    {
+                        <div class="bar-item">
+
+                            <div class="bar-value">@item.Value</div>
+
+                            <div class="bar"
+                                 style="height:@GetBarHeight(item.Value)px">
+                            </div>
+
+                            <div class="bar-label">@item.Day</div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Common insurance operations</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <a href="/patients/create" class="quick-action">
+                        <span>＋</span>
+                        <div>
+                            <strong>Add Patient</strong>
+                            <small>Create a patient record</small>
+                        </div>
+                    </a>
+
+                    <button type="button"
+                            class="quick-action"
+                            @onclick="ManageProviders">
+                        <span>＋</span>
+                        <div>
+                            <strong>Manage Providers</strong>
+                            <small>View provider records</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="quick-action"
+                            @onclick="AddInsurance">
+                        <span>＋</span>
+                        <div>
+                            <strong>Add Insurance</strong>
+                            <small>Manage patient coverage</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="quick-action"
+                            @onclick="RunEligibility">
+                        <span>✓</span>
+                        <div>
+                            <strong>Run Eligibility</strong>
+                            <small>Verify patient coverage</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="quick-action"
+                            @onclick="ReviewAuthorizations">
+                        <span>✓</span>
+                        <div>
+                            <strong>Review Authorizations</strong>
+                            <small>View pending requests</small>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CLAIMS OVERVIEW -->
+        <section class="panel claims-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>Claims Overview</h2>
+                    <p>Current claim processing status</p>
+                </div>
+
+                <button type="button" class="panel-link" @onclick="ViewClaims">
+                    View Claims →
+                </button>
+            </div>
+
+            <div class="claims-grid">
+
+                @foreach (var item in ClaimsOverview?.StatusBreakdown ?? [])
+                {
+                    <div class="claim-status @GetClaimCssClass(item.Status)">
+
+                        <span class="claim-icon">
+                            @GetClaimIcon(item.Status)
+                        </span>
+
+                        <div>
+                            <span>@FormatStatus(item.Status)</span>
+                            <strong>@item.Count.ToString("N0")</strong>
+                        </div>
+
+                        <small>@FormatPercentage(item.Percentage)</small>
+
+                    </div>
+                }
+
+            </div>
+
+        </section>
+
+        <!-- AR AGING + PAYER PERFORMANCE -->
+        <section class="dashboard-grid">
+
+            <!-- AR AGING -->
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>AR Aging</h2>
+                        <p>Outstanding accounts receivable</p>
+                    </div>
+
+                    <span class="status-pill">
+                        @FormatCompactMoney(ArAging?.TotalOutstanding) Total
+                    </span>
+                </div>
+
+                <div class="aging-list">
+
+                    @foreach (var item in ArAging?.Aging ?? [])
+                    {
+                        <div class="aging-row">
+
+                            <div class="aging-label">
+                                <span>@item.Label</span>
+                                <strong>@FormatMoney(item.Amount)</strong>
+                            </div>
+
+                            <div class="aging-progress">
+                                <div class="aging-bar @(item.Label == "90+ Days" ? "aging-danger" : "")"
+                                     style="width:@GetPercentageWidth(item.Percentage)">
+                                </div>
+                            </div>
+
+                            <span>@FormatPercentage(item.Percentage)</span>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- PAYER PERFORMANCE -->
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>Payer Performance</h2>
+                        <p>Top insurance payers</p>
+                    </div>
+
+                    <button type="button"
+                            class="panel-link"
+                            @onclick="ViewReports">
+                        View Report →
+                    </button>
+                </div>
+
+                <div class="payer-table">
+
+                    <div class="payer-header">
+                        <span>Payer</span>
+                        <span>Claims</span>
+                        <span>Paid</span>
+                        <span>Denial</span>
+                    </div>
+
+                    @foreach (var payer in Payers)
+                    {
+                        <div class="payer-row">
+                            <strong>@payer.Name</strong>
+                            <span>@payer.Claims</span>
+                            <span class="paid-rate">@FormatPercentage(payer.PaidRate)</span>
+                            <span class="denial-rate">@FormatPercentage(payer.DenialRate)</span>
+                        </div>
+                    }
+
+                    @if (Payers.Count == 0)
+                    {
+                        <p>No payer performance records available.</p>
+                    }
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- RECENT ACTIVITY -->
+        <section class="panel recent-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>Recent Activity</h2>
+                    <p>Latest portal events</p>
+                </div>
+
+                <button type="button"
+                        class="panel-link"
+                        @onclick="ViewPatients">
+                    View patients →
+                </button>
+            </div>
+
+            <div class="activity-list">
+
+                @foreach (var item in Recent)
+                {
+                    <div class="activity-row">
+
+                        <span class="activity-dot @GetActivityCssClass(item.Type)"></span>
+
+                        <div>
+                            <strong>@item.Title</strong>
+                            <small>@item.Description</small>
+                        </div>
+
+                        <time>@FormatRelativeTime(item.Timestamp)</time>
+
+                    </div>
+                }
+
+                @if (Recent.Count == 0)
+                {
+                    <p>No recent activity available.</p>
+                }
+
+            </div>
+
+        </section>
+    }
+
+</div>
+
+@code {
+
+    private DashboardSummaryDto? Summary;
+    private DashboardMetricDto? Eligibility;
+    private DashboardMetricDto? Authorizations;
+    private DashboardMetricDto? Claims;
+    private DashboardDenialsDto? Denials;
+    private DashboardMetricDto? Appeals;
+    private DashboardPaymentsDto? Payments;
+
+    private DashboardPatientsDto? Patients;
+    private DashboardInsuranceDto? Insurance;
+    private DashboardEligibilityActivityDto? EligibilityActivity;
+    private DashboardClaimsOverviewDto? ClaimsOverview;
+    private DashboardArAgingDto? ArAging;
+
+    private List<DashboardPayerDto> Payers = [];
+    private List<DashboardRecentActivityDto> Recent = [];
+
+    private bool IsLoading = true;
+    private string? LoadError;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDashboard();
+    }
+
+    private async Task LoadDashboard()
+    {
+        IsLoading = true;
+        LoadError = null;
+
+        try
+        {
+            var tasks = new Task[]
+            {
+                LoadSummary(),
+                LoadEligibility(),
+                LoadAuthorizations(),
+                LoadClaims(),
+                LoadDenials(),
+                LoadAppeals(),
+                LoadPayments(),
+                LoadPatients(),
+                LoadInsurance(),
+                LoadEligibilityActivity(),
+                LoadClaimsOverview(),
+                LoadArAging(),
+                LoadPayers(),
+                LoadRecentActivity()
+            };
+
+            await Task.WhenAll(tasks);
+        }
+        catch (Exception ex)
+        {
+            LoadError = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task LoadSummary() =>
+        Summary = await DashboardService.GetSummaryAsync();
+
+    private async Task LoadEligibility() =>
+        Eligibility = await DashboardService.GetEligibilityAsync();
+
+    private async Task LoadAuthorizations() =>
+        Authorizations = await DashboardService.GetAuthorizationsAsync();
+
+    private async Task LoadClaims() =>
+        Claims = await DashboardService.GetClaimsAsync();
+
+    private async Task LoadDenials() =>
+        Denials = await DashboardService.GetDenialsAsync();
+
+    private async Task LoadAppeals() =>
+        Appeals = await DashboardService.GetAppealsAsync();
+
+    private async Task LoadPayments() =>
+        Payments = await DashboardService.GetPaymentsAsync();
+
+    private async Task LoadPatients() =>
+        Patients = await DashboardService.GetPatientsAsync();
+
+    private async Task LoadInsurance() =>
+        Insurance = await DashboardService.GetInsuranceAsync();
+
+    private async Task LoadEligibilityActivity() =>
+        EligibilityActivity = await DashboardService.GetEligibilityActivityAsync();
+
+    private async Task LoadClaimsOverview() =>
+        ClaimsOverview = await DashboardService.GetClaimsOverviewAsync();
+
+    private async Task LoadArAging() =>
+        ArAging = await DashboardService.GetArAgingAsync();
+
+    private async Task LoadPayers() =>
+        Payers = await DashboardService.GetPayerPerformanceAsync() ?? [];
+
+    private async Task LoadRecentActivity() =>
+        Recent = await DashboardService.GetRecentActivityAsync() ?? [];
+
+    // FORMATTING
+
+    private static string FormatCount(int? value) =>
+        value?.ToString("N0") ?? "—";
+
+    private static string FormatMoney(decimal? value) =>
+        value?.ToString("C2", CultureInfo.GetCultureInfo("en-US")) ?? "—";
+
+    private static string FormatMoney(decimal value) =>
+        value.ToString("C2", CultureInfo.GetCultureInfo("en-US"));
+
+    private static string FormatCompactMoney(decimal? value)
+    {
+        if (value is null)
+            return "—";
+
+        if (value >= 1_000_000)
+            return "$" + (value.Value / 1_000_000).ToString("0.00") + "M";
+
+        if (value >= 1_000)
+            return "$" + (value.Value / 1_000).ToString("0.0") + "K";
+
+        return FormatMoney(value);
+    }
+
+    private static string FormatPercentage(decimal? value) =>
+        value.HasValue ? value.Value.ToString("0.0") + "%" : "—";
+
+    private static string FormatPercentage(decimal value) =>
+        value.ToString("0.0") + "%";
+
+    private static string FormatStatus(string status)
+    {
+        return string.Join(" ",
+            status.Split('_', StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => char.ToUpperInvariant(x[0]) + x[1..].ToLowerInvariant()));
+    }
+
+    private static int GetBarHeight(int value)
+    {
+        var maximum = 100;
+        return Math.Clamp(value, 0, maximum) * 2;
+    }
+
+    private static string GetPercentageWidth(decimal value) =>
+        Math.Clamp(value, 0, 100).ToString("0.#", CultureInfo.InvariantCulture) + "%";
+
+    private static string GetClaimCssClass(string status)
+    {
+        return status.ToUpperInvariant() switch
+        {
+            "SUBMITTED" or "ACCEPTED" or "PAID" => "submitted",
+            "REJECTED" or "VALIDATION_FAILED" => "rejected",
+            "DENIED" => "denied",
+            "PENDING" or "DRAFT" or "READY_TO_SUBMIT" => "pending",
+            _ => "pending"
+        };
+    }
+
+    private static string GetClaimIcon(string status)
+    {
+        return status.ToUpperInvariant() switch
+        {
+            "SUBMITTED" or "ACCEPTED" or "PAID" => "✓",
+            "REJECTED" or "VALIDATION_FAILED" => "!",
+            "DENIED" => "×",
+            _ => "..."
+        };
+    }
+
+    private static string GetActivityCssClass(string type)
+    {
+        return type.ToLowerInvariant() switch
+        {
+            "claim" => "claim",
+            "eligibility" => "eligibility",
+            "authorization" => "authorization",
+            "denial" => "denial",
+            "appeal" => "appeal",
+            _ => "default"
+        };
+    }
+
+    private static string FormatRelativeTime(DateTime timestamp)
+    {
+        var utcTimestamp = timestamp.Kind == DateTimeKind.Utc
+            ? timestamp
+            : DateTime.SpecifyKind(timestamp, DateTimeKind.Utc);
+
+        var difference = DateTime.UtcNow - utcTimestamp;
+
+        if (difference.TotalMinutes < 1)
+            return "Just now";
+
+        if (difference.TotalMinutes < 60)
+            return $"{(int)difference.TotalMinutes} min ago";
+
+        if (difference.TotalHours < 24)
+            return $"{(int)difference.TotalHours} hours ago";
+
+        if (difference.TotalDays < 7)
+            return $"{(int)difference.TotalDays} days ago";
+
+        return utcTimestamp.ToLocalTime().ToString("dd MMM yyyy");
+    }
+
+    // NAVIGATION
+
+    private void ManageProviders() =>
+        Navigation.NavigateTo("/providers");
+
+    private void AddInsurance() =>
+        Navigation.NavigateTo("/patient-insurances");
+
+    private void RunEligibility() =>
+        Navigation.NavigateTo("/eligibility");
+
+    private void ReviewAuthorizations() =>
+        Navigation.NavigateTo("/authorizations");
+
+    private void ViewClaims() =>
+        Navigation.NavigateTo("/claims");
+
+    private void ViewReports() =>
+        Navigation.NavigateTo("/reports");
+
+    private void ViewPatients() =>
+        Navigation.NavigateTo("/patients");
+}

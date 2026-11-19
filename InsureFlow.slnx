@@ -1,4 +1,4 @@
-<Solution>
+﻿<Solution>
   <Folder Name="/backend/">
     <Project Path="backend/InsureFlow.Api/InsureFlow.Api.csproj" />
     <Project Path="backend/InsureFlow.Application/InsureFlow.Application.csproj" />
@@ -8,7 +8,7 @@
     <Project Path="backend/InsureFlow.Integrations/InsureFlow.Integrations.csproj" />
   </Folder>
   <Folder Name="/frontend/">
-    <Project Path="frontend/insureflow-portal/insureflow-portal.csproj" />
+    <Project Path="frontend/insureflow-portal.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/InsureFlow.Api.Tests/InsureFlow.Api.Tests.csproj" />
@@ -18,3 +18,4 @@
     <Project Path="tests/InsureFlow.Integration.Tests/InsureFlow.Integration.Tests.csproj" />
   </Folder>
 </Solution>
+
