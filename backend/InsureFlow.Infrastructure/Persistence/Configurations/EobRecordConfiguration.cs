@@ -9,7 +9,7 @@ public class EobRecordConfiguration : IEntityTypeConfiguration<EobRecord>
 {
     public void Configure(EntityTypeBuilder<EobRecord> builder)
     {
-        builder.ToTable("eob_records");
+        builder.ToTable("if_eob_records");
 
         builder.HasKey(x => x.Id);
 

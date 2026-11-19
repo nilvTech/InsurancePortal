@@ -9,7 +9,7 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)
     {
-        builder.ToTable("roles");
+        builder.ToTable("if_roles");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.ExternalId)

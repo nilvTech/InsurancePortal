@@ -9,7 +9,7 @@ public class RefundConfiguration : IEntityTypeConfiguration<Refund>
 {
     public void Configure(EntityTypeBuilder<Refund> builder)
     {
-        builder.ToTable("refunds");
+        builder.ToTable("if_refunds");
 
         builder.HasKey(x => x.Id);
 

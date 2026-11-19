@@ -9,7 +9,7 @@ public class EraRecordConfiguration : IEntityTypeConfiguration<EraRecord>
 {
     public void Configure(EntityTypeBuilder<EraRecord> builder)
     {
-        builder.ToTable("era_records");
+        builder.ToTable("if_era_records");
 
         builder.HasKey(x => x.Id);
 

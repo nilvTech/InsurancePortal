@@ -13,7 +13,7 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "eob_records",
+                name: "if_eob_records",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -39,12 +39,12 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_eob_records", x => x.id);
+                    table.PrimaryKey("PK_if_eob_records", x => x.id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "era_records",
+                name: "if_era_records",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -70,12 +70,12 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_era_records", x => x.id);
+                    table.PrimaryKey("PK_if_era_records", x => x.id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "payment_adjustments",
+                name: "if_payment_adjustments",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -99,12 +99,12 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_payment_adjustments", x => x.id);
+                    table.PrimaryKey("PK_if_payment_adjustments", x => x.id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "payment_reconciliations",
+                name: "if_payment_reconciliations",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -132,12 +132,12 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_payment_reconciliations", x => x.id);
+                    table.PrimaryKey("PK_if_payment_reconciliations", x => x.id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "payments",
+                name: "if_payments",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -168,9 +168,9 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_payments", x => x.id);
+                    table.PrimaryKey("PK_if_payments", x => x.id);
                     table.ForeignKey(
-                        name: "FK_payments_payers_payer_id",
+                        name: "FK_if_payments_payers_payer_id",
                         column: x => x.payer_id,
                         principalTable: "payers",
                         principalColumn: "id",
@@ -179,7 +179,64 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "payment_allocations",
+                name: "if_permissions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    permission_guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    tenant_id = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    code = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    name = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    is_active = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    created_at_utc = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    updated_at_utc = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedByUserId = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedByUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_if_permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_if_permissions_tenants_tenant_id",
+                        column: x => x.tenant_id,
+                        principalTable: "tenants",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "if_roles",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    role_guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    tenant_id = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    is_active = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    created_at_utc = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    updated_at_utc = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedByUserId = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedByUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_if_roles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_if_roles_tenants_tenant_id",
+                        column: x => x.tenant_id,
+                        principalTable: "tenants",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "if_payment_allocations",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -200,24 +257,24 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_payment_allocations", x => x.id);
+                    table.PrimaryKey("PK_if_payment_allocations", x => x.id);
                     table.ForeignKey(
-                        name: "FK_payment_allocations_claims_claim_id",
+                        name: "FK_if_payment_allocations_claims_claim_id",
                         column: x => x.claim_id,
                         principalTable: "claims",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_payment_allocations_payments_payment_id",
+                        name: "FK_if_payment_allocations_if_payments_payment_id",
                         column: x => x.payment_id,
-                        principalTable: "payments",
+                        principalTable: "if_payments",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "refunds",
+                name: "if_refunds",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -242,185 +299,273 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_refunds", x => x.id);
+                    table.PrimaryKey("PK_if_refunds", x => x.id);
                     table.ForeignKey(
-                        name: "FK_refunds_payments_payment_id",
+                        name: "FK_if_refunds_if_payments_payment_id",
                         column: x => x.payment_id,
-                        principalTable: "payments",
+                        principalTable: "if_payments",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "if_role_permissions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    tenant_id = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    role_id = table.Column<long>(type: "bigint", nullable: false),
+                    permission_id = table.Column<long>(type: "bigint", nullable: false),
+                    ExternalId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    created_at_utc = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    updated_at_utc = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedByUserId = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedByUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_if_role_permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_if_role_permissions_if_permissions_permission_id",
+                        column: x => x.permission_id,
+                        principalTable: "if_permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_if_role_permissions_if_roles_role_id",
+                        column: x => x.role_id,
+                        principalTable: "if_roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_if_role_permissions_tenants_tenant_id",
+                        column: x => x.tenant_id,
+                        principalTable: "tenants",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_eob_records_eob_guid",
-                table: "eob_records",
+                name: "IX_if_eob_records_eob_guid",
+                table: "if_eob_records",
                 column: "eob_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_eob_records_tenant_id_claim_id",
-                table: "eob_records",
+                name: "IX_if_eob_records_tenant_id_claim_id",
+                table: "if_eob_records",
                 columns: new[] { "tenant_id", "claim_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_eob_records_tenant_id_payer_id_received_at_utc",
-                table: "eob_records",
+                name: "IX_if_eob_records_tenant_id_payer_id_received_at_utc",
+                table: "if_eob_records",
                 columns: new[] { "tenant_id", "payer_id", "received_at_utc" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_era_records_era_guid",
-                table: "era_records",
+                name: "IX_if_era_records_era_guid",
+                table: "if_era_records",
                 column: "era_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_era_records_tenant_id_payer_id_received_at_utc",
-                table: "era_records",
+                name: "IX_if_era_records_tenant_id_payer_id_received_at_utc",
+                table: "if_era_records",
                 columns: new[] { "tenant_id", "payer_id", "received_at_utc" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_era_records_tenant_id_trace_number",
-                table: "era_records",
+                name: "IX_if_era_records_tenant_id_trace_number",
+                table: "if_era_records",
                 columns: new[] { "tenant_id", "trace_number" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_adjustments_adjustment_guid",
-                table: "payment_adjustments",
+                name: "IX_if_payment_adjustments_adjustment_guid",
+                table: "if_payment_adjustments",
                 column: "adjustment_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_adjustments_tenant_id_claim_id",
-                table: "payment_adjustments",
+                name: "IX_if_payment_adjustments_tenant_id_claim_id",
+                table: "if_payment_adjustments",
                 columns: new[] { "tenant_id", "claim_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_adjustments_tenant_id_payment_id",
-                table: "payment_adjustments",
+                name: "IX_if_payment_adjustments_tenant_id_payment_id",
+                table: "if_payment_adjustments",
                 columns: new[] { "tenant_id", "payment_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_allocations_allocation_guid",
-                table: "payment_allocations",
+                name: "IX_if_payment_allocations_allocation_guid",
+                table: "if_payment_allocations",
                 column: "allocation_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_allocations_claim_id",
-                table: "payment_allocations",
+                name: "IX_if_payment_allocations_claim_id",
+                table: "if_payment_allocations",
                 column: "claim_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_allocations_payment_id",
-                table: "payment_allocations",
+                name: "IX_if_payment_allocations_payment_id",
+                table: "if_payment_allocations",
                 column: "payment_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_allocations_tenant_id_claim_id",
-                table: "payment_allocations",
+                name: "IX_if_payment_allocations_tenant_id_claim_id",
+                table: "if_payment_allocations",
                 columns: new[] { "tenant_id", "claim_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_allocations_tenant_id_payment_id",
-                table: "payment_allocations",
+                name: "IX_if_payment_allocations_tenant_id_payment_id",
+                table: "if_payment_allocations",
                 columns: new[] { "tenant_id", "payment_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_reconciliations_reconciliation_guid",
-                table: "payment_reconciliations",
+                name: "IX_if_payment_reconciliations_reconciliation_guid",
+                table: "if_payment_reconciliations",
                 column: "reconciliation_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_reconciliations_tenant_id_reconciliation_number",
-                table: "payment_reconciliations",
+                name: "IX_if_payment_reconciliations_tenant_id_reconciliation_number",
+                table: "if_payment_reconciliations",
                 columns: new[] { "tenant_id", "reconciliation_number" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_reconciliations_tenant_id_started_at_utc",
-                table: "payment_reconciliations",
+                name: "IX_if_payment_reconciliations_tenant_id_started_at_utc",
+                table: "if_payment_reconciliations",
                 columns: new[] { "tenant_id", "started_at_utc" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payments_payer_id",
-                table: "payments",
+                name: "IX_if_payments_payer_id",
+                table: "if_payments",
                 column: "payer_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_payments_payment_guid",
-                table: "payments",
+                name: "IX_if_payments_payment_guid",
+                table: "if_payments",
                 column: "payment_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_payments_tenant_id_payer_id_payment_date_utc",
-                table: "payments",
+                name: "IX_if_payments_tenant_id_payer_id_payment_date_utc",
+                table: "if_payments",
                 columns: new[] { "tenant_id", "payer_id", "payment_date_utc" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_payments_tenant_id_payment_number",
-                table: "payments",
+                name: "IX_if_payments_tenant_id_payment_number",
+                table: "if_payments",
                 columns: new[] { "tenant_id", "payment_number" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_payments_tenant_id_status",
-                table: "payments",
+                name: "IX_if_payments_tenant_id_status",
+                table: "if_payments",
                 columns: new[] { "tenant_id", "status" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_refunds_payment_id",
-                table: "refunds",
+                name: "IX_if_permissions_permission_guid",
+                table: "if_permissions",
+                column: "permission_guid",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_permissions_tenant_id_code",
+                table: "if_permissions",
+                columns: new[] { "tenant_id", "code" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_refunds_payment_id",
+                table: "if_refunds",
                 column: "payment_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_refunds_refund_guid",
-                table: "refunds",
+                name: "IX_if_refunds_refund_guid",
+                table: "if_refunds",
                 column: "refund_guid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_refunds_tenant_id_payment_id",
-                table: "refunds",
+                name: "IX_if_refunds_tenant_id_payment_id",
+                table: "if_refunds",
                 columns: new[] { "tenant_id", "payment_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_refunds_tenant_id_refund_number",
-                table: "refunds",
+                name: "IX_if_refunds_tenant_id_refund_number",
+                table: "if_refunds",
                 columns: new[] { "tenant_id", "refund_number" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_refunds_tenant_id_status",
-                table: "refunds",
+                name: "IX_if_refunds_tenant_id_status",
+                table: "if_refunds",
                 columns: new[] { "tenant_id", "status" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_role_permissions_permission_id",
+                table: "if_role_permissions",
+                column: "permission_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_role_permissions_role_id",
+                table: "if_role_permissions",
+                column: "role_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_role_permissions_tenant_id_role_id_permission_id",
+                table: "if_role_permissions",
+                columns: new[] { "tenant_id", "role_id", "permission_id" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_roles_role_guid",
+                table: "if_roles",
+                column: "role_guid",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_if_roles_tenant_id_name",
+                table: "if_roles",
+                columns: new[] { "tenant_id", "name" },
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "eob_records");
+                name: "if_eob_records");
 
             migrationBuilder.DropTable(
-                name: "era_records");
+                name: "if_era_records");
 
             migrationBuilder.DropTable(
-                name: "payment_adjustments");
+                name: "if_payment_adjustments");
 
             migrationBuilder.DropTable(
-                name: "payment_allocations");
+                name: "if_payment_allocations");
 
             migrationBuilder.DropTable(
-                name: "payment_reconciliations");
+                name: "if_payment_reconciliations");
 
             migrationBuilder.DropTable(
-                name: "refunds");
+                name: "if_refunds");
 
             migrationBuilder.DropTable(
-                name: "payments");
+                name: "if_role_permissions");
+
+            migrationBuilder.DropTable(
+                name: "if_payments");
+
+            migrationBuilder.DropTable(
+                name: "if_permissions");
+
+            migrationBuilder.DropTable(
+                name: "if_roles");
         }
     }
 }

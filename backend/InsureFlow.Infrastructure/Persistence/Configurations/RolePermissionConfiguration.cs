@@ -10,7 +10,7 @@ public sealed class RolePermissionConfiguration
 {
     public void Configure(EntityTypeBuilder<RolePermission> builder)
     {
-        builder.ToTable("role_permissions");
+        builder.ToTable("if_role_permissions");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.TenantId)

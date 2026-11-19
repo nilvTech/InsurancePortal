@@ -341,6 +341,17 @@ modelBuilder.Entity<AppealNotification>()
         modelBuilder.Entity<Refund>()
             .HasQueryFilter(x => !_tenantContext.HasTenant || x.TenantId == _tenantContext.TenantId);
 
+        modelBuilder.Entity<Role>()
+            .HasQueryFilter(x =>
+                CurrentTenantId == null || x.TenantId == CurrentTenantId);
+
+        modelBuilder.Entity<Permission>()
+            .HasQueryFilter(x =>
+                CurrentTenantId == null || x.TenantId == CurrentTenantId);
+
+        modelBuilder.Entity<RolePermission>()
+            .HasQueryFilter(x =>
+                CurrentTenantId == null || x.TenantId == CurrentTenantId);
 
     }
 
@@ -455,7 +466,10 @@ modelBuilder.Entity<AppealNotification>()
             or EobRecord 
             or PaymentAdjustment 
             or PaymentReconciliation 
-            or Refund;
+            or Refund
+            or Role
+            or Permission
+            or RolePermission;
 
     }
 }

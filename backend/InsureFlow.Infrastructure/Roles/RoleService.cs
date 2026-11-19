@@ -77,6 +77,7 @@ public sealed class RoleService : IRoleService
             request.Description);
 
         _db.Roles.Add(role);
+
         await _db.SaveChangesAsync(cancellationToken);
 
         return ToResponse(role);
@@ -135,6 +136,7 @@ public sealed class RoleService : IRoleService
         role.Deactivate();
 
         await _db.SaveChangesAsync(cancellationToken);
+
         return true;
     }
 
@@ -143,7 +145,6 @@ public sealed class RoleService : IRoleService
         CancellationToken cancellationToken)
     {
         var role = await _db.Roles
-            .AsNoTracking()
             .FirstOrDefaultAsync(
                 x => x.ExternalId == roleId
                      && x.TenantId == TenantId
@@ -153,22 +154,31 @@ public sealed class RoleService : IRoleService
         if (role is null)
             return null;
 
-        return await _db.RolePermissions
+        await EnsureDefaultPermissionsAsync(cancellationToken);
+
+        var assignedIds = await _db.RolePermissions
+            .Where(x =>
+                x.TenantId == TenantId &&
+                x.RoleId == role.Id)
+            .Select(x => x.PermissionId)
+            .ToListAsync(cancellationToken);
+
+        var assignedSet = assignedIds.ToHashSet();
+
+        return await _db.Permissions
             .AsNoTracking()
-            .Where(x => x.TenantId == TenantId && x.RoleId == role.Id)
-            .Join(
-                _db.Permissions.Where(
-                    p => p.TenantId == TenantId && p.IsActive),
-                rp => rp.PermissionId,
-                p => p.Id,
-                (rp, p) => new PermissionResponse
-                {
-                    ExternalId = p.ExternalId,
-                    Code = p.Code,
-                    Name = p.Name,
-                    Description = p.Description
-                })
+            .Where(x =>
+                x.TenantId == TenantId &&
+                x.IsActive)
             .OrderBy(x => x.Code)
+            .Select(x => new PermissionResponse
+            {
+                ExternalId = x.ExternalId,
+                Code = x.Code,
+                Name = x.Name,
+                Description = x.Description,
+                IsAssigned = assignedSet.Contains(x.Id)
+            })
             .ToListAsync(cancellationToken);
     }
 
@@ -186,6 +196,8 @@ public sealed class RoleService : IRoleService
         if (role is null)
             return null;
 
+        await EnsureDefaultPermissionsAsync(cancellationToken);
+
         var requestedIds = (request.PermissionIds ?? [])
             .Distinct()
             .ToList();
@@ -202,7 +214,9 @@ public sealed class RoleService : IRoleService
                 "One or more permission IDs are invalid or inactive.");
 
         var existing = await _db.RolePermissions
-            .Where(x => x.TenantId == TenantId && x.RoleId == role.Id)
+            .Where(x =>
+                x.TenantId == TenantId &&
+                x.RoleId == role.Id)
             .ToListAsync(cancellationToken);
 
         _db.RolePermissions.RemoveRange(existing);
@@ -225,9 +239,109 @@ public sealed class RoleService : IRoleService
                 ExternalId = x.ExternalId,
                 Code = x.Code,
                 Name = x.Name,
-                Description = x.Description
+                Description = x.Description,
+                IsAssigned = true
             })
             .ToList();
+    }
+
+    private async Task EnsureDefaultPermissionsAsync(
+        CancellationToken cancellationToken)
+    {
+        var defaults = new (string Code, string Name)[]
+        {
+            ("PATIENTS.VIEW", "View Patients"),
+            ("PATIENTS.CREATE", "Create Patients"),
+            ("PATIENTS.UPDATE", "Update Patients"),
+            ("PATIENTS.DELETE", "Delete Patients"),
+
+            ("INSURANCE_PLANS.VIEW", "View Insurance Plans"),
+            ("INSURANCE_PLANS.CREATE", "Create Insurance Plans"),
+            ("INSURANCE_PLANS.UPDATE", "Update Insurance Plans"),
+            ("INSURANCE_PLANS.DELETE", "Delete Insurance Plans"),
+
+            ("PATIENT_INSURANCE.VIEW", "View Patient Insurance"),
+            ("PATIENT_INSURANCE.CREATE", "Create Patient Insurance"),
+            ("PATIENT_INSURANCE.UPDATE", "Update Patient Insurance"),
+            ("PATIENT_INSURANCE.DELETE", "Delete Patient Insurance"),
+
+            ("ELIGIBILITY.VIEW", "View Eligibility"),
+            ("ELIGIBILITY.CHECK", "Check Eligibility"),
+
+            ("AUTHORIZATIONS.VIEW", "View Authorizations"),
+            ("AUTHORIZATIONS.CREATE", "Create Authorizations"),
+            ("AUTHORIZATIONS.UPDATE", "Update Authorizations"),
+            ("AUTHORIZATIONS.SUBMIT", "Submit Authorizations"),
+            ("AUTHORIZATIONS.APPROVE", "Approve Authorizations"),
+            ("AUTHORIZATIONS.DENY", "Deny Authorizations"),
+
+            ("CLAIMS.VIEW", "View Claims"),
+            ("CLAIMS.CREATE", "Create Claims"),
+            ("CLAIMS.UPDATE", "Update Claims"),
+            ("CLAIMS.SUBMIT", "Submit Claims"),
+            ("CLAIMS.RESUBMIT", "Resubmit Claims"),
+
+            ("DENIALS.VIEW", "View Denials"),
+            ("DENIALS.CREATE", "Create Denials"),
+            ("DENIALS.UPDATE", "Update Denials"),
+            ("DENIALS.ASSIGN", "Assign Denials"),
+            ("DENIALS.RESOLVE", "Resolve Denials"),
+
+            ("APPEALS.VIEW", "View Appeals"),
+            ("APPEALS.CREATE", "Create Appeals"),
+            ("APPEALS.UPDATE", "Update Appeals"),
+            ("APPEALS.SUBMIT", "Submit Appeals"),
+
+            ("PAYMENTS.VIEW", "View Payments"),
+            ("PAYMENTS.CREATE", "Create Payments"),
+            ("PAYMENTS.UPDATE", "Update Payments"),
+            ("PAYMENTS.RECONCILE", "Reconcile Payments"),
+            ("PAYMENTS.REFUND", "Process Refunds"),
+
+            ("REPORTS.VIEW", "View Reports"),
+            ("REPORTS.EXPORT", "Export Reports"),
+
+            ("ORGANIZATIONS.VIEW", "View Organizations"),
+            ("ORGANIZATIONS.CREATE", "Create Organizations"),
+            ("ORGANIZATIONS.UPDATE", "Update Organizations"),
+
+            ("PROVIDERS.VIEW", "View Providers"),
+            ("PROVIDERS.CREATE", "Create Providers"),
+            ("PROVIDERS.UPDATE", "Update Providers"),
+
+            ("PAYERS.VIEW", "View Payers"),
+            ("PAYERS.CREATE", "Create Payers"),
+            ("PAYERS.UPDATE", "Update Payers"),
+
+            ("SETTINGS.VIEW", "View Settings"),
+            ("SETTINGS.UPDATE", "Update Settings")
+        };
+
+        var existingCodes = await _db.Permissions
+            .Where(x => x.TenantId == TenantId)
+            .Select(x => x.Code)
+            .ToListAsync(cancellationToken);
+
+        var existing = existingCodes.ToHashSet(
+            StringComparer.OrdinalIgnoreCase);
+
+        foreach (var item in defaults)
+        {
+            if (existing.Contains(item.Code))
+                continue;
+
+            _db.Permissions.Add(
+                new Permission(
+                    TenantId,
+                    item.Code,
+                    item.Name,
+                    null));
+        }
+
+        if (_db.ChangeTracker.HasChanges())
+        {
+            await _db.SaveChangesAsync(cancellationToken);
+        }
     }
 
     private static RoleResponse ToResponse(Role role)

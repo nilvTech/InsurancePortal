@@ -9,7 +9,7 @@ public class PaymentReconciliationConfiguration : IEntityTypeConfiguration<Payme
 {
     public void Configure(EntityTypeBuilder<PaymentReconciliation> builder)
     {
-        builder.ToTable("payment_reconciliations");
+        builder.ToTable("if_payment_reconciliations");
 
         builder.HasKey(x => x.Id);
 

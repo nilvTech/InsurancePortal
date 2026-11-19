@@ -10,7 +10,7 @@ public sealed class PermissionConfiguration
 {
     public void Configure(EntityTypeBuilder<Permission> builder)
     {
-        builder.ToTable("permissions");
+        builder.ToTable("if_permissions");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.ExternalId)

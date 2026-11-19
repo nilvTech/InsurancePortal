@@ -2128,7 +2128,7 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "PayerId", "ReceivedAtUtc");
 
-                    b.ToTable("eob_records", (string)null);
+                    b.ToTable("if_eob_records", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.EraRecord", b =>
@@ -2226,7 +2226,7 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "PayerId", "ReceivedAtUtc");
 
-                    b.ToTable("era_records", (string)null);
+                    b.ToTable("if_era_records", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.InsurancePlan", b =>
@@ -2901,7 +2901,7 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "PayerId", "PaymentDateUtc");
 
-                    b.ToTable("payments", (string)null);
+                    b.ToTable("if_payments", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.PaymentAdjustment", b =>
@@ -2991,7 +2991,7 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "PaymentId");
 
-                    b.ToTable("payment_adjustments", (string)null);
+                    b.ToTable("if_payment_adjustments", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.PaymentAllocation", b =>
@@ -3068,7 +3068,7 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "PaymentId");
 
-                    b.ToTable("payment_allocations", (string)null);
+                    b.ToTable("if_payment_allocations", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.PaymentReconciliation", b =>
@@ -3175,7 +3175,66 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "StartedAtUtc");
 
-                    b.ToTable("payment_reconciliations", (string)null);
+                    b.ToTable("if_payment_reconciliations", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Permission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("code");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("permission_guid");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("is_active");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("name");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "Code")
+                        .IsUnique();
+
+                    b.ToTable("if_permissions", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.Provider", b =>
@@ -3391,7 +3450,107 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TenantId", "Status");
 
-                    b.ToTable("refunds", (string)null);
+                    b.ToTable("if_refunds", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Role", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("role_guid");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("is_active");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("name");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.HasIndex("TenantId", "Name")
+                        .IsUnique();
+
+                    b.ToTable("if_roles", (string)null);
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.RolePermission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at_utc");
+
+                    b.Property<long?>("CreatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<long>("PermissionId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("permission_id");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("role_id");
+
+                    b.Property<ulong>("TenantId")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at_utc");
+
+                    b.Property<long?>("UpdatedByUserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("TenantId", "RoleId", "PermissionId")
+                        .IsUnique();
+
+                    b.ToTable("if_role_permissions", (string)null);
                 });
 
             modelBuilder.Entity("InsureFlow.Domain.Entities.Tenant", b =>
@@ -3912,6 +4071,15 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                     b.Navigation("Payment");
                 });
 
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Permission", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("InsureFlow.Domain.Entities.Provider", b =>
                 {
                     b.HasOne("InsureFlow.Domain.Entities.Organization", "Organization")
@@ -3942,6 +4110,40 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Role", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.RolePermission", b =>
+                {
+                    b.HasOne("InsureFlow.Domain.Entities.Permission", "Permission")
+                        .WithMany()
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InsureFlow.Domain.Entities.Tenant", null)
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("InsureFlow.Domain.Entities.EligibilityRequest", b =>
                 {
                     b.Navigation("History");
@@ -3962,6 +4164,11 @@ namespace InsureFlow.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("InsureFlow.Domain.Entities.Payment", b =>
                 {
                     b.Navigation("Allocations");
+                });
+
+            modelBuilder.Entity("InsureFlow.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("RolePermissions");
                 });
 #pragma warning restore 612, 618
         }

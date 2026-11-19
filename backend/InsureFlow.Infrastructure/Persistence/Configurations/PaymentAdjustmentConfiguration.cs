@@ -9,7 +9,7 @@ public class PaymentAdjustmentConfiguration : IEntityTypeConfiguration<PaymentAd
 {
     public void Configure(EntityTypeBuilder<PaymentAdjustment> builder)
     {
-        builder.ToTable("payment_adjustments");
+        builder.ToTable("if_payment_adjustments");
 
         builder.HasKey(x => x.Id);
 
